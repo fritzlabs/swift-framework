@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   s.version = '1.0.0-beta1'
   s.summary = 'Official Fritz SDK for Swift 4 and Objective-C'
   s.homepage = 'https://github.com/fritzlabs/swift-framework'
-  s.license = 'MIT'
+  s.license = { :type => 'Apache 2.0', :file => 'LICENSE' }
   s.author = { 'Andrew Barba' => 'andrew@fritz.ai' }
   s.source = { :git => 'https://github.com/fritzlabs/swift-framework.git', :tag => s.version.to_s }
 
