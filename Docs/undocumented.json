@@ -44,14 +44,14 @@
     },
     {
       "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Fritz.swift",
-      "line": 105,
+      "line": 114,
       "symbol": "FritzSDK",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Fritz.swift",
-      "line": 138,
+      "line": 140,
       "symbol": "FritzSDK.setup(models:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
