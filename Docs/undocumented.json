@@ -9,64 +9,29 @@
     },
     {
       "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Errors.swift",
-      "line": 12,
-      "symbol": "ErrorCode",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Errors.swift",
-      "line": 13,
+      "line": 14,
       "symbol": "ErrorCode.modelCompilation",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Errors.swift",
-      "line": 14,
+      "line": 15,
       "symbol": "ErrorCode.modelDownload",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Errors.swift",
-      "line": 18,
-      "symbol": "FritzError",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Errors.swift",
-      "line": 52,
-      "symbol": "FritzError.init(coder:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Fritz.swift",
-      "line": 114,
+      "line": 159,
       "symbol": "FritzSDK",
       "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Fritz.swift",
-      "line": 140,
-      "symbol": "FritzSDK.setup(models:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/ManagedMLModel.swift",
       "line": 14,
       "symbol": "ManagedMLModel",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Session.swift",
-      "line": 12,
-      "symbol": "Session",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     }

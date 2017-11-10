@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>NSObject Extension Reference</title>
+    <title>NSNotification Extension Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Extension/NSObject" class="dashAnchor"></a>
-    <a title="NSObject Extension Reference"></a>
+    <a name="//apple_ref/swift/Extension/NSNotification" class="dashAnchor"></a>
+    <a title="NSNotification Extension Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">Fritz Docs</a> (91% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">Fritz Reference</a>
         <img id="carat" src="../img/carat.png" />
-        NSObject Extension Reference
+        NSNotification Extension Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -98,18 +98,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>NSObject</h1>
-            <div class="aside aside-note">
-    <p class="aside-title">Note</p>
-    <p>In order to expose a Swift extension to Objective-C the extension <em>must</em> be mode on a concrete class and not a protocol. Ideally this extension would be made on <code><a href="../Protocols.html#/c:@M@Fritz@objc(pl)FritzObjcIdentifiedModel">ObjcIdentifiedModel</a></code> but this is not possible as of Swift 4 and Xcode 9.</p>
+            <h1>NSNotification</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">class</span> <span class="kt">NSNotification</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">NSCopying</span><span class="p">,</span> <span class="kt">NSCoding</span></code></pre>
 
-</div>
-<div class="aside aside-see-also">
-    <p class="aside-title">See also</p>
-    <p><code><a href="../Protocols.html#/c:@M@Fritz@objc(pl)FritzObjcIdentifiedModel">ObjcIdentifiedModel</a></code></p>
-
-</div>
-
+                </div>
+              </div>
+            
           </section>
           <section class="section task-group-section">
             <div class="task-group">
@@ -117,9 +113,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@CM@Fritz@@objc(cs)NSObject(im)fritz"></a>
-                    <a name="//apple_ref/swift/Method/fritz()" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@Fritz@@objc(cs)NSObject(im)fritz">fritz()</a>
+                    <a name="/c:@CM@Fritz@@objc(cs)NSNotification(cpy)FritzErrorNotificationKey"></a>
+                    <a name="//apple_ref/swift/Variable/errorNotificationKey" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@Fritz@@objc(cs)NSNotification(cpy)FritzErrorNotificationKey">errorNotificationKey</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -127,30 +123,43 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Injects a Fritz managed model into this instance allowing the SDK to instrument model predications.</p>
-<div class="aside aside-warning">
-    <p class="aside-title">Warning</p>
-    <p>When Xcode generates a Swift class based on a MLModel file it provides a read-write model property that allows the SDK to safely overwrite the model with a Fritz managed model. When using Objective-C, Xcode generates a class with a readonly model property which forces us to use <code>setValue:forKey:</code> instead of a type-safe setter. It&rsquo;s crucial to test your apps on future beta versions of iOS as Apple could change the underlying implementation of the model property causing this method to crash. If this is the case, we will have updated SDKs ready for those newer versions.</p>
-
-</div>
-<div class="aside aside-note">
-    <p class="aside-title">Note</p>
-    <p>This method will have no affect on any object that does not conform to <code><a href="../Protocols.html#/c:@M@Fritz@objc(pl)FritzObjcIdentifiedModel">ObjcIdentifiedModel</a></code>.</p>
-
-</div>
+                        <p>Subscribe to this notification to receive Fritz-related errors</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">fritz</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">errorNotificationKey</span> <span class="o">=</span> <span class="s">"com.fritz.sdk.notifications.error"</span></code></pre>
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The same instance that this method was called.</p>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@Fritz@@objc(cs)NSNotification(cpy)FritzModelUpdatedNotificationKey"></a>
+                    <a name="//apple_ref/swift/Variable/modelUpdatedNotificationKey" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@Fritz@@objc(cs)NSNotification(cpy)FritzModelUpdatedNotificationKey">modelUpdatedNotificationKey</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Subscribe to this notification to know when a Fritz model has been updated</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">modelUpdatedNotificationKey</span> <span class="o">=</span> <span class="s">"com.fritz.sdk.notifications.model-updated"</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>

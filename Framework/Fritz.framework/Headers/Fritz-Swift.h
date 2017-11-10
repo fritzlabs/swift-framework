@@ -188,7 +188,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 SWIFT_MODULE_NAMESPACE_PUSH("Fritz")
 @class MLModel;
 
-/// Manages an MLModel instance in Swift
+/// Manages an MLModel instance
 SWIFT_PROTOCOL_NAMED("ReadModelProvider")
 @protocol FritzReadModelProvider
 /// A read model
@@ -197,17 +197,29 @@ SWIFT_PROTOCOL_NAMED("ReadModelProvider")
 
 @class FritzSession;
 
-/// Conform your Xcode generated class to this protocol to expose Fritz functionality
+/// This is the main entry point to exposing Fritz functionality on your Xcode-generated model classes.
+/// seealso:
+///
+/// <code>SwiftIdentifiedModel</code>
+/// <code>ObjcIdentifiedModel</code>
+/// note:
+/// You should not conform your generated class to this protocol directly, instead conform to either <code>SwiftIdentifiedModel</code> when using Swift, or <code>ObjcIdentifiedModel</code> when using Objective-C.
 SWIFT_PROTOCOL_NAMED("BaseIdentifiedModel")
 @protocol FritzBaseIdentifiedModel <FritzReadModelProvider>
-/// The Fritz identifier that matches this class
+/// The Fritz model identifier that matches this class.
+/// note:
+/// You should copy this identifier from the Fritz dashboard
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull fritzModelIdentifier;)
 + (NSString * _Nonnull)fritzModelIdentifier SWIFT_WARN_UNUSED_RESULT;
-/// The Fritz version number of the packaged model
+/// This is the version of the model that is packaged with your application at submission time.
+/// note:
+/// As you upload newer versions of your model to the Fritz dashboard, clients will download those versions and begin using them automatically. This version is specifically for tracking the version that is installed on the device when they first download the app from the App Store. In order to maintain accurate tracking you should update this version number when you package a later version of a model into your app and resubmit to the App Store with that later version.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger fritzPackagedModelVersion;)
 + (NSInteger)fritzPackagedModelVersion SWIFT_WARN_UNUSED_RESULT;
 @optional
-/// The Fritz session to perform requests in
+/// A Fritz session encapsualtes your App Token and the Environment in which to send all Fritz-related requests.
+/// note:
+/// This is an optional property. By default the SDK will read your App Token from the <code>FritzToken</code> line in your apps Info.plist. However, by providing a <code>Session</code> you have the ability to use models in your app that are from different Fritz accounts. This is useful if you are an SDK author and want to include Fritz as a dependency in your SDK without affecting the end-develoeprs ability to also use Fritz with their App Token.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzSession * _Nonnull fritzSession;)
 + (FritzSession * _Nonnull)fritzSession SWIFT_WARN_UNUSED_RESULT;
 @end
@@ -234,6 +246,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzEnviron
 + (FritzEnvironment * _Nonnull)stagingEnvironment SWIFT_WARN_UNUSED_RESULT;
 @end
 
+/// The type of error encountered
 typedef SWIFT_ENUM_NAMED(NSInteger, FritzErrorCode, "ErrorCode") {
   FritzErrorCodeModelCompilation = 0,
   FritzErrorCodeModelDownload = 1,
@@ -241,11 +254,14 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzErrorCode, "ErrorCode") {
 
 @class NSCoder;
 
+/// Class representing a Fritz-related error
+/// note:
+/// You subscribe to a notification to be notified anytime an error is encountered in the SDK.
+/// seealso:
+/// <code>Notification.Name.fritzError</code>
 SWIFT_CLASS_NAMED("FritzError")
 @interface FritzError : NSError
-/// Unique key to post error notifications
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull FritzErrorNotificationKey;)
-+ (NSString * _Nonnull)FritzErrorNotificationKey SWIFT_WARN_UNUSED_RESULT;
+/// Do not create an instance of this class directly
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithDomain:(NSString * _Nonnull)domain code:(NSInteger)code userInfo:(NSDictionary<NSString *, id> * _Nullable)dict SWIFT_UNAVAILABLE;
 @end
@@ -253,13 +269,21 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 
 SWIFT_CLASS_NAMED("FritzSDK")
 @interface FritzSDK : NSObject
-/// Sets up the Fritz SDK. This should be on startup in AppDelegate.application(didFinishLaunching:)
-/// \param models The list of Fritz models you want to setup
+/// Sets up the Fritz SDK. This should be on startup in <code>AppDelegate.application(didFinishLaunching:)</code>.
+/// \param models The list of Fritz models you want to setup.
 ///
-/// \param completionHandler Handler to be called with any errors seting up models, keyed by model identifier
+/// \param completionHandler Handler to be called with any errors seting up models, keyed by model identifier.
 ///
 + (void)setupModels:(NSArray<Class <FritzBaseIdentifiedModel>> * _Nonnull)models completionHandler:(void (^ _Nonnull)(NSDictionary<NSString *, NSError *> * _Nonnull))completionHandler;
+/// Sets up the Fritz SDK. This should be on startup in <code>AppDelegate.application(didFinishLaunching:)</code>.
+/// note:
+/// This simply calls <code>setupModels:completionHandler:</code> with a no-op completion handler
+/// seealso:
+/// <code>setupModels:completionHandler:</code>
+/// \param models The list of Fritz models you want to setup.
+///
 + (void)setupModels:(NSArray<Class <FritzBaseIdentifiedModel>> * _Nonnull)models;
+/// Cannot instantiate an instance of this class. Use <code>setupModels:</code> instead
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -287,20 +311,39 @@ SWIFT_CLASS_NAMED("ManagedMLModel")
 @end
 
 
+@interface NSNotification (SWIFT_EXTENSION(Fritz))
+/// Subscribe to this notification to receive Fritz-related errors
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull FritzErrorNotificationKey;)
++ (NSString * _Nonnull)FritzErrorNotificationKey SWIFT_WARN_UNUSED_RESULT;
+/// Subscribe to this notification to know when a Fritz model has been updated
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull FritzModelUpdatedNotificationKey;)
++ (NSString * _Nonnull)FritzModelUpdatedNotificationKey SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
 @interface NSObject (SWIFT_EXTENSION(Fritz))
-/// Returns a Fritz wrapped version of this class
+/// Injects a Fritz managed model into this instance allowing the SDK to instrument model predications.
+/// warning:
+/// When Xcode generates a Swift class based on a MLModel file it provides a read-write model property that allows the SDK to safely overwrite the model with a Fritz managed model. When using Objective-C, Xcode generates a class with a readonly model property which forces us to use <code>setValue:forKey:</code> instead of a type-safe setter. It’s crucial to test your apps on future beta versions of iOS as Apple could change the underlying implementation of the model property causing this method to crash. If this is the case, we will have updated SDKs ready for those newer versions.
+/// note:
+/// This method will have no affect on any object that does not conform to <code>ObjcIdentifiedModel</code>.
+///
+/// returns:
+/// The same instance that this method was called.
 - (nonnull instancetype)fritz SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
 /// Conform your Xcode-generated Objective-C class to this protocol to expose Fritz functionality
+/// seealso:
+/// <code>BaseIdentifiedModel</code>
 SWIFT_PROTOCOL_NAMED("ObjcIdentifiedModel")
 @protocol FritzObjcIdentifiedModel <FritzBaseIdentifiedModel>
 @end
 
 
 
-/// Manages an MLModel instance in Swift
+/// Manages an MLModel instance
 SWIFT_PROTOCOL_NAMED("ReadWriteModelProvider")
 @protocol FritzReadWriteModelProvider <FritzReadModelProvider>
 /// A read-write model
@@ -308,6 +351,9 @@ SWIFT_PROTOCOL_NAMED("ReadWriteModelProvider")
 @end
 
 
+/// Encapsualtes your App Token and the Environment in which to send all Fritz-related requests.
+/// note:
+/// By default the SDK will read your App Token from the <code>FritzToken</code> line in your apps Info.plist. However, by providing a <code>Session</code> when conforming to <code>BaseIdentifiedModel</code> you have the ability to use models in your app that are from different Fritz accounts. This is useful if you are an SDK author and want to include Fritz as a dependency in your SDK without affecting the end-develoeprs ability to also use Fritz with their App Token.
 SWIFT_CLASS_NAMED("Session")
 @interface FritzSession : NSObject
 /// Default session to use throughout SDK
@@ -322,6 +368,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzSession
 
 
 /// Conform your Xcode-generated Swift class to this protocol to expose Fritz functionality
+/// seealso:
+/// <code>BaseIdentifiedModel</code>
 SWIFT_PROTOCOL_NAMED("SwiftIdentifiedModel")
 @protocol FritzSwiftIdentifiedModel <FritzBaseIdentifiedModel, FritzReadWriteModelProvider>
 @end
