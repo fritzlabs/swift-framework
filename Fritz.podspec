@@ -10,9 +10,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.ios.deployment_target = '11.0'
-  s.macos.deployment_target = '10.13'
-  s.watchos.deployment_target = '4.0'
-  s.tvos.deployment_target = '11.0'
 
   s.framework = 'CoreML'
   s.vendored_frameworks = 'Framework/Fritz.framework'
