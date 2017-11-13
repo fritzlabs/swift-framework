@@ -38,9 +38,11 @@ pod install Fritz '~> 1.0.0-beta'
 ### Swift
 
 Follow our integration guide for Swift projects here:
+
 [https://github.com/fritzlabs/swift-framework/wiki/Swift-Integration](https://github.com/fritzlabs/swift-framework/wiki/Swift-Integration)
 
 ### Objective-C
 
 Follow our integration guide for Objective-C projects here:
+
 [https://github.com/fritzlabs/swift-framework/wiki/Objective-C-Integration](https://github.com/fritzlabs/swift-framework/wiki/Objective-C-Integration)
