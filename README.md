@@ -1,7 +1,7 @@
 Fritz Swift SDK
 ===============
 
-The Fritz SDK is used to provide insights into your use of CoreML models. Fritz provides seamless over-the-air updates to your models as well as analytics in how well your models are performing on your end-users devices.
+The Fritz SDK is used to provide insights into your use of iOS Core ML models. Fritz provides seamless over-the-air updates to your models as well as analytics in how well your models are performing on your end-users devices.
 
 ## Installation
 
