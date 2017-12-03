@@ -1,7 +1,7 @@
 Fritz Swift SDK
 ===============
 
-The Fritz SDK provides insights into your use of Core ML models. Fritz provides seamless over-the-air updates to your models as well as analytics in how well your models are performing on your end-users devices.
+The Fritz SDK is used to provide insights into your use of CoreML models. Fritz provides seamless over-the-air updates to your models as well as analytics in how well your models are performing on your end-users devices.
 
 ## Installation
 
@@ -32,17 +32,3 @@ To integrate Fritz into your Xcode project using CocoaPods, specify it in your `
 ```
 pod install Fritz '~> 1.0.0-beta'
 ```
-
-## Integration
-
-### Swift
-
-Follow our integration guide for Swift projects here:
-
-[https://github.com/fritzlabs/swift-framework/wiki/Swift-Integration](https://github.com/fritzlabs/swift-framework/wiki/Swift-Integration)
-
-### Objective-C
-
-Follow our integration guide for Objective-C projects here:
-
-[https://github.com/fritzlabs/swift-framework/wiki/Objective-C-Integration](https://github.com/fritzlabs/swift-framework/wiki/Objective-C-Integration)
