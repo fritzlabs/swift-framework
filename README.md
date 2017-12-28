@@ -30,5 +30,6 @@ $ gem install cocoapods
 To integrate Fritz into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```
-pod install Fritz '~> 1.0.0-beta3'
+pod update
+pod install Fritz '~> 1.0.0-beta'
 ```
