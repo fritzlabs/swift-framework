@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [1.0.0-beta4](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta4)
+
+1. Add SDK logging
+
 ## [1.0.0-beta3](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta3)
 
 1. Fix an unnecessary model download on first run
