@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [1.0.0-beta5](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta5)
+
+1. Support app settings configured from the Fritz dashboard
+
 ## [1.0.0-beta4](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta4)
 
 1. Add SDK logging

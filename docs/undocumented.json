@@ -22,8 +22,15 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Errors.swift",
+      "line": 16,
+      "symbol": "ErrorCode.sessionDisabled",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Fritz.swift",
-      "line": 159,
+      "line": 150,
       "symbol": "FritzSDK",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"

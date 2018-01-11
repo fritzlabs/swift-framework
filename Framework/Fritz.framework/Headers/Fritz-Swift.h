@@ -250,6 +250,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzEnviron
 typedef SWIFT_ENUM_NAMED(NSInteger, FritzErrorCode, "ErrorCode") {
   FritzErrorCodeModelCompilation = 0,
   FritzErrorCodeModelDownload = 1,
+  FritzErrorCodeSessionDisabled = 2,
 };
 
 @class NSCoder;
