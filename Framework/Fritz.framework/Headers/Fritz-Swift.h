@@ -330,6 +330,8 @@ typedef SWIFT_ENUM(NSInteger, LogLevel) {
   LogLevelNone = 4,
 };
 
+
+
 @class MLModelDescription;
 @protocol MLFeatureProvider;
 @class MLPredictionOptions;

@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [1.0.0-beta6](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta6)
+
+1. Support basic model input/output sampling
+
 ## [1.0.0-beta5](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta5)
 
 1. Support app settings configured from the Fritz dashboard
