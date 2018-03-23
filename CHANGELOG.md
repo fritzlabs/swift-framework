@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [1.0.0-beta7](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta7)
+
+1. Internal API naming changes
+
 ## [1.0.0-beta6](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta6)
 
 1. Support basic model input/output sampling
