@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'Fritz'
   s.author = 'Fritz'
-  s.version = '1.0.0-beta7'
+  s.version = '1.0.0-beta8'
   s.summary = 'Official Fritz SDK for Swift 4 and Objective-C'
   s.homepage = 'https://github.com/fritzlabs/swift-framework'
   s.documentation_url = 'https://fritzlabs.github.io/swift-framework/'

@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [1.0.0-beta8](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta8)
+
+1. Built with Swift 4.1
+
 ## [1.0.0-beta7](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta7)
 
 1. Internal API naming changes
