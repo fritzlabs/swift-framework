@@ -23,9 +23,8 @@ $ gem install cocoapods
 
 > CocoaPods 1.1.0+ is required to build Fritz 1.0.0+.
 
-To integrate Fritz into your Xcode project using CocoaPods, specify it in your `Podfile`:
+To integrate Fritz into your Xcode project using CocoaPods, add a line to your `Podfile`:
 
 ```
-pod update
-pod install Fritz '~> 1.0.0-beta'
+pod Fritz '~> 1.0.0-beta'
 ```
