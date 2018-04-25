@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'Fritz'
   s.author = 'Fritz'
-  s.version = '1.0.0-beta8'
+  s.version = '1.0.0-beta.9'
   s.summary = 'Official Fritz SDK for Swift 4 and Objective-C'
   s.homepage = 'https://github.com/fritzlabs/swift-framework'
   s.documentation_url = 'https://fritzlabs.github.io/swift-framework/'
@@ -13,5 +13,5 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '11.0'
 
   s.framework = 'CoreML'
-  s.vendored_frameworks = 'Framework/Fritz.framework'
+  s.vendored_frameworks = 'Fritz.framework'
 end
