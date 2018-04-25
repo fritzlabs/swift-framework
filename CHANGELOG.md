@@ -7,7 +7,9 @@ Change Log
 
 ## [1.0.0-beta.9](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.9)
 
-1. Fix semantic version beta number
+1. Rework SDK initialization. `setup(models:)` has been removed, replaced with optional `Model.updateIfNeeded(_:)`
+2. Require `session` on `BaseIdentifiedModel` protocol to prevent issue with Swift framework and optional protocol requirements
+3. Fix semantic version beta number
 
 ## [1.0.0-beta8](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta8)
 

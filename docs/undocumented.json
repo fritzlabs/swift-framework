@@ -30,7 +30,7 @@
     },
     {
       "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Fritz.swift",
-      "line": 150,
+      "line": 188,
       "symbol": "FritzSDK",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"

@@ -213,10 +213,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 /// As you upload newer versions of your model to the Fritz dashboard, clients will download those versions and begin using them automatically. This version is specifically for tracking the version that is installed on the device when they first download the app from the App Store. In order to maintain accurate tracking you should update this version number when you package a later version of a model into your app and resubmit to the App Store with that later version.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger fritzPackagedModelVersion;)
 + (NSInteger)fritzPackagedModelVersion SWIFT_WARN_UNUSED_RESULT;
-@optional
 /// A Fritz session encapsualtes your App Token and the Environment in which to send all Fritz-related requests.
-/// note:
-/// This is an optional property. By default the SDK will read your App Token from the <code>FritzToken</code> line in your apps Info.plist. However, by providing a <code>Session</code> you have the ability to use models in your app that are from different Fritz accounts. This is useful if you are an SDK author and want to include Fritz as a dependency in your SDK without affecting the end-develoeprs ability to also use Fritz with their App Token.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzSession * _Nonnull fritzSession;)
 + (FritzSession * _Nonnull)fritzSession SWIFT_WARN_UNUSED_RESULT;
 @end
@@ -269,20 +266,14 @@ enum LogLevel : NSInteger;
 
 SWIFT_CLASS_NAMED("FritzSDK")
 @interface FritzSDK : NSObject
-/// Sets up the Fritz SDK. This should be on startup in <code>AppDelegate.application(didFinishLaunching:)</code>.
-/// \param models The list of Fritz models you want to setup.
-///
-/// \param completionHandler Handler to be called with any errors seting up models, keyed by model identifier.
-///
-+ (void)setupModels:(NSArray<Class <FritzBaseIdentifiedModel>> * _Nonnull)models completionHandler:(void (^ _Nonnull)(NSDictionary<NSString *, NSError *> * _Nonnull))completionHandler;
-/// Sets up the Fritz SDK. This should be on startup in <code>AppDelegate.application(didFinishLaunching:)</code>.
-/// note:
-/// This simply calls <code>setupModels:completionHandler:</code> with a no-op completion handler
+/// Removed in v1.0.0-beta.9
 /// seealso:
-/// <code>setupModels:completionHandler:</code>
-/// \param models The list of Fritz models you want to setup.
-///
-+ (void)setupModels:(NSArray<Class <FritzBaseIdentifiedModel>> * _Nonnull)models;
+/// <code>updateModelIfNeeded:completionHandler:</code>
++ (void)setupModel:(NSArray<Class <FritzBaseIdentifiedModel>> * _Nonnull)models completionHandler:(void (^ _Nonnull)(NSError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("This method is no longer needed. To manually trigger a model update, call Model.updateIfNeeded(_:)");
+/// Deprecated in v1.0.0-beta.9
+/// seealso:
+/// <code>updateModelIfNeeded:completionHandler:</code>
++ (void)setupModel:(NSArray<Class <FritzBaseIdentifiedModel>> * _Nonnull)models SWIFT_UNAVAILABLE_MSG("This method is no longer needed. To manually trigger a model update, call Model.updateIfNeeded(_:)");
 /// Enables Fritz SDK logging
 /// \param level 
 /// – 0: Debug logging
@@ -369,6 +360,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 /// returns:
 /// The same instance that this method was called.
 - (nonnull instancetype)fritz SWIFT_WARN_UNUSED_RESULT;
+/// Manually check for an OTA model update
+- (void)updateIfNeeded:(void (^ _Nonnull)(BOOL, NSError * _Nullable))completionHandler;
+/// Manually check for an OTA model update
++ (void)updateIfNeeded:(void (^ _Nonnull)(BOOL, NSError * _Nullable))completionHandler;
 @end
 
 
