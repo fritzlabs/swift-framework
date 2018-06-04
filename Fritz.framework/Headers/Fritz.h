@@ -11,3 +11,5 @@
 
 FOUNDATION_EXPORT double FritzVersionNumber;
 FOUNDATION_EXPORT const unsigned char FritzVersionString[];
+
+#import <Fritz/RNCryptor.h>
