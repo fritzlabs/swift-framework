@@ -5,6 +5,11 @@ Change Log
 
 ---
 
+## [1.0.0-beta.11](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.11)
+
+1. Support encrypted models
+2. Fix missing scripts
+
 ## [1.0.0-beta.10](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.10)
 
 1. Support encrypted models
