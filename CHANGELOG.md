@@ -5,6 +5,12 @@ Change Log
 
 ---
 
+## [1.0.0-beta.12](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.12)
+
+1. Support encrypted models
+2. Fix missing scripts
+3. Fix write permission issue when decrypting an encrypted model
+
 ## [1.0.0-beta.11](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.11)
 
 1. Support encrypted models
