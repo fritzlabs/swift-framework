@@ -5,6 +5,13 @@ Change Log
 
 ---
 
+## [1.0.0-beta.13](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.13)
+
+1. Support encrypted models
+2. Fix missing scripts
+3. Fix write permission issue when decrypting an encrypted model
+4. Fix framework archive not including symbols for the iOS Simulator
+
 ## [1.0.0-beta.12](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.12)
 
 1. Support encrypted models
