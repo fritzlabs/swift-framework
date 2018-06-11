@@ -2,7 +2,7 @@
 //  FritzCore.h
 //  FritzCore
 //
-//  Created by Christopher Kelly on 6/8/18.
+//  Created by Christopher Kelly on 6/11/18.
 //  Copyright © 2018 Fritz Labs Incorporated. All rights reserved.
 //
 
