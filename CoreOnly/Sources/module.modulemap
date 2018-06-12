@@ -1,4 +1,4 @@
-module FritzSDK {
+module Fritz {
   export *
-  header "FritzSDK.h"
+  header "Fritz.h"
 }
