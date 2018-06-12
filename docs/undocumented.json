@@ -1,89 +1,89 @@
 {
   "warnings": [
     {
-      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Environment.swift",
+      "file": "/Users/chris/fritz/swift-sdk/FritzManagedModel/Environment.swift",
       "line": 16,
       "symbol": "Environment.namespace",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Errors.swift",
+      "file": "/Users/chris/fritz/swift-sdk/FritzManagedModel/Errors.swift",
       "line": 14,
       "symbol": "ErrorCode.modelCompilation",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Errors.swift",
+      "file": "/Users/chris/fritz/swift-sdk/FritzManagedModel/Errors.swift",
       "line": 15,
       "symbol": "ErrorCode.modelDecryption",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Errors.swift",
+      "file": "/Users/chris/fritz/swift-sdk/FritzManagedModel/Errors.swift",
       "line": 16,
       "symbol": "ErrorCode.modelDownload",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Errors.swift",
+      "file": "/Users/chris/fritz/swift-sdk/FritzManagedModel/Errors.swift",
       "line": 17,
       "symbol": "ErrorCode.sessionDisabled",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Fritz.swift",
+      "file": "/Users/chris/fritz/swift-sdk/FritzManagedModel/Fritz.swift",
       "line": 201,
       "symbol": "FritzSDK",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Logger.swift",
+      "file": "/Users/chris/fritz/swift-sdk/FritzManagedModel/Logger.swift",
       "line": 20,
       "symbol": "LogLevel.debug",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Logger.swift",
+      "file": "/Users/chris/fritz/swift-sdk/FritzManagedModel/Logger.swift",
       "line": 21,
       "symbol": "LogLevel.info",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Logger.swift",
+      "file": "/Users/chris/fritz/swift-sdk/FritzManagedModel/Logger.swift",
       "line": 22,
       "symbol": "LogLevel.warn",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Logger.swift",
+      "file": "/Users/chris/fritz/swift-sdk/FritzManagedModel/Logger.swift",
       "line": 23,
       "symbol": "LogLevel.error",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/Logger.swift",
+      "file": "/Users/chris/fritz/swift-sdk/FritzManagedModel/Logger.swift",
       "line": 24,
       "symbol": "LogLevel.none",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/andrewbarba/Code/Fritz/swift-sdk/Source/ManagedMLModel.swift",
+      "file": "/Users/chris/fritz/swift-sdk/FritzManagedModel/ManagedMLModel.swift",
       "line": 14,
       "symbol": "ManagedMLModel",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/andrewbarba/Code/Fritz/swift-sdk"
+  "source_directory": "/Users/chris/fritz/swift-sdk"
 }
