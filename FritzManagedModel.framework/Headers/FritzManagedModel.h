@@ -1,6 +1,6 @@
 //
-//  Fritz.h
-//  Fritz
+//  FritzManagedModel.h
+//  FritzManagedModel
 //
 //  Created by Andrew Barba on 8/9/17.
 //  Copyright © 2017 Fritz Labs Incorporated. All rights reserved.

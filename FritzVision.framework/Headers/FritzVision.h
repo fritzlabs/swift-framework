@@ -6,7 +6,7 @@
 //  Copyright © 2018 Fritz Labs Incorporated. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 //! Project version number for FritzVision.
 FOUNDATION_EXPORT double FritzVisionVersionNumber;

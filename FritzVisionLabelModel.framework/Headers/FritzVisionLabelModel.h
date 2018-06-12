@@ -6,7 +6,7 @@
 //  Copyright © 2018 Fritz Labs Incorporated. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import Foundation;
 
 //! Project version number for FritzVisionLabelModel.
 FOUNDATION_EXPORT double FritzVisionLabelModelVersionNumber;
