@@ -10,8 +10,8 @@
     #import <FritzVision/FritzVision.h>
   #endif
 
-  #if __has_include(<FritzVisionModel/FritzVisionModel.h>)
-    #import <FritzVisionModel/FritzVisionModel.h>
+  #if __has_include(<FritzVisionLabelModel/FritzVisionLabelModel.h>)
+    #import <FritzVisionLabelModel/FritzVisionLabelModel.h>
   #endif
 
 #endif  // defined(__has_include)
