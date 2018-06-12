@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
   s.name = 'FritzSDK'
-  s.version = '1.0.8'
+  s.version = '1.0.12'
   s.summary = 'Official Fritz SDK for Swift 4 and Objective-C'
   s.homepage = 'https://fritz.ai'
   s.license = {
     :type => 'Apache 2.0', :text => 'License goes here'
   }
   s.author = { 'Andrew Barba' => 'andrew@fritz.ai' }
-  s.default_subspec = 'FritzCore'
+  s.default_subspec = 'Core'
   s.source = { :git => 'https://github.com/fritzlabs/swift-framework.git',
                :branch => 'SDK-58-fritz-sdk-frameworks' }
   s.requires_arc = true
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.frameworks = 'UIKit', 'CoreML'
 
   s.subspec 'CoreOnly' do |core|
-    core.dependency 'FritzSDK/FritzCore'
+    core.dependency 'FritzSDK/Core'
     core.preserve_paths = 'CoreOnly/Sources/module.modulemap'
     core.source_files = 'CoreOnly/Sources/FritzSDK.h'
     core.user_target_xcconfig = {
@@ -27,18 +27,18 @@ Pod::Spec.new do |s|
     }
   end
 
-  s.subspec 'FritzCore' do |core|
+  s.subspec 'Core' do |core|
     core.vendored_framework = 'FritzCore.framework'
   end
 
-  s.subspec 'FritzVision' do |vision|
+  s.subspec 'Vision' do |vision|
     vision.dependency 'FritzSDK/CoreOnly'
     vision.vendored_framework = 'FritzVision.framework'
   end
 
-  s.subspec 'FritzVisionModel' do |vision|
+  s.subspec 'VisionLabelModel' do |vision|
     vision.dependency 'FritzSDK/CoreOnly'
-    vision.dependency 'FritzSDK/FritzVision'
-    vision.vendored_framework = 'FritzVisionModel.framework'
+    vision.dependency 'FritzSDK/Vision'
+    vision.vendored_framework = 'FritzVisionLabelModel.framework'
   end
 end
