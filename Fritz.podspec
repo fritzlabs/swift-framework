@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Fritz'
-  s.version = '1.0.20'
+  s.version = '1.0.21'
   s.summary = 'Official Fritz SDK for Swift 4 and Objective-C'
   s.homepage = 'https://fritz.ai'
   s.license = {
@@ -11,25 +11,24 @@ Pod::Spec.new do |s|
                :branch => 'SDK-58-fritz-sdk-frameworks' }
   s.requires_arc = true
 
-
   s.ios.deployment_target = '11.0'
   # s.macos.deployment_target = '10.13'
   # s.watchos.deployment_target = '4.0'
   # s.tvos.deployment_target = '11.0'
   s.frameworks = 'UIKit', 'CoreML'
 
-  s.default_subspec = 'Core'
+  s.default_subspec = 'ManagedModel'
 
-  s.subspec 'Analytics' do |analytics|
+  s.subspec 'ManagedModel' do |analytics|
     analytics.dependency 'Fritz/Core'
-    analytics.vendored_framework = 'FritzAnalytics.framework'
+    analytics.vendored_framework = 'FritzManagedModel.framework'
   end
 
   s.subspec 'Core' do |core|
     core.preserve_paths = 'CoreOnly/Sources/module.modulemap'
     core.source_files = 'CoreOnly/Sources/Fritz.h'
     core.user_target_xcconfig = {
-      "HEADER_SEARCH_PATHS": "$(inherited) ${PODS_ROOT}/FritzSDK/CoreOnly/Sources"
+      "HEADER_SEARCH_PATHS": "$(inherited) ${PODS_ROOT}/Fritz/CoreOnly/Sources"
     }
     core.vendored_framework = 'FritzCore.framework'
   end

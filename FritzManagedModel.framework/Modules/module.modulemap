@@ -1,0 +1,11 @@
+framework module FritzManagedModel {
+  umbrella header "FritzManagedModel.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzManagedModel.Swift {
+    header "FritzManagedModel-Swift.h"
+    requires objc
+}
