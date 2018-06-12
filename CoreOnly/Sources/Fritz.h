@@ -14,8 +14,8 @@
     #import <FritzVisionLabelModel/FritzVisionLabelModel.h>
   #endif
 
-  #if __has_include(<FritzAnalytics/FritzAnalytics.h>)
-    #import <FritzAnalytics/FritzAnalytics.h>
+  #if __has_include(<FritzManagedModel/FritzManagedModel.h>)
+    #import <FritzManagedModel/FritzManagedModel.h>
   #endif
 
 #endif  // defined(__has_include)
