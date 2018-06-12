@@ -1,0 +1,11 @@
+framework module FritzAnalytics {
+  umbrella header "FritzAnalytics.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzAnalytics.Swift {
+    header "FritzAnalytics-Swift.h"
+    requires objc
+}

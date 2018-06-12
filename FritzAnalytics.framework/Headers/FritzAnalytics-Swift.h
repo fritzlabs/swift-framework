@@ -179,7 +179,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_attribute(external_source_symbol)
 # pragma push_macro("any")
 # undef any
-# pragma clang attribute push(__attribute__((external_source_symbol(language="Swift", defined_in="Fritz",generated_declaration))), apply_to=any(function,enum,objc_interface,objc_category,objc_protocol))
+# pragma clang attribute push(__attribute__((external_source_symbol(language="Swift", defined_in="FritzAnalytics",generated_declaration))), apply_to=any(function,enum,objc_interface,objc_category,objc_protocol))
 # pragma pop_macro("any")
 #endif
 
@@ -234,7 +234,7 @@ SWIFT_CLASS_NAMED("Environment")
 @end
 
 
-@interface FritzEnvironment (SWIFT_EXTENSION(Fritz))
+@interface FritzEnvironment (SWIFT_EXTENSION(FritzAnalytics))
 /// Default environment
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzEnvironment * _Nonnull defaultEnvironment;)
 + (FritzEnvironment * _Nonnull)defaultEnvironment SWIFT_WARN_UNUSED_RESULT;
@@ -346,7 +346,7 @@ SWIFT_CLASS_NAMED("ManagedMLModel")
 @end
 
 
-@interface NSNotification (SWIFT_EXTENSION(Fritz))
+@interface NSNotification (SWIFT_EXTENSION(FritzAnalytics))
 /// Subscribe to this notification to receive Fritz-related errors
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull FritzErrorNotificationKey;)
 + (NSString * _Nonnull)FritzErrorNotificationKey SWIFT_WARN_UNUSED_RESULT;
@@ -356,7 +356,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 @end
 
 
-@interface NSObject (SWIFT_EXTENSION(Fritz))
+@interface NSObject (SWIFT_EXTENSION(FritzAnalytics))
 /// Injects a Fritz managed model into this instance allowing the SDK to instrument model predications.
 /// warning:
 /// When Xcode generates a Swift class based on a MLModel file it provides a read-write model property that allows the SDK to safely overwrite the model with a Fritz managed model. When using Objective-C, Xcode generates a class with a readonly model property which forces us to use <code>setValue:forKey:</code> instead of a type-safe setter. It’s crucial to test your apps on future beta versions of iOS as Apple could change the underlying implementation of the model property causing this method to crash. If this is the case, we will have updated SDKs ready for those newer versions.
