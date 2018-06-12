@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Fritz'
-  s.version = '1.0.19'
+  s.version = '1.0.20'
   s.summary = 'Official Fritz SDK for Swift 4 and Objective-C'
   s.homepage = 'https://fritz.ai'
   s.license = {
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   # s.tvos.deployment_target = '11.0'
   s.frameworks = 'UIKit', 'CoreML'
 
-  s.default_subspec = 'Analytics'
+  s.default_subspec = 'Core'
 
   s.subspec 'Analytics' do |analytics|
     analytics.dependency 'Fritz/Core'
@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'Core' do |core|
     core.preserve_paths = 'CoreOnly/Sources/module.modulemap'
-    core.source_files = 'CoreOnly/Sources/FritzSDK.h'
+    core.source_files = 'CoreOnly/Sources/Fritz.h'
     core.user_target_xcconfig = {
       "HEADER_SEARCH_PATHS": "$(inherited) ${PODS_ROOT}/FritzSDK/CoreOnly/Sources"
     }
