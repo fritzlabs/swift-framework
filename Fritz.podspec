@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.license = { :type => 'Apache 2.0', :file => 'LICENSE.md' }
   s.author = { 'Andrew Barba' => 'andrew@fritz.ai' }
   s.source = { :git => 'https://github.com/fritzlabs/swift-framework.git',
-               :branch => 'SDK-58-fritz-sdk-frameworks' }
+               :tag => s.version.to_s }
   s.requires_arc = true
 
   s.ios.deployment_target = '11.0'
