@@ -1,0 +1,11 @@
+framework module FritzVision {
+  umbrella header "FritzVision.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVision.Swift {
+    header "FritzVision-Swift.h"
+    requires objc
+}

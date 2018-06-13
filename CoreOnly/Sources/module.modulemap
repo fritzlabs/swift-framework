@@ -1,0 +1,4 @@
+module Fritz {
+  export *
+  header "Fritz.h"
+}

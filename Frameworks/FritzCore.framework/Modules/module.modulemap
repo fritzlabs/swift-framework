@@ -1,0 +1,11 @@
+framework module FritzCore {
+  umbrella header "FritzCore.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzCore.Swift {
+    header "FritzCore-Swift.h"
+    requires objc
+}
