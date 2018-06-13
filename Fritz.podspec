@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Fritz'
-  s.version = '1.0.23'
+  s.version = '1.0.0-beta.14'
   s.summary = 'Official Fritz SDK for Swift 4 and Objective-C'
   s.homepage = 'https://fritz.ai'
   s.license = { :type => 'Apache 2.0', :file => 'LICENSE.md' }
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'ManagedModel' do |analytics|
     analytics.dependency 'Fritz/Core'
-    analytics.vendored_framework = 'FritzManagedModel.framework'
+    analytics.vendored_framework = 'Frameworks/FritzManagedModel.framework'
   end
 
   s.subspec 'Core' do |core|
@@ -26,17 +26,17 @@ Pod::Spec.new do |s|
     core.user_target_xcconfig = {
       "HEADER_SEARCH_PATHS": "$(inherited) ${PODS_ROOT}/Fritz/CoreOnly/Sources"
     }
-    core.vendored_framework = 'FritzCore.framework'
+    core.vendored_framework = 'Frameworks/FritzCore.framework'
   end
 
   s.subspec 'Vision' do |vision|
     vision.dependency 'Fritz/Core'
-    vision.vendored_framework = 'FritzVision.framework'
+    vision.vendored_framework = 'Frameworks/FritzVision.framework'
   end
 
   s.subspec 'VisionLabelModel' do |vision|
     vision.dependency 'Fritz/Core'
     vision.dependency 'Fritz/Vision'
-    vision.vendored_framework = 'FritzVisionLabelModel.framework'
+    vision.vendored_framework = 'Frameworks/FritzVisionLabelModel.framework'
   end
 end
