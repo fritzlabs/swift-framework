@@ -4,7 +4,7 @@ Change Log
 `Fritz` follows [Semantic Versioning](http://semver.org/)
 
 ---
-## [1.0.0-beta.14](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.13)
+## [1.0.0-beta.14](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.14)
 
 1. Support iOS 10 as minimum iOS Deployment Target
 2. Add new FritzCore, FritzVision, and FritzVisionLabelModel subspecs
