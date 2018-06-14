@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
                :tag => s.version.to_s }
   s.requires_arc = true
 
-  s.ios.deployment_target = '11.0'
+  s.ios.deployment_target = '10.0'
 
   s.frameworks = 'UIKit', 'CoreML', 'Foundation'
 
