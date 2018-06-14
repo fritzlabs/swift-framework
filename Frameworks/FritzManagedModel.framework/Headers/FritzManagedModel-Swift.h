@@ -186,7 +186,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @class MLModel;
 
 /// Manages an MLModel instance
-SWIFT_PROTOCOL_NAMED("ReadModelProvider")
+SWIFT_PROTOCOL_NAMED("ReadModelProvider") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @protocol FritzReadModelProvider
 /// A read model
 @property (nonatomic, readonly, strong) MLModel * _Nonnull model;
@@ -331,7 +331,7 @@ typedef SWIFT_ENUM(NSInteger, LogLevel) {
 @protocol MLFeatureProvider;
 @class MLPredictionOptions;
 
-SWIFT_CLASS_NAMED("ManagedMLModel")
+SWIFT_CLASS_NAMED("ManagedMLModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzManagedMLModel : MLModel
 /// Initialize model with an model type
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzBaseIdentifiedModel> _Nonnull)identifiedModel OBJC_DESIGNATED_INITIALIZER;
@@ -356,6 +356,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 @end
 
 
+SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface NSObject (SWIFT_EXTENSION(FritzManagedModel))
 /// Injects a Fritz managed model into this instance allowing the SDK to instrument model predications.
 /// warning:
@@ -383,7 +384,7 @@ SWIFT_PROTOCOL_NAMED("ObjcIdentifiedModel")
 
 
 /// Manages an MLModel instance
-SWIFT_PROTOCOL_NAMED("ReadWriteModelProvider")
+SWIFT_PROTOCOL_NAMED("ReadWriteModelProvider") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @protocol FritzReadWriteModelProvider <FritzReadModelProvider>
 /// A read-write model
 @property (nonatomic, strong) MLModel * _Nonnull model;
@@ -410,7 +411,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzSession
 /// Conform your Xcode-generated Swift class to this protocol to expose Fritz functionality
 /// seealso:
 /// <code>BaseIdentifiedModel</code>
-SWIFT_PROTOCOL_NAMED("SwiftIdentifiedModel")
+SWIFT_PROTOCOL_NAMED("SwiftIdentifiedModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @protocol FritzSwiftIdentifiedModel <FritzBaseIdentifiedModel, FritzReadWriteModelProvider>
 @end
 

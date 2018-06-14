@@ -37,7 +37,7 @@
     },
     {
       "file": "/Users/chris/fritz/swift-sdk/FritzManagedModel/Fritz.swift",
-      "line": 201,
+      "line": 206,
       "symbol": "FritzSDK",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
@@ -79,7 +79,7 @@
     },
     {
       "file": "/Users/chris/fritz/swift-sdk/FritzManagedModel/ManagedMLModel.swift",
-      "line": 14,
+      "line": 15,
       "symbol": "ManagedMLModel",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
