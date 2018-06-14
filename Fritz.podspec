@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.ios.deployment_target = '10.0'
-
+  s.swift_version = '4.2'
   s.frameworks = 'UIKit', 'CoreML', 'Foundation'
 
   s.default_subspec = 'ManagedModel'
