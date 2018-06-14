@@ -37,7 +37,7 @@
     },
     {
       "file": "/Users/chris/fritz/swift-sdk/FritzManagedModel/Fritz.swift",
-      "line": 206,
+      "line": 207,
       "symbol": "FritzSDK",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
