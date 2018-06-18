@@ -4,6 +4,10 @@ Change Log
 `Fritz` follows [Semantic Versioning](http://semver.org/)
 
 ---
+## [1.0.0-beta.15](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.15)
+
+1. Hot fix for un-signed shell script
+
 ## [1.0.0-beta.14](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.14)
 
 1. Support iOS 10 as minimum iOS Deployment Target
