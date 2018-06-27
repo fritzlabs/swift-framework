@@ -1,0 +1,5 @@
+- name: ios_docs_deploy
+  service: ios_docs_deploy
+  command: deploy/deploy.sh
+  cached: true
+  tag: ^(\d+\.)?(\d+\.)?(\*|\d+)$

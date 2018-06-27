@@ -1,0 +1,7 @@
+ios_docs_deploy:
+  build:
+    dockerfile: deploy/DeployDockerfile
+  cached: true
+  encrypted_env_file: aws_creds.encrypted
+  volumes:
+    - ./deploy:/deploy

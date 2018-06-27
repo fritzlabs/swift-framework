@@ -4,6 +4,11 @@ Change Log
 `Fritz` follows [Semantic Versioning](http://semver.org/)
 
 ---
+
+## [1.0.0-beta.16](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.16)
+
+1. Built with Swift 4.1
+
 ## [1.0.0-beta.15](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.15)
 
 1. Hot fix for un-signed shell script
