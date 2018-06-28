@@ -1,7 +1,6 @@
 #!/bin/bash
 
-S3_BUCKET=abdinoor-test
-# S3_BUCKET=fritz-docs
+S3_BUCKET=fritz-docs
 
 echo Pushing docs folder $CI_BRANCH
 aws s3 cp /docs/ s3://${S3_BUCKET}/iOS/${CI_BRANCH}/ --recursive --quiet
