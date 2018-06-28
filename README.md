@@ -9,7 +9,7 @@ The Fritz SDK is used to provide insights into your use of Core ML models. Fritz
 
 ## Documentation
 
-[https://docs.fritz.ai/iOS/latest/](https://docs.fritz.ai/iOS/latest/)
+[https://docs.fritz.ai/iOS/latest/index.html](https://docs.fritz.ai/iOS/latest/index.html)
 
 ## Installation
 
