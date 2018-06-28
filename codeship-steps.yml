@@ -2,4 +2,5 @@
   service: ios_docs_deploy
   command: deploy/deploy.sh
   cached: true
-  tag: ^(\d+\.)?(\d+\.)?(\*|\d+)$
+  # regex matches 1.2.3 and 1.2.3-beta type formats
+  tag: ^(\d+\.)(\d+\.)(\*|\d+)(-\w+)?$
