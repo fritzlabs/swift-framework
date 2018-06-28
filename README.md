@@ -1,11 +1,11 @@
 Fritz Swift SDK
 ===============
 
-[![Build Status](https://www.bitrise.io/app/dc5257678b56fb7b/status.svg?token=SKEIdD52UbujsZb4wsiCwQ&branch=master)](https://www.bitrise.io/app/dc5257678b56fb7b)
+[![Build Status](https://app.bitrise.io/app/dc5257678b56fb7b/status.svg?token=SKEIdD52UbujsZb4wsiCwQ&branch=master)](https://app.bitrise.io/app/dc5257678b56fb7b)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Fritz.svg)](https://img.shields.io/cocoapods/v/Fritz.svg)
 [![Twitter](https://img.shields.io/badge/twitter-@fritzlabs-blue.svg?style=flat)](http://twitter.com/fritzlabs)
 
-The Fritz SDK is used to provide insights into your use of CoreML models. Fritz provides seamless over-the-air updates to your models as well as analytics in how well your models are performing on your end-users devices.
+The Fritz SDK is used to provide insights into your use of Core ML models. Fritz provides seamless over-the-air updates to your models as well as analytics in how well your models are performing on your end-users devices.
 
 ## Documentation
 
