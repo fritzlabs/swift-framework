@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Fritz'
-  s.version = '1.0.0-beta.16'
+  s.version = '1.0.0-beta.17'
   s.summary = 'Official Fritz SDK for Swift 4.1 and Objective-C'
   s.homepage = 'https://fritz.ai'
   s.license = { :type => 'Apache 2.0', :file => 'LICENSE.md' }
@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.ios.deployment_target = '10.0'
-  s.swift_version = '4.1'
+  s.swift_version = '4.0'
   s.frameworks = 'UIKit', 'CoreML', 'Foundation'
 
   s.default_subspec = 'ManagedModel'

@@ -1,266 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Classes  Reference</title>
+    <title>Fritz Docs | Classes  iOS Reference</title>
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+    <meta name="description" content="iOS SDK Reference Documentation for Fritz.">
+    <link rel="stylesheet" href="https://cdn.fritz.ai/css/font-sf-display.css" />
+    <link rel="stylesheet" href="https://cdn.fritz.ai/css/font-saveur-sans.css" />
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <link rel="stylesheet" type="text/css" href="css/custom.css" />
     <meta charset='utf-8'>
+	  <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0" />
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109026462-7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-109026462-7');
+    </script>
   </head>
   <body>
+    <a name="//apple_ref/swift/Section/Classes" class="dashAnchor"></a>
     <a title="Classes  Reference"></a>
-    <header>
-      <div class="content-wrapper">
-        <p><a href="index.html">FritzManagedModel Docs</a> (81% documented)</p>
-        <p class="header-right"><a href="https://github.com/fritzlabs/swift-framework"><img src="img/gh.png"/>View on GitHub</a></p>
-      </div>
-    </header>
-    <div class="content-wrapper">
-      <p id="breadcrumbs">
-        <a href="index.html">FritzManagedModel Reference</a>
-        <img id="carat" src="img/carat.png" />
-        Classes  Reference
-      </p>
-    </div>
-    <div class="content-wrapper">
-      <nav class="sidebar">
-        <ul class="nav-groups">
-          <li class="nav-group-name">
-            <a href="Classes.html">Classes</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Classes/Environment.html">Environment</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/FritzError.html">FritzError</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/FritzSDK.html">FritzSDK</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/ManagedMLModel.html">ManagedMLModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/Session.html">Session</a>
-              </li>
-            </ul>
+    <nav class="navbar-fixed">
+      <div class="nav-upper">
+        <ul class="nav-items">
+          <li>
+            <a href="/" class="logo">
+              <img src="img/fritz_logo.svg" alt="Fritz"/>
+            </a>
           </li>
-          <li class="nav-group-name">
-            <a href="Enums.html">Enumerations</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Enums/ErrorCode.html">ErrorCode</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Enums/LogLevel.html">LogLevel</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="Extensions.html">Extensions</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Extensions/NSNotification.html">NSNotification</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/NSObject.html">NSObject</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/Notification.html">Notification</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/Notification/Name.html">– Name</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="Protocols.html">Protocols</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Protocols/BaseIdentifiedModel.html">BaseIdentifiedModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols.html#/c:@M@FritzManagedModel@objc(pl)FritzObjcIdentifiedModel">ObjcIdentifiedModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/ReadModelProvider.html">ReadModelProvider</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/ReadWriteModelProvider.html">ReadWriteModelProvider</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/SwiftIdentifiedModel.html">SwiftIdentifiedModel</a>
-              </li>
-            </ul>
-          </li>
+          <li><a href="https://fritz.ai">FRITZ</a></li>
+          <li><a class="active" href="/">DOCUMENTATION</a></li>
+          <li><a href="https://heartbeat.fritz.ai">HEARTBEAT</a></li>
+          <li><a href="https://alchemy.fritz.ai">ALCHEMY</a></li>
+          <li><a href="https://app.fritz.ai">LOGIN</a></li>
         </ul>
-      </nav>
-      <article class="main-content">
-        <section>
-          <section class="section">
-            <h1>Classes</h1>
-            <p>The following classes are available globally.</p>
+      </div>
+      <div class="nav-lower">
+        <p id="breadcrumbs">
+          <span class="no-mobile">
+            <a href="/">Docs</a>
+            <img id="carat" src="img/carat.png" />
+            <a href="index.html">iOS Reference</a>
+            <img id="carat" src="img/carat.png" />
+          </span>
+          Classes 
+          <span class="no-mobile coverage"> (81% documented)</span>
+        </p>
+      </div>
+    </nav>
+    <div class="wrapper">
+      <div class="article-wrapper">
+        <article class="main-content">
+          <section>
+            <section class="section">
+              <h1>Classes</h1>
+              <p>The following classes are available globally.</p>
 
-          </section>
-          <section class="section task-group-section">
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@FritzManagedModel@objc(cs)FritzEnvironment"></a>
-                    <a name="//apple_ref/swift/Class/Environment" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FritzManagedModel@objc(cs)FritzEnvironment">Environment</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Fritz Environment Config</p>
+            </section>
+            <section class="section task-group-section">
+              <div class="task-group">
+                <ul>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/c:@M@FritzManagedModel@objc(cs)FritzEnvironment"></a>
+                      <a name="//apple_ref/swift/Class/Environment" class="dashAnchor"></a>
+                      <a class="token" href="#/c:@M@FritzManagedModel@objc(cs)FritzEnvironment">Environment</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Fritz Environment Config</p>
 
-                        <a href="Classes/Environment.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">Environment</span><span class="p">:</span> <span class="kt">NSObject</span></code></pre>
-
+                          <a href="Classes/Environment.html" class="slightly-smaller">See more</a>
                         </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/SDK"></a>
-                <a name="//apple_ref/swift/Section/SDK" class="dashAnchor"></a>
-                <a href="#/SDK">
-                  <h3 class="section-name">SDK</h3>
-                </a>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">@objc(FritzEnvironment)</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">Environment</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                </ul>
               </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@FritzManagedModel@objc(cs)FritzSDK"></a>
-                    <a name="//apple_ref/swift/Class/FritzSDK" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FritzManagedModel@objc(cs)FritzSDK">FritzSDK</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                        <a href="Classes/FritzSDK.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">FritzSDK</span><span class="p">:</span> <span class="kt">NSObject</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@FritzManagedModel@objc(cs)FritzManagedMLModel"></a>
-                    <a name="//apple_ref/swift/Class/ManagedMLModel" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FritzManagedModel@objc(cs)FritzManagedMLModel">ManagedMLModel</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                        <a href="Classes/ManagedMLModel.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">ManagedMLModel</span><span class="p">:</span> <span class="kt">MLModel</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@FritzManagedModel@objc(cs)FritzSession"></a>
-                    <a name="//apple_ref/swift/Class/Session" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FritzManagedModel@objc(cs)FritzSession">Session</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Encapsualtes your App Token and the Environment in which to send all Fritz-related requests.</p>
-<div class="aside aside-note">
-    <p class="aside-title">Note</p>
-    By default the SDK will read your App Token from the <code>FritzToken</code> line in your apps Info.plist. However, by providing a <code>Session</code> when conforming to <code><a href="Protocols/BaseIdentifiedModel.html">BaseIdentifiedModel</a></code> you have the ability to use models in your app that are from different Fritz accounts. This is useful if you are an SDK author and want to include Fritz as a dependency in your SDK without affecting the end-develoeprs ability to also use Fritz with their App Token.
-
-</div>
-
-                        <a href="Classes/Session.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">Session</span><span class="p">:</span> <span class="kt">NSObject</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@FritzManagedModel@objc(cs)FritzError"></a>
-                    <a name="//apple_ref/swift/Class/FritzError" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@FritzManagedModel@objc(cs)FritzError">FritzError</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Class representing a Fritz-related error</p>
+              <div class="task-group">
+                <ul>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/c:@M@FritzManagedModel@objc(cs)FritzError"></a>
+                      <a name="//apple_ref/swift/Class/FritzError" class="dashAnchor"></a>
+                      <a class="token" href="#/c:@M@FritzManagedModel@objc(cs)FritzError">FritzError</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Class representing a Fritz-related error</p>
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
     <p>You subscribe to a notification to be notified anytime an error is encountered in the SDK.</p>
@@ -268,32 +121,220 @@
 </div>
 <div class="aside aside-see-also">
     <p class="aside-title">See also</p>
-    <p><code><a href="Extensions/Notification/Name.html#/s:So14NSNotificationC4NameV17FritzManagedModelE10fritzErrorADvpZ">Notification.Name.fritzError</a></code></p>
+    <p><code><a href="Extensions/Notification/Name.html#/s:So14NSNotificationC4NameV17FritzManagedModelE10fritzErrorADvZ">Notification.Name.fritzError</a></code></p>
 
 </div>
 
-                        <a href="Classes/FritzError.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">FritzError</span><span class="p">:</span> <span class="kt">NSError</span></code></pre>
-
+                          <a href="Classes/FritzError.html" class="slightly-smaller">See more</a>
                         </div>
-                      </div>
-                    </section>
-                  </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">@objc(FritzError)</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">FritzError</span> <span class="p">:</span> <span class="kt">NSError</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="task-group">
+                <div class="task-name-container">
+                  <a name="/SDK"></a>
+                  <a name="//apple_ref/swift/Section/SDK" class="dashAnchor"></a>
+                  <a href="#/SDK">
+                    <h3 class="section-name">SDK</h3>
+                  </a>
+                </div>
+                <ul>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/c:@M@FritzManagedModel@objc(cs)FritzSDK"></a>
+                      <a name="//apple_ref/swift/Class/FritzSDK" class="dashAnchor"></a>
+                      <a class="token" href="#/c:@M@FritzManagedModel@objc(cs)FritzSDK">FritzSDK</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Undocumented</p>
+
+                          <a href="Classes/FritzSDK.html" class="slightly-smaller">See more</a>
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">@objc(FritzSDK)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="kt">FritzSDK</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="task-group">
+                <ul>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/c:@M@FritzManagedModel@objc(cs)FritzManagedMLModel"></a>
+                      <a name="//apple_ref/swift/Class/ManagedMLModel" class="dashAnchor"></a>
+                      <a class="token" href="#/c:@M@FritzManagedModel@objc(cs)FritzManagedMLModel">ManagedMLModel</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Undocumented</p>
+
+                          <a href="Classes/ManagedMLModel.html" class="slightly-smaller">See more</a>
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">@objc(FritzManagedMLModel)</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">ManagedMLModel</span> <span class="p">:</span> <span class="kt">MLModel</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="task-group">
+                <ul>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/c:@M@FritzManagedModel@objc(cs)FritzSession"></a>
+                      <a name="//apple_ref/swift/Class/Session" class="dashAnchor"></a>
+                      <a class="token" href="#/c:@M@FritzManagedModel@objc(cs)FritzSession">Session</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Encapsualtes your App Token and the Environment in which to send all Fritz-related requests.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    By default the SDK will read your App Token from the <code>FritzToken</code> line in your apps Info.plist. However, by providing a <code>Session</code> when conforming to <code><a href="Protocols/BaseIdentifiedModel.html">BaseIdentifiedModel</a></code> you have the ability to use models in your app that are from different Fritz accounts. This is useful if you are an SDK author and want to include Fritz as a dependency in your SDK without affecting the end-develoeprs ability to also use Fritz with their App Token.
+
+</div>
+
+                          <a href="Classes/Session.html" class="slightly-smaller">See more</a>
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">@objc(FritzSession)</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">Session</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </section>
+          </section>
+        </article>
+      </div>
+      <div class="nav-wrapper">
+        <nav class="nav-bottom">
+          <ul class="nav-groups">
+            <li class="nav-group-name">
+              <a href="Classes.html">Classes</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="Classes/Environment.html">Environment</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Classes/FritzError.html">FritzError</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Classes/FritzSDK.html">FritzSDK</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Classes/ManagedMLModel.html">ManagedMLModel</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Classes/Session.html">Session</a>
                 </li>
               </ul>
-            </div>
-          </section>
-        </section>
+            </li>
+            <li class="nav-group-name">
+              <a href="Enums.html">Enumerations</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="Enums/ErrorCode.html">ErrorCode</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Enums/LogLevel.html">LogLevel</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-group-name">
+              <a href="Extensions.html">Extensions</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="Extensions/NSNotification.html">NSNotification</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Extensions/NSObject.html">NSObject</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Extensions/Notification.html">Notification</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Extensions/Notification/Name.html">– Name</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-group-name">
+              <a href="Protocols.html">Protocols</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="Protocols/BaseIdentifiedModel.html">BaseIdentifiedModel</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Protocols.html#/c:@M@FritzManagedModel@objc(pl)FritzObjcIdentifiedModel">ObjcIdentifiedModel</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Protocols/ReadModelProvider.html">ReadModelProvider</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Protocols/ReadWriteModelProvider.html">ReadWriteModelProvider</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="Protocols/SwiftIdentifiedModel.html">SwiftIdentifiedModel</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-wrapper">
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://fritz.ai" target="_blank" rel="external">Fritz Labs Incorporated</a>. All rights reserved. (Last updated: 2018-06-27)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://fritz.ai" target="_blank" rel="external">Fritz Labs Incorporated</a>. All rights reserved. (Last updated: 2018-07-03)</p>
         </section>
-      </article>
+      </div>
     </div>
   </body>
 </div>
