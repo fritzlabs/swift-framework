@@ -142,10 +142,6 @@ def update_version(ctx):
                       'Clean up modified files and try again.')
         return
 
-    _logger.info('Updating lastest master branch')
-    os.system('git checkout master')
-    os.system('git pull origin master')
-
     current_version = _get_current_version('Fritz.podspec')
     new_version = semver.bump_prerelease(current_version, token='beta')
     _update_changelog(new_version)
