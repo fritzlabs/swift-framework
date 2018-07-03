@@ -86,6 +86,25 @@
 <p>To integrate Fritz into your Xcode project using CocoaPods, add a line to your <code>Podfile</code>:</p>
 <pre class="highlight plaintext"><code>pod Fritz '~&gt; 1.0.0-beta'
 </code></pre>
+<h2 id='building-a-new-version-of-the-framework' class='heading'>Building a new version of the Framework</h2>
+
+<p>To simply build a new version of the Fritz framework, run the invoke command below. This will bump the sdk version and push new tags up to github.</p>
+<pre class="highlight shell"><code><span class="nv">$ </span>inv update-version
+</code></pre>
+
+<p>If you wish to Bump the SDK version and build a new version of the framework, run:</p>
+<pre class="highlight shell"><code><span class="nv">$ </span>inv update-version <span class="nt">-b</span>
+</code></pre>
+
+<p>To simply build the framework for a given tagged version, run:</p>
+<pre class="highlight shell"><code><span class="nv">$ </span>inv build-swift-framework <span class="o">{</span>version<span class="o">}</span>
+</code></pre>
+
+<p>To install invoke locally:</p>
+<pre class="highlight plaintext"><code>$ pyenv virtualenv 3.6.3 swift-sdk
+$ echo 'swift-sdk' &gt; .python-version
+$ pip install -r requirements.txt
+</code></pre>
 
             </section>
           </section>

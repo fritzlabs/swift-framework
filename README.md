@@ -30,3 +30,28 @@ To integrate Fritz into your Xcode project using CocoaPods, add a line to your `
 ```
 pod Fritz '~> 1.0.0-beta'
 ```
+
+
+## Building a new version of the Framework
+
+To simply build a new version of the Fritz framework, run the invoke command below. This will bump the sdk version and push new tags up to github.
+```bash
+$ inv update-version
+```
+
+If you wish to Bump the SDK version and build a new version of the framework, run:
+```bash
+$ inv update-version -b
+```
+
+To simply build the framework for a given tagged version, run:
+```bash
+$ inv build-swift-framework {version}
+```
+
+To install invoke locally:
+```
+$ pyenv virtualenv 3.6.3 swift-sdk
+$ echo 'swift-sdk' > .python-version
+$ pip install -r requirements.txt
+```
