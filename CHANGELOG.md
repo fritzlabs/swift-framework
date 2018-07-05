@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [1.0.0-beta.18](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.18)
+
+1. Properly fix version string in user agent
+
 ## [1.0.0-beta.17](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.17)
 
 1. Switch back to Swift 4.0 for compatibility with older Xcode version
