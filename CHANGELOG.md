@@ -5,6 +5,13 @@ Change Log
 
 ---
 
+## [1.0.0-beta.19](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.19)
+
+1. Use vision framework for Label model predictions
+2. Add FritzVisionObjectModel for real time object detection.
+3. Add FritzVisionObjectModelOptions and FritzVisionLabelModelOptions to configure model prediction behavior.
+4. Built with Swift 4.1.2.
+
 ## [1.0.0-beta.18](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.18)
 
 1. Properly fix version string in user agent

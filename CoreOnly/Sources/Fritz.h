@@ -18,4 +18,8 @@
     #import <FritzManagedModel/FritzManagedModel.h>
   #endif
 
+  #if __has_include(<FritzVisionObjectModel/FritzVisionObjectModel.h>)
+    #import <FritzVisionObjectModel/FritzVisionObjectModel.h>
+  #endif
+
 #endif  // defined(__has_include)
