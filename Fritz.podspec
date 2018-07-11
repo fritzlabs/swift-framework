@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.ios.deployment_target = '10.0'
-  s.swift_version = '4.0'
+  s.swift_version = '4.1'
   s.frameworks = 'UIKit', 'CoreML', 'Foundation'
 
   s.default_subspec = 'ManagedModel'
@@ -38,4 +38,11 @@ Pod::Spec.new do |s|
     vision.dependency 'Fritz/Vision'
     vision.vendored_framework = 'Frameworks/FritzVisionLabelModel.framework'
   end
+
+  s.subspec 'VisionObjectModel' do |vision|
+    vision.dependency 'Fritz/Core'
+    vision.dependency 'Fritz/Vision'
+    vision.vendored_framework = 'Frameworks/FritzVisionObjectModel.framework'
+  end
+
 end
