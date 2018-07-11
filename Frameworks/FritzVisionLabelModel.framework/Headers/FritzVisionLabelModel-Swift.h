@@ -193,11 +193,9 @@ static NSString * _Nonnull const FritzVisionLabelErrorDomain = @"FritzVisionLabe
 SWIFT_CLASS_NAMED("FritzVisionLabelModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzVisionLabelModel : NSObject
 /// Run label prediction requst on a UIImage.
-/// \param pixelBuffer A UIImage containing the image to be used for performing the requests.
+/// \param fritzImage Image or buffer to run model on.
 ///
-/// \param orientation Optional orientation of the input image.
-///
-/// \param options An optional dictionary containing VNImageOption keys to auxiliary image data.
+/// \param options Options for model execution.
 ///
 /// \param completion The block to invoke after the prediction request.  Contains an array of FritzVisionLabel objects or error message.
 ///

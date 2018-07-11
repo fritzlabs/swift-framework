@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage = 'https://fritz.ai'
   s.license = { :type => 'Apache 2.0', :file => 'LICENSE.md' }
   s.author = { 'Andrew Barba' => 'andrew@fritz.ai' }
-  s.source = { :git => 'https://github.com/fritzlabs/swift-framework.git', :tag => s.version.to_s }
+  s.source = { :git => 'https://github.com/fritzlabs/swift-framework.git', :branch => 'fixes-to-beta-19' }
   s.requires_arc = true
 
   s.ios.deployment_target = '10.0'
