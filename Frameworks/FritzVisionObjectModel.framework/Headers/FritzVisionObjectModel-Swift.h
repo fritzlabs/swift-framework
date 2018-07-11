@@ -215,11 +215,9 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModel") SWIFT_AVAILABILITY(ios,introduced=11
 @interface FritzVisionObjectModel : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 /// Run prediction for vision object model.
-/// \param pixelBuffer A CVPixelBuffer containing the image to be used for performing the requests. Buffer contents can’t be changed for the lifetime of the request handler.
+/// \param fritzImage Image or buffer to run model on.
 ///
-/// \param orientation The orientation of the input image.
-///
-/// \param options An optional dictionary containing VNImageOption keys to auxiliary image data.
+/// \param options Options for model execution.
 ///
 /// \param completion The block to invoke after the prediction request has finished processing.
 ///
