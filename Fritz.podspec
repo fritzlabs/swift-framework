@@ -36,12 +36,14 @@ Pod::Spec.new do |s|
   s.subspec 'VisionLabelModel' do |vision|
     vision.dependency 'Fritz/Core'
     vision.dependency 'Fritz/Vision'
+    vision.dependency 'Fritz/ManagedModel'
     vision.vendored_framework = 'Frameworks/FritzVisionLabelModel.framework'
   end
 
   s.subspec 'VisionObjectModel' do |vision|
     vision.dependency 'Fritz/Core'
     vision.dependency 'Fritz/Vision'
+    vision.dependency 'Fritz/ManagedModel'
     vision.vendored_framework = 'Frameworks/FritzVisionObjectModel.framework'
   end
 
