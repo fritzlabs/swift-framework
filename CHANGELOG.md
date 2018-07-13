@@ -5,6 +5,11 @@ Change Log
 
 ---
 
+## [1.0.0-beta.20](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.20)
+
+1. Add Fritz tracking to label and object models
+2. Speed up sigmoid calculation by using Accelerate functions
+
 ## [1.0.0-beta.19](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.19)
 
 1. Use vision framework for Label model predictions
