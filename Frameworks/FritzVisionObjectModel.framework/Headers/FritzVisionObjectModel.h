@@ -14,5 +14,5 @@ FOUNDATION_EXPORT double FritzVisionObjectModelVersionNumber;
 //! Project version string for FritzVisionObjectModel.
 FOUNDATION_EXPORT const unsigned char FritzVisionObjectModelVersionString[];
 @import FritzVision;
-
+@import FritzManagedModel;
 // In this header, you should import all the public headers of your framework using statements like #import <FritzVisionObjectModel/PublicHeader.h>
