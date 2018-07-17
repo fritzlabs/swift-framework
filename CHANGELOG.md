@@ -5,6 +5,13 @@ Change Log
 
 ---
 
+## [1.0.0-beta.21](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.21)
+
+1. Move some functionality from FritzManagedModel to FritzCore
+2. Add support for including Fritz-Info.plist
+3. Build tests from all frameworks
+4. Session now optional in SwiftIdentifiedModel
+
 ## [1.0.0-beta.20](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.20)
 
 1. Add Fritz tracking to label and object models

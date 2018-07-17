@@ -164,6 +164,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 #if __has_feature(modules)
 @import ObjectiveC;
+@import Foundation;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -188,10 +189,101 @@ SWIFT_CLASS_NAMED("Configuration") SWIFT_AVAILABILITY(watchos,introduced=4.0) SW
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
+/// The type of error encountered
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzErrorCode, "ErrorCode") {
+  FritzErrorCodeModelCompilation = 0,
+  FritzErrorCodeModelDecryption = 1,
+  FritzErrorCodeModelDownload = 2,
+  FritzErrorCodeSessionDisabled = 3,
+};
+
+enum LogLevel : NSInteger;
 
 SWIFT_CLASS_NAMED("FritzCore") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzCore : NSObject
+/// Enables Fritz SDK logging
+/// \param level 
+/// – 0: Debug logging
+/// – 1: Info logging
+/// – 2: Warn logging
+/// – 3: Error logging
+/// – 4: Disable logging
+///
++ (void)setLogLevel:(enum LogLevel)level;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+
+
+
+
+
+@class NSCoder;
+
+/// Class representing a Fritz-related error
+/// note:
+/// You subscribe to a notification to be notified anytime an error is encountered in the SDK.
+/// seealso:
+/// <code>Notification.Name.fritzError</code>
+SWIFT_CLASS_NAMED("FritzError") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+@interface FritzError : NSError
+/// Do not create an instance of this class directly
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithDomain:(NSString * _Nonnull)domain code:(NSInteger)code userInfo:(NSDictionary<NSString *, id> * _Nullable)dict SWIFT_UNAVAILABLE;
+@end
+
+/// Logging level for the SDK
+/// <ul>
+///   <li>
+///     debug: log all logs
+///   </li>
+///   <li>
+///     info: log info logs or higher
+///   </li>
+///   <li>
+///     warn: log warning logs or higher
+///   </li>
+///   <li>
+///     error: log error logs only
+///   </li>
+///   <li>
+///     none: disable logging
+///   </li>
+/// </ul>
+typedef SWIFT_ENUM(NSInteger, LogLevel) {
+  LogLevelDebug = 0,
+  LogLevelInfo = 1,
+  LogLevelWarn = 2,
+  LogLevelError = 3,
+  LogLevelNone = 4,
+};
+
+
+@interface NSNotification (SWIFT_EXTENSION(FritzCore))
+/// Subscribe to this notification to receive Fritz-related errors
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull FritzErrorNotificationKey;)
++ (NSString * _Nonnull)FritzErrorNotificationKey SWIFT_WARN_UNUSED_RESULT;
+/// Subscribe to this notification to know when a Fritz model has been updated
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull FritzModelUpdatedNotificationKey;)
++ (NSString * _Nonnull)FritzModelUpdatedNotificationKey SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+/// Encapsualtes your App Token and the Environment in which to send all Fritz-related requests.
+/// note:
+/// By default the SDK will read your App Token from the <code>FritzToken</code> line in your apps Info.plist. However, by providing a <code>Session</code> when conforming to <code>BaseIdentifiedModel</code> you have the ability to use models in your app that are from different Fritz accounts. This is useful if you are an SDK author and want to include Fritz as a dependency in your SDK without affecting the end-develoeprs ability to also use Fritz with their App Token.
+SWIFT_CLASS_NAMED("Session") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+@interface FritzSession : NSObject
+/// Default session to use throughout SDK
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzSession * _Nonnull defaultSession;)
++ (FritzSession * _Nonnull)defaultSession SWIFT_WARN_UNUSED_RESULT;
+/// Create a session
+- (nonnull instancetype)initWithAppToken:(NSString * _Nonnull)apiKey environment:(NSString * _Nonnull)apiUrl namespace:(NSString * _Nonnull)namespace_ OBJC_DESIGNATED_INITIALIZER;
+/// Create a session
+- (nonnull instancetype)initWithAppToken:(NSString * _Nonnull)apiKey;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
 #if __has_attribute(external_source_symbol)

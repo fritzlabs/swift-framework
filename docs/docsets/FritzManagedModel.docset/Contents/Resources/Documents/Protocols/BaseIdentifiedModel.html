@@ -51,7 +51,7 @@
             <img id="carat" src="../img/carat.png" />
           </span>
           BaseIdentifiedModel Protocol
-          <span class="no-mobile coverage"> (81% documented)</span>
+          <span class="no-mobile coverage"> (96% documented)</span>
         </p>
       </div>
     </nav>
@@ -63,7 +63,8 @@
               <h1>BaseIdentifiedModel</h1>
                 <div class="declaration">
                   <div class="language">
-                    <pre class="highlight swift"><code><span class="kd">@objc(FritzBaseIdentifiedModel)</span>
+                    <pre class="highlight swift"><code><span class="kd">@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)</span>
+<span class="kd">@objc(FritzBaseIdentifiedModel)</span>
 <span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">BaseIdentifiedModel</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/ReadModelProvider.html">ReadModelProvider</a></span></code></pre>
 
                   </div>
@@ -224,7 +225,7 @@
                           <div class="language">
                             <p class="aside-title">Swift</p>
                             <pre class="highlight swift"><code><span class="kd">@objc(fritzSession)</span>
-<span class="kd">static</span> <span class="k">var</span> <span class="nv">session</span><span class="p">:</span> <span class="kt"><a href="../Classes/Session.html">Session</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+<span class="kd">optional</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">Session</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                           </div>
                         </div>
@@ -285,30 +286,7 @@
               <a href="../Classes.html">Classes</a>
               <ul class="nav-group-tasks">
                 <li class="nav-group-task">
-                  <a href="../Classes/Environment.html">Environment</a>
-                </li>
-                <li class="nav-group-task">
-                  <a href="../Classes/FritzError.html">FritzError</a>
-                </li>
-                <li class="nav-group-task">
-                  <a href="../Classes/FritzSDK.html">FritzSDK</a>
-                </li>
-                <li class="nav-group-task">
                   <a href="../Classes/ManagedMLModel.html">ManagedMLModel</a>
-                </li>
-                <li class="nav-group-task">
-                  <a href="../Classes/Session.html">Session</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-group-name">
-              <a href="../Enums.html">Enumerations</a>
-              <ul class="nav-group-tasks">
-                <li class="nav-group-task">
-                  <a href="../Enums/ErrorCode.html">ErrorCode</a>
-                </li>
-                <li class="nav-group-task">
-                  <a href="../Enums/LogLevel.html">LogLevel</a>
                 </li>
               </ul>
             </li>
@@ -316,16 +294,7 @@
               <a href="../Extensions.html">Extensions</a>
               <ul class="nav-group-tasks">
                 <li class="nav-group-task">
-                  <a href="../Extensions/NSNotification.html">NSNotification</a>
-                </li>
-                <li class="nav-group-task">
                   <a href="../Extensions/NSObject.html">NSObject</a>
-                </li>
-                <li class="nav-group-task">
-                  <a href="../Extensions/Notification.html">Notification</a>
-                </li>
-                <li class="nav-group-task">
-                  <a href="../Extensions/Notification/Name.html">– Name</a>
                 </li>
               </ul>
             </li>
@@ -354,7 +323,7 @@
       </div>
       <div class="footer-wrapper">
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://fritz.ai" target="_blank" rel="external">Fritz Labs Incorporated</a>. All rights reserved. (Last updated: 2018-07-13)</p>
+          <p>&copy; 2018 <a class="link" href="https://fritz.ai" target="_blank" rel="external">Fritz Labs Incorporated</a>. All rights reserved. (Last updated: 2018-07-17)</p>
         </section>
       </div>
     </div>
