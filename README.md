@@ -5,28 +5,14 @@ Fritz Swift SDK
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Fritz.svg)](https://img.shields.io/cocoapods/v/Fritz.svg)
 [![Twitter](https://img.shields.io/badge/twitter-@fritzlabs-blue.svg?style=flat)](http://twitter.com/fritzlabs)
 
-The Fritz SDK is used to provide insights into your use of Core ML models. Fritz provides seamless over-the-air updates to your models as well as analytics in how well your models are performing on your end-users devices.
-
-## Documentation
-
-[iOS SDK Reference Docs](https://docs.fritz.ai/iOS/latest/index.html)
-
-[Docs Home](https://docs.fritz.ai/)
+Fritz is a free end-to-end platform that allows you to create machine-learning-powered features in your mobile apps with ease. Build unique, compelling user experiences using ML technology like image labeling, object detection, and more.
 
 ## Installation
 
-### CocoaPods
+[iOS SDK instructions](https://docs.fritz.ai/get-started.html#ios)
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
+## Documentation
 
-```bash
-$ gem install cocoapods
-```
+[Fritz Docs Home](https://docs.fritz.ai/)
 
-> CocoaPods 1.1.0+ is required to build Fritz 1.0.0+.
-
-To integrate Fritz into your Xcode project using CocoaPods, add a line to your `Podfile`:
-
-```
-pod Fritz '~> 1.0.0-beta'
-```
+[iOS SDK Reference Docs](https://docs.fritz.ai/iOS/latest/index.html)
