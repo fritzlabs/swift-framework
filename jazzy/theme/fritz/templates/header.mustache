@@ -1,0 +1,28 @@
+<nav class="navbar-fixed">
+  <div class="nav-upper">
+    <ul class="nav-items">
+      <li>
+        <a href="/" class="logo">
+          <img src="{{path_to_root}}img/fritz_logo.svg" alt="Fritz"/>
+        </a>
+      </li>
+      <li><a href="https://fritz.ai">FRITZ</a></li>
+      <li><a class="active" href="/">DOCUMENTATION</a></li>
+      <li><a href="https://heartbeat.fritz.ai">HEARTBEAT</a></li>
+      <li><a href="https://alchemy.fritz.ai">ALCHEMY</a></li>
+      <li><a href="https://app.fritz.ai">LOGIN</a></li>
+    </ul>
+  </div>
+  <div class="nav-lower">
+    <p id="breadcrumbs">
+      <span class="no-mobile">
+        <a href="/">Docs</a>
+        <img id="carat" src="{{path_to_root}}img/carat.png" />
+        <a href="{{path_to_root}}index.html">iOS Reference</a>
+        <img id="carat" src="{{path_to_root}}img/carat.png" />
+      </span>
+      {{name}} {{kind}}
+      <span class="no-mobile coverage">{{#doc_coverage}} ({{doc_coverage}}% documented){{/doc_coverage}}</span>
+    </p>
+  </div>
+</nav>

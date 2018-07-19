@@ -1,0 +1,10 @@
+FROM codeship/ruby
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    sqlite3 \
+    libsqlite3-dev
+
+RUN gem install jazzy
+
+WORKDIR /swift-framework
+COPY . .
