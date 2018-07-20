@@ -192,7 +192,7 @@ SWIFT_PROTOCOL_NAMED("ReadModelProvider") SWIFT_AVAILABILITY(watchos,introduced=
 @property (nonatomic, readonly, strong) MLModel * _Nonnull model;
 @end
 
-@class FritzSession;
+@class FritzConfiguration;
 
 /// This is the main entry point to exposing Fritz functionality on your Xcode-generated model classes.
 /// seealso:
@@ -217,9 +217,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger fritzPacka
 /// Signifies whether or not the model is encrypted.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<NSNumber *> * _Nonnull fritzEncryptionSeed;)
 + (NSArray<NSNumber *> * _Nonnull)fritzEncryptionSeed SWIFT_WARN_UNUSED_RESULT;
-/// A Fritz session encapsualtes your App Token and the Environment in which to send all Fritz-related requests.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzSession * _Nonnull fritzSession;)
-+ (FritzSession * _Nonnull)fritzSession SWIFT_WARN_UNUSED_RESULT;
+/// A Fritz configuration encapsualtes your App Token and the Environment in which to send all Fritz-related requests.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzConfiguration * _Nonnull fritzConfiguration;)
++ (FritzConfiguration * _Nonnull)fritzConfiguration SWIFT_WARN_UNUSED_RESULT;
 @end
 
 

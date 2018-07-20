@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [1.0.0-beta.22](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.22)
+
+1. Uses a single shared SessionManager across all models
+
 ## [1.0.0-beta.21](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.21)
 
 1. Move some functionality from FritzManagedModel to FritzCore
