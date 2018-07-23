@@ -5,6 +5,12 @@ Change Log
 
 ---
 
+## [1.0.0](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0)
+
+1. We're now out of Beta! To add machine learning features to your app [create an account](https://app.fritz.ai/register).
+1. Updating API Client to be more configurable from server.
+2. Update FritzImageOrientation class to better communicate image orientation options.
+
 ## [1.0.0-beta.22](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.22)
 
 1. Uses a single shared SessionManager across all models
