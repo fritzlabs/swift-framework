@@ -193,15 +193,16 @@ SWIFT_CLASS_NAMED("BoundingBox")
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
+/// Describes the orientation of the image. The orientations match the <a href="https://developer.apple.com/documentation/imageio/cgimagepropertyorientation">CGImagePropertyOrientation</a> Enumeration from Apple. Refer to that documentation for clear descriptions of each case.
 typedef SWIFT_ENUM(int32_t, FritzImageOrientation) {
-  FritzImageOrientationTopLeft = 1,
-  FritzImageOrientationTopRight = 2,
-  FritzImageOrientationBottomRight = 3,
-  FritzImageOrientationBottomLeft = 4,
-  FritzImageOrientationLeftTop = 5,
-  FritzImageOrientationRightTop = 6,
-  FritzImageOrientationRightBottom = 7,
-  FritzImageOrientationLeftBottom = 8,
+  FritzImageOrientationUp = 1,
+  FritzImageOrientationUpMirrored = 2,
+  FritzImageOrientationDown = 3,
+  FritzImageOrientationDownMirrored = 4,
+  FritzImageOrientationLeftMirrored = 5,
+  FritzImageOrientationRight = 6,
+  FritzImageOrientationRightMirrored = 7,
+  FritzImageOrientationLeft = 8,
 };
 
 typedef SWIFT_ENUM(NSInteger, FritzVisionError) {
