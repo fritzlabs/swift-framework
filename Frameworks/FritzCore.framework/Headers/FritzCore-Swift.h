@@ -201,6 +201,13 @@ enum LogLevel : NSInteger;
 
 SWIFT_CLASS_NAMED("FritzCore") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzCore : NSObject
+/// Shared configuration
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzConfiguration * _Nonnull configuration;)
++ (FritzConfiguration * _Nonnull)configuration SWIFT_WARN_UNUSED_RESULT;
+/// Configure the Fritz SDK
++ (void)configure;
+/// Configure the Fritz SDK with a custom configuration
++ (void)configureWith:(FritzConfiguration * _Nonnull)configuration;
 /// Enables Fritz SDK logging
 /// \param level 
 /// – 0: Debug logging
