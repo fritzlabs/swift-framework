@@ -221,7 +221,7 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModel") SWIFT_AVAILABILITY(ios,introduced=11
 ///
 /// \param completion The block to invoke after the prediction request has finished processing.
 ///
-- (void)fritzImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionObjectModelOptions * _Nonnull)options completion:(void (^ _Nonnull)(NSArray<FritzVisionObject *> * _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionObjectModelOptions * _Nonnull)options completion:(void (^ _Nonnull)(NSArray<FritzVisionObject *> * _Nullable, NSError * _Nullable))completion;
 @end
 
 

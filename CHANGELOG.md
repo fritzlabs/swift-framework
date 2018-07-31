@@ -5,6 +5,11 @@ Change Log
 
 ---
 
+## [1.0.1](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.1)
+
+1. Fix Obj-C naming.
+2. Update FritzImageOrientation to more easily represent input orientation.
+
 ## [1.0.0](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0)
 
 1. We're now out of Beta! To add machine learning features to your app [create an account](https://app.fritz.ai/register).
