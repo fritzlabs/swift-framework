@@ -1,6 +1,15 @@
 ////////////////////
 // Fritz Overrides
 ////////////////////
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+     -moz-box-shadow: $shadows;
+       -o-box-shadow: $shadows;
+          box-shadow: $shadows;
+}
+
+
 body {
   font-family: 'SF Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -10,28 +19,40 @@ body {
   padding-bottom: 0;
   margin-top: 0;
   .coverage {
-    padding: 0 10px;
     float: right;
   }
 }
 
 
+
 ////////////////////
 // Fritz Navbar
 ////////////////////
+
+$black:         #000000;
+$white:         #ffffff;
+$brass:         #9e8d37;
+$raisin_black:  #212121;
+$grey_main:     #a1a1a1;
+$grey_dark:     darken($grey_main, 20%);
+$grey_light:    lighten($grey_main, 5%);
+$shadow:        rgba($black, 0.4);
+
 .navbar-fixed {
   position: fixed;
   z-index: 9999;
   top: 0;
   left: 0;
   width: 100%;
-  overflow: hidden;
-  background: #1b1b1b;
   padding: 0;
-  box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
-  .nav-upper, .nav-lower {
+  overflow: hidden;
+  background-color: $raisin_black;
+  transition: all 0.5s;
+  @include box-shadow(0 0 4px $shadow, 0 4px 8px $shadow);
+  .nav-upper,
+  .nav-lower {
     position: relative;
-    padding: 0 0 0 20px;
+    padding: 0 20px;
     height: 50px;
     line-height: 50px;
   }
@@ -44,40 +65,76 @@ body {
       display: none;
     }
   }
-}
-.nav-items {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-size: 0;
-  li {
-    display: inline-block;
-    a {
-      font-family: 'Saveur Sans', Helvetica, Arial, sans-serif;
-      font-size: 14px;
-      line-height: 50px;
-      color: #a1a1a1;
-      letter-spacing: 0.3em;
+  ul {
+    list-style: none;
+    padding: 0;
+    font-size: 0;
+    li {
       display: inline-block;
-      text-decoration: none;
-      margin: 0 10px;
-      padding: 0;
-      &:hover, &.active {
-        color: #9e8d37;
-      }
-      &.logo {
-        width: 42px;
-        margin: 0;
-        img {
-          vertical-align: middle;
+      float: left;
+      height: 50px;
+      line-height: 50px;
+      a {
+        color: $grey_main;
+        height: 100%;
+        text-decoration: none;
+        padding: 0;
+        margin: 0 10px;
+        &.navbar-button {
+          color: $white;
+          background-color: $raisin_black;
+          border: 2px solid $brass;
+          padding: 5px 12px;
+          @include box-shadow(0 0 4px $shadow, 2px 2px 8px $shadow);
+          &:hover {
+            border-color: lighten($brass, 10%);
+          }
+        }
+        &.active {
+          color: $brass; // backup for gradient
+          background: -webkit-linear-gradient(#B3A662, #7A6D2B); // match svg
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-size: 22px;
+          margin-left: 0;
+        }
+        &.help {
+          font-size: 14px;
+          margin-right: 0;
+        }
+        &:hover {
+          color: $white;
         }
       }
-      @media (min-width: 992px) {
-        margin: 0 20px;
-      }
+    }
+    &.nav-items-left {
+      font-family: 'Saveur Sans', Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.3em;
+    }
+    &.nav-items-right {
+      font-weight: bold;
+      font-size: 12px;
+      letter-spacing: 0.15em;
     }
   }
+  .logo {
+    width: 32px;
+  }
+  .pull-left {
+    float: left;
+  }
+  .pull-right {
+    float: right;
+  }
 }
+
+.navbar-fixed .nav-items-left li a {
+  @media (min-width: 992px) {
+    margin: 0 20px; /* more space between when wider */
+  }
+}
+
 .main-content {
   @media (min-width: 769px) {
     margin-top: 100px; /* height of navbar */
