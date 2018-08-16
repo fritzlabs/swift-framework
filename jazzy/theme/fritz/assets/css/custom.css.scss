@@ -48,7 +48,7 @@ $shadow:        rgba($black, 0.4);
   overflow: hidden;
   background-color: $raisin_black;
   transition: all 0.5s;
-  @include box-shadow(0 0 4px $shadow, 0 4px 8px $shadow);
+  @include box-shadow(0 0 4px rgba($black, 0.14), 0 4px 8px rgba($black, 0.28));
   .nav-upper,
   .nav-lower {
     position: relative;
@@ -120,6 +120,7 @@ $shadow:        rgba($black, 0.4);
   }
   .logo {
     width: 32px;
+    vertical-align: middle;
   }
   .pull-left {
     float: left;
