@@ -2,6 +2,9 @@
 // Fritz Overrides
 ////////////////////
 
+$mobile_breakpoint: 767px;
+$wide_breakpoint: 992px;
+
 @mixin box-shadow($shadows...) {
   -webkit-box-shadow: $shadows;
      -moz-box-shadow: $shadows;
@@ -59,11 +62,6 @@ $shadow:        rgba($black, 0.4);
   .nav-lower {
     color: #fefefe;
     background: #424242;
-  }
-  .nav-upper {
-    @media (max-width: 768px) {
-      display: none;
-    }
   }
   ul {
     list-style: none;
@@ -131,13 +129,13 @@ $shadow:        rgba($black, 0.4);
 }
 
 .navbar-fixed .nav-items-left li a {
-  @media (min-width: 992px) {
+  @media (min-width: $wide_breakpoint) {
     margin: 0 20px; /* more space between when wider */
   }
 }
 
 .main-content {
-  @media (min-width: 769px) {
+  @media screen and (min-width: $mobile_breakpoint) {
     margin-top: 100px; /* height of navbar */
   }
 }
