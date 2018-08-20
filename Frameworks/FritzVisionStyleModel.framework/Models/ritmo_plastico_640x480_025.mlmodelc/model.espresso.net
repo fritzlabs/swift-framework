@@ -1,0 +1,938 @@
+{
+  "storage" : "model.espresso.weights",
+  "properties" : {
+
+  },
+  "format_version" : 200,
+  "layers" : [
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "conv2d_1_output",
+      "blob_weights" : 1,
+      "K" : 3,
+      "name" : "conv2d_1",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 8,
+      "bottom" : "image",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "Nx" : 9,
+      "pad_value" : 0,
+      "Ny" : 9,
+      "n_parallel" : 1
+    },
+    {
+      "bottom" : "conv2d_1_output",
+      "training_instancenorm" : 1,
+      "training_momentum" : 0.89999997615814209,
+      "training" : 1,
+      "blob_batchnorm_params" : 3,
+      "weights" : {
+
+      },
+      "training_eps" : 0.0010000000474974513,
+      "top" : "instance_normalization_1_output",
+      "C" : 8,
+      "type" : "batchnorm",
+      "name" : "instance_normalization_1"
+    },
+    {
+      "mode" : 0,
+      "weights" : {
+
+      },
+      "top" : "activation_1_output",
+      "type" : "activation",
+      "name" : "activation_1",
+      "bottom" : "instance_normalization_1_output"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "conv2d_2_output",
+      "blob_weights" : 5,
+      "K" : 8,
+      "stride_x" : 2,
+      "name" : "conv2d_2",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "stride_y" : 2,
+      "has_biases" : 0,
+      "C" : 16,
+      "bottom" : "activation_1_output",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "bottom" : "conv2d_2_output",
+      "training_instancenorm" : 1,
+      "training_momentum" : 0.89999997615814209,
+      "training" : 1,
+      "blob_batchnorm_params" : 7,
+      "weights" : {
+
+      },
+      "training_eps" : 0.0010000000474974513,
+      "top" : "instance_normalization_2_output",
+      "C" : 16,
+      "type" : "batchnorm",
+      "name" : "instance_normalization_2"
+    },
+    {
+      "mode" : 0,
+      "weights" : {
+
+      },
+      "top" : "activation_2_output",
+      "type" : "activation",
+      "name" : "activation_2",
+      "bottom" : "instance_normalization_2_output"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "conv2d_3_output",
+      "blob_weights" : 9,
+      "K" : 16,
+      "stride_x" : 2,
+      "name" : "conv2d_3",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "stride_y" : 2,
+      "has_biases" : 0,
+      "C" : 32,
+      "bottom" : "activation_2_output",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 1,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "bottom" : "conv2d_3_output",
+      "training_instancenorm" : 1,
+      "training_momentum" : 0.89999997615814209,
+      "training" : 1,
+      "blob_batchnorm_params" : 11,
+      "weights" : {
+
+      },
+      "training_eps" : 0.0010000000474974513,
+      "top" : "instance_normalization_3_output",
+      "C" : 32,
+      "type" : "batchnorm",
+      "name" : "instance_normalization_3"
+    },
+    {
+      "mode" : 0,
+      "weights" : {
+
+      },
+      "top" : "activation_3_output",
+      "type" : "activation",
+      "name" : "activation_3",
+      "bottom" : "instance_normalization_3_output"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "conv2d_4_output",
+      "blob_weights" : 13,
+      "K" : 32,
+      "name" : "conv2d_4",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 32,
+      "bottom" : "activation_3_output",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "Nx" : 3,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "bottom" : "conv2d_4_output",
+      "training_instancenorm" : 1,
+      "training_momentum" : 0.89999997615814209,
+      "training" : 1,
+      "blob_batchnorm_params" : 15,
+      "weights" : {
+
+      },
+      "training_eps" : 0.0010000000474974513,
+      "top" : "instance_normalization_4_output",
+      "C" : 32,
+      "type" : "batchnorm",
+      "name" : "instance_normalization_4"
+    },
+    {
+      "mode" : 0,
+      "weights" : {
+
+      },
+      "top" : "activation_4_output",
+      "type" : "activation",
+      "name" : "activation_4",
+      "bottom" : "instance_normalization_4_output"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "conv2d_5_output",
+      "blob_weights" : 17,
+      "K" : 32,
+      "name" : "conv2d_5",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 32,
+      "bottom" : "activation_4_output",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "Nx" : 3,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "bottom" : "conv2d_5_output",
+      "training_instancenorm" : 1,
+      "training_momentum" : 0.89999997615814209,
+      "training" : 1,
+      "blob_batchnorm_params" : 19,
+      "weights" : {
+
+      },
+      "training_eps" : 0.0010000000474974513,
+      "top" : "instance_normalization_5_output",
+      "C" : 32,
+      "type" : "batchnorm",
+      "name" : "instance_normalization_5"
+    },
+    {
+      "alpha" : 1,
+      "bottom" : "instance_normalization_5_output,activation_3_output",
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "top" : "add_1_output",
+      "type" : "elementwise",
+      "name" : "add_1",
+      "beta" : 0
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "conv2d_6_output",
+      "blob_weights" : 21,
+      "K" : 32,
+      "name" : "conv2d_6",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 32,
+      "bottom" : "add_1_output",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "Nx" : 3,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "bottom" : "conv2d_6_output",
+      "training_instancenorm" : 1,
+      "training_momentum" : 0.89999997615814209,
+      "training" : 1,
+      "blob_batchnorm_params" : 23,
+      "weights" : {
+
+      },
+      "training_eps" : 0.0010000000474974513,
+      "top" : "instance_normalization_6_output",
+      "C" : 32,
+      "type" : "batchnorm",
+      "name" : "instance_normalization_6"
+    },
+    {
+      "mode" : 0,
+      "weights" : {
+
+      },
+      "top" : "activation_5_output",
+      "type" : "activation",
+      "name" : "activation_5",
+      "bottom" : "instance_normalization_6_output"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "conv2d_7_output",
+      "blob_weights" : 25,
+      "K" : 32,
+      "name" : "conv2d_7",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 32,
+      "bottom" : "activation_5_output",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "Nx" : 3,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "bottom" : "conv2d_7_output",
+      "training_instancenorm" : 1,
+      "training_momentum" : 0.89999997615814209,
+      "training" : 1,
+      "blob_batchnorm_params" : 27,
+      "weights" : {
+
+      },
+      "training_eps" : 0.0010000000474974513,
+      "top" : "instance_normalization_7_output",
+      "C" : 32,
+      "type" : "batchnorm",
+      "name" : "instance_normalization_7"
+    },
+    {
+      "alpha" : 1,
+      "bottom" : "instance_normalization_7_output,add_1_output",
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "top" : "add_2_output",
+      "type" : "elementwise",
+      "name" : "add_2",
+      "beta" : 0
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "conv2d_8_output",
+      "blob_weights" : 29,
+      "K" : 32,
+      "name" : "conv2d_8",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 32,
+      "bottom" : "add_2_output",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "Nx" : 3,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "bottom" : "conv2d_8_output",
+      "training_instancenorm" : 1,
+      "training_momentum" : 0.89999997615814209,
+      "training" : 1,
+      "blob_batchnorm_params" : 31,
+      "weights" : {
+
+      },
+      "training_eps" : 0.0010000000474974513,
+      "top" : "instance_normalization_8_output",
+      "C" : 32,
+      "type" : "batchnorm",
+      "name" : "instance_normalization_8"
+    },
+    {
+      "mode" : 0,
+      "weights" : {
+
+      },
+      "top" : "activation_6_output",
+      "type" : "activation",
+      "name" : "activation_6",
+      "bottom" : "instance_normalization_8_output"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "conv2d_9_output",
+      "blob_weights" : 33,
+      "K" : 32,
+      "name" : "conv2d_9",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 32,
+      "bottom" : "activation_6_output",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "Nx" : 3,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "bottom" : "conv2d_9_output",
+      "training_instancenorm" : 1,
+      "training_momentum" : 0.89999997615814209,
+      "training" : 1,
+      "blob_batchnorm_params" : 35,
+      "weights" : {
+
+      },
+      "training_eps" : 0.0010000000474974513,
+      "top" : "instance_normalization_9_output",
+      "C" : 32,
+      "type" : "batchnorm",
+      "name" : "instance_normalization_9"
+    },
+    {
+      "alpha" : 1,
+      "bottom" : "instance_normalization_9_output,add_2_output",
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "top" : "add_3_output",
+      "type" : "elementwise",
+      "name" : "add_3",
+      "beta" : 0
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "conv2d_10_output",
+      "blob_weights" : 37,
+      "K" : 32,
+      "name" : "conv2d_10",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 32,
+      "bottom" : "add_3_output",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "Nx" : 3,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "bottom" : "conv2d_10_output",
+      "training_instancenorm" : 1,
+      "training_momentum" : 0.89999997615814209,
+      "training" : 1,
+      "blob_batchnorm_params" : 39,
+      "weights" : {
+
+      },
+      "training_eps" : 0.0010000000474974513,
+      "top" : "instance_normalization_10_output",
+      "C" : 32,
+      "type" : "batchnorm",
+      "name" : "instance_normalization_10"
+    },
+    {
+      "mode" : 0,
+      "weights" : {
+
+      },
+      "top" : "activation_7_output",
+      "type" : "activation",
+      "name" : "activation_7",
+      "bottom" : "instance_normalization_10_output"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "conv2d_11_output",
+      "blob_weights" : 41,
+      "K" : 32,
+      "name" : "conv2d_11",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 32,
+      "bottom" : "activation_7_output",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "Nx" : 3,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "bottom" : "conv2d_11_output",
+      "training_instancenorm" : 1,
+      "training_momentum" : 0.89999997615814209,
+      "training" : 1,
+      "blob_batchnorm_params" : 43,
+      "weights" : {
+
+      },
+      "training_eps" : 0.0010000000474974513,
+      "top" : "instance_normalization_11_output",
+      "C" : 32,
+      "type" : "batchnorm",
+      "name" : "instance_normalization_11"
+    },
+    {
+      "alpha" : 1,
+      "bottom" : "instance_normalization_11_output,add_3_output",
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "top" : "add_4_output",
+      "type" : "elementwise",
+      "name" : "add_4",
+      "beta" : 0
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "conv2d_12_output",
+      "blob_weights" : 45,
+      "K" : 32,
+      "name" : "conv2d_12",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 32,
+      "bottom" : "add_4_output",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "Nx" : 3,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "bottom" : "conv2d_12_output",
+      "training_instancenorm" : 1,
+      "training_momentum" : 0.89999997615814209,
+      "training" : 1,
+      "blob_batchnorm_params" : 47,
+      "weights" : {
+
+      },
+      "training_eps" : 0.0010000000474974513,
+      "top" : "instance_normalization_12_output",
+      "C" : 32,
+      "type" : "batchnorm",
+      "name" : "instance_normalization_12"
+    },
+    {
+      "mode" : 0,
+      "weights" : {
+
+      },
+      "top" : "activation_8_output",
+      "type" : "activation",
+      "name" : "activation_8",
+      "bottom" : "instance_normalization_12_output"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "conv2d_13_output",
+      "blob_weights" : 49,
+      "K" : 32,
+      "name" : "conv2d_13",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 32,
+      "bottom" : "activation_8_output",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "Nx" : 3,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "bottom" : "conv2d_13_output",
+      "training_instancenorm" : 1,
+      "training_momentum" : 0.89999997615814209,
+      "training" : 1,
+      "blob_batchnorm_params" : 51,
+      "weights" : {
+
+      },
+      "training_eps" : 0.0010000000474974513,
+      "top" : "instance_normalization_13_output",
+      "C" : 32,
+      "type" : "batchnorm",
+      "name" : "instance_normalization_13"
+    },
+    {
+      "alpha" : 1,
+      "bottom" : "instance_normalization_13_output,add_4_output",
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "top" : "add_5_output",
+      "type" : "elementwise",
+      "name" : "add_5",
+      "beta" : 0
+    },
+    {
+      "bottom" : "add_5_output",
+      "scaling_factor_y" : 2,
+      "weights" : {
+
+      },
+      "mode" : 0,
+      "top" : "up_sampling2d_1_output",
+      "scaling_factor_x" : 2,
+      "type" : "upsample",
+      "name" : "up_sampling2d_1"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "conv2d_14_output",
+      "blob_weights" : 53,
+      "K" : 32,
+      "name" : "conv2d_14",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 16,
+      "bottom" : "up_sampling2d_1_output",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "Nx" : 3,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "bottom" : "conv2d_14_output",
+      "training_instancenorm" : 1,
+      "training_momentum" : 0.89999997615814209,
+      "training" : 1,
+      "blob_batchnorm_params" : 55,
+      "weights" : {
+
+      },
+      "training_eps" : 0.0010000000474974513,
+      "top" : "instance_normalization_14_output",
+      "C" : 16,
+      "type" : "batchnorm",
+      "name" : "instance_normalization_14"
+    },
+    {
+      "mode" : 0,
+      "weights" : {
+
+      },
+      "top" : "activation_9_output",
+      "type" : "activation",
+      "name" : "activation_9",
+      "bottom" : "instance_normalization_14_output"
+    },
+    {
+      "bottom" : "activation_9_output",
+      "scaling_factor_y" : 2,
+      "weights" : {
+
+      },
+      "mode" : 0,
+      "top" : "up_sampling2d_2_output",
+      "scaling_factor_x" : 2,
+      "type" : "upsample",
+      "name" : "up_sampling2d_2"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "conv2d_15_output",
+      "blob_weights" : 57,
+      "K" : 16,
+      "name" : "conv2d_15",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 8,
+      "bottom" : "up_sampling2d_2_output",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "Nx" : 3,
+      "pad_value" : 0,
+      "Ny" : 3,
+      "n_parallel" : 1
+    },
+    {
+      "bottom" : "conv2d_15_output",
+      "training_instancenorm" : 1,
+      "training_momentum" : 0.89999997615814209,
+      "training" : 1,
+      "blob_batchnorm_params" : 59,
+      "weights" : {
+
+      },
+      "training_eps" : 0.0010000000474974513,
+      "top" : "instance_normalization_15_output",
+      "C" : 8,
+      "type" : "batchnorm",
+      "name" : "instance_normalization_15"
+    },
+    {
+      "mode" : 0,
+      "weights" : {
+
+      },
+      "top" : "activation_10_output",
+      "type" : "activation",
+      "name" : "activation_10",
+      "bottom" : "instance_normalization_15_output"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "conv2d_16_output",
+      "blob_weights" : 61,
+      "K" : 8,
+      "name" : "conv2d_16",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 0,
+      "C" : 3,
+      "bottom" : "activation_10_output",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "Nx" : 9,
+      "pad_value" : 0,
+      "Ny" : 9,
+      "n_parallel" : 1
+    },
+    {
+      "bottom" : "conv2d_16_output",
+      "training_instancenorm" : 1,
+      "training_momentum" : 0.89999997615814209,
+      "training" : 1,
+      "blob_batchnorm_params" : 63,
+      "weights" : {
+
+      },
+      "training_eps" : 0.0010000000474974513,
+      "top" : "instance_normalization_16_output",
+      "C" : 3,
+      "type" : "batchnorm",
+      "name" : "instance_normalization_16"
+    },
+    {
+      "mode" : 1,
+      "weights" : {
+
+      },
+      "top" : "activation_11_output",
+      "type" : "activation",
+      "name" : "activation_11",
+      "bottom" : "instance_normalization_16_output"
+    },
+    {
+      "k" : 3,
+      "bottom" : "",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "constant_blob" : 65,
+      "top" : "activation_11_output_constant_in_scale",
+      "w" : 1,
+      "type" : "load_constant",
+      "name" : "activation_11_output"
+    },
+    {
+      "k" : 3,
+      "bottom" : "",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "constant_blob" : 67,
+      "top" : "activation_11_output_constant_in_bias",
+      "w" : 1,
+      "type" : "load_constant",
+      "name" : "activation_11_output"
+    },
+    {
+      "alpha" : 1,
+      "bottom" : "activation_11_output,activation_11_output_constant_in_scale",
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "top" : "activation_11_output_mul_out",
+      "type" : "elementwise",
+      "name" : "activation_11_output",
+      "beta" : 0
+    },
+    {
+      "alpha" : 1,
+      "bottom" : "activation_11_output_mul_out,activation_11_output_constant_in_bias",
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "top" : "stylizedImage",
+      "type" : "elementwise",
+      "name" : "activation_11_output",
+      "beta" : 0
+    }
+  ]
+}

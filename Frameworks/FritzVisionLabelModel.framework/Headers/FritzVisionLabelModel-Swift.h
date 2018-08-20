@@ -164,6 +164,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 #if __has_feature(modules)
 @import ObjectiveC;
+@import Dispatch;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -199,7 +200,17 @@ SWIFT_CLASS_NAMED("FritzVisionLabelModel") SWIFT_AVAILABILITY(watchos,introduced
 ///
 /// \param completion The block to invoke after the prediction request.  Contains an array of FritzVisionLabel objects or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionLabelModelOptions * _Nonnull)options completion:(void (^ _Nonnull)(NSArray<FritzVisionLabel *> * _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionLabelModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionLabel *> * _Nullable, NSError * _Nullable))completion;
+/// Run label prediction requst asynchronously on a given queue.
+/// \param fritzImage Image or buffer to run model on.
+///
+/// \param options Options for model execution.
+///
+/// \param queue Dispatch queue to asynchronously execute predictions on
+///
+/// \param completion The block to invoke after the prediction request.  Contains an array of FritzVisionLabel objects or error message.
+///
+- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionLabelModelOptions * _Nonnull)options queue:(dispatch_queue_t _Nonnull)queue completion:(void (^ _Nonnull)(NSArray<FritzVisionLabel *> * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
