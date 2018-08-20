@@ -165,6 +165,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_feature(modules)
 @import ObjectiveC;
 @import CoreGraphics;
+@import Dispatch;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -221,7 +222,17 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModel") SWIFT_AVAILABILITY(ios,introduced=11
 ///
 /// \param completion The block to invoke after the prediction request has finished processing.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionObjectModelOptions * _Nonnull)options completion:(void (^ _Nonnull)(NSArray<FritzVisionObject *> * _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionObjectModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionObject *> * _Nullable, NSError * _Nullable))completion;
+/// Run prediction for vision object model asynchronously on a given queue.
+/// \param fritzImage Image or buffer to run model on.
+///
+/// \param options Options for model execution.
+///
+/// \param queue Dispatch queue to asynchronously execute predictions on
+///
+/// \param completion The block to invoke after the prediction request has finished processing.
+///
+- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionObjectModelOptions * _Nonnull)options queue:(dispatch_queue_t _Nonnull)queue completion:(void (^ _Nonnull)(NSArray<FritzVisionObject *> * _Nullable, NSError * _Nullable))completion;
 @end
 
 
