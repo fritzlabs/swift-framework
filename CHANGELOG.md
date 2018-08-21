@@ -5,7 +5,7 @@ Change Log
 
 ---
 
-## [1.0.2](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.2)
+## [1.1.0](https://github.com/fritzlabs/swift-framework/releases/tag/1.1.0)
 
 1. Add async prediction functions.
 2. Add FritzStyleVision for live video style transfer.

@@ -22,4 +22,8 @@
     #import <FritzVisionObjectModel/FritzVisionObjectModel.h>
   #endif
 
+  #if __has_include(<FritzVisionStyleModel/FritzVisionStyleModel.h>)
+    #import <FritzVisionStyleModel/FritzVisionStyleModel.h>
+  #endif
+
 #endif  // defined(__has_include)
