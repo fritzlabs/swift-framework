@@ -1,26 +1,28 @@
 <nav class="navbar-fixed">
-  <div class="nav-upper">
-    <ul class="nav-items">
-      <li>
-        <a href="/" class="logo">
-          <img src="{{path_to_root}}img/fritz_logo.svg" alt="Fritz"/>
-        </a>
-      </li>
-      <li><a href="https://fritz.ai">FRITZ</a></li>
-      <li><a class="active" href="/">DOCUMENTATION</a></li>
-      <li><a href="https://heartbeat.fritz.ai">HEARTBEAT</a></li>
-      <li><a href="https://alchemy.fritz.ai">ALCHEMY</a></li>
-      <li><a href="https://app.fritz.ai">LOGIN</a></li>
+  <div class="nav-upper no-mobile">
+    <ul class="nav-items-left pull-left">
+        <li>
+            <a href="/" class="active">
+                <img src="{{path_to_root}}img/fritz_logo.svg" class="logo" alt="Fritz"/>
+                DOCS
+            </a>
+        </li>
+        <li><a href="https://fritz.ai">FRITZ</a></li>
+        <li><a href="https://heartbeat.fritz.ai">HEARTBEAT</a></li>
+        <li><a href="https://alchemy.fritz.ai">ALCHEMY</a></li>
+    </ul>
+    <ul class="nav-items-right pull-right">
+        <li><a href="https://app.fritz.ai/login">LOGIN</a></li>
+        <li><a class="navbar-button" href="https://app.fritz.ai/register">SIGN UP</a></li>
+        <li><a href="/help-center/index.html" class="help" title="Help"><i class="fas fa-question-circle"></i></a></li>
     </ul>
   </div>
   <div class="nav-lower">
     <p id="breadcrumbs">
-      <span class="no-mobile">
-        <a href="/">Docs</a>
-        <img id="carat" src="{{path_to_root}}img/carat.png" />
-        <a href="{{path_to_root}}index.html">iOS Reference</a>
-        <img id="carat" src="{{path_to_root}}img/carat.png" />
-      </span>
+      <a href="/">Docs</a>
+      &raquo;
+      <a href="{{path_to_root}}index.html">iOS Reference</a>
+      &raquo;
       {{name}} {{kind}}
       <span class="no-mobile coverage">{{#doc_coverage}} ({{doc_coverage}}% documented){{/doc_coverage}}</span>
     </p>
