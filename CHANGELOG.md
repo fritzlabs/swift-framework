@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [1.1.1](https://github.com/fritzlabs/swift-framework/releases/tag/1.1.1)
+
+1. Add new styles to FritzStyleVision.
+
 ## [1.1.0](https://github.com/fritzlabs/swift-framework/releases/tag/1.1.0)
 
 1. Add async prediction functions.
