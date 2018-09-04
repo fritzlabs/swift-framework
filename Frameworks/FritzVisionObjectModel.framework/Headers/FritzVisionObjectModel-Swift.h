@@ -214,7 +214,6 @@ SWIFT_CLASS_NAMED("BoundingBoxOutline")
 
 SWIFT_CLASS_NAMED("FritzVisionObjectModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionObjectModel : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 /// Run prediction for vision object model.
 /// \param fritzImage Image or buffer to run model on.
 ///
@@ -233,6 +232,7 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModel") SWIFT_AVAILABILITY(ios,introduced=11
 /// \param completion The block to invoke after the prediction request has finished processing.
 ///
 - (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionObjectModelOptions * _Nonnull)options queue:(dispatch_queue_t _Nonnull)queue completion:(void (^ _Nonnull)(NSArray<FritzVisionObject *> * _Nullable, NSError * _Nullable))completion;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
