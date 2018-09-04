@@ -5,6 +5,11 @@ Change Log
 
 ---
 
+## [1.1.2](https://github.com/fritzlabs/swift-framework/releases/tag/1.1.2)
+
+1. Guard against Gzip returning empty data
+2. Fix Fritz Metrics tracking in Feature SDKs
+
 ## [1.1.1](https://github.com/fritzlabs/swift-framework/releases/tag/1.1.1)
 
 1. Add new styles to FritzStyleVision.
