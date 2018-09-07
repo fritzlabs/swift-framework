@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [1.1.3](https://github.com/fritzlabs/swift-framework/releases/tag/1.1.3)
+
+1. Add Objective C support for FritzVisionStyleModel
+
 ## [1.1.2](https://github.com/fritzlabs/swift-framework/releases/tag/1.1.2)
 
 1. Guard against Gzip returning empty data
