@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [2.0.0](https://github.com/fritzlabs/swift-framework/releases/tag/2.0.0)
+
+1. Built with Swift 4.2
+
 ## [1.1.3](https://github.com/fritzlabs/swift-framework/releases/tag/1.1.3)
 
 1. Add Objective C support for FritzVisionStyleModel
