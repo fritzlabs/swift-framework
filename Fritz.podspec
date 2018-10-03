@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Fritz'
-  s.version = '2.0.0'
+  s.version = '2.1.0-beta.1'
   s.summary = 'Official Fritz SDK for Swift 4.1 and Objective-C'
   s.homepage = 'https://fritz.ai'
   s.license = { :type => 'Apache 2.0', :file => 'LICENSE.md' }
@@ -53,4 +53,24 @@ Pod::Spec.new do |s|
     vision.dependency 'Fritz/ManagedModel'
     vision.vendored_framework = 'Frameworks/FritzVisionStyleModel.framework'
   end
+
+  s.subspec 'VisionSegmentationModel' do |vision|
+    vision.dependency 'Fritz/Core'
+    vision.dependency 'Fritz/Vision'
+    vision.dependency 'Fritz/ManagedModel'
+    vision.vendored_framework = 'Frameworks/FritzVisionStyleModel.framework'
+  end
+
+  s.subspec 'VisionPeopleSegmentationModel' do |vision|
+    vision.dependency 'Fritz/VisionSegmentationModel'
+    vision.dependency 'Fritz/ManagedModel'
+    vision.vendored_framework = 'Frameworks/FritzVisionPeopleSegmentationModel.framework'
+  end
+
+  s.subspec 'VisionLivingRoomSegmentationModel' do |vision|
+    vision.dependency 'Fritz/VisionSegmentationModel'
+    vision.dependency 'Fritz/ManagedModel'
+    vision.vendored_framework = 'Frameworks/FritzVisionLivingRoomSegmentationModel.framework'
+  end
+
 end

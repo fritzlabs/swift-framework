@@ -26,4 +26,16 @@
     #import <FritzVisionStyleModel/FritzVisionStyleModel.h>
   #endif
 
+  #if __has_include(<FritzVisionSegmentationModel/FritzVisionSegmentationModel.h>)
+    #import <FritzVisionSegmentationModel/FritzVisionSegmentationModel.h>
+  #endif
+
+  #if __has_include(<FritzVisionPeopleSegmentationModel/FritzVisionPeopleSegmentationModel.h>)
+    #import <FritzVisionPeopleSegmentationModel/FritzVisionPeopleSegmentationModel.h>
+  #endif
+
+  #if __has_include(<FritzVisionLivingRoomSegmentationModel/FritzVisionLivingRoomSegmentationModel.h>)
+    #import <FritzVisionLivingRoomSegmentationModel/FritzVisionLivingRoomSegmentationModel.h>
+  #endif
+
 #endif  // defined(__has_include)

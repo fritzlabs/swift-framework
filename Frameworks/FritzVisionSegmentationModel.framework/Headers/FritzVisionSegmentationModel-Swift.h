@@ -163,7 +163,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # define SWIFT_DEPRECATED_OBJC(Msg) SWIFT_DEPRECATED_MSG(Msg)
 #endif
 #if __has_feature(modules)
-@import CoreGraphics;
 @import ObjectiveC;
 @import UIKit;
 #endif
@@ -179,67 +178,20 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_attribute(external_source_symbol)
 # pragma push_macro("any")
 # undef any
-# pragma clang attribute push(__attribute__((external_source_symbol(language="Swift", defined_in="FritzVision",generated_declaration))), apply_to=any(function,enum,objc_interface,objc_category,objc_protocol))
+# pragma clang attribute push(__attribute__((external_source_symbol(language="Swift", defined_in="FritzVisionSegmentationModel",generated_declaration))), apply_to=any(function,enum,objc_interface,objc_category,objc_protocol))
 # pragma pop_macro("any")
 #endif
 
 
-/// BoundingBox Contains coordinates to draw bounding boxes on images as predicted directly by the model.  However, because of cropping or resizing done to accomadate model size constraints, the default values may not map to coordinates in your view.  Use the toCGRect functions to convert bounding box coordinates to fit the image.
-SWIFT_CLASS_NAMED("BoundingBox")
-@interface BoundingBox : NSObject
-- (CGRect)imgHeight:(double)imgHeight imgWidth:(double)imgWidth SWIFT_WARN_UNUSED_RESULT;
-- (CGRect)imgHeight:(double)imgHeight imgWidth:(double)imgWidth xOffset:(double)xOffset yOffset:(double)yOffset SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
-@end
-
-/// Describes the orientation of the image. The orientations match the <a href="https://developer.apple.com/documentation/imageio/cgimagepropertyorientation">CGImagePropertyOrientation</a> Enumeration from Apple. Refer to that documentation for clear descriptions of each case.
-typedef SWIFT_ENUM(int32_t, FritzImageOrientation, closed) {
-  FritzImageOrientationUp = 1,
-  FritzImageOrientationUpMirrored = 2,
-  FritzImageOrientationDown = 3,
-  FritzImageOrientationDownMirrored = 4,
-  FritzImageOrientationLeftMirrored = 5,
-  FritzImageOrientationRight = 6,
-  FritzImageOrientationRightMirrored = 7,
-  FritzImageOrientationLeft = 8,
-};
-
-typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
-  FritzVisionErrorInvalidSampleImageBuffer = 0,
-  FritzVisionErrorErrorProcessingImage = 1,
-};
-static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
-
-
-/// An image or image buffer used in vision detection.
-SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
-@interface FritzVisionImage : NSObject
+SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+@interface FritzVisionSegmentationModel : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
 
-
-
-SWIFT_CLASS_NAMED("FritzVisionImageMetadata")
-@interface FritzVisionImageMetadata : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-/// Represents a label for an image.
-SWIFT_CLASS_NAMED("FritzVisionLabel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
-@interface FritzVisionLabel : NSObject
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
-@end
-
-
-SWIFT_CLASS_NAMED("FritzVisionObject") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionObject : NSObject
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+SWIFT_CLASS("_TtC28FritzVisionSegmentationModel35FritzVisionSegmentationModelOptions")
+@interface FritzVisionSegmentationModelOptions : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
