@@ -28,8 +28,13 @@ Pod::Spec.new do |s|
     core.vendored_framework = 'Frameworks/FritzCore.framework'
   end
 
+  s.subspec 'CoreMLHelpers' do |helpers|
+    helpers.vendored_framework = 'Frameworks/CoreMLHelpers.framework'
+  end
+
   s.subspec 'Vision' do |vision|
     vision.dependency 'Fritz/Core'
+    vision.dependency 'Fritz/CoreMLHelpers'
     vision.vendored_framework = 'Frameworks/FritzVision.framework'
   end
 
@@ -58,6 +63,7 @@ Pod::Spec.new do |s|
     vision.dependency 'Fritz/Core'
     vision.dependency 'Fritz/Vision'
     vision.dependency 'Fritz/ManagedModel'
+    vision.dependency 'Fritz/CoreMLHelpers'
     vision.vendored_framework = 'Frameworks/FritzVisionStyleModel.framework'
   end
 

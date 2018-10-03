@@ -10,6 +10,10 @@
     #import <FritzVision/FritzVision.h>
   #endif
 
+  #if __has_include(<CoreMLHelpers/CoreMLHelpers.h>)
+    #import <CoreMLHelpers/CoreMLHelpers.h>
+  #endif
+
   #if __has_include(<FritzVisionLabelModel/FritzVisionLabelModel.h>)
     #import <FritzVisionLabelModel/FritzVisionLabelModel.h>
   #endif
