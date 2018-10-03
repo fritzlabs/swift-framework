@@ -1,0 +1,11 @@
+framework module CoreMLHelpers {
+  umbrella header "CoreMLHelpers.h"
+
+  export *
+  module * { export * }
+}
+
+module CoreMLHelpers.Swift {
+    header "CoreMLHelpers-Swift.h"
+    requires objc
+}
