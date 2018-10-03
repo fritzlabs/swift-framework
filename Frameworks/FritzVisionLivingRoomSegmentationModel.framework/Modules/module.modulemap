@@ -1,0 +1,11 @@
+framework module FritzVisionLivingRoomSegmentationModel {
+  umbrella header "FritzVisionLivingRoomSegmentationModel.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionLivingRoomSegmentationModel.Swift {
+    header "FritzVisionLivingRoomSegmentationModel-Swift.h"
+    requires objc
+}
