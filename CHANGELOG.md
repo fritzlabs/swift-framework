@@ -5,6 +5,12 @@ Change Log
 
 ---
 
+## [2.1.0-beta.1](https://github.com/fritzlabs/swift-framework/releases/tag/2.1.0-beta.1)
+
+1. Add CoreMLHelpers package.
+2. Add People and Living Room Segmentation Models.
+3. Add features to FritzVision to resize images.
+
 ## [2.0.0](https://github.com/fritzlabs/swift-framework/releases/tag/2.0.0)
 
 1. Built with Swift 4.2
