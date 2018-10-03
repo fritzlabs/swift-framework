@@ -64,7 +64,7 @@ Pod::Spec.new do |s|
     vision.dependency 'Fritz/Vision'
     vision.dependency 'Fritz/ManagedModel'
     vision.dependency 'Fritz/CoreMLHelpers'
-    vision.vendored_framework = 'Frameworks/FritzVisionStyleModel.framework'
+    vision.vendored_framework = 'Frameworks/FritzVisionSegmentationModel.framework'
   end
 
   s.subspec 'VisionPeopleSegmentationModel' do |vision|
