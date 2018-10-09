@@ -5,6 +5,11 @@ Change Log
 
 ---
 
+## [2.1.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/2.1.0-beta.2)
+
+1. Add outdoor scene
+2. Actually use Fritz to report metrics of segmentation model
+
 ## [2.1.0-beta.1](https://github.com/fritzlabs/swift-framework/releases/tag/2.1.0-beta.1)
 
 1. Add CoreMLHelpers package.
