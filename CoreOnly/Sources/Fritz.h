@@ -42,4 +42,8 @@
     #import <FritzVisionLivingRoomSegmentationModel/FritzVisionLivingRoomSegmentationModel.h>
   #endif
 
+  #if __has_include(<FritzVisionOutdoorSegmentationModel/FritzVisionOutdoorSegmentationModel.h>)
+    #import <FritzVisionOutdoorSegmentationModel/FritzVisionOutdoorSegmentationModel.h>
+  #endif
+
 #endif  // defined(__has_include)

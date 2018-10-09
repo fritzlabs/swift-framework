@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [2.1.0-beta.4](https://github.com/fritzlabs/swift-framework/releases/tag/2.1.0-beta.4)
+
+1. Actually include outdoor model
+
 ## [2.1.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/2.1.0-beta.2)
 
 1. Add outdoor scene
