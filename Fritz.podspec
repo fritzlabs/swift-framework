@@ -80,6 +80,12 @@ Pod::Spec.new do |s|
       livingroom.dependency 'Fritz/VisionSegmentationModelBase'
       livingroom.vendored_framework = 'Frameworks/FritzVisionLivingRoomSegmentationModel.framework'
     end
+
+    vision.subspec 'Outdoor' do |outdoor|
+      outdoor.dependency 'Fritz/ManagedModel'
+      outdoor.dependency 'Fritz/VisionSegmentationModelBase'
+      outdoor.vendored_framework = 'Frameworks/FritzVisionOutdoorSegmentationModel.framework'
+    end
   end
 
 
