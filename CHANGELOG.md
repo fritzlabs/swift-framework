@@ -5,9 +5,9 @@ Change Log
 
 ---
 
-## [2.1.0-beta.4](https://github.com/fritzlabs/swift-framework/releases/tag/2.1.0-beta.4)
+## [2.1.0](https://github.com/fritzlabs/swift-framework/releases/tag/2.1.0)
 
-1. Actually include outdoor model
+1. Finalizing Fritz Vision Segmentation Model
 
 ## [2.1.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/2.1.0-beta.2)
 

@@ -205,6 +205,12 @@ typedef SWIFT_ENUM(int32_t, FritzImageOrientation, closed) {
   FritzImageOrientationLeft = 8,
 };
 
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionCropAndScale, "FritzVisionCropAndScale", closed) {
+  FritzVisionCropAndScaleCenterCrop = 1,
+  FritzVisionCropAndScaleScaleFill = 2,
+  FritzVisionCropAndScaleScaleFit = 3,
+};
+
 typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
   FritzVisionErrorInvalidSampleImageBuffer = 0,
   FritzVisionErrorErrorProcessingImage = 1,
