@@ -237,7 +237,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationResult") SWIFT_AVAILABILITY(watchos,in
 - (UIImage * _Nullable)toImageMask:(double)minThreshold alpha:(uint8_t)alpha SWIFT_WARN_UNUSED_RESULT;
 /// Generate UIImage mask of given class, filtering out values below threshold.
 /// The generated image size will fit the original image passed into prediction, applying rotation.  If the image was center cropped, will return an image that covers the cropped image.
-/// \param of Class to maks
+/// \param segmentClass Class to mask.
 ///
 /// \param threshold Probability to filter.  Any probabilities below this value will be filtered out.
 ///
