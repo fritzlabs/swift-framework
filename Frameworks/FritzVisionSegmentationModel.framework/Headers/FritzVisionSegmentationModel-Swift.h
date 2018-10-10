@@ -163,6 +163,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # define SWIFT_DEPRECATED_OBJC(Msg) SWIFT_DEPRECATED_MSG(Msg)
 #endif
 #if __has_feature(modules)
+@import FritzVision;
 @import ObjectiveC;
 @import UIKit;
 #endif
@@ -182,16 +183,78 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@class ModelSegmentationClass;
+@class FritzVisionImage;
+@class FritzVisionSegmentationModelOptions;
+@class FritzVisionSegmentationResult;
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzVisionSegmentationModel : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
+/// Run image segmentation on a FritzVisionImage.
+/// \param fritzImage Image or buffer to run model on.
+///
+/// \param options Options for model execution.
+///
+/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
+///
+- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
 
-SWIFT_CLASS("_TtC28FritzVisionSegmentationModel35FritzVisionSegmentationModelOptions")
+SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 @interface FritzVisionSegmentationModelOptions : NSObject
+/// Crop and scale option.
+@property (nonatomic, readonly) enum FritzVisionCropAndScale imageCropAndScaleOption;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+@class UIImage;
+
+SWIFT_CLASS_NAMED("FritzVisionSegmentationResult") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+@interface FritzVisionSegmentationResult : NSObject
+/// Height of model output array.
+@property (nonatomic, readonly) NSInteger height;
+/// Width of model output array.
+@property (nonatomic, readonly) NSInteger width;
+/// Model classes.
+@property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
+/// Create 2D-Array same size as the model output with each point representing most likely class.
+/// \param minThreshold Only include classes that have a probability greater than the minThreshold.
+///
+- (NSArray<NSArray<NSNumber *> *> * _Nonnull)getMaxIndices:(double)minThreshold SWIFT_WARN_UNUSED_RESULT;
+- (NSArray<NSArray<NSNumber *> *> * _Nonnull)thresholdClass:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold SWIFT_WARN_UNUSED_RESULT;
+/// Generate UIImage mask from most likely class at each pixel.
+/// The generated image size will fit the original image passed into prediction, applying rotation.  If the image was center cropped, will return an image that covers the cropped image.
+/// \param minThreshold Minimum threshold value needed to count. By default zero.  You can set this property to filter out classes that may be the most likely but still have a lower probability.
+///
+/// \param alpha Alpha value of the color (0-255) for detected classes. By default completely opaque.
+///
+- (UIImage * _Nullable)toImageMask:(double)minThreshold alpha:(uint8_t)alpha SWIFT_WARN_UNUSED_RESULT;
+/// Generate UIImage mask of given class, filtering out values below threshold.
+/// The generated image size will fit the original image passed into prediction, applying rotation.  If the image was center cropped, will return an image that covers the cropped image.
+/// \param of Class to maks
+///
+/// \param threshold Probability to filter.  Any probabilities below this value will be filtered out.
+///
+/// \param alpha Alpha value of the color (0-255) for detected classes.
+///
+- (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS_NAMED("ModelSegmentationClass")
+@interface ModelSegmentationClass : NSObject
+/// Index in output array from model.
+@property (nonatomic, readonly) NSInteger index;
+/// Label name for Model Segmentation Class.
+@property (nonatomic, readonly, copy) NSString * _Nonnull label;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
