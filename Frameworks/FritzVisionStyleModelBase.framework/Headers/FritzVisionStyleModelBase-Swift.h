@@ -179,7 +179,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_attribute(external_source_symbol)
 # pragma push_macro("any")
 # undef any
-# pragma clang attribute push(__attribute__((external_source_symbol(language="Swift", defined_in="FritzVisionStyleModel",generated_declaration))), apply_to=any(function,enum,objc_interface,objc_category,objc_protocol))
+# pragma clang attribute push(__attribute__((external_source_symbol(language="Swift", defined_in="FritzVisionStyleModelBase",generated_declaration))), apply_to=any(function,enum,objc_interface,objc_category,objc_protocol))
 # pragma pop_macro("any")
 #endif
 
@@ -196,7 +196,7 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.
 @class FritzVisionStyleModelOptions;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVisionStyleModel))
+@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVisionStyleModelBase))
 /// Run prediction for vision object model.
 /// \param fritzImage Image or buffer to run model on.
 ///

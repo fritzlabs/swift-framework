@@ -26,6 +26,10 @@
     #import <FritzVisionObjectModel/FritzVisionObjectModel.h>
   #endif
 
+  #if __has_include(<FritzVisionStyleModelBase/FritzVisionStyleModelBase.h>)
+    #import <FritzVisionStyleModelBase/FritzVisionStyleModelBase.h>
+  #endif
+
   #if __has_include(<FritzVisionStyleModel/FritzVisionStyleModel.h>)
     #import <FritzVisionStyleModel/FritzVisionStyleModel.h>
   #endif

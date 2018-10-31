@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@import FritzVisionStyleModel;
+@import FritzVisionStyleModelBase;
 
 //! Project version number for FritzVisionStyle.
 FOUNDATION_EXPORT double FritzVisionStyleVersionNumber;
