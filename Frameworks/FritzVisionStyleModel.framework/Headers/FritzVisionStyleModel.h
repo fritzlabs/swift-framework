@@ -1,22 +1,21 @@
 //
-//  FritzVisionStyle.h
-//  FritzVisionStyle
+//  FritzVisionStyleModel.h
+//  FritzVisionStyleModel
 //
-//  Created by Christopher Kelly on 8/6/18.
+//  Created by Christopher Kelly on 10/31/18.
 //  Copyright © 2018 Fritz Labs Incorporated. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@import FritzVision;
-@import FritzManagedModel;
+@import FritzVisionStyleModelBase;
 
-//! Project version number for FritzVisionStyle.
-FOUNDATION_EXPORT double FritzVisionStyleVersionNumber;
+//! Project version number for FritzVisionStyleModel.
+FOUNDATION_EXPORT double FritzVisionStyleModelVersionNumber;
 
-//! Project version string for FritzVisionStyle.
-FOUNDATION_EXPORT const unsigned char FritzVisionStyleVersionString[];
+//! Project version string for FritzVisionStyleModel.
+FOUNDATION_EXPORT const unsigned char FritzVisionStyleModelVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <FritzVisionStyle/PublicHeader.h>
+// In this header, you should import all the public headers of your framework using statements like #import <FritzVisionStyleModel/PublicHeader.h>
 
 
