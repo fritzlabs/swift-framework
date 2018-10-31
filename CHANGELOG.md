@@ -5,6 +5,11 @@ Change Log
 
 ---
 
+## [2.2.0](https://github.com/fritzlabs/swift-framework/releases/tag/2.2.0)
+
+1. Separate FritzVisionStyleModel into FritzVisionStylePaintingModel and base class
+2. Add public FritzVisionStyleModel to enable you to add your own style transfer model.
+
 ## [2.1.0](https://github.com/fritzlabs/swift-framework/releases/tag/2.1.0)
 
 1. Finalizing Fritz Vision Segmentation Model

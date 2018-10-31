@@ -163,9 +163,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # define SWIFT_DEPRECATED_OBJC(Msg) SWIFT_DEPRECATED_MSG(Msg)
 #endif
 #if __has_feature(modules)
-@import CoreVideo;
-@import Dispatch;
-@import ObjectiveC;
+@import FritzVisionStyleModel;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -179,48 +177,48 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_attribute(external_source_symbol)
 # pragma push_macro("any")
 # undef any
-# pragma clang attribute push(__attribute__((external_source_symbol(language="Swift", defined_in="FritzVisionStyleModel",generated_declaration))), apply_to=any(function,enum,objc_interface,objc_category,objc_protocol))
+# pragma clang attribute push(__attribute__((external_source_symbol(language="Swift", defined_in="FritzVisionStyleModelPaintings",generated_declaration))), apply_to=any(function,enum,objc_interface,objc_category,objc_protocol))
 # pragma pop_macro("any")
 #endif
 
 
-SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionStyleModel : NSObject
-/// Number of predictions waiting to be run asynchronously
-@property (nonatomic) NSInteger pendingAsyncPredictions;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
-@end
-
-@class FritzVisionImage;
-@class FritzVisionStyleModelOptions;
-
 SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVisionStyleModel))
-/// Run prediction for vision object model.
-/// \param fritzImage Image or buffer to run model on.
-///
-/// \param options Options for model execution.
-///
-/// \param completion The block to invoke after the prediction request has finished processing.
-///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
-/// Run prediction on a style transfer model asynchronously on the given queue.
-/// \param fritzImage Image or buffer to run model on.
-///
-/// \param options Options for model execution.
-///
-/// \param queue DispatchQueue to run prediction on.  This will run as an async request on the queue.
-///
-/// \param completion The block to invoke after the prediction request has finished processing.
-///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionStyleModelOptions * _Nonnull)options queue:(dispatch_queue_t _Nonnull)queue completion:(void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
-@end
-
-
-SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
-@interface FritzVisionStyleModelOptions : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVisionStyleModelPaintings))
+/// Style Model based on Vincent Van Gogh’s Starry Night painting
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull starryNight;)
++ (FritzVisionStyleModel * _Nonnull)starryNight SWIFT_WARN_UNUSED_RESULT;
+/// Style Model with shapes of pink and blue rhombuses.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull pinkBlueRhombus;)
++ (FritzVisionStyleModel * _Nonnull)pinkBlueRhombus SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Edvard Munch’s The Scream painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull theScream;)
++ (FritzVisionStyleModel * _Nonnull)theScream SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Roy Lichtenstein’s Bicentennial Print from America: The Third Century
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull bicentennialPrint;)
++ (FritzVisionStyleModel * _Nonnull)bicentennialPrint SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Claude Monet’s The Poppy Field painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull poppyField;)
++ (FritzVisionStyleModel * _Nonnull)poppyField SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on an image depicting the view through a kaleidoscope.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull kaleidoscope;)
++ (FritzVisionStyleModel * _Nonnull)kaleidoscope SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Picasso’s Les Femmes d’Alger painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull femmes;)
++ (FritzVisionStyleModel * _Nonnull)femmes SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Joseph Kutter’s Head of a Clown painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull headOfClown;)
++ (FritzVisionStyleModel * _Nonnull)headOfClown SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Giorgio de Chirico’s Horses on the Seashore painting
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull horsesOnSeashore;)
++ (FritzVisionStyleModel * _Nonnull)horsesOnSeashore SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Sidney Nolan’s The Trial painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull theTrial;)
++ (FritzVisionStyleModel * _Nonnull)theTrial SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Gino Severini’s Ritmo Plastico painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull ritmoPlastico;)
++ (FritzVisionStyleModel * _Nonnull)ritmoPlastico SWIFT_WARN_UNUSED_RESULT;
+/// A list of all Style Models.
++ (NSArray<FritzVisionStyleModel *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
 @end
 
 #if __has_attribute(external_source_symbol)
