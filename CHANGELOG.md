@@ -5,6 +5,15 @@ Change Log
 
 ---
 
+## [2.2.1](https://github.com/fritzlabs/swift-framework/releases/tag/2.2.1)
+
+1. Fix bug in FritzVision to add better UIImage support.
+
+## [2.2.0](https://github.com/fritzlabs/swift-framework/releases/tag/2.2.0)
+
+1. Add Public FritzVisionStyleModel you can use to add your own style models
+2. Separate painting styles into their own framework.
+
 ## [2.1.0](https://github.com/fritzlabs/swift-framework/releases/tag/2.1.0)
 
 1. Finalizing Fritz Vision Segmentation Model
