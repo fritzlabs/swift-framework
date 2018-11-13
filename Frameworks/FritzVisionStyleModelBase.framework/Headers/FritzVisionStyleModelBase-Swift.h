@@ -165,6 +165,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_feature(modules)
 @import CoreVideo;
 @import Dispatch;
+@import FritzVision;
 @import ObjectiveC;
 #endif
 
@@ -197,12 +198,12 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVisionStyleModelBase))
-/// Run prediction for vision object model.
+/// Run Style Transfer on a FritzVisionImage.
 /// \param fritzImage Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
-/// \param completion The block to invoke after the prediction request has finished processing.
+/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
 ///
 - (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
 /// Run prediction on a style transfer model asynchronously on the given queue.
@@ -220,7 +221,10 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 @interface FritzVisionStyleModelOptions : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+/// Crop and scale option.
+@property (nonatomic, readonly) enum FritzVisionCropAndScale imageCropAndScaleOption;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
 #if __has_attribute(external_source_symbol)
