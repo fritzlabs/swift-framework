@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [2.2.2](https://github.com/fritzlabs/swift-framework/releases/tag/2.2.2)
+
+1. Fix aspect ratio problem on Style Transfer by using Core ML directly.
+
 ## [2.2.1](https://github.com/fritzlabs/swift-framework/releases/tag/2.2.1)
 
 1. Fix bug in FritzVision to add better UIImage support.
