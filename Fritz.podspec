@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
   s.subspec 'ManagedModel' do |analytics|
     analytics.dependency 'Fritz/Core'
     analytics.vendored_framework = 'Frameworks/FritzManagedModel.framework'
+    analytics.preserve_path = 'Frameworks/FritzManagedModel.framework/build-encrypted-model.sh'
   end
 
   s.subspec 'Core' do |core|
