@@ -226,8 +226,8 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationResult") SWIFT_AVAILABILITY(watchos,in
 /// Create 2D-Array same size as the model output with each point representing most likely class.
 /// \param minThreshold Only include classes that have a probability greater than the minThreshold.
 ///
-- (NSArray<NSArray<NSNumber *> *> * _Nonnull)getMaxIndices:(double)minThreshold SWIFT_WARN_UNUSED_RESULT;
-- (NSArray<NSArray<NSNumber *> *> * _Nonnull)thresholdClass:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold SWIFT_WARN_UNUSED_RESULT;
+- (NSArray<NSNumber *> * _Nonnull)getMaxIndices:(double)minThreshold SWIFT_WARN_UNUSED_RESULT;
+- (NSArray<NSNumber *> * _Nonnull)thresholdClass:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold minAccepted:(double)minAccepted SWIFT_WARN_UNUSED_RESULT;
 /// Generate UIImage mask from most likely class at each pixel.
 /// The generated image size will fit the original image passed into prediction, applying rotation.  If the image was center cropped, will return an image that covers the cropped image.
 /// \param minThreshold Minimum threshold value needed to count. By default zero.  You can set this property to filter out classes that may be the most likely but still have a lower probability.
@@ -243,7 +243,9 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationResult") SWIFT_AVAILABILITY(watchos,in
 ///
 /// \param alpha Alpha value of the color (0-255) for detected classes.
 ///
-- (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha SWIFT_WARN_UNUSED_RESULT;
+/// \param minThresholdAccepted Any confidence score below this value will have an alpha of 0. Class confidence scores between <code>minThresholdAccepted</code> and <code>threshold</code> will retain their original value.
+///
+- (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha minThresholdAccepted:(double)minThresholdAccepted SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
