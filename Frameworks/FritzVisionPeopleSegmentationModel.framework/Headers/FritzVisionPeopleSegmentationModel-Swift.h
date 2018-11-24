@@ -198,6 +198,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPeopleSegmentationModel : FritzVisionSegmentationModel
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
++ (nonnull instancetype)new;
 @end
 
 #if __has_attribute(external_source_symbol)

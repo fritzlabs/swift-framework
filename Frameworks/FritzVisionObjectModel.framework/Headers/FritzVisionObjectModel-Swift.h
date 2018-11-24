@@ -238,6 +238,7 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModel") SWIFT_AVAILABILITY(ios,introduced=11
 
 SWIFT_CLASS_NAMED("FritzVisionObjectModelOptions")
 @interface FritzVisionObjectModelOptions : NSObject
+- (nonnull instancetype)initWithThreshold:(double)threshold iouThreshold:(float)iouThreshold numResults:(NSInteger)numResults OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
