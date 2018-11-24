@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 @import CoreMLHelpers;
+#import <FritzVisionSegmentationModel/threshold.h>
+
 
 //! Project version number for FritzVisionSegmentationModel.
 FOUNDATION_EXPORT double FritzVisionSegmentationModelVersionNumber;

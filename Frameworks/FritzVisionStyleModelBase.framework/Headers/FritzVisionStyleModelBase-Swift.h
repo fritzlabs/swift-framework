@@ -184,11 +184,16 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@protocol FritzSwiftIdentifiedModel;
 
 SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStyleModel : NSObject
 /// Number of predictions waiting to be run asynchronously
 @property (nonatomic) NSInteger pendingAsyncPredictions;
+/// Initialize FritzStyleTransferModel with your own trained style model.
+/// \param model Fritz model to use.
+///
+- (nonnull instancetype)initWithModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
@@ -223,6 +228,7 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 @interface FritzVisionStyleModelOptions : NSObject
 /// Crop and scale option.
 @property (nonatomic, readonly) enum FritzVisionCropAndScale imageCropAndScaleOption;
+- (nonnull instancetype)initWithCropAndScaleOption:(enum FritzVisionCropAndScale)cropAndScaleOption OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end

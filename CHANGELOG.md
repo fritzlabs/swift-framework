@@ -5,6 +5,16 @@ Change Log
 
 ---
 
+## [2.3.1](https://github.com/fritzlabs/swift-framework/releases/tag/2.3.1)
+
+1. Fix Objective-C annotations.
+
+## [2.3.0](https://github.com/fritzlabs/swift-framework/releases/tag/2.3.0)
+
+1. Updated image segmentation processing.  Existing models should now be faster!
+2. Added a higher quality People Segmentation Model.
+3. Added ability to download models over the air without needing to include it in the application bundle.
+
 ## [2.2.2](https://github.com/fritzlabs/swift-framework/releases/tag/2.2.2)
 
 1. Fix aspect ratio problem on Style Transfer by using Core ML directly.

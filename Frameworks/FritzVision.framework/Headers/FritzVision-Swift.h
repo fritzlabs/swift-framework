@@ -164,6 +164,8 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 #if __has_feature(modules)
 @import CoreGraphics;
+@import CoreMedia;
+@import CoreVideo;
 @import ObjectiveC;
 @import UIKit;
 #endif
@@ -217,15 +219,23 @@ typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
 };
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
+@class UIImage;
 
 /// An image or image buffer used in vision detection.
 SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzVisionImage : NSObject
+- (nonnull instancetype)initWithBuffer:(CMSampleBufferRef _Nonnull)buffer OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
 
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
+@end
 
 
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata")

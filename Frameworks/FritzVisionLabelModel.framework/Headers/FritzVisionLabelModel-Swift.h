@@ -217,6 +217,7 @@ SWIFT_CLASS_NAMED("FritzVisionLabelModel") SWIFT_AVAILABILITY(watchos,introduced
 
 SWIFT_CLASS_NAMED("FritzVisionLabelModelOptions")
 @interface FritzVisionLabelModelOptions : NSObject
+- (nonnull instancetype)initWithThreshold:(double)threshold numResults:(NSInteger)numResults OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end

@@ -182,9 +182,11 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@class FritzSession;
 
 SWIFT_CLASS_NAMED("Configuration") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzConfiguration : NSObject
+- (nonnull instancetype)initWithSession:(FritzSession * _Nonnull)session OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
@@ -286,7 +288,7 @@ SWIFT_CLASS_NAMED("Session") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AV
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzSession * _Nonnull defaultSession;)
 + (FritzSession * _Nonnull)defaultSession SWIFT_WARN_UNUSED_RESULT;
 /// Create a session
-- (nonnull instancetype)initWithAppToken:(NSString * _Nonnull)apiKey environment:(NSString * _Nonnull)apiUrl namespace:(NSString * _Nonnull)namespace_ OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithAppToken:(NSString * _Nonnull)apiKey apiUrl:(NSString * _Nonnull)apiUrl namespace:(NSString * _Nonnull)namespace_ OBJC_DESIGNATED_INITIALIZER;
 /// Create a session
 - (nonnull instancetype)initWithAppToken:(NSString * _Nonnull)apiKey;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
