@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [2.3.2](https://github.com/fritzlabs/swift-framework/releases/tag/2.3.2)
+
+1. Expose original prediction result in FritzVisionSegmentationResult.
+
 ## [2.3.1](https://github.com/fritzlabs/swift-framework/releases/tag/2.3.1)
 
 1. Fix Objective-C annotations.
