@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [2.3.4](https://github.com/fritzlabs/swift-framework/releases/tag/2.3.4)
+
+1. Corrupt Over The Air model downloads no longer triggers a crash.
+
 ## [2.3.3](https://github.com/fritzlabs/swift-framework/releases/tag/2.3.3)
 
 1. Update People Segmentation model.

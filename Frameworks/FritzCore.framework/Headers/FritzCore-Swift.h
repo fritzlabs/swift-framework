@@ -197,6 +197,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzErrorCode, "ErrorCode", closed) {
   FritzErrorCodeModelDecryption = 1,
   FritzErrorCodeModelDownload = 2,
   FritzErrorCodeSessionDisabled = 3,
+  FritzErrorCodeModelInitialization = 4,
 };
 
 enum LogLevel : NSInteger;
