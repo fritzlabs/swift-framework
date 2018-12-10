@@ -1,0 +1,11 @@
+framework module Fritz {
+  umbrella header "Fritz.h"
+
+  export *
+  module * { export * }
+}
+
+module Fritz.Swift {
+    header "Fritz-Swift.h"
+    requires objc
+}
