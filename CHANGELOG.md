@@ -5,6 +5,12 @@ Change Log
 
 ---
 
+## [2.4.0](https://github.com/fritzlabs/swift-framework/releases/tag/2.4.0)
+
+1. Fix OTA Model loading issues
+2. Update people, living room, and outdoor segmentation models to use newer versions of models
+3. Don’t use neural engine for image segmentation models to improve performance
+
 ## [2.3.4](https://github.com/fritzlabs/swift-framework/releases/tag/2.3.4)
 
 1. Corrupt Over The Air model downloads no longer triggers a crash.
