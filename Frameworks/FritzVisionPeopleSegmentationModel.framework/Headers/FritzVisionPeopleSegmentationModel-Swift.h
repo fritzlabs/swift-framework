@@ -184,6 +184,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 @class ModelSegmentationClass;
 
+/// Class labels for FritzVisionPeopleSegmentationModel
 SWIFT_CLASS_NAMED("FritzVisionPeopleClass")
 @interface FritzVisionPeopleClass : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
@@ -196,6 +197,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 @end
 
 
+/// Image segmentation model to detect people.
 SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPeopleSegmentationModel : FritzVisionSegmentationModel
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;

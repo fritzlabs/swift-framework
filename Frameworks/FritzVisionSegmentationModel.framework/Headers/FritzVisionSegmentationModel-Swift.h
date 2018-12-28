@@ -207,7 +207,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,int
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 @interface FritzVisionSegmentationModelOptions : NSObject
-/// Crop and scale option.
+/// Crop and scale option. Default value is scaleFit.
 @property (nonatomic, readonly) enum FritzVisionCropAndScale imageCropAndScaleOption;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithCropAndScale:(enum FritzVisionCropAndScale)cropAndScaleOption OBJC_DESIGNATED_INITIALIZER;

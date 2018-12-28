@@ -5,6 +5,11 @@ Change Log
 
 ---
 
+## [2.4.1](https://github.com/fritzlabs/swift-framework/releases/tag/2.4.1)
+
+1. Change default model settings to scaleFit.
+2. Add FritzVisionFlexibleStyleTransferModel to use for flexible style transfer models.
+
 ## [2.4.0](https://github.com/fritzlabs/swift-framework/releases/tag/2.4.0)
 
 1. Fix OTA Model loading issues

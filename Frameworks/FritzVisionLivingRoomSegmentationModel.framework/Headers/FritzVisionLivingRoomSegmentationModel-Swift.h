@@ -214,6 +214,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 @end
 
 
+/// Image segmentation model to detect common living room objects.
 SWIFT_CLASS_NAMED("FritzVisionLivingRoomSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionLivingRoomSegmentationModel : FritzVisionSegmentationModel
 @end

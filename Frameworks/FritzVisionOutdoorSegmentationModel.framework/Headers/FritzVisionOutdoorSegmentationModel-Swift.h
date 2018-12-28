@@ -234,6 +234,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 @end
 
 
+/// Image segmentation model to detect common outdoor objects.
 SWIFT_CLASS_NAMED("FritzVisionOutdoorSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionOutdoorSegmentationModel : FritzVisionSegmentationModel
 @end
