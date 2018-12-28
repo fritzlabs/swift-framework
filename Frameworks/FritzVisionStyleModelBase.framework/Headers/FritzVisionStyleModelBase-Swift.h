@@ -163,6 +163,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # define SWIFT_DEPRECATED_OBJC(Msg) SWIFT_DEPRECATED_MSG(Msg)
 #endif
 #if __has_feature(modules)
+@import CoreGraphics;
 @import CoreVideo;
 @import Dispatch;
 @import FritzVision;
@@ -184,7 +185,69 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+
+SWIFT_CLASS_NAMED("FlexibleModelDimensions")
+@interface FlexibleModelDimensions : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithWidth:(NSInteger)width withHeight:(NSInteger)height OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+
 @protocol FritzSwiftIdentifiedModel;
+
+/// Construct a Flexible Style Transfer model and run on any FritzVisionImage. Use this class over <code>FritzVisionStyleTransferModel</code> to produce stylized images with customizable output sizes.
+SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionFlexibleStyleModel : NSObject
+/// Number of predictions waiting to be run asynchronously
+@property (nonatomic) NSInteger pendingAsyncPredictions;
+/// Initialize FritzStyleTransferModel with your own trained style model.
+/// \param model Fritz model to use.
+///
+- (nonnull instancetype)initWithModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+@class FritzVisionImage;
+@class FritzVisionFlexibleStyleModelOptions;
+
+SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionFlexibleStyleModel (SWIFT_EXTENSION(FritzVisionStyleModelBase))
+/// Run Style Transfer on a FritzVisionImage.
+/// \param fritzImage Image or buffer to run model on.
+///
+/// \param options Options for model execution.
+///
+/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
+///
+- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionFlexibleStyleModelOptions * _Nonnull)options completion:(void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
+/// Run prediction on a style transfer model asynchronously on the given queue.
+/// \param fritzImage Image or buffer to run model on.
+///
+/// \param options Options for model execution.
+///
+/// \param queue DispatchQueue to run prediction on.  This will run as an async request on the queue.
+///
+/// \param completion The block to invoke after the prediction request has finished processing.
+///
+- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionFlexibleStyleModelOptions * _Nonnull)options queue:(dispatch_queue_t _Nonnull)queue completion:(void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
+@end
+
+
+/// Options for how to run flexible style transfer model.
+SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModelOptions")
+@interface FritzVisionFlexibleStyleModelOptions : NSObject
+/// Crop and scale option. Default option is .scaleFit.
+@property (nonatomic, readonly) enum FritzVisionCropAndScale imageCropAndScaleOption;
+/// Set dimensions for output result of flexible model.
+@property (nonatomic, readonly, strong) FlexibleModelDimensions * _Nonnull flexibleModelDimensions;
+- (nonnull instancetype)initWithCropAndScaleOption:(enum FritzVisionCropAndScale)cropAndScaleOption withDimensions:(FlexibleModelDimensions * _Nonnull)flexibleModelDimensions OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
 
 SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStyleModel : NSObject
@@ -198,7 +261,6 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
-@class FritzVisionImage;
 @class FritzVisionStyleModelOptions;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
