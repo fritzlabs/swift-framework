@@ -213,10 +213,14 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class FritzMLModel;
 
 /// Image segmentation model to detect common living room objects.
 SWIFT_CLASS_NAMED("FritzVisionLivingRoomSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionLivingRoomSegmentationModel : FritzVisionSegmentationModel
+- (nonnull instancetype)init;
++ (nonnull instancetype)new;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=11.0);
 @end
 
 #if __has_attribute(external_source_symbol)

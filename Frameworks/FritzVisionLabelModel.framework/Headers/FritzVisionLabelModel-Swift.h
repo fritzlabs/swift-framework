@@ -217,6 +217,10 @@ SWIFT_CLASS_NAMED("FritzVisionLabelModel") SWIFT_AVAILABILITY(watchos,introduced
 
 SWIFT_CLASS_NAMED("FritzVisionLabelModelOptions")
 @interface FritzVisionLabelModelOptions : NSObject
+/// Confidence threshold for prediction results in the range of [0, 1], default is 0.6.
+@property (nonatomic, readonly) double threshold;
+/// Number of results to return from request.
+@property (nonatomic, readonly) NSInteger numResults;
 - (nonnull instancetype)initWithThreshold:(double)threshold numResults:(NSInteger)numResults OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");

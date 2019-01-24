@@ -166,6 +166,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @import CoreGraphics;
 @import CoreMedia;
 @import CoreVideo;
+@import ImageIO;
 @import ObjectiveC;
 @import UIKit;
 #endif
@@ -189,6 +190,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 /// BoundingBox Contains coordinates to draw bounding boxes on images as predicted directly by the model.  However, because of cropping or resizing done to accomadate model size constraints, the default values may not map to coordinates in your view.  Use the toCGRect functions to convert bounding box coordinates to fit the image.
 SWIFT_CLASS_NAMED("BoundingBox")
 @interface BoundingBox : NSObject
+- (nonnull instancetype)initWithYMin:(double)yMin xMin:(double)xMin yMax:(double)yMax xMax:(double)xMax OBJC_DESIGNATED_INITIALIZER;
 - (CGRect)imgHeight:(double)imgHeight imgWidth:(double)imgWidth SWIFT_WARN_UNUSED_RESULT;
 - (CGRect)imgHeight:(double)imgHeight imgWidth:(double)imgWidth xOffset:(double)xOffset yOffset:(double)yOffset SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -241,13 +243,21 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata")
 @interface FritzVisionImageMetadata : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+/// Orientation defaults to <code>FritzImageOrientation.right</code> which should work for rear facing cameras with a device orientation of Portrait.
+@property (nonatomic) enum FritzImageOrientation orientation;
+@property (nonatomic, readonly) CGImagePropertyOrientation cgOrientation;
 @end
 
 
 /// Represents a label for an image.
 SWIFT_CLASS_NAMED("FritzVisionLabel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzVisionLabel : NSObject
+/// Human readable string of detected label.
+@property (nonatomic, readonly, copy) NSString * _Nonnull label;
+/// Prediction confidence for label in range of [0, 1]
+@property (nonatomic, readonly) double confidence;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)initWithLabel:(NSString * _Nonnull)label confidence:(double)confidence OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
@@ -255,7 +265,11 @@ SWIFT_CLASS_NAMED("FritzVisionLabel") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 
 SWIFT_CLASS_NAMED("FritzVisionObject") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionObject : NSObject
+@property (nonatomic, readonly, strong) FritzVisionLabel * _Nonnull label;
+/// BoundingBox of detected object.
+@property (nonatomic, readonly, strong) BoundingBox * _Nonnull boundingBox;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)initWithLabel:(FritzVisionLabel * _Nonnull)label boundingBox:(BoundingBox * _Nonnull)boundingBox OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end

@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.0.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0)
+
+1. did a lot of things will update more later.
+
 ## [2.4.1](https://github.com/fritzlabs/swift-framework/releases/tag/2.4.1)
 
 1. Change default model settings to scaleFit.

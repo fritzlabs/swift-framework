@@ -163,8 +163,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # define SWIFT_DEPRECATED_OBJC(Msg) SWIFT_DEPRECATED_MSG(Msg)
 #endif
 #if __has_feature(modules)
-@import FritzVisionSegmentationModel;
-@import ObjectiveC;
+@import FritzVisionPeopleSegmentationModelBase;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -182,25 +181,10 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class ModelSegmentationClass;
 
-/// Class labels for FritzVisionPeopleSegmentationModel
-SWIFT_CLASS_NAMED("FritzVisionPeopleClass")
-@interface FritzVisionPeopleClass : NSObject
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
-+ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull person;)
-+ (ModelSegmentationClass * _Nonnull)person SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
-+ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-/// Image segmentation model to detect people.
-SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationModel : FritzVisionSegmentationModel
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationModel (SWIFT_EXTENSION(FritzVisionPeopleSegmentationModel))
+- (nonnull instancetype)init;
 + (nonnull instancetype)new;
 @end
 
