@@ -77,16 +77,16 @@ Pod::Spec.new do |s|
     vision.vendored_framework = 'Frameworks/FritzVisionSegmentationModel.framework'
   end
 
-  s.subspec 'VisionPeopleSegmentationModelBase' do |vision|
+  s.subspec 'VisionSegmentationPeopleModelBase' do |vision|
     vision.dependency 'Fritz/Core'
     vision.dependency 'Fritz/ManagedModel'
     vision.dependency 'Fritz/VisionSegmentationModelBase'
-    vision.vendored_framework = 'Frameworks/FritzVisionSegmentationModelBase.framework'
+    vision.vendored_framework = 'Frameworks/FritzVisionSegmentationPeopleModelBase.framework'
   end
 
   s.subspec 'VisionSegmentationModel' do |vision|
     vision.subspec 'People' do |people|
-      people.dependency 'Fritz/VisionPeopleSegmentationModelBase'
+      people.dependency 'Fritz/VisionSegmentationPeopleModelBase'
       people.vendored_framework = 'Frameworks/FritzVisionPeopleSegmentationModel.framework'
     end
 

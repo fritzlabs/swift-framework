@@ -42,8 +42,20 @@
     #import <FritzVisionSegmentationModel/FritzVisionSegmentationModel.h>
   #endif
 
+  #if __has_include(<FritzVisionPeopleSegmentationModelBase/FritzVisionPeopleSegmentationModelBase.h>)
+    #import <FritzVisionPeopleSegmentationModelBase/FritzVisionPeopleSegmentationModelBase.h>
+  #endif
+
   #if __has_include(<FritzVisionPeopleSegmentationModel/FritzVisionPeopleSegmentationModel.h>)
     #import <FritzVisionPeopleSegmentationModel/FritzVisionPeopleSegmentationModel.h>
+  #endif
+
+  #if __has_include(<FritzVisionPeopleSegmentationMediumModelBase/FritzVisionPeopleSegmentationMediumModelBase.h>)
+    #import <FritzVisionPeopleSegmentationMediumModelBase/FritzVisionPeopleSegmentationMediumModelBase.h>
+  #endif
+
+  #if __has_include(<FritzVisionPeopleSegmentationMediumModel/FritzVisionPeopleSegmentationMediumModel.h>)
+    #import <FritzVisionPeopleSegmentationMediumModel/FritzVisionPeopleSegmentationMediumModel.h>
   #endif
 
   #if __has_include(<FritzVisionLivingRoomSegmentationModel/FritzVisionLivingRoomSegmentationModel.h>)
