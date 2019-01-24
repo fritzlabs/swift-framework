@@ -85,9 +85,8 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'VisionSegmentationModel' do |vision|
-
     vision.subspec 'People' do |people|
-      people.dependency 'Fritz/VisionSegmentationPeopleModelBase'
+      people.dependency 'Fritz/VisionSegmentationModelPeopleBase'
       people.vendored_framework = 'Frameworks/FritzVisionPeopleSegmentationModel.framework'
     end
 
