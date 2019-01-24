@@ -164,6 +164,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 #if __has_feature(modules)
 @import CoreML;
+@import Foundation;
 @import FritzCore;
 @import ObjectiveC;
 #endif
@@ -235,22 +236,124 @@ SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11
 + (void)setupModel:(NSArray<Class <FritzBaseIdentifiedModel>> * _Nonnull)models SWIFT_UNAVAILABLE_MSG("This method is no longer needed. To manually trigger a model update, call Model.updateIfNeeded(_:)");
 @end
 
-
-
+@class FritzModelConfiguration;
+@class SessionManager;
 @class MLModelDescription;
 @protocol MLFeatureProvider;
 @class MLPredictionOptions;
 
-SWIFT_CLASS_NAMED("ManagedMLModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
-@interface FritzManagedMLModel : MLModel
+SWIFT_CLASS_NAMED("FritzMLModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+@interface FritzMLModel : MLModel
+@property (nonatomic, readonly, strong) FritzModelConfiguration * _Nonnull activeModelConfig;
 /// Initialize model with an model type
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzBaseIdentifiedModel> _Nonnull)identifiedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(MLModel * _Nonnull)model config:(FritzModelConfiguration * _Nonnull)activeModelConfig sessionManager:(SessionManager * _Nonnull)sessionManager OBJC_DESIGNATED_INITIALIZER;
 /// Proxy model description
 @property (nonatomic, readonly, strong) MLModelDescription * _Nonnull modelDescription;
 /// Override prediction method and pass input/output to analytics
 - (id <MLFeatureProvider> _Nullable)predictionFromFeatures:(id <MLFeatureProvider> _Nonnull)input error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
 /// Override prediction method and pass input/output to analytics
 - (id <MLFeatureProvider> _Nullable)predictionFromFeatures:(id <MLFeatureProvider> _Nonnull)input options:(MLPredictionOptions * _Nonnull)options error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+/// Coordinates tasks for interacting with Fritz Models.
+SWIFT_CLASS_NAMED("FritzManagedModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+@interface FritzManagedModel : NSObject
+/// Currenly active model configuration.
+@property (nonatomic, strong) FritzModelConfiguration * _Nonnull activeModelConfig;
+/// Model Identifier of active model.
+@property (nonatomic, readonly, copy) NSString * _Nonnull id;
+/// Model Version number of active model.
+@property (nonatomic, readonly) NSInteger version;
+/// Creates FritzManagedModel from model configuration.
+/// \param modelConfig Specifies which model class is operating on.
+///
+/// \param sessionManager Optional SessionManager. If not included uses default globally shared SessionManager.
+///
+- (nonnull instancetype)initWithModelConfig:(FritzModelConfiguration * _Nonnull)modelConfig sessionManager:(SessionManager * _Nullable)sessionManager loadActive:(BOOL)loadActiveFromDisk OBJC_DESIGNATED_INITIALIZER;
+/// Creates FritzManagedModel from a packaged MLModel with BaseIdentifiedModel extension.  Used when model is included in application package.
+/// \param identifiedModel Included MLModel class.
+///
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzBaseIdentifiedModel> _Nonnull)identifiedModel;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+
+
+
+
+SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+@interface FritzManagedModel (SWIFT_EXTENSION(FritzManagedModel))
+/// Check server for latest active model defined in webapp and update local model state if different from webapp.
+/// If a model is updated, an .activeModelChanged notification is broadcast.
+/// \param completionHandler Completion handler called with result of update operation.
+///
+- (void)updateModelIfNeededWithCompletion:(void (^ _Nonnull)(BOOL, NSError * _Nullable))completionHandler;
+@end
+
+
+SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+@interface FritzManagedModel (SWIFT_EXTENSION(FritzManagedModel))
+/// Load ManagedMLModel from stored Fritz Model (as defined by active model metadata) or model included in app bundle.
+/// \param identifiedModel Conformed MLModel.
+///
+///
+/// returns:
+/// FritzMLModel.
+- (FritzMLModel * _Nonnull)loadModelWithIdentifiedModel:(id <FritzBaseIdentifiedModel> _Nonnull)identifiedModel SWIFT_WARN_UNUSED_RESULT;
+/// Loads model when no model is included in application bundle.  If a model has previously been downloaded, it will be used. If not, it will be downloaded from Fritz.
+/// If <code>fetchModel</code> is called multiple times and a download request is already happening, a new downloaded request will not be started.  All completionHandlers will be resolved when active request is completed.
+/// \param completionHandler Completion handler returning ManagedMLModel if successfully loaded model.
+///
+- (void)fetchModelWithCompletion:(void (^ _Nonnull)(FritzMLModel * _Nullable, NSError * _Nullable))completionHandler;
+/// Trigger model download without waiting for response.
+- (void)startDownload;
+@end
+
+
+
+
+SWIFT_CLASS_NAMED("FritzModelConfiguration") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+@interface FritzModelConfiguration : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull identifier;
+@property (nonatomic, readonly) NSInteger version;
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
+@property (nonatomic, readonly) BOOL isOTA;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version encryptionSeed:(NSArray<NSNumber *> * _Nullable)encryptionSeed src:(NSURL * _Nullable)src tags:(NSArray<NSString *> * _Nullable)tags OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version;
+- (nonnull instancetype)initFromIdentifiedModel:(id <FritzBaseIdentifiedModel> _Nonnull)identifiedModel;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, readonly) NSUInteger hash;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+
+
+/// Manages interacting with models using tags created in the webapp.
+SWIFT_CLASS_NAMED("ModelTagManager") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+@interface ModelTagManager : NSObject
+/// Tags applied to models to query for.
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nonnull tags;
+- (nonnull instancetype)initWithTags:(NSArray<NSString *> * _Nonnull)tags sessionManager:(SessionManager * _Nullable)sessionManager OBJC_DESIGNATED_INITIALIZER;
+/// Gets managed models matching tags, pulling from data already queries from API.
+/// Does not query the API, only checks model data stored locally. To update tags with latest known data,
+/// use <code>fetchModelsForTags</code>.
+///
+/// returns:
+/// List of FritzManagedModel matching tags.
+- (NSArray<FritzManagedModel *> * _Nonnull)getModelsForTags SWIFT_WARN_UNUSED_RESULT;
+/// Fetch FritzManagedModels from Fritz API that match tags. If the request fails for any reason, it
+/// will query local store and return existing models that match models.
+/// \param completionHandler CompletionHandler with
+///
+- (void)fetchModelsForTagsWithCompletion:(void (^ _Nonnull)(NSArray<FritzManagedModel *> * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
@@ -268,9 +371,9 @@ SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11
 /// The same instance that this method was called.
 - (nonnull instancetype)fritz SWIFT_WARN_UNUSED_RESULT;
 /// Manually check for an OTA model update
-- (void)updateIfNeeded:(void (^ _Nonnull)(BOOL, NSError * _Nullable))completionHandler;
+- (void)updateIfNeeded;
 /// Manually check for an OTA model update
-+ (void)updateIfNeeded:(void (^ _Nonnull)(BOOL, NSError * _Nullable))completionHandler;
++ (void)updateIfNeeded;
 @end
 
 
@@ -289,6 +392,22 @@ SWIFT_PROTOCOL_NAMED("ReadWriteModelProvider") SWIFT_AVAILABILITY(watchos,introd
 /// A read-write model
 @property (nonatomic, strong) MLModel * _Nonnull model;
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /// Conform your Xcode-generated Swift class to this protocol to expose Fritz functionality

@@ -184,6 +184,8 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 @class ModelSegmentationClass;
+@class FritzMLModel;
+@protocol FritzSwiftIdentifiedModel;
 @class FritzVisionImage;
 @class FritzVisionSegmentationModelOptions;
 @class FritzVisionSegmentationResult;
@@ -192,6 +194,8 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,int
 @interface FritzVisionSegmentationModel : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull name;
 @property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes;
 /// Run image segmentation on a FritzVisionImage.
 /// \param fritzImage Image or buffer to run model on.
 ///

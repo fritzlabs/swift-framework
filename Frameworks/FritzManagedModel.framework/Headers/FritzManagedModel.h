@@ -7,6 +7,7 @@
 //
 
 @import Foundation;
+
 @import FritzCore;
 
 #import <FritzManagedModel/RNCryptor.h>

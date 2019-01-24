@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 @import CoreMLHelpers;
+@import FritzVision;
+@import FritzManagedModel;
 #import <FritzVisionSegmentationModel/threshold.h>
 
 

@@ -183,9 +183,12 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 @class FritzSession;
+@class SessionManager;
 
 SWIFT_CLASS_NAMED("Configuration") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzConfiguration : NSObject
+@property (nonatomic, readonly, strong) FritzSession * _Nonnull session;
+@property (nonatomic, readonly, strong) SessionManager * _Nonnull sessionManager;
 - (nonnull instancetype)initWithSession:(FritzSession * _Nonnull)session OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
@@ -277,6 +280,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 /// Subscribe to this notification to know when a Fritz model has been updated
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull FritzModelUpdatedNotificationKey;)
 + (NSString * _Nonnull)FritzModelUpdatedNotificationKey SWIFT_WARN_UNUSED_RESULT;
+/// Subscribe to this notification to know when a Fritz activeModel has changed
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull FritzModelActiveModelChangedNotificationKey;)
++ (NSString * _Nonnull)FritzModelActiveModelChangedNotificationKey SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -295,6 +301,21 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzSession
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
+
+
+SWIFT_CLASS("_TtC9FritzCore14SessionManager") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+@interface SessionManager : NSObject
+/// Internal testing queue for objective c to peek into the items queue.
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nonnull trackRequestQueueItemTypes;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+
+
+
+
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop

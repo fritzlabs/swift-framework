@@ -248,6 +248,7 @@ SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModelOptions")
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
+@class FritzMLModel;
 
 SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStyleModel : NSObject
@@ -256,9 +257,26 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.
 /// Initialize FritzStyleTransferModel with your own trained style model.
 /// \param model Fritz model to use.
 ///
-- (nonnull instancetype)initWithModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
+/// Initialize FritzStyleTransferModel with your own trained style model.
+/// \param model Fritz model to use.
+///
+- (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVisionStyleModelBase))
+/// Fetch and load Style Models for the given tags.
+/// Note that this instantiates all models which could cause memory pressure if you are loading many models.
+/// If you do not want to immediately instantiate the models, create a ModelTagManager and manage loading yourself.
+/// \param tags List of tags to load models for.
+///
+/// \param completionHandler Completion handler with instantiated FritzVisionStyleModels
+///
++ (void)fetchStyleModelsForTags:(NSArray<NSString *> * _Nonnull)tags withCompletionHandler:(void (^ _Nonnull)(NSArray<FritzVisionStyleModel *> * _Nullable, NSError * _Nullable))completionHandler;
 @end
 
 @class FritzVisionStyleModelOptions;
