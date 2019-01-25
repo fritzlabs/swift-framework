@@ -196,6 +196,7 @@ SWIFT_CLASS_NAMED("FlexibleModelDimensions")
 
 
 @protocol FritzSwiftIdentifiedModel;
+@class FritzMLModel;
 
 /// Construct a Flexible Style Transfer model and run on any FritzVisionImage. Use this class over <code>FritzVisionStyleTransferModel</code> to produce stylized images with customizable output sizes.
 SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
@@ -205,9 +206,28 @@ SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModel") SWIFT_AVAILABILITY(ios,introd
 /// Initialize FritzStyleTransferModel with your own trained style model.
 /// \param model Fritz model to use.
 ///
-- (nonnull instancetype)initWithModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
+/// Initialize FritzVisionFlexibleStyleModel with your own trained style model.
+/// \param model Fritz model to use.
+///
+- (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionFlexibleStyleModel (SWIFT_EXTENSION(FritzVisionStyleModelBase))
+/// Fetch and load Style Models for the given tags.
+/// Note that this instantiates all models which could cause memory pressure if you are loading many models.
+/// If you do not want to immediately instantiate the models, create a ModelTagManager and manage loading yourself.
+/// \param tags List of tags to load models for.
+///
+/// \param wifiRequiredForModelDownload True if client must be on WiFi to download model. Default is false.
+///
+/// \param completionHandler Completion handler with instantiated FritzVisionStyleModels
+///
++ (void)fetchStyleModelsForTags:(NSArray<NSString *> * _Nonnull)tags wifiRequiredForModelDownload:(BOOL)wifiRequiredForModelDownload withCompletionHandler:(void (^ _Nonnull)(NSArray<FritzVisionFlexibleStyleModel *> * _Nullable, NSError * _Nullable))completionHandler;
 @end
 
 @class FritzVisionImage;
@@ -248,7 +268,6 @@ SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModelOptions")
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
-@class FritzMLModel;
 
 SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStyleModel : NSObject
@@ -274,9 +293,11 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// If you do not want to immediately instantiate the models, create a ModelTagManager and manage loading yourself.
 /// \param tags List of tags to load models for.
 ///
+/// \param wifiRequiredForModelDownload If true, client must be connected to a wifi network to download a model. Default is false.
+///
 /// \param completionHandler Completion handler with instantiated FritzVisionStyleModels
 ///
-+ (void)fetchStyleModelsForTags:(NSArray<NSString *> * _Nonnull)tags withCompletionHandler:(void (^ _Nonnull)(NSArray<FritzVisionStyleModel *> * _Nullable, NSError * _Nullable))completionHandler;
++ (void)fetchStyleModelsForTags:(NSArray<NSString *> * _Nonnull)tags wifiRequiredForModelDownload:(BOOL)wifiRequiredForModelDownload withCompletionHandler:(void (^ _Nonnull)(NSArray<FritzVisionStyleModel *> * _Nullable, NSError * _Nullable))completionHandler;
 @end
 
 @class FritzVisionStyleModelOptions;

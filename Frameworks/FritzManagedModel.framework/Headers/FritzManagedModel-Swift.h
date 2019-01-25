@@ -221,6 +221,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<NSNumb
 /// A Fritz configuration encapsualtes your App Token and the Environment in which to send all Fritz-related requests.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzConfiguration * _Nonnull fritzConfiguration;)
 + (FritzConfiguration * _Nonnull)fritzConfiguration SWIFT_WARN_UNUSED_RESULT;
+/// Specifies whether or not phone must be connected to wifi for model downloads to happen. If not set, defaults to false, models will download over cell connections.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL fritzWifiRequiredForDownload;)
++ (BOOL)fritzWifiRequiredForDownload SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -322,9 +325,13 @@ SWIFT_CLASS_NAMED("FritzModelConfiguration") SWIFT_AVAILABILITY(watchos,introduc
 @property (nonatomic, readonly, copy) NSString * _Nonnull identifier;
 @property (nonatomic, readonly) NSInteger version;
 @property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
+/// Model Metadata set in webapp.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+/// Model downloads will only happen
+@property (nonatomic) BOOL wifiRequiredForModelDownload;
 @property (nonatomic, readonly) BOOL isOTA;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version encryptionSeed:(NSArray<NSNumber *> * _Nullable)encryptionSeed src:(NSURL * _Nullable)src tags:(NSArray<NSString *> * _Nullable)tags OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version encryptionSeed:(NSArray<NSNumber *> * _Nullable)encryptionSeed src:(NSURL * _Nullable)src tags:(NSArray<NSString *> * _Nullable)tags isWifiRequiredForDownloads:(BOOL)wifiRequiredForModelDownload metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version;
 - (nonnull instancetype)initFromIdentifiedModel:(id <FritzBaseIdentifiedModel> _Nonnull)identifiedModel;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
@@ -345,15 +352,19 @@ SWIFT_CLASS_NAMED("ModelTagManager") SWIFT_AVAILABILITY(watchos,introduced=4.0) 
 /// Gets managed models matching tags, pulling from data already queries from API.
 /// Does not query the API, only checks model data stored locally. To update tags with latest known data,
 /// use <code>fetchModelsForTags</code>.
+/// \param wifiRequiredForModelDownload Optional value to require wifi when downloading models loaded from tags.
+///
 ///
 /// returns:
 /// List of FritzManagedModel matching tags.
-- (NSArray<FritzManagedModel *> * _Nonnull)getModelsForTags SWIFT_WARN_UNUSED_RESULT;
+- (NSArray<FritzManagedModel *> * _Nonnull)getModelsForTagsWithWifiRequired:(BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 /// Fetch FritzManagedModels from Fritz API that match tags. If the request fails for any reason, it
 /// will query local store and return existing models that match models.
-/// \param completionHandler CompletionHandler with
+/// \param wifiRequiredForModelDownload Optional value to require wifi when downloading models loaded from tags.
 ///
-- (void)fetchModelsForTagsWithCompletion:(void (^ _Nonnull)(NSArray<FritzManagedModel *> * _Nullable, NSError * _Nullable))completionHandler;
+/// \param completionHandler Called after models for tags are loaded.
+///
+- (void)fetchModelsForTagsWithWifiRequired:(BOOL)wifiRequiredForModelDownload completionHandler:(void (^ _Nonnull)(NSArray<FritzManagedModel *> * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
