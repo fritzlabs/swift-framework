@@ -196,16 +196,29 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class FritzModelConfiguration;
 @class FritzMLModel;
 
 /// Image segmentation model to detect people.
 SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPeopleSegmentationModel : FritzVisionSegmentationModel
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
++ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
++ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
++ (void)setWifiRequiredForModelDownload:(BOOL)newValue;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=11.0);
 @end
 
 
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationModel (SWIFT_EXTENSION(FritzVisionPeopleSegmentationModelBase))
+/// Fetch <code>FritzVisionPeopleSegmentationModel</code>.  Returns packaged model.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
+@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop

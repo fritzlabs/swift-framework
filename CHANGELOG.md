@@ -5,6 +5,12 @@ Change Log
 
 ---
 
+## [3.0.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0-beta.2)
+
+1. Adding in Model Metadata
+2. Adding option to download models using cellular data
+3. Additional functionality on Style Transfer to load from tags.
+
 ## [3.0.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0)
 
 1. did a lot of things will update more later.
