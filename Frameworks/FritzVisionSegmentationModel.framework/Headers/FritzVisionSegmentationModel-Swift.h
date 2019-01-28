@@ -163,6 +163,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # define SWIFT_DEPRECATED_OBJC(Msg) SWIFT_DEPRECATED_MSG(Msg)
 #endif
 #if __has_feature(modules)
+@import FritzManagedModel;
 @import FritzVision;
 @import ObjectiveC;
 @import UIKit;
@@ -206,6 +207,15 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,int
 - (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSegmentationModel (SWIFT_EXTENSION(FritzVisionSegmentationModel))
+/// Model metadata set in webapp.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+/// Model tags set in webapp.
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
 @end
 
 

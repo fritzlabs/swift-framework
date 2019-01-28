@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.0.0-beta.3](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0-beta.3)
+
+1. Add getter to access metadata
+
 ## [3.0.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0-beta.2)
 
 1. Adding in Model Metadata
