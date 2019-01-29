@@ -166,6 +166,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @import CoreGraphics;
 @import CoreVideo;
 @import Dispatch;
+@import FritzManagedModel;
 @import FritzVision;
 @import ObjectiveC;
 #endif
@@ -256,6 +257,15 @@ SWIFT_AVAILABILITY(ios,introduced=12.0)
 @end
 
 
+SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionFlexibleStyleModel (SWIFT_EXTENSION(FritzVisionStyleModelBase))
+/// Model metadata set in webapp.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+/// Model tags set in webapp.
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
+@end
+
+
 /// Options for how to run flexible style transfer model.
 SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModelOptions")
 @interface FritzVisionFlexibleStyleModelOptions : NSObject
@@ -322,6 +332,15 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// \param completion The block to invoke after the prediction request has finished processing.
 ///
 - (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionStyleModelOptions * _Nonnull)options queue:(dispatch_queue_t _Nonnull)queue completion:(void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVisionStyleModelBase))
+/// Model metadata set in webapp.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+/// Model tags set in webapp.
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
 @end
 
 
