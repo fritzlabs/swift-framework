@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.0.0-beta.4](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0-beta.4)
+
+1. Don't use ANE with people segmentation
+
 ## [3.0.0-beta.3](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0-beta.3)
 
 1. Add getter to access metadata
