@@ -329,10 +329,12 @@ SWIFT_CLASS_NAMED("FritzModelConfiguration") SWIFT_AVAILABILITY(watchos,introduc
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
 /// Model downloads will only happen
 @property (nonatomic) BOOL wifiRequiredForModelDownload;
+/// Whether or not this model should use CPU and GPU only (not using the ANE).
+@property (nonatomic, readonly) BOOL cpuAndGPUOnly;
 @property (nonatomic, readonly) BOOL isOTA;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version encryptionSeed:(NSArray<NSNumber *> * _Nullable)encryptionSeed src:(NSURL * _Nullable)src tags:(NSArray<NSString *> * _Nullable)tags isWifiRequiredForDownloads:(BOOL)wifiRequiredForModelDownload metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version encryptionSeed:(NSArray<NSNumber *> * _Nullable)encryptionSeed src:(NSURL * _Nullable)src tags:(NSArray<NSString *> * _Nullable)tags isWifiRequiredForDownloads:(BOOL)wifiRequiredForModelDownload metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata cpuAndGPUOnly:(BOOL)cpuAndGPUOnly OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version cpuAndGPUOnly:(BOOL)cpuAndGPUOnly;
 - (nonnull instancetype)initFromIdentifiedModel:(id <FritzBaseIdentifiedModel> _Nonnull)identifiedModel;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, readonly) NSUInteger hash;
