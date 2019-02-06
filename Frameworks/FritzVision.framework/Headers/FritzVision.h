@@ -9,6 +9,9 @@
 @import UIKit;
 @import FritzCore;
 @import CoreMLHelpers;
+@import FritzManagedModel;
+
+#import <FritzVision/threshold.h>
 
 FOUNDATION_EXPORT double FritzVisionVersionNumber;
 FOUNDATION_EXPORT const unsigned char FritzVisionVersionString[];

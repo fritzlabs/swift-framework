@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @import FritzManagedModel;
+@import FritzVision;
 
 //! Project version number for FritzVisionLivingRoomSegmentationModel.
 FOUNDATION_EXPORT double FritzVisionLivingRoomSegmentationModelVersionNumber;

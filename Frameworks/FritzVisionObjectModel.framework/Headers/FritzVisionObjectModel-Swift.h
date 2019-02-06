@@ -163,9 +163,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # define SWIFT_DEPRECATED_OBJC(Msg) SWIFT_DEPRECATED_MSG(Msg)
 #endif
 #if __has_feature(modules)
-@import CoreGraphics;
-@import Dispatch;
-@import ObjectiveC;
+@import FritzVision;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -183,64 +181,11 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class CALayer;
-@class UIColor;
+@class FritzMLModel;
 
-SWIFT_CLASS_NAMED("BoundingBoxOutline")
-@interface BoundingBoxOutline : NSObject
-/// Add shape and text to parent layer
-/// \param parent parent CALayer
-///
-- (void)parent:(CALayer * _Nonnull)parent;
-/// Show Bounding box.
-/// \param frame CGRect of coordinates to draw box
-///
-/// \param label Classified label
-///
-/// \param color Color of bounding box outline
-///
-/// \param textColor Classified label text
-///
-- (void)frame:(CGRect)frame label:(NSString * _Nonnull)label color:(UIColor * _Nonnull)color textColor:(UIColor * _Nonnull)textColor;
-/// Hide bounding box from appearing in view.
-- (void)hide;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
-@end
-
-@class FritzVisionImage;
-@class FritzVisionObjectModelOptions;
-@class FritzVisionObject;
-
-SWIFT_CLASS_NAMED("FritzVisionObjectModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionObjectModel : NSObject
-/// Run prediction for vision object model.
-/// \param fritzImage Image or buffer to run model on.
-///
-/// \param options Options for model execution.
-///
-/// \param completion The block to invoke after the prediction request has finished processing.
-///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionObjectModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionObject *> * _Nullable, NSError * _Nullable))completion;
-/// Run prediction for vision object model asynchronously on a given queue.
-/// \param fritzImage Image or buffer to run model on.
-///
-/// \param options Options for model execution.
-///
-/// \param queue Dispatch queue to asynchronously execute predictions on
-///
-/// \param completion The block to invoke after the prediction request has finished processing.
-///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionObjectModelOptions * _Nonnull)options queue:(dispatch_queue_t _Nonnull)queue completion:(void (^ _Nonnull)(NSArray<FritzVisionObject *> * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=11.0);
-@end
-
-
-SWIFT_CLASS_NAMED("FritzVisionObjectModelOptions")
-@interface FritzVisionObjectModelOptions : NSObject
-- (nonnull instancetype)initWithThreshold:(double)threshold iouThreshold:(float)iouThreshold numResults:(NSInteger)numResults OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionObjectModel (SWIFT_EXTENSION(FritzVisionObjectModel))
+- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
 @end
 
 #if __has_attribute(external_source_symbol)

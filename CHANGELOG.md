@@ -5,9 +5,9 @@ Change Log
 
 ---
 
-## [3.0.0-beta.4](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0-beta.4)
+## [3.0.0-beta.5](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0-beta.5)
 
-1. Don't use ANE with people segmentation
+1. Adding Models to FritzVision framework
 
 ## [3.0.0-beta.3](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0-beta.3)
 
