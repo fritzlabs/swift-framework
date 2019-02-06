@@ -66,4 +66,8 @@
     #import <FritzVisionOutdoorSegmentationModel/FritzVisionOutdoorSegmentationModel.h>
   #endif
 
+  #if __has_include(<FritzVisionPoseModel/FritzVisionPoseModel.h>)
+    #import <FritzVisionPoseModel/FritzVisionPoseModel.h>
+  #endif
+
 #endif  // defined(__has_include)

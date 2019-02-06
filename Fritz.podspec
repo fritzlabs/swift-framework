@@ -69,6 +69,14 @@ Pod::Spec.new do |s|
       paintings.vendored_framework = 'Frameworks/FritzVisionStyleModelPaintings.framework'
     end
   end
+
+  s.subspec 'VisionPoseModel' do |vision|
+    vision.dependency 'Fritz/Core'
+    vision.dependency 'Fritz/Vision'
+    vision.dependency 'Fritz/ManagedModel'
+    vision.vendored_framework = 'Frameworks/FritzVisionPoseModel.framework'
+  end
+
   s.subspec 'VisionSegmentationModelBase' do |vision|
     vision.dependency 'Fritz/Core'
     vision.dependency 'Fritz/Vision'
