@@ -26,14 +26,6 @@
     #import <FritzVisionObjectModel/FritzVisionObjectModel.h>
   #endif
 
-  #if __has_include(<FritzVisionStyleModelBase/FritzVisionStyleModelBase.h>)
-    #import <FritzVisionStyleModelBase/FritzVisionStyleModelBase.h>
-  #endif
-
-  #if __has_include(<FritzVisionStyleModel/FritzVisionStyleModel.h>)
-    #import <FritzVisionStyleModel/FritzVisionStyleModel.h>
-  #endif
-
   #if __has_include(<FritzVisionStyleModelPaintings/FritzVisionStyleModelPaintings.h>)
     #import <FritzVisionStyleModelPaintings/FritzVisionStyleModelPaintings.h>
   #endif
@@ -42,16 +34,8 @@
     #import <FritzVisionSegmentationModel/FritzVisionSegmentationModel.h>
   #endif
 
-  #if __has_include(<FritzVisionPeopleSegmentationModelBase/FritzVisionPeopleSegmentationModelBase.h>)
-    #import <FritzVisionPeopleSegmentationModelBase/FritzVisionPeopleSegmentationModelBase.h>
-  #endif
-
   #if __has_include(<FritzVisionPeopleSegmentationModel/FritzVisionPeopleSegmentationModel.h>)
     #import <FritzVisionPeopleSegmentationModel/FritzVisionPeopleSegmentationModel.h>
-  #endif
-
-  #if __has_include(<FritzVisionPeopleSegmentationMediumModelBase/FritzVisionPeopleSegmentationMediumModelBase.h>)
-    #import <FritzVisionPeopleSegmentationMediumModelBase/FritzVisionPeopleSegmentationMediumModelBase.h>
   #endif
 
   #if __has_include(<FritzVisionPeopleSegmentationMediumModel/FritzVisionPeopleSegmentationMediumModel.h>)
@@ -64,10 +48,6 @@
 
   #if __has_include(<FritzVisionOutdoorSegmentationModel/FritzVisionOutdoorSegmentationModel.h>)
     #import <FritzVisionOutdoorSegmentationModel/FritzVisionOutdoorSegmentationModel.h>
-  #endif
-
-  #if __has_include(<FritzVisionPoseModel/FritzVisionPoseModel.h>)
-    #import <FritzVisionPoseModel/FritzVisionPoseModel.h>
   #endif
 
 #endif  // defined(__has_include)
