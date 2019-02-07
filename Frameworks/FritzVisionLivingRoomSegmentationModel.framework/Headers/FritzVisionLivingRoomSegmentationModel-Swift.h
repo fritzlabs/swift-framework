@@ -163,8 +163,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # define SWIFT_DEPRECATED_OBJC(Msg) SWIFT_DEPRECATED_MSG(Msg)
 #endif
 #if __has_feature(modules)
-@import FritzVisionSegmentationModel;
-@import ObjectiveC;
+@import FritzVision;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -182,45 +181,11 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class ModelSegmentationClass;
 
-SWIFT_CLASS_NAMED("FritzVisionLivingRoomClass")
-@interface FritzVisionLivingRoomClass : NSObject
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
-+ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull chair;)
-+ (ModelSegmentationClass * _Nonnull)chair SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull wall;)
-+ (ModelSegmentationClass * _Nonnull)wall SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull coffeeTable;)
-+ (ModelSegmentationClass * _Nonnull)coffeeTable SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull ceiling;)
-+ (ModelSegmentationClass * _Nonnull)ceiling SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull floor;)
-+ (ModelSegmentationClass * _Nonnull)floor SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull bed;)
-+ (ModelSegmentationClass * _Nonnull)bed SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull lamp;)
-+ (ModelSegmentationClass * _Nonnull)lamp SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull sofa;)
-+ (ModelSegmentationClass * _Nonnull)sofa SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull windowpane;)
-+ (ModelSegmentationClass * _Nonnull)windowpane SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull pillow;)
-+ (ModelSegmentationClass * _Nonnull)pillow SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
-+ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class FritzMLModel;
-
-/// Image segmentation model to detect common living room objects.
-SWIFT_CLASS_NAMED("FritzVisionLivingRoomSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionLivingRoomSegmentationModel : FritzVisionSegmentationModel
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionLivingRoomSegmentationModel (SWIFT_EXTENSION(FritzVisionLivingRoomSegmentationModel))
 - (nonnull instancetype)init;
 + (nonnull instancetype)new;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=11.0);
 @end
 
 #if __has_attribute(external_source_symbol)

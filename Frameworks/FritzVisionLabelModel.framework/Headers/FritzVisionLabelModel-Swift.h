@@ -163,8 +163,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # define SWIFT_DEPRECATED_OBJC(Msg) SWIFT_DEPRECATED_MSG(Msg)
 #endif
 #if __has_feature(modules)
-@import Dispatch;
-@import ObjectiveC;
+@import FritzVision;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -182,48 +181,11 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-typedef SWIFT_ENUM(NSInteger, FritzVisionLabelError, closed) {
-  FritzVisionLabelErrorNoVisionModel = 0,
-};
-static NSString * _Nonnull const FritzVisionLabelErrorDomain = @"FritzVisionLabelModel.FritzVisionLabelError";
+@class FritzMLModel;
 
-@class FritzVisionImage;
-@class FritzVisionLabelModelOptions;
-@class FritzVisionLabel;
-
-SWIFT_CLASS_NAMED("FritzVisionLabelModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
-@interface FritzVisionLabelModel : NSObject
-/// Run label prediction requst on a UIImage.
-/// \param fritzImage Image or buffer to run model on.
-///
-/// \param options Options for model execution.
-///
-/// \param completion The block to invoke after the prediction request.  Contains an array of FritzVisionLabel objects or error message.
-///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionLabelModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionLabel *> * _Nullable, NSError * _Nullable))completion;
-/// Run label prediction requst asynchronously on a given queue.
-/// \param fritzImage Image or buffer to run model on.
-///
-/// \param options Options for model execution.
-///
-/// \param queue Dispatch queue to asynchronously execute predictions on
-///
-/// \param completion The block to invoke after the prediction request.  Contains an array of FritzVisionLabel objects or error message.
-///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionLabelModelOptions * _Nonnull)options queue:(dispatch_queue_t _Nonnull)queue completion:(void (^ _Nonnull)(NSArray<FritzVisionLabel *> * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(macos,introduced=10.13) SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0);
-@end
-
-
-SWIFT_CLASS_NAMED("FritzVisionLabelModelOptions")
-@interface FritzVisionLabelModelOptions : NSObject
-/// Confidence threshold for prediction results in the range of [0, 1], default is 0.6.
-@property (nonatomic, readonly) double threshold;
-/// Number of results to return from request.
-@property (nonatomic, readonly) NSInteger numResults;
-- (nonnull instancetype)initWithThreshold:(double)threshold numResults:(NSInteger)numResults OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+@interface FritzVisionLabelModel (SWIFT_EXTENSION(FritzVisionLabelModel))
+- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
 @end
 
 #if __has_attribute(external_source_symbol)

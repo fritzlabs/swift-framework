@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Fritz'
-  s.version = '3.0.0-beta.4'
+  s.version = '3.0.0-beta.5'
   s.summary = 'Official Fritz SDK for Swift 4.1 and Objective-C'
   s.homepage = 'https://fritz.ai'
   s.license = { :type => 'Apache 2.0', :file => 'LICENSE.md' }
@@ -36,6 +36,7 @@ Pod::Spec.new do |s|
   s.subspec 'Vision' do |vision|
     vision.dependency 'Fritz/Core'
     vision.dependency 'Fritz/CoreMLHelpers'
+    vision.dependency 'Fritz/ManagedModel'
     vision.vendored_framework = 'Frameworks/FritzVision.framework'
   end
 
@@ -53,52 +54,30 @@ Pod::Spec.new do |s|
     vision.vendored_framework = 'Frameworks/FritzVisionObjectModel.framework'
   end
 
-  s.subspec 'VisionStyleModelBase' do |vision|
-    vision.dependency 'Fritz/Core'
-    vision.dependency 'Fritz/Vision'
-    vision.dependency 'Fritz/ManagedModel'
-    vision.vendored_framework = 'Frameworks/FritzVisionStyleModelBase.framework'
-  end
-
   s.subspec 'VisionStyleModel' do |style|
-    style.dependency 'Fritz/VisionStyleModelBase'
-    style.vendored_framework = 'Frameworks/FritzVisionStyleModel.framework'
-
     style.subspec 'Paintings' do |paintings|
-      paintings.dependency 'Fritz/VisionStyleModelBase'
+      paintings.dependency 'Fritz/Vision'
+      paintings.dependency 'Fritz/ManagedModel'
       paintings.vendored_framework = 'Frameworks/FritzVisionStyleModelPaintings.framework'
     end
-  end
-  s.subspec 'VisionSegmentationModelBase' do |vision|
-    vision.dependency 'Fritz/Core'
-    vision.dependency 'Fritz/Vision'
-    vision.dependency 'Fritz/ManagedModel'
-    vision.dependency 'Fritz/CoreMLHelpers'
-    vision.vendored_framework = 'Frameworks/FritzVisionSegmentationModel.framework'
-  end
-
-  s.subspec 'VisionSegmentationModelPeopleBase' do |vision|
-    vision.dependency 'Fritz/Core'
-    vision.dependency 'Fritz/ManagedModel'
-    vision.dependency 'Fritz/VisionSegmentationModelBase'
-    vision.vendored_framework = 'Frameworks/FritzVisionPeopleSegmentationModelBase.framework'
   end
 
   s.subspec 'VisionSegmentationModel' do |vision|
     vision.subspec 'People' do |people|
-      people.dependency 'Fritz/VisionSegmentationModelPeopleBase'
+      people.dependency 'Fritz/Vision'
+      people.dependency 'Fritz/ManagedModel'
       people.vendored_framework = 'Frameworks/FritzVisionPeopleSegmentationModel.framework'
     end
 
     vision.subspec 'LivingRoom' do |livingroom|
       livingroom.dependency 'Fritz/ManagedModel'
-      livingroom.dependency 'Fritz/VisionSegmentationModelBase'
+      livingroom.dependency 'Fritz/Vision'
       livingroom.vendored_framework = 'Frameworks/FritzVisionLivingRoomSegmentationModel.framework'
     end
 
     vision.subspec 'Outdoor' do |outdoor|
       outdoor.dependency 'Fritz/ManagedModel'
-      outdoor.dependency 'Fritz/VisionSegmentationModelBase'
+      outdoor.dependency 'Fritz/Vision'
       outdoor.vendored_framework = 'Frameworks/FritzVisionOutdoorSegmentationModel.framework'
     end
   end

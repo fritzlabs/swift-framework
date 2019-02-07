@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @import FritzManagedModel;
-@import FritzVisionPeopleSegmentationModelBase;
+@import FritzVision;
 
 //! Project version number for FritzVisionPeopleSegmentationModel.
 FOUNDATION_EXPORT double FritzVisionPeopleSegmentationModelVersionNumber;

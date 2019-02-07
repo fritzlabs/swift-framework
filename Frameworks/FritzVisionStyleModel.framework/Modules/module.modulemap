@@ -1,6 +1,0 @@
-framework module FritzVisionStyleModel {
-  umbrella header "FritzVisionStyleModel.h"
-
-  export *
-  module * { export * }
-}
