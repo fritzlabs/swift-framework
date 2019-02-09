@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.0.0-beta.6](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0-beta.6)
+
+1. Fixing up pose api
+
 ## [3.0.0-beta.5](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0-beta.5)
 
 1. Adding Models to FritzVision framework
