@@ -1,0 +1,11 @@
+framework module FritzVisionPoseModel {
+  umbrella header "FritzVisionPoseModel.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionPoseModel.Swift {
+    header "FritzVisionPoseModel-Swift.h"
+    requires objc
+}
