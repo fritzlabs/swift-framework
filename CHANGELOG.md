@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.0.0-beta.7](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0-beta.7)
+
+1. Fixing Pose Detection result filtering
+
 ## [3.0.0-beta.6](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0-beta.6)
 
 1. Fixing up pose api
