@@ -324,9 +324,10 @@ SWIFT_CLASS_NAMED("FritzModelConfiguration") SWIFT_AVAILABILITY(watchos,introduc
 @interface FritzModelConfiguration : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull identifier;
 @property (nonatomic, readonly) NSInteger version;
-@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
-/// Model Metadata set in webapp.
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+/// Tags data set in webapp.  Pulls from most recently updated active server response if one exists.
+@property (nonatomic, copy) NSArray<NSString *> * _Nullable tags;
+/// Model Metadata set in webapp. Uses cached server model info if it exists.
+@property (nonatomic, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
 /// Model downloads will only happen
 @property (nonatomic) BOOL wifiRequiredForModelDownload;
 /// Whether or not this model should use CPU and GPU only (not using the ANE).

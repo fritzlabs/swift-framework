@@ -304,7 +304,7 @@ SWIFT_AVAILABILITY(ios,introduced=12.0)
 /// If you do not want to immediately instantiate the models, create a ModelTagManager and manage loading yourself.
 /// \param tags List of tags to load models for.
 ///
-/// \param wifiRequiredForModelDownload True if client must be on WiFi to download model. Default is false.
+/// \param wifiRequiredForModelDownload If true, client must be connected to a wifi network to download a model. Default is false.
 ///
 /// \param completionHandler Completion handler with instantiated FritzVisionStyleModels
 ///
@@ -325,12 +325,10 @@ SWIFT_AVAILABILITY(ios,introduced=12.0)
 SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModelOptions")
 @interface FritzVisionFlexibleStyleModelOptions : NSObject
 /// Crop and scale option. Default option is .scaleFit.
-@property (nonatomic, readonly) enum FritzVisionCropAndScale imageCropAndScaleOption;
+@property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
 /// Set dimensions for output result of flexible model.
-@property (nonatomic, readonly, strong) FlexibleModelDimensions * _Nonnull flexibleModelDimensions;
-- (nonnull instancetype)initWithCropAndScaleOption:(enum FritzVisionCropAndScale)cropAndScaleOption withDimensions:(FlexibleModelDimensions * _Nonnull)flexibleModelDimensions OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@property (nonatomic, strong) FlexibleModelDimensions * _Nonnull flexibleModelDimensions;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class UIImage;
@@ -403,14 +401,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
-@class FritzVisionLivingRoomSegmentationModel;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionLabelModel (SWIFT_EXTENSION(FritzVision))
-/// Fetch <code>FritzVisionPeopleSegmentationMediumModel</code>.  Returns packaged model.
+/// Fetch model. Downloads model if model has not been downloaded before.
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionLivingRoomSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionLabelModel * _Nullable, NSError * _Nullable))completionHandler;
 @end
 
 
@@ -426,13 +423,11 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 SWIFT_CLASS_NAMED("FritzVisionLabelModelOptions")
 @interface FritzVisionLabelModelOptions : NSObject
 /// Confidence threshold for prediction results in the range of [0, 1], default is 0.6.
-@property (nonatomic, readonly) double threshold;
+@property (nonatomic) double threshold;
 /// Number of results to return from request.
-@property (nonatomic, readonly) NSInteger numResults;
+@property (nonatomic) NSInteger numResults;
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
-- (nonnull instancetype)initWithThreshold:(double)threshold numResults:(NSInteger)numResults imageCropAndScaleOption:(enum FritzVisionCropAndScale)imageCropAndScaleOption OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class ModelSegmentationClass;
@@ -497,7 +492,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelCo
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
-/// Fetch <code>FritzVisionPeopleSegmentationMediumModel</code>.  Returns packaged model.
+/// Fetch model. Downloads model if model has not been downloaded before.
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionLivingRoomSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
@@ -532,10 +527,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionObjectModel (SWIFT_EXTENSION(FritzVision))
-/// Fetch <code>FritzVisionPeopleSegmentationMediumModel</code>.  Returns packaged model.
+/// Fetch model. Downloads model if model has not been downloaded before.
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionLivingRoomSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionObjectModel * _Nullable, NSError * _Nullable))completionHandler;
 @end
 
 @class FritzVisionObjectModelOptions;
@@ -565,15 +560,13 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 SWIFT_CLASS_NAMED("FritzVisionObjectModelOptions")
 @interface FritzVisionObjectModelOptions : NSObject
 /// Confidence threshold for prediction results in the range of [0, 1], default is 0.6.
-@property (nonatomic, readonly) double threshold;
+@property (nonatomic) double threshold;
 /// Threshold for overlap of items within a single class in range [0, 1].  Lower values are more strict.
-@property (nonatomic, readonly) float iouThreshold;
+@property (nonatomic) float iouThreshold;
 /// Number of results to return from request.
-@property (nonatomic, readonly) NSInteger numResults;
+@property (nonatomic) NSInteger numResults;
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
-- (nonnull instancetype)initWithThreshold:(double)threshold iouThreshold:(float)iouThreshold numResults:(NSInteger)numResults imageCropAndScaleOption:(enum FritzVisionCropAndScale)imageCropAndScaleOption OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -636,7 +629,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelCo
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
-/// Fetch <code>FritzVisionPeopleSegmentationMediumModel</code>.  Returns packaged model.
+/// Fetch model. Downloads model if model has not been downloaded before.
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionOutdoorSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
@@ -678,7 +671,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
-/// Fetch <code>FritzVisionPeopleSegmentationMediumModel</code>.  Returns packaged model.
+/// Fetch model. Downloads model if model has not been downloaded before.
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationMediumModel * _Nullable, NSError * _Nullable))completionHandler;
@@ -695,7 +688,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
-/// Fetch <code>FritzVisionPeopleSegmentationModel</code>.  Returns packaged model.
+/// Fetch model. Downloads model if model has not been downloaded before.
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
@@ -705,18 +698,40 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
 
+/// A model used to predict the poses of people in images.
 SWIFT_CLASS_NAMED("FritzVisionPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseModel : NSObject
+/// Model Configuration for pose model in Fritz.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
 + (void)setModelConfig:(FritzModelConfiguration * _Nonnull)value;
+/// Is WiFi required to download pose model over the air.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
+/// Initialize model with FritzMLModel
+/// \param model FritzMLModel
+///
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+/// Predict poses from a FritzImage.
+/// \param fritzImage The image to use to dectect poses.
+///
+/// \param options The options used to configure the pose results.
+///
+/// \param completion Handler to call back on the main thread with poses or error.
+///
 - (void)predictWithImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionPoseResult * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseModel (SWIFT_EXTENSION(FritzVision))
+/// Fetch model. Downloads model if model has not been downloaded before.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPoseModel * _Nullable, NSError * _Nullable))completionHandler;
 @end
 
 
@@ -729,30 +744,62 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @end
 
 
+/// Options for Pose Model.
 SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 @interface FritzVisionPoseModelOptions : NSObject
 /// Crop and scale option. Default value is scaleFit.
-@property (nonatomic, readonly) enum FritzVisionCropAndScale imageCropAndScaleOption;
+@property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
 /// Minimum score a part must have to be included in a pose.
-@property (nonatomic, readonly) double minPartThreshold;
-@property (nonatomic, readonly) double minPoseThreshold;
+@property (nonatomic) double minPartThreshold;
+/// Minimum score a pose must have to be included in results.
+@property (nonatomic) double minPoseThreshold;
+/// Maximum number of poses to detect.
+@property (nonatomic, readonly) NSInteger numPoses;
 /// NMS radius for pose
-@property (nonatomic, readonly) NSInteger nmsRadius;
-- (nonnull instancetype)initWithCropAndScale:(enum FritzVisionCropAndScale)cropAndScaleOption withMinPartThreshold:(double)minPartThreshold withMinPoseThreshold:(double)minPoseThreshold nmsRadius:(NSInteger)nmsRadius OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@property (nonatomic) NSInteger nmsRadius;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @protocol MLFeatureProvider;
 
 SWIFT_CLASS_NAMED("FritzVisionPoseResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseResult : NSObject
+/// Model image width
+@property (nonatomic, readonly) NSInteger modelInputWidth;
+/// Model image height
+@property (nonatomic, readonly) NSInteger modelInputHeight;
+/// Original input image before it was rescaled
+@property (nonatomic, readonly, strong) FritzVisionImage * _Nonnull image;
+/// Pose model options.
+@property (nonatomic, readonly, strong) FritzVisionPoseModelOptions * _Nonnull options;
+/// Unavailable.  Use <code>FritzVisionPoseModel.predict</code> function to build.
 - (nonnull instancetype)initForResults:(id <MLFeatureProvider> _Nonnull)results fritzImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
+@class FritzPose;
 
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
+/// Decodes all poses above pose threshold.
+///
+/// returns:
+/// Pose list of poses above mininimum pose threshold option.
+- (NSArray<FritzPose *> * _Nonnull)decodeMultiplePoses SWIFT_WARN_UNUSED_RESULT;
+/// Decode poses and draw on original UIImage.
+///
+/// returns:
+/// UIImage with poses overlayed on original UIImage.
+- (UIImage * _Nullable)drawPoses SWIFT_WARN_UNUSED_RESULT;
+/// Draw detected poses on input image.
+/// \param poses List of poses to draw
+///
+///
+/// returns:
+/// Original image with poses drawn on image.
+- (UIImage * _Nullable)drawPosesForPoses:(NSArray<FritzPose *> * _Nonnull)poses SWIFT_WARN_UNUSED_RESULT;
+@end
 
 
 
@@ -768,9 +815,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 @interface FritzVisionSegmentationModelOptions : NSObject
 /// Crop and scale option. Default value is scaleFit.
-@property (nonatomic, readonly) enum FritzVisionCropAndScale imageCropAndScaleOption;
+@property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithCropAndScale:(enum FritzVisionCropAndScale)cropAndScaleOption OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class MLMultiArray;
@@ -864,11 +910,25 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 @interface FritzVisionStyleModelOptions : NSObject
 /// Crop and scale option.
-@property (nonatomic, readonly) enum FritzVisionCropAndScale imageCropAndScaleOption;
-- (nonnull instancetype)initWithCropAndScaleOption:(enum FritzVisionCropAndScale)cropAndScaleOption OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class FritzPosePoint;
+
+/// Predicted keypoint containing part, score, and position identified.
+SWIFT_CLASS_NAMED("Keypoint")
+@interface FritzPoseKeypoint : NSObject
+@property (nonatomic, readonly) NSInteger id;
+@property (nonatomic, readonly, strong) FritzPosePoint * _Nonnull position;
+@property (nonatomic, readonly) double score;
+@property (nonatomic, readonly, copy) NSString * _Nonnull part;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
+
+
 
 
 SWIFT_CLASS_NAMED("ModelSegmentationClass")
@@ -877,6 +937,31 @@ SWIFT_CLASS_NAMED("ModelSegmentationClass")
 @property (nonatomic, readonly) NSInteger index;
 /// Label name for Model Segmentation Class.
 @property (nonatomic, readonly, copy) NSString * _Nonnull label;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+/// Predicted point on model input coordinates.
+SWIFT_CLASS_NAMED("Point")
+@interface FritzPosePoint : NSObject
+@property (nonatomic, readonly) double x;
+@property (nonatomic, readonly) double y;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+
+
+
+
+/// Detected pose with Keypoints and corresponding score.
+SWIFT_CLASS_NAMED("Pose")
+@interface FritzPose : NSObject
+@property (nonatomic, readonly, copy) NSArray<FritzPoseKeypoint *> * _Nonnull keypoints;
+@property (nonatomic, readonly) double score;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
