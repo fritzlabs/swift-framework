@@ -502,9 +502,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 
 SWIFT_CLASS_NAMED("FritzVisionObject") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionObject : NSObject
-@property (nonatomic, readonly, strong) FritzVisionLabel * _Nonnull label;
+@property (nonatomic, readonly, strong) FritzVisionLabel * _Nonnull detectedLabel;
 /// BoundingBox of detected object.
 @property (nonatomic, readonly, strong) BoundingBox * _Nonnull boundingBox;
+@property (nonatomic, readonly, copy) NSString * _Nonnull label;
+@property (nonatomic, readonly) double confidence;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)initWithLabel:(FritzVisionLabel * _Nonnull)label boundingBox:(BoundingBox * _Nonnull)boundingBox OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -753,8 +755,6 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 @property (nonatomic) double minPartThreshold;
 /// Minimum score a pose must have to be included in results.
 @property (nonatomic) double minPoseThreshold;
-/// Maximum number of poses to detect.
-@property (nonatomic, readonly) NSInteger numPoses;
 /// NMS radius for pose
 @property (nonatomic) NSInteger nmsRadius;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -765,9 +765,11 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 SWIFT_CLASS_NAMED("FritzVisionPoseResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseResult : NSObject
 /// Model image width
-@property (nonatomic, readonly) NSInteger modelInputWidth;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger modelInputWidth;)
++ (NSInteger)modelInputWidth SWIFT_WARN_UNUSED_RESULT;
 /// Model image height
-@property (nonatomic, readonly) NSInteger modelInputHeight;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger modelInputHeight;)
++ (NSInteger)modelInputHeight SWIFT_WARN_UNUSED_RESULT;
 /// Original input image before it was rescaled
 @property (nonatomic, readonly, strong) FritzVisionImage * _Nonnull image;
 /// Pose model options.
@@ -782,23 +784,23 @@ SWIFT_CLASS_NAMED("FritzVisionPoseResult") SWIFT_AVAILABILITY(ios,introduced=11.
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
-/// Decodes all poses above pose threshold.
+/// Decode single pose result
 ///
 /// returns:
-/// Pose list of poses above mininimum pose threshold option.
-- (NSArray<FritzPose *> * _Nonnull)decodeMultiplePoses SWIFT_WARN_UNUSED_RESULT;
-/// Decode poses and draw on original UIImage.
+/// Pose
+- (FritzPose * _Nullable)decodePose SWIFT_WARN_UNUSED_RESULT;
+/// Draw single pose on input image.
 ///
 /// returns:
-/// UIImage with poses overlayed on original UIImage.
-- (UIImage * _Nullable)drawPoses SWIFT_WARN_UNUSED_RESULT;
+/// UIImage if pose detected.
+- (UIImage * _Nullable)drawPose SWIFT_WARN_UNUSED_RESULT;
 /// Draw detected poses on input image.
-/// \param poses List of poses to draw
+/// \param pose List of poses to draw
 ///
 ///
 /// returns:
 /// Original image with poses drawn on image.
-- (UIImage * _Nullable)drawPosesForPoses:(NSArray<FritzPose *> * _Nonnull)poses SWIFT_WARN_UNUSED_RESULT;
+- (UIImage * _Nullable)drawPose:(FritzPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -915,6 +917,7 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 @end
 
 @class FritzPosePoint;
+enum PosePart : NSInteger;
 
 /// Predicted keypoint containing part, score, and position identified.
 SWIFT_CLASS_NAMED("Keypoint")
@@ -922,13 +925,11 @@ SWIFT_CLASS_NAMED("Keypoint")
 @property (nonatomic, readonly) NSInteger id;
 @property (nonatomic, readonly, strong) FritzPosePoint * _Nonnull position;
 @property (nonatomic, readonly) double score;
-@property (nonatomic, readonly, copy) NSString * _Nonnull part;
+@property (nonatomic, readonly) enum PosePart part;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
-
-
 
 
 SWIFT_CLASS_NAMED("ModelSegmentationClass")
@@ -957,14 +958,43 @@ SWIFT_CLASS_NAMED("Point")
 
 
 
+
+
 /// Detected pose with Keypoints and corresponding score.
-SWIFT_CLASS_NAMED("Pose")
+SWIFT_CLASS_NAMED("Pose") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzPose : NSObject
 @property (nonatomic, readonly, copy) NSArray<FritzPoseKeypoint *> * _Nonnull keypoints;
 @property (nonatomic, readonly) double score;
+/// Create new Pose with keypoint positions scaled to be inside of rect.
+/// \param rect Rect coordinates
+///
+///
+/// returns:
+/// New Pose with position inset in provided rect
+- (FritzPose * _Nonnull)inRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
+
+typedef SWIFT_ENUM(NSInteger, PosePart, closed) {
+  PosePartNose = 0,
+  PosePartLeftEye = 1,
+  PosePartRightEye = 2,
+  PosePartLeftEar = 3,
+  PosePartRightEar = 4,
+  PosePartLeftShoulder = 5,
+  PosePartRightShoulder = 6,
+  PosePartLeftElbow = 7,
+  PosePartRightElbow = 8,
+  PosePartLeftWrist = 9,
+  PosePartRightWrist = 10,
+  PosePartLeftHip = 11,
+  PosePartRightHip = 12,
+  PosePartLeftKnee = 13,
+  PosePartRightKnee = 14,
+  PosePartLeftAnkle = 15,
+  PosePartRightAnkle = 16,
+};
 
 
 
