@@ -5,6 +5,61 @@ Change Log
 
 ---
 
+## [3.0.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.1)
+
+1. Adding FritzVisionMultiPoseModel to Fritz Framework.
+
+## [3.0.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0)
+
+Highlights ✨
+-------------
+
+- Added pose estimation feature. You can use the `FritzVisionPoseModel` to detect human figures in images and video ([Documentation](https://docs.fritz.ai/develop/vision/pose-estimation/ios.html)).
+- Added ability to download `FritzVision` models over the air ([Documentation](https://docs.fritz.ai/develop/vision/pose-estimation/ios.html#download-the-model-over-the-air)).
+- Standardized feature APIs across all `FritzVision` models ([API Reference](https://docs.fritz.ai/iOS/3.0.0/index.html)).
+- Added ability to download custom models by tags ([Documentation](https://docs.fritz.ai/develop/custom-models/tag-based/ios.html)).
+- Added user-configurable metadata to Custom Models. ([Documentation](https://docs.fritz.ai/develop/custom-models/tag-based/index.html)).
+- Simplified dependencies. All feature models are now included in the `FritzVision` target.
+- Fixed many broken Objective-C interfaces.
+
+Breaking changes
+----------------
+
+- All `VisionModelOptions` objects no longer can be configured during initialization.  You can configure model options after creating an options object:
+
+```diff
+-  let modelOptions = FritzVisionLabelModelOptions(threshold: 0.5, numResults: 10)
++  let modelOptions = FritzVisionLabelModelOptions()
++  modelOptions.threshold = 0.5
++  modelOptions.numResults = 10
+```
+
+- All models now run with a default `imageCropAndScaleOption` of `.scaleFit`.  You will have to make the following changes to keep the same behavior:
+
+```diff
+-  let modelOptions = FritzVisionLabelModelOptions()
++  let modelOptions = FritzVisionLabelModelOptions()
++  modelOptions.imageCropAndScaleOption = .centerCrop
+```
+
+This is especially important for the object detection model as the crop and scale option affects the placement of the bounding boxes.
+```diff
+-  let modelOptions = FritzVisionObjectModelOptions()
++  let modelOptions = FritzVisionObjectModelOptions()
++  modelOptions.imageCropAndScaleOption = .centerCrop
+```
+
+- Changed access to `label` and `confidence` on `FritzVisionObject` to simplify access:
+
+```diff
+- visionObject.label.label
+- visionObject.label.confidence
++ visionObject.label
++ visionObject.confidence
+```
+
+
+
 ## [3.0.0-beta.7](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0-beta.7)
 
 1. Fixing Pose Detection result filtering

@@ -54,4 +54,8 @@
     #import <FritzVisionPoseModel/FritzVisionPoseModel.h>
   #endif
 
+  #if __has_include(<FritzVisionMultiPoseModel/FritzVisionMultiPoseModel.h>)
+    #import <FritzVisionMultiPoseModel/FritzVisionMultiPoseModel.h>
+  #endif
+
 #endif  // defined(__has_include)
