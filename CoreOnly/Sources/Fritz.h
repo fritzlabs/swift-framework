@@ -30,10 +30,6 @@
     #import <FritzVisionStyleModelPaintings/FritzVisionStyleModelPaintings.h>
   #endif
 
-  #if __has_include(<FritzVisionSegmentationModel/FritzVisionSegmentationModel.h>)
-    #import <FritzVisionSegmentationModel/FritzVisionSegmentationModel.h>
-  #endif
-
   #if __has_include(<FritzVisionPeopleSegmentationModel/FritzVisionPeopleSegmentationModel.h>)
     #import <FritzVisionPeopleSegmentationModel/FritzVisionPeopleSegmentationModel.h>
   #endif
