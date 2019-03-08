@@ -268,6 +268,7 @@ typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
 };
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
+@class FritzManagedModel;
 @protocol FritzSwiftIdentifiedModel;
 @class FritzMLModel;
 @class FritzVisionImage;
@@ -276,6 +277,7 @@ static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVis
 /// Construct a Flexible Style Transfer model and run on any FritzVisionImage. Use this class over <code>FritzVisionStyleTransferModel</code> to produce stylized images with customizable output sizes.
 SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface FritzVisionFlexibleStyleModel : NSObject
+@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
 /// Initialize FritzStyleTransferModel with your own trained style model.
 /// \param model Fritz model to use.
 ///
@@ -385,6 +387,8 @@ SWIFT_CLASS_NAMED("FritzVisionLabelModel") SWIFT_AVAILABILITY(watchos,introduced
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
 + (void)setModelConfig:(FritzModelConfiguration * _Nonnull)value;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
@@ -466,6 +470,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzVisionSegmentationModel : NSObject
+@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
 @property (nonatomic, readonly, copy) NSString * _Nonnull name;
 @property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
@@ -488,6 +493,8 @@ SWIFT_CLASS_NAMED("FritzVisionLivingRoomSegmentationModel") SWIFT_AVAILABILITY(i
 @interface FritzVisionLivingRoomSegmentationModel : FritzVisionSegmentationModel
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
@@ -518,9 +525,12 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModel") SWIFT_AVAILABILITY(ios,introduced=11
 @interface FritzVisionObjectModel : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
+@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
@@ -627,6 +637,8 @@ SWIFT_CLASS_NAMED("FritzVisionOutdoorSegmentationModel") SWIFT_AVAILABILITY(ios,
 @interface FritzVisionOutdoorSegmentationModel : FritzVisionSegmentationModel
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
@@ -669,6 +681,8 @@ SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationMediumModel") SWIFT_AVAILABILITY
 @interface FritzVisionPeopleSegmentationMediumModel : FritzVisionSegmentationModel
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
@@ -686,6 +700,8 @@ SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModel") SWIFT_AVAILABILITY(ios,i
 @interface FritzVisionPeopleSegmentationModel : FritzVisionSegmentationModel
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
@@ -703,10 +719,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// A model used to predict the poses of people in images.
 SWIFT_CLASS_NAMED("FritzVisionPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseModel : NSObject
+@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
 /// Model Configuration for pose model in Fritz.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
 + (void)setModelConfig:(FritzModelConfiguration * _Nonnull)value;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
 /// Is WiFi required to download pose model over the air.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
@@ -864,6 +883,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationResult") SWIFT_AVAILABILITY(watchos,in
 
 SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStyleModel : NSObject
+@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
 /// Initialize FritzStyleTransferModel with your own trained style model.
 /// \param model Fritz model to use.
 ///

@@ -270,6 +270,10 @@ SWIFT_CLASS_NAMED("FritzManagedModel") SWIFT_AVAILABILITY(watchos,introduced=4.0
 @property (nonatomic, readonly, copy) NSString * _Nonnull id;
 /// Model Version number of active model.
 @property (nonatomic, readonly) NSInteger version;
+/// If true, the active model config version is downloaded.
+@property (nonatomic, readonly) BOOL isVersionDownloaded;
+/// If true, there is at least one active model downloaded
+@property (nonatomic, readonly) BOOL hasDownloadedModel;
 /// Creates FritzManagedModel from model configuration.
 /// \param modelConfig Specifies which model class is operating on.
 ///
@@ -341,6 +345,13 @@ SWIFT_CLASS_NAMED("FritzModelConfiguration") SWIFT_AVAILABILITY(watchos,introduc
 @property (nonatomic, readonly) NSUInteger hash;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzModelConfiguration (SWIFT_EXTENSION(FritzManagedModel))
+/// Create managed model from current FritzModelConfiguration
+- (FritzManagedModel * _Nonnull)buildManagedModel SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
