@@ -5,6 +5,12 @@ Change Log
 
 ---
 
+## [3.1.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.1.0)
+
+1. Expose ManagedModel on all VisionModels
+2. Add a public protocol for interacting with all FritzVision models.
+3. Fix SwiftIdentifiedModel download (using shared downloader).
+
 ## [3.0.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.1)
 
 1. Adding FritzVisionMultiPoseModel to Fritz Framework.
