@@ -328,6 +328,9 @@ SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModelOptions")
 @interface FritzVisionFlexibleStyleModelOptions : NSObject
 /// Crop and scale option. Default option is .scaleFit.
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
+/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
+/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
+@property (nonatomic) BOOL forceCoreMLPrediction;
 /// Set dimensions for output result of flexible model.
 @property (nonatomic, strong) FlexibleModelDimensions * _Nonnull flexibleModelDimensions;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -428,6 +431,9 @@ SWIFT_CLASS_NAMED("FritzVisionLabelModelOptions")
 @interface FritzVisionLabelModelOptions : NSObject
 /// Confidence threshold for prediction results in the range of [0, 1], default is 0.6.
 @property (nonatomic) double threshold;
+/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
+/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
+@property (nonatomic, readonly) BOOL forceCoreMLPrediction;
 /// Number of results to return from request.
 @property (nonatomic) NSInteger numResults;
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
@@ -578,6 +584,9 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModelOptions")
 /// Number of results to return from request.
 @property (nonatomic) NSInteger numResults;
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
+/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
+/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
+@property (nonatomic, readonly) BOOL forceCoreMLPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -770,6 +779,9 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 @interface FritzVisionPoseModelOptions : NSObject
 /// Crop and scale option. Default value is scaleFit.
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
+/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
+/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
+@property (nonatomic) BOOL forceCoreMLPrediction;
 /// Minimum score a part must have to be included in a pose.
 @property (nonatomic) double minPartThreshold;
 /// Minimum score a pose must have to be included in results.
@@ -837,6 +849,9 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 @interface FritzVisionSegmentationModelOptions : NSObject
 /// Crop and scale option. Default value is scaleFit.
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
+/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
+/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
+@property (nonatomic) BOOL forceCoreMLPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -933,6 +948,9 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 @interface FritzVisionStyleModelOptions : NSObject
 /// Crop and scale option.
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
+/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
+/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
+@property (nonatomic) BOOL forceCoreMLPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

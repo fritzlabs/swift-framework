@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.1.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.1.1)
+
+1. Added override to force processing using Core ML instead of the Vision framework.
+
 ## [3.1.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.1.0)
 
 1. Expose ManagedModel on all VisionModels
