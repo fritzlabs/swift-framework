@@ -164,6 +164,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 #if __has_feature(modules)
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -220,6 +221,28 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionS
 /// A list of all Style Models.
 + (NSArray<FritzVisionStyleModel *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
+/// Enumeration of all Painting Styles available.
+SWIFT_CLASS_NAMED("PaintingStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzPaintingStyle : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=11.0);
+@end
+
+/// Available Painting Styles.
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPaintingStyleModel, "Style", closed) {
+  FritzVisionPaintingStyleModelStarryNight = 0,
+  FritzVisionPaintingStyleModelPinkBlueRhombus = 1,
+  FritzVisionPaintingStyleModelTheScream = 2,
+  FritzVisionPaintingStyleModelBicentennialPrint = 3,
+  FritzVisionPaintingStyleModelPoppyField = 4,
+  FritzVisionPaintingStyleModelKaleidoscope = 5,
+  FritzVisionPaintingStyleModelFemmes = 6,
+  FritzVisionPaintingStyleModelHeadOfClown = 7,
+  FritzVisionPaintingStyleModelHorsesOnSeashore = 8,
+  FritzVisionPaintingStyleModelTheTrial = 9,
+  FritzVisionPaintingStyleModelRitmoPlastico = 10,
+};
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop

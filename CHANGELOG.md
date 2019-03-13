@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.1.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.1.2)
+
+1. Adding enum for Fritz Paintings to access models individually.
+
 ## [3.1.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.1.1)
 
 1. Added override to force processing using Core ML instead of the Vision framework.
