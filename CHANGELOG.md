@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.1.3](https://github.com/fritzlabs/swift-framework/releases/tag/3.1.3)
+
+1. Make loadModel function public to synchronously load models from OTA.
+
 ## [3.1.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.1.2)
 
 1. Adding enum for Fritz Paintings to access models individually.

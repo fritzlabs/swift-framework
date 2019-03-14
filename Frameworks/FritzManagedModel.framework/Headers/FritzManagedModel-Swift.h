@@ -303,15 +303,22 @@ SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11
 @end
 
 
+
+
 SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzManagedModel (SWIFT_EXTENSION(FritzManagedModel))
-/// Load ManagedMLModel from stored Fritz Model (as defined by active model metadata) or model included in app bundle.
+/// Load FritzMLModel from stored Fritz Model (as defined by active model metadata) or model included in app bundle.
 /// \param identifiedModel Conformed MLModel.
 ///
 ///
 /// returns:
 /// FritzMLModel.
 - (FritzMLModel * _Nonnull)loadModelWithIdentifiedModel:(id <FritzBaseIdentifiedModel> _Nonnull)identifiedModel SWIFT_WARN_UNUSED_RESULT;
+/// Loads a model previously downloaded OTA if it exists.
+///
+/// returns:
+/// nil if no model downloaded or FritzMLModel if it does.
+- (FritzMLModel * _Nullable)loadModel SWIFT_WARN_UNUSED_RESULT;
 /// Loads model when no model is included in application bundle.  If a model has previously been downloaded, it will be used. If not, it will be downloaded from Fritz.
 /// If <code>fetchModel</code> is called multiple times and a download request is already happening, a new downloaded request will not be started.  All completionHandlers will be resolved when active request is completed.
 /// \param completionHandler Completion handler returning ManagedMLModel if successfully loaded model.
@@ -320,8 +327,6 @@ SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11
 /// Trigger model download without waiting for response.
 - (void)startDownload;
 @end
-
-
 
 
 SWIFT_CLASS_NAMED("FritzModelConfiguration") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
