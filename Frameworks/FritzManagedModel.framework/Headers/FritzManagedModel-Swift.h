@@ -191,6 +191,9 @@ SWIFT_PROTOCOL_NAMED("ReadModelProvider") SWIFT_AVAILABILITY(watchos,introduced=
 @protocol FritzReadModelProvider
 /// A read model
 @property (nonatomic, readonly, strong) MLModel * _Nonnull model;
+/// The url of the compiled model url in the bundle.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSURL * _Nonnull urlOfModelInThisBundle;)
++ (NSURL * _Nonnull)urlOfModelInThisBundle SWIFT_WARN_UNUSED_RESULT;
 @end
 
 @class FritzConfiguration;
@@ -274,16 +277,24 @@ SWIFT_CLASS_NAMED("FritzManagedModel") SWIFT_AVAILABILITY(watchos,introduced=4.0
 @property (nonatomic, readonly) BOOL isVersionDownloaded;
 /// If true, there is at least one active model downloaded
 @property (nonatomic, readonly) BOOL hasDownloadedModel;
+/// The type of the identified model, if initialized from a conformed model.
+/// Storing this gives us access to the url of the identified model, so you can call
+/// self.loadModel() and load the model included in the package.
+@property (nonatomic, readonly) Class <FritzBaseIdentifiedModel> _Nullable packagedIdentifiedModelType;
 /// Creates FritzManagedModel from model configuration.
 /// \param modelConfig Specifies which model class is operating on.
 ///
 /// \param sessionManager Optional SessionManager. If not included uses default globally shared SessionManager.
 ///
-- (nonnull instancetype)initWithModelConfig:(FritzModelConfiguration * _Nonnull)modelConfig sessionManager:(SessionManager * _Nullable)sessionManager loadActive:(BOOL)loadActiveFromDisk OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModelConfig:(FritzModelConfiguration * _Nonnull)modelConfig sessionManager:(SessionManager * _Nullable)sessionManager loadActive:(BOOL)loadActiveFromDisk packagedModelType:(Class <FritzBaseIdentifiedModel> _Nullable)packagedIdentifiedModelType OBJC_DESIGNATED_INITIALIZER;
 /// Creates FritzManagedModel from a packaged MLModel with BaseIdentifiedModel extension.  Used when model is included in application package.
 /// \param identifiedModel Included MLModel class.
 ///
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzBaseIdentifiedModel> _Nonnull)identifiedModel;
+/// Creates FritzManagedModel from a packaged MLModel with BaseIdentifiedModel extension.  Used when model is included in application package.
+/// \param identifiedModel Included MLModel class.
+///
+- (nonnull instancetype)initWithIdentifiedModelType:(Class <FritzBaseIdentifiedModel> _Nonnull)identifiedModelType;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
@@ -346,6 +357,7 @@ SWIFT_CLASS_NAMED("FritzModelConfiguration") SWIFT_AVAILABILITY(watchos,introduc
 - (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version encryptionSeed:(NSArray<NSNumber *> * _Nullable)encryptionSeed src:(NSURL * _Nullable)src tags:(NSArray<NSString *> * _Nullable)tags isWifiRequiredForDownloads:(BOOL)wifiRequiredForModelDownload metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata cpuAndGPUOnly:(BOOL)cpuAndGPUOnly OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version cpuAndGPUOnly:(BOOL)cpuAndGPUOnly;
 - (nonnull instancetype)initFromIdentifiedModel:(id <FritzBaseIdentifiedModel> _Nonnull)identifiedModel;
+- (nonnull instancetype)initFromIdentifiedModelType:(Class <FritzBaseIdentifiedModel> _Nonnull)identifiedModelType;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, readonly) NSUInteger hash;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;

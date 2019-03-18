@@ -5,6 +5,11 @@ Change Log
 
 ---
 
+## [3.1.4](https://github.com/fritzlabs/swift-framework/releases/tag/3.1.4)
+
+1. Add functionality to load from prepackaged model without keeping it around at runtime.
+2. Fix Fritz framework to properly export available frameworks.
+
 ## [3.1.3](https://github.com/fritzlabs/swift-framework/releases/tag/3.1.3)
 
 1. Make loadModel function public to synchronously load models from OTA.
