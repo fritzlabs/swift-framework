@@ -286,13 +286,17 @@ SWIFT_CLASS_NAMED("FritzManagedModel") SWIFT_AVAILABILITY(watchos,introduced=4.0
 ///
 /// \param sessionManager Optional SessionManager. If not included uses default globally shared SessionManager.
 ///
+/// \param loadActiveFromDisk If true (default) will load latest model downloaded over the air.
+///
+/// \param packagedIdentifiedModelType Optional identified model type packaged in app.
+///
 - (nonnull instancetype)initWithModelConfig:(FritzModelConfiguration * _Nonnull)modelConfig sessionManager:(SessionManager * _Nullable)sessionManager loadActive:(BOOL)loadActiveFromDisk packagedModelType:(Class <FritzBaseIdentifiedModel> _Nullable)packagedIdentifiedModelType OBJC_DESIGNATED_INITIALIZER;
 /// Creates FritzManagedModel from a packaged MLModel with BaseIdentifiedModel extension.  Used when model is included in application package.
 /// \param identifiedModel Included MLModel class.
 ///
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzBaseIdentifiedModel> _Nonnull)identifiedModel;
 /// Creates FritzManagedModel from a packaged MLModel with BaseIdentifiedModel extension.  Used when model is included in application package.
-/// \param identifiedModel Included MLModel class.
+/// \param identifiedModelType Type of conformed model.
 ///
 - (nonnull instancetype)initWithIdentifiedModelType:(Class <FritzBaseIdentifiedModel> _Nonnull)identifiedModelType;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
