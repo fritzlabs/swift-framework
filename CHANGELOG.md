@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.1.5](https://github.com/fritzlabs/swift-framework/releases/tag/3.1.5)
+
+1. Fix loading managed model from prepackaged model for Fritz Features.
+
 ## [3.1.4](https://github.com/fritzlabs/swift-framework/releases/tag/3.1.4)
 
 1. Add functionality to load from prepackaged model without keeping it around at runtime.
