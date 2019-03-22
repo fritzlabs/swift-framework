@@ -191,6 +191,7 @@ SWIFT_PROTOCOL_NAMED("ReadModelProvider") SWIFT_AVAILABILITY(watchos,introduced=
 @protocol FritzReadModelProvider
 /// A read model
 @property (nonatomic, readonly, strong) MLModel * _Nonnull model;
+@optional
 /// The url of the compiled model url in the bundle.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSURL * _Nonnull urlOfModelInThisBundle;)
 + (NSURL * _Nonnull)urlOfModelInThisBundle SWIFT_WARN_UNUSED_RESULT;
@@ -265,7 +266,7 @@ SWIFT_CLASS_NAMED("FritzMLModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWI
 
 
 /// Coordinates tasks for interacting with Fritz Models.
-SWIFT_CLASS_NAMED("FritzManagedModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+SWIFT_CLASS("_TtC17FritzManagedModel17FritzManagedModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzManagedModel : NSObject
 /// Currenly active model configuration.
 @property (nonatomic, strong) FritzModelConfiguration * _Nonnull activeModelConfig;
@@ -299,6 +300,8 @@ SWIFT_CLASS_NAMED("FritzManagedModel") SWIFT_AVAILABILITY(watchos,introduced=4.0
 /// \param identifiedModelType Type of conformed model.
 ///
 - (nonnull instancetype)initWithIdentifiedModelType:(Class <FritzBaseIdentifiedModel> _Nonnull)identifiedModelType;
+/// Deletes all downloaded models and state for managed model.
+- (BOOL)deleteModelsAndReturnError:(NSError * _Nullable * _Nullable)error;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
@@ -314,10 +317,21 @@ SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11
 /// If a model is updated, an .activeModelChanged notification is broadcast.
 /// \param completionHandler Completion handler called with result of update operation.
 ///
-- (void)updateModelIfNeededWithCompletion:(void (^ _Nonnull)(BOOL, NSError * _Nullable))completionHandler;
+- (void)updateModelIfNeededWithSkipCache:(BOOL)skipCache completionHandler:(void (^ _Nonnull)(BOOL, NSError * _Nullable))completionHandler;
 @end
 
 
+SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+@interface FritzManagedModel (SWIFT_EXTENSION(FritzManagedModel))
+- (void)downloadAndFetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzMLModel * _Nullable, NSError * _Nullable))completionHandler;
+/// Loads previously downloaded model from disk or uses the identified model included in the app.
+/// \param identifiedModel Identified model included with bundle.
+///
+///
+/// returns:
+/// MLModel for activeModelConfig
+- (MLModel * _Nonnull)loadMLModelWithIdentifiedModel:(id <FritzBaseIdentifiedModel> _Nonnull)identifiedModel SWIFT_WARN_UNUSED_RESULT;
+@end
 
 
 SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
@@ -338,7 +352,7 @@ SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11
 /// If <code>fetchModel</code> is called multiple times and a download request is already happening, a new downloaded request will not be started.  All completionHandlers will be resolved when active request is completed.
 /// \param completionHandler Completion handler returning ManagedMLModel if successfully loaded model.
 ///
-- (void)fetchModelWithCompletion:(void (^ _Nonnull)(FritzMLModel * _Nullable, NSError * _Nullable))completionHandler;
+- (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzMLModel * _Nullable, NSError * _Nullable))completionHandler;
 /// Trigger model download without waiting for response.
 - (void)startDownload;
 @end
