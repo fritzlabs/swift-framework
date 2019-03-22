@@ -300,8 +300,10 @@ SWIFT_CLASS("_TtC17FritzManagedModel17FritzManagedModel") SWIFT_AVAILABILITY(wat
 /// \param identifiedModelType Type of conformed model.
 ///
 - (nonnull instancetype)initWithIdentifiedModelType:(Class <FritzBaseIdentifiedModel> _Nonnull)identifiedModelType;
-/// Deletes all downloaded models and state for managed model.
-- (BOOL)deleteModelsAndReturnError:(NSError * _Nullable * _Nullable)error;
+/// Deletes all state relating to managed model version.
+/// This removes all downloaded versions for this model identifier and any cached
+/// server values for it.
+- (BOOL)deleteAndReturnError:(NSError * _Nullable * _Nullable)error;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
