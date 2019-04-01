@@ -6,9 +6,6 @@
 //  Copyright © 2018 Fritz Labs Incorporated. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-@import FritzManagedModel;
 @import FritzVision;
 
 //! Project version number for FritzVisionLivingRoomSegmentationModel.

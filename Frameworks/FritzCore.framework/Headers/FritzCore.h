@@ -8,6 +8,6 @@
 
 @import Foundation;
 @import CoreML;
-
+@import UIKit;
 FOUNDATION_EXPORT double FritzCoreVersionNumber;
 FOUNDATION_EXPORT const unsigned char FritzCoreVersionString[];

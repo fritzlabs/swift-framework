@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@import Accelerate;
+@import CoreImage;
+@import VideoToolbox;
+@import CoreML;
 
 //! Project version number for CoreMLHelpers.
 FOUNDATION_EXPORT double CoreMLHelpersVersionNumber;

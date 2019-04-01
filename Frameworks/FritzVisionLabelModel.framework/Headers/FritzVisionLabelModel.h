@@ -8,7 +8,7 @@
 
 @import Foundation;
 @import FritzVision;
-@import FritzManagedModel;
+
 
 FOUNDATION_EXPORT double FritzVisionLabelModelVersionNumber;
 FOUNDATION_EXPORT const unsigned char FritzVisionLabelModelVersionString[];
