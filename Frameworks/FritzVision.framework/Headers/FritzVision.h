@@ -7,9 +7,13 @@
 //
 
 @import UIKit;
+@import Vision;
+@import AVFoundation;
+
 @import FritzCore;
 @import CoreMLHelpers;
 @import FritzManagedModel;
+
 
 #import <FritzVision/threshold.h>
 

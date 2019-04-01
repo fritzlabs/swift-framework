@@ -14,57 +14,59 @@ FOUNDATION_EXPORT const unsigned char FritzVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <Fritz/PublicHeader.h>
 
+@import FritzCore;
 
 #if !defined(__has_include)
 #error "Fritz.h won't import anything if your compiler doesn't support __has_include. Please \
 import the headers individually."
 #else
 #if __has_include(<FritzVision/FritzVision.h>)
-#import <FritzVision/FritzVision.h>
+@import FritzVision;
 #endif
 
 #if __has_include(<CoreMLHelpers/CoreMLHelpers.h>)
-#import <CoreMLHelpers/CoreMLHelpers.h>
-#endif
-
-#if __has_include(<FritzVisionLabelModel/FritzVisionLabelModel.h>)
-#import <FritzVisionLabelModel/FritzVisionLabelModel.h>
+@import CoreMLHelpers;
 #endif
 
 #if __has_include(<FritzManagedModel/FritzManagedModel.h>)
-#import <FritzManagedModel/FritzManagedModel.h>
+@import FritzManagedModel;
 #endif
 
+#if __has_include(<FritzVisionLabelModel/FritzVisionLabelModel.h>)
+@import FritzVisionLabelModel;
+#endif
+
+
 #if __has_include(<FritzVisionObjectModel/FritzVisionObjectModel.h>)
-#import <FritzVisionObjectModel/FritzVisionObjectModel.h>
+@import FritzVisionObjectModel;
 #endif
 
 #if __has_include(<FritzVisionStyleModelPaintings/FritzVisionStyleModelPaintings.h>)
-#import <FritzVisionStyleModelPaintings/FritzVisionStyleModelPaintings.h>
+@import FritzVisionStyleModelPaintings;
 #endif
 
 #if __has_include(<FritzVisionPeopleSegmentationModel/FritzVisionPeopleSegmentationModel.h>)
-#import <FritzVisionPeopleSegmentationModel/FritzVisionPeopleSegmentationModel.h>
+@import FritzVisionPeopleSegmentationModel;
 #endif
 
 #if __has_include(<FritzVisionPeopleSegmentationMediumModel/FritzVisionPeopleSegmentationMediumModel.h>)
-#import <FritzVisionPeopleSegmentationMediumModel/FritzVisionPeopleSegmentationMediumModel.h>
+@import FritzVisionPeopleSegmentationMediumModel;
 #endif
 
 #if __has_include(<FritzVisionLivingRoomSegmentationModel/FritzVisionLivingRoomSegmentationModel.h>)
-#import <FritzVisionLivingRoomSegmentationModel/FritzVisionLivingRoomSegmentationModel.h>
+@import FritzVisionLivingRoomSegmentationModel;
 #endif
 
 #if __has_include(<FritzVisionOutdoorSegmentationModel/FritzVisionOutdoorSegmentationModel.h>)
-#import <FritzVisionOutdoorSegmentationModel/FritzVisionOutdoorSegmentationModel.h>
+@import FritzVisionOutdoorSegmentationModel;
 #endif
 
 #if __has_include(<FritzVisionPoseModel/FritzVisionPoseModel.h>)
-#import <FritzVisionPoseModel/FritzVisionPoseModel.h>
+@import FritzVisionPoseModel;
 #endif
 
 #if __has_include(<FritzVisionMultiPoseModel/FritzVisionMultiPoseModel.h>)
-#import <FritzVisionMultiPoseModel/FritzVisionMultiPoseModel.h>
+@import FritzVisionMultiPoseModel;
 #endif
 
 #endif  // defined(__has_include)

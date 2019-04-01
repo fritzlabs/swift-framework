@@ -5,6 +5,12 @@ Change Log
 
 ---
 
+## [3.2.0-beta.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.0-beta.1)
+
+1. Updating to Swift 5.
+2. Fixing Linking issues in Objective-C
+3. Add option to resize Style transfer image output to original size.
+
 ## [3.1.7](https://github.com/fritzlabs/swift-framework/releases/tag/3.1.7)
 
 1. Fix model version being incorrectly set when downloading model for first time using `fetchModel`.

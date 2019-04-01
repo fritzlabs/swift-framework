@@ -6,11 +6,8 @@
 //  Copyright © 2019 Fritz Labs Incorporated. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-
 @import FritzVision;
-@import FritzManagedModel;
+
 //! Project version number for FritzVisionPoseModel.
 FOUNDATION_EXPORT double FritzVisionPoseModelVersionNumber;
 
