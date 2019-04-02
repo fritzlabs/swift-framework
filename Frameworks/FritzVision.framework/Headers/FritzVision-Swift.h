@@ -304,7 +304,7 @@ SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModel") SWIFT_AVAILABILITY(ios,introd
 ///
 /// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionFlexibleStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionFlexibleStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -358,6 +358,8 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -415,7 +417,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 ///
 /// \param completion The block to invoke after the prediction request.  Contains an array of FritzVisionLabel objects or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionLabelModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionLabel *> * _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionLabelModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionLabel *> * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -501,7 +503,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,int
 ///
 /// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -578,7 +580,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// \param completion The block to invoke after the prediction request has finished processing.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionObjectModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionObject *> * _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionObjectModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionObject *> * _Nullable, NSError * _Nullable))completion;
 @end
 
 
@@ -776,7 +778,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 ///
 /// \param completion Handler to call back on the main thread with poses or error.
 ///
-- (void)predictWithImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionPoseResult * _Nullable, NSError * _Nullable))completion;
+- (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionPoseResult * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -946,7 +948,7 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.
 ///
 /// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1024,6 +1026,8 @@ SWIFT_CLASS_NAMED("Point")
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 
 
@@ -1381,7 +1385,7 @@ SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModel") SWIFT_AVAILABILITY(ios,introd
 ///
 /// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionFlexibleStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionFlexibleStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1435,6 +1439,8 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -1492,7 +1498,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 ///
 /// \param completion The block to invoke after the prediction request.  Contains an array of FritzVisionLabel objects or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionLabelModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionLabel *> * _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionLabelModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionLabel *> * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1578,7 +1584,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,int
 ///
 /// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1655,7 +1661,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// \param completion The block to invoke after the prediction request has finished processing.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionObjectModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionObject *> * _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionObjectModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionObject *> * _Nullable, NSError * _Nullable))completion;
 @end
 
 
@@ -1853,7 +1859,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 ///
 /// \param completion Handler to call back on the main thread with poses or error.
 ///
-- (void)predictWithImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionPoseResult * _Nullable, NSError * _Nullable))completion;
+- (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionPoseResult * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -2023,7 +2029,7 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.
 ///
 /// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -2101,6 +2107,8 @@ SWIFT_CLASS_NAMED("Point")
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 
 
@@ -2461,7 +2469,7 @@ SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModel") SWIFT_AVAILABILITY(ios,introd
 ///
 /// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionFlexibleStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionFlexibleStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -2515,6 +2523,8 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -2572,7 +2582,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 ///
 /// \param completion The block to invoke after the prediction request.  Contains an array of FritzVisionLabel objects or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionLabelModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionLabel *> * _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionLabelModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionLabel *> * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -2658,7 +2668,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,int
 ///
 /// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -2735,7 +2745,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// \param completion The block to invoke after the prediction request has finished processing.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionObjectModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionObject *> * _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionObjectModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionObject *> * _Nullable, NSError * _Nullable))completion;
 @end
 
 
@@ -2933,7 +2943,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 ///
 /// \param completion Handler to call back on the main thread with poses or error.
 ///
-- (void)predictWithImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionPoseResult * _Nullable, NSError * _Nullable))completion;
+- (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionPoseResult * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -3103,7 +3113,7 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.
 ///
 /// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -3181,6 +3191,8 @@ SWIFT_CLASS_NAMED("Point")
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 
 
@@ -3538,7 +3550,7 @@ SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModel") SWIFT_AVAILABILITY(ios,introd
 ///
 /// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionFlexibleStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionFlexibleStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -3592,6 +3604,8 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -3649,7 +3663,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 ///
 /// \param completion The block to invoke after the prediction request.  Contains an array of FritzVisionLabel objects or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionLabelModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionLabel *> * _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionLabelModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionLabel *> * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -3735,7 +3749,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,int
 ///
 /// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -3812,7 +3826,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// \param completion The block to invoke after the prediction request has finished processing.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionObjectModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionObject *> * _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionObjectModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(NSArray<FritzVisionObject *> * _Nullable, NSError * _Nullable))completion;
 @end
 
 
@@ -4010,7 +4024,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 ///
 /// \param completion Handler to call back on the main thread with poses or error.
 ///
-- (void)predictWithImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionPoseResult * _Nullable, NSError * _Nullable))completion;
+- (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionPoseResult * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -4180,7 +4194,7 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.
 ///
 /// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -4258,6 +4272,8 @@ SWIFT_CLASS_NAMED("Point")
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 
 
