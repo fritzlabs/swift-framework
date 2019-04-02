@@ -5,6 +5,21 @@ Change Log
 
 ---
 
+## [3.2.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.0-beta.2)
+
+1. Internal code restructuring.
+2. Add a new predict method for easier predictions:
+
+```
+import Fritz
+
+let image = FritzVisionImage(...)
+let model = FritzVisionPoseModel()
+
+let result = try model.predict(image)
+```
+
+
 ## [3.2.0-beta.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.0-beta.1)
 
 1. Updating to Swift 5.
