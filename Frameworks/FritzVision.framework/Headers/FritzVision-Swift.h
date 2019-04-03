@@ -1001,6 +1001,7 @@ SWIFT_CLASS_NAMED("Keypoint")
 @property (nonatomic, readonly) double score;
 @property (nonatomic, readonly) enum PosePart part;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1023,9 +1024,12 @@ SWIFT_CLASS_NAMED("Point")
 @property (nonatomic, readonly) double x;
 @property (nonatomic, readonly) double y;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 
 
@@ -1071,6 +1075,24 @@ typedef SWIFT_ENUM(NSInteger, PosePart, closed) {
   PosePartLeftAnkle = 15,
   PosePartRightAnkle = 16,
 };
+
+
+/// Smoothes pose results. Use to help reduce the variation between pose predictions
+SWIFT_CLASS("_TtC11FritzVision12PoseSmoother") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface PoseSmoother : NSObject
+@property (nonatomic) NSInteger count;
+- (nonnull instancetype)initWithWindowSize:(NSInteger)windowSize polynomialOrder:(NSInteger)polynomialOrder OBJC_DESIGNATED_INITIALIZER;
+/// Applies Savitzky-Golay smoothing to incoming pose.
+/// Returns original pose if not enough data points to fill buffer yet.
+/// \param pose Pose
+///
+///
+/// returns:
+/// Smoothed Pose.
+- (FritzPose * _Nonnull)smoothe:(FritzPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
 
 
 
@@ -2082,6 +2104,7 @@ SWIFT_CLASS_NAMED("Keypoint")
 @property (nonatomic, readonly) double score;
 @property (nonatomic, readonly) enum PosePart part;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -2104,9 +2127,12 @@ SWIFT_CLASS_NAMED("Point")
 @property (nonatomic, readonly) double x;
 @property (nonatomic, readonly) double y;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 
 
@@ -2152,6 +2178,24 @@ typedef SWIFT_ENUM(NSInteger, PosePart, closed) {
   PosePartLeftAnkle = 15,
   PosePartRightAnkle = 16,
 };
+
+
+/// Smoothes pose results. Use to help reduce the variation between pose predictions
+SWIFT_CLASS("_TtC11FritzVision12PoseSmoother") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface PoseSmoother : NSObject
+@property (nonatomic) NSInteger count;
+- (nonnull instancetype)initWithWindowSize:(NSInteger)windowSize polynomialOrder:(NSInteger)polynomialOrder OBJC_DESIGNATED_INITIALIZER;
+/// Applies Savitzky-Golay smoothing to incoming pose.
+/// Returns original pose if not enough data points to fill buffer yet.
+/// \param pose Pose
+///
+///
+/// returns:
+/// Smoothed Pose.
+- (FritzPose * _Nonnull)smoothe:(FritzPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
 
 
 
@@ -3166,6 +3210,7 @@ SWIFT_CLASS_NAMED("Keypoint")
 @property (nonatomic, readonly) double score;
 @property (nonatomic, readonly) enum PosePart part;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -3188,9 +3233,12 @@ SWIFT_CLASS_NAMED("Point")
 @property (nonatomic, readonly) double x;
 @property (nonatomic, readonly) double y;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 
 
@@ -3236,6 +3284,24 @@ typedef SWIFT_ENUM(NSInteger, PosePart, closed) {
   PosePartLeftAnkle = 15,
   PosePartRightAnkle = 16,
 };
+
+
+/// Smoothes pose results. Use to help reduce the variation between pose predictions
+SWIFT_CLASS("_TtC11FritzVision12PoseSmoother") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface PoseSmoother : NSObject
+@property (nonatomic) NSInteger count;
+- (nonnull instancetype)initWithWindowSize:(NSInteger)windowSize polynomialOrder:(NSInteger)polynomialOrder OBJC_DESIGNATED_INITIALIZER;
+/// Applies Savitzky-Golay smoothing to incoming pose.
+/// Returns original pose if not enough data points to fill buffer yet.
+/// \param pose Pose
+///
+///
+/// returns:
+/// Smoothed Pose.
+- (FritzPose * _Nonnull)smoothe:(FritzPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
 
 
 
@@ -4247,6 +4313,7 @@ SWIFT_CLASS_NAMED("Keypoint")
 @property (nonatomic, readonly) double score;
 @property (nonatomic, readonly) enum PosePart part;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -4269,9 +4336,12 @@ SWIFT_CLASS_NAMED("Point")
 @property (nonatomic, readonly) double x;
 @property (nonatomic, readonly) double y;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 
 
@@ -4317,6 +4387,24 @@ typedef SWIFT_ENUM(NSInteger, PosePart, closed) {
   PosePartLeftAnkle = 15,
   PosePartRightAnkle = 16,
 };
+
+
+/// Smoothes pose results. Use to help reduce the variation between pose predictions
+SWIFT_CLASS("_TtC11FritzVision12PoseSmoother") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface PoseSmoother : NSObject
+@property (nonatomic) NSInteger count;
+- (nonnull instancetype)initWithWindowSize:(NSInteger)windowSize polynomialOrder:(NSInteger)polynomialOrder OBJC_DESIGNATED_INITIALIZER;
+/// Applies Savitzky-Golay smoothing to incoming pose.
+/// Returns original pose if not enough data points to fill buffer yet.
+/// \param pose Pose
+///
+///
+/// returns:
+/// Smoothed Pose.
+- (FritzPose * _Nonnull)smoothe:(FritzPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
 
 
 
