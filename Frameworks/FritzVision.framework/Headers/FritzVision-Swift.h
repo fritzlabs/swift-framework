@@ -298,7 +298,7 @@ SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModel") SWIFT_AVAILABILITY(ios,introd
 ///
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 /// Run Style Transfer on a FritzVisionImage.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -411,7 +411,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 /// Run label prediction requst on a UIImage.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -497,7 +497,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,int
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes;
 /// Run image segmentation on a FritzVisionImage.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -574,7 +574,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionObjectModel (SWIFT_EXTENSION(FritzVision))
 /// Run prediction for vision object model.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -772,7 +772,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 ///
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 /// Predict poses from a FritzImage.
-/// \param fritzImage The image to use to dectect poses.
+/// \param input The image to use to dectect poses.
 ///
 /// \param options The options used to configure the pose results.
 ///
@@ -942,7 +942,7 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.
 ///
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 /// Run Style Transfer on a FritzVisionImage.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -1401,7 +1401,7 @@ SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModel") SWIFT_AVAILABILITY(ios,introd
 ///
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 /// Run Style Transfer on a FritzVisionImage.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -1514,7 +1514,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 /// Run label prediction requst on a UIImage.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -1600,7 +1600,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,int
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes;
 /// Run image segmentation on a FritzVisionImage.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -1677,7 +1677,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionObjectModel (SWIFT_EXTENSION(FritzVision))
 /// Run prediction for vision object model.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -1875,7 +1875,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 ///
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 /// Predict poses from a FritzImage.
-/// \param fritzImage The image to use to dectect poses.
+/// \param input The image to use to dectect poses.
 ///
 /// \param options The options used to configure the pose results.
 ///
@@ -2045,7 +2045,7 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.
 ///
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 /// Run Style Transfer on a FritzVisionImage.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -2507,7 +2507,7 @@ SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModel") SWIFT_AVAILABILITY(ios,introd
 ///
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 /// Run Style Transfer on a FritzVisionImage.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -2620,7 +2620,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 /// Run label prediction requst on a UIImage.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -2706,7 +2706,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,int
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes;
 /// Run image segmentation on a FritzVisionImage.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -2783,7 +2783,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionObjectModel (SWIFT_EXTENSION(FritzVision))
 /// Run prediction for vision object model.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -2981,7 +2981,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 ///
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 /// Predict poses from a FritzImage.
-/// \param fritzImage The image to use to dectect poses.
+/// \param input The image to use to dectect poses.
 ///
 /// \param options The options used to configure the pose results.
 ///
@@ -3151,7 +3151,7 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.
 ///
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 /// Run Style Transfer on a FritzVisionImage.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -3610,7 +3610,7 @@ SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModel") SWIFT_AVAILABILITY(ios,introd
 ///
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 /// Run Style Transfer on a FritzVisionImage.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -3723,7 +3723,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 /// Run label prediction requst on a UIImage.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -3809,7 +3809,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,int
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes;
 /// Run image segmentation on a FritzVisionImage.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -3886,7 +3886,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionObjectModel (SWIFT_EXTENSION(FritzVision))
 /// Run prediction for vision object model.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
@@ -4084,7 +4084,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 ///
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 /// Predict poses from a FritzImage.
-/// \param fritzImage The image to use to dectect poses.
+/// \param input The image to use to dectect poses.
 ///
 /// \param options The options used to configure the pose results.
 ///
@@ -4254,7 +4254,7 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.
 ///
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 /// Run Style Transfer on a FritzVisionImage.
-/// \param fritzImage Image or buffer to run model on.
+/// \param input Image or buffer to run model on.
 ///
 /// \param options Options for model execution.
 ///
