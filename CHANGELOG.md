@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.2.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.1)
+
+1. Add public methods
+
 ## [3.2.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.0-beta.2)
 
 1. Internal code restructuring.

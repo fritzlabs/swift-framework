@@ -61,6 +61,10 @@ import the headers individually."
 @import FritzVisionOutdoorSegmentationModel;
 #endif
 
+#if __has_include(<FritzVisionPeopleAndPetSegmentationMediumModel/FritzVisionPeopleAndPetSegmentationMediumModel.h>)
+@import FritzVisionPeopleAndPetSegmentationMediumModel;
+#endif
+
 #if __has_include(<FritzVisionPoseModel/FritzVisionPoseModel.h>)
 @import FritzVisionPoseModel;
 #endif
