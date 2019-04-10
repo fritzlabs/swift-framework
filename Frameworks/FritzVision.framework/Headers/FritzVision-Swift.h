@@ -192,6 +192,28 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@class FritzManagedModel;
+@class FritzMLModel;
+
+SWIFT_CLASS("_TtC11FritzVision13BasePredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface BasePredictor : NSObject
+@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
+/// Initialize model with FritzMLModel
+/// \param model FritzMLModel
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+/// Initialize model with FritzMLModel
+/// \param model FritzMLModel
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+/// Model metadata set in webapp.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+/// Model tags set in webapp.
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 
 /// BoundingBox Contains coordinates to draw bounding boxes on images as predicted directly by the model.  However, because of cropping or resizing done to accomadate model size constraints, the default values may not map to coordinates in your view.  Use the toCGRect functions to convert bounding box coordinates to fit the image.
 SWIFT_CLASS_NAMED("BoundingBox")
@@ -273,9 +295,7 @@ typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
 };
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
-@class FritzManagedModel;
 @protocol FritzSwiftIdentifiedModel;
-@class FritzMLModel;
 @class FritzVisionImage;
 @class FritzVisionFlexibleStyleModelOptions;
 
@@ -746,13 +766,36 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+/// Model used to create a 3D pose from 2D pose
+SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseLiftingModel : BasePredictor
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class FritzPose;
+@class PoseLiftingPredictorOptions;
+@class FritzPose3D;
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseLiftingModel (SWIFT_EXTENSION(FritzVision))
+/// Predict poses from an inputPose
+/// \param input Input pose to process.
+///
+/// \param options The options used to configure the pose results.
+///
+/// \param completion Handler to call back on the main thread with poses or error.
+///
+- (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
+@end
+
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
 
 /// A model used to predict the poses of people in images.
 SWIFT_CLASS_NAMED("FritzVisionPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseModel : NSObject
-@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
+@interface FritzVisionPoseModel : BasePredictor
 /// Model Configuration for pose model in Fritz.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
@@ -763,14 +806,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManaged
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
-/// Initialize model with FritzMLModel
-/// \param model FritzMLModel
-///
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
-/// Initialize model with FritzMLModel
-/// \param model FritzMLModel
-///
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 /// Predict poses from a FritzImage.
 /// \param input The image to use to dectect poses.
 ///
@@ -779,8 +814,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completion Handler to call back on the main thread with poses or error.
 ///
 - (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionPoseResult * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -790,15 +825,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPoseModel * _Nullable, NSError * _Nullable))completionHandler;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseModel (SWIFT_EXTENSION(FritzVision))
-/// Model metadata set in webapp.
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
-/// Model tags set in webapp.
-@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
 @end
 
 
@@ -839,7 +865,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger modelInput
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
-@class FritzPose;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
@@ -1006,6 +1031,21 @@ SWIFT_CLASS_NAMED("Keypoint")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class Point3D;
+
+/// Predicted keypoint containing part, score, and position identified.
+SWIFT_CLASS_NAMED("Keypoint3D")
+@interface FritzPoseKeypoint3D : NSObject
+@property (nonatomic, readonly) NSInteger id;
+@property (nonatomic, readonly, strong) Point3D * _Nonnull position;
+@property (nonatomic, readonly) double score;
+@property (nonatomic, readonly) enum PosePart part;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 
 SWIFT_CLASS_NAMED("ModelSegmentationClass")
 @interface ModelSegmentationClass : NSObject
@@ -1040,6 +1080,32 @@ SWIFT_CLASS_NAMED("Point")
 
 
 
+
+
+
+
+SWIFT_CLASS("_TtC11FritzVision7Point3D")
+@interface Point3D : NSObject
+@property (nonatomic, readonly) double x;
+@property (nonatomic, readonly) double y;
+@property (nonatomic, readonly) double z;
+- (nonnull instancetype)initWithX:(double)x y:(double)y z:(double)z OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (NSArray<NSNumber *> * _Nonnull)toArray SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface Point3D (SWIFT_EXTENSION(FritzVision))
+- (nonnull instancetype)initWith:(NSArray<NSNumber *> * _Nonnull)array;
+@end
+
+
+
+
+
+
 /// Detected pose with Keypoints and corresponding score.
 SWIFT_CLASS_NAMED("Pose") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzPose : NSObject
@@ -1052,8 +1118,40 @@ SWIFT_CLASS_NAMED("Pose") SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// New Pose with position inset in provided rect
 - (FritzPose * _Nonnull)inRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+
+
+
+/// Detected pose with Keypoints and corresponding score.
+SWIFT_CLASS_NAMED("Pose3D") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzPose3D : NSObject
+@property (nonatomic, readonly, copy) NSArray<FritzPoseKeypoint3D *> * _Nonnull keypoints;
+@property (nonatomic, readonly) double score;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+
+
+
+/// Options for Pose Model.
+SWIFT_CLASS("_TtC11FritzVision27PoseLiftingPredictorOptions")
+@interface PoseLiftingPredictorOptions : NSObject
+/// Default Pose model options.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingPredictorOptions * _Nonnull defaults;)
++ (PoseLiftingPredictorOptions * _Nonnull)defaults SWIFT_WARN_UNUSED_RESULT;
+/// If true only uses CPU to run predictions.
+@property (nonatomic) BOOL useCPUOnly;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 typedef SWIFT_ENUM(NSInteger, PosePart, closed) {
@@ -1075,24 +1173,6 @@ typedef SWIFT_ENUM(NSInteger, PosePart, closed) {
   PosePartLeftAnkle = 15,
   PosePartRightAnkle = 16,
 };
-
-
-/// Smoothes pose results. Use to help reduce the variation between pose predictions
-SWIFT_CLASS("_TtC11FritzVision12PoseSmoother") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface PoseSmoother : NSObject
-@property (nonatomic) NSInteger count;
-- (nonnull instancetype)initWithWindowSize:(NSInteger)windowSize polynomialOrder:(NSInteger)polynomialOrder OBJC_DESIGNATED_INITIALIZER;
-/// Applies Savitzky-Golay smoothing to incoming pose.
-/// Returns original pose if not enough data points to fill buffer yet.
-/// \param pose Pose
-///
-///
-/// returns:
-/// Smoothed Pose.
-- (FritzPose * _Nonnull)smoothe:(FritzPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
 
 
 
@@ -1295,6 +1375,28 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@class FritzManagedModel;
+@class FritzMLModel;
+
+SWIFT_CLASS("_TtC11FritzVision13BasePredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface BasePredictor : NSObject
+@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
+/// Initialize model with FritzMLModel
+/// \param model FritzMLModel
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+/// Initialize model with FritzMLModel
+/// \param model FritzMLModel
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+/// Model metadata set in webapp.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+/// Model tags set in webapp.
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 
 /// BoundingBox Contains coordinates to draw bounding boxes on images as predicted directly by the model.  However, because of cropping or resizing done to accomadate model size constraints, the default values may not map to coordinates in your view.  Use the toCGRect functions to convert bounding box coordinates to fit the image.
 SWIFT_CLASS_NAMED("BoundingBox")
@@ -1376,9 +1478,7 @@ typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
 };
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
-@class FritzManagedModel;
 @protocol FritzSwiftIdentifiedModel;
-@class FritzMLModel;
 @class FritzVisionImage;
 @class FritzVisionFlexibleStyleModelOptions;
 
@@ -1849,13 +1949,36 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+/// Model used to create a 3D pose from 2D pose
+SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseLiftingModel : BasePredictor
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class FritzPose;
+@class PoseLiftingPredictorOptions;
+@class FritzPose3D;
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseLiftingModel (SWIFT_EXTENSION(FritzVision))
+/// Predict poses from an inputPose
+/// \param input Input pose to process.
+///
+/// \param options The options used to configure the pose results.
+///
+/// \param completion Handler to call back on the main thread with poses or error.
+///
+- (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
+@end
+
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
 
 /// A model used to predict the poses of people in images.
 SWIFT_CLASS_NAMED("FritzVisionPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseModel : NSObject
-@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
+@interface FritzVisionPoseModel : BasePredictor
 /// Model Configuration for pose model in Fritz.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
@@ -1866,14 +1989,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManaged
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
-/// Initialize model with FritzMLModel
-/// \param model FritzMLModel
-///
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
-/// Initialize model with FritzMLModel
-/// \param model FritzMLModel
-///
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 /// Predict poses from a FritzImage.
 /// \param input The image to use to dectect poses.
 ///
@@ -1882,8 +1997,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completion Handler to call back on the main thread with poses or error.
 ///
 - (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionPoseResult * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1893,15 +2008,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPoseModel * _Nullable, NSError * _Nullable))completionHandler;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseModel (SWIFT_EXTENSION(FritzVision))
-/// Model metadata set in webapp.
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
-/// Model tags set in webapp.
-@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
 @end
 
 
@@ -1942,7 +2048,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger modelInput
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
-@class FritzPose;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
@@ -2109,6 +2214,21 @@ SWIFT_CLASS_NAMED("Keypoint")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class Point3D;
+
+/// Predicted keypoint containing part, score, and position identified.
+SWIFT_CLASS_NAMED("Keypoint3D")
+@interface FritzPoseKeypoint3D : NSObject
+@property (nonatomic, readonly) NSInteger id;
+@property (nonatomic, readonly, strong) Point3D * _Nonnull position;
+@property (nonatomic, readonly) double score;
+@property (nonatomic, readonly) enum PosePart part;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 
 SWIFT_CLASS_NAMED("ModelSegmentationClass")
 @interface ModelSegmentationClass : NSObject
@@ -2143,6 +2263,32 @@ SWIFT_CLASS_NAMED("Point")
 
 
 
+
+
+
+
+SWIFT_CLASS("_TtC11FritzVision7Point3D")
+@interface Point3D : NSObject
+@property (nonatomic, readonly) double x;
+@property (nonatomic, readonly) double y;
+@property (nonatomic, readonly) double z;
+- (nonnull instancetype)initWithX:(double)x y:(double)y z:(double)z OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (NSArray<NSNumber *> * _Nonnull)toArray SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface Point3D (SWIFT_EXTENSION(FritzVision))
+- (nonnull instancetype)initWith:(NSArray<NSNumber *> * _Nonnull)array;
+@end
+
+
+
+
+
+
 /// Detected pose with Keypoints and corresponding score.
 SWIFT_CLASS_NAMED("Pose") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzPose : NSObject
@@ -2155,8 +2301,40 @@ SWIFT_CLASS_NAMED("Pose") SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// New Pose with position inset in provided rect
 - (FritzPose * _Nonnull)inRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+
+
+
+/// Detected pose with Keypoints and corresponding score.
+SWIFT_CLASS_NAMED("Pose3D") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzPose3D : NSObject
+@property (nonatomic, readonly, copy) NSArray<FritzPoseKeypoint3D *> * _Nonnull keypoints;
+@property (nonatomic, readonly) double score;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+
+
+
+/// Options for Pose Model.
+SWIFT_CLASS("_TtC11FritzVision27PoseLiftingPredictorOptions")
+@interface PoseLiftingPredictorOptions : NSObject
+/// Default Pose model options.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingPredictorOptions * _Nonnull defaults;)
++ (PoseLiftingPredictorOptions * _Nonnull)defaults SWIFT_WARN_UNUSED_RESULT;
+/// If true only uses CPU to run predictions.
+@property (nonatomic) BOOL useCPUOnly;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 typedef SWIFT_ENUM(NSInteger, PosePart, closed) {
@@ -2178,24 +2356,6 @@ typedef SWIFT_ENUM(NSInteger, PosePart, closed) {
   PosePartLeftAnkle = 15,
   PosePartRightAnkle = 16,
 };
-
-
-/// Smoothes pose results. Use to help reduce the variation between pose predictions
-SWIFT_CLASS("_TtC11FritzVision12PoseSmoother") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface PoseSmoother : NSObject
-@property (nonatomic) NSInteger count;
-- (nonnull instancetype)initWithWindowSize:(NSInteger)windowSize polynomialOrder:(NSInteger)polynomialOrder OBJC_DESIGNATED_INITIALIZER;
-/// Applies Savitzky-Golay smoothing to incoming pose.
-/// Returns original pose if not enough data points to fill buffer yet.
-/// \param pose Pose
-///
-///
-/// returns:
-/// Smoothed Pose.
-- (FritzPose * _Nonnull)smoothe:(FritzPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
 
 
 
@@ -2401,6 +2561,28 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@class FritzManagedModel;
+@class FritzMLModel;
+
+SWIFT_CLASS("_TtC11FritzVision13BasePredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface BasePredictor : NSObject
+@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
+/// Initialize model with FritzMLModel
+/// \param model FritzMLModel
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+/// Initialize model with FritzMLModel
+/// \param model FritzMLModel
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+/// Model metadata set in webapp.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+/// Model tags set in webapp.
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 
 /// BoundingBox Contains coordinates to draw bounding boxes on images as predicted directly by the model.  However, because of cropping or resizing done to accomadate model size constraints, the default values may not map to coordinates in your view.  Use the toCGRect functions to convert bounding box coordinates to fit the image.
 SWIFT_CLASS_NAMED("BoundingBox")
@@ -2482,9 +2664,7 @@ typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
 };
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
-@class FritzManagedModel;
 @protocol FritzSwiftIdentifiedModel;
-@class FritzMLModel;
 @class FritzVisionImage;
 @class FritzVisionFlexibleStyleModelOptions;
 
@@ -2955,13 +3135,36 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+/// Model used to create a 3D pose from 2D pose
+SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseLiftingModel : BasePredictor
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class FritzPose;
+@class PoseLiftingPredictorOptions;
+@class FritzPose3D;
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseLiftingModel (SWIFT_EXTENSION(FritzVision))
+/// Predict poses from an inputPose
+/// \param input Input pose to process.
+///
+/// \param options The options used to configure the pose results.
+///
+/// \param completion Handler to call back on the main thread with poses or error.
+///
+- (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
+@end
+
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
 
 /// A model used to predict the poses of people in images.
 SWIFT_CLASS_NAMED("FritzVisionPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseModel : NSObject
-@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
+@interface FritzVisionPoseModel : BasePredictor
 /// Model Configuration for pose model in Fritz.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
@@ -2972,14 +3175,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManaged
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
-/// Initialize model with FritzMLModel
-/// \param model FritzMLModel
-///
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
-/// Initialize model with FritzMLModel
-/// \param model FritzMLModel
-///
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 /// Predict poses from a FritzImage.
 /// \param input The image to use to dectect poses.
 ///
@@ -2988,8 +3183,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completion Handler to call back on the main thread with poses or error.
 ///
 - (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionPoseResult * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2999,15 +3194,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPoseModel * _Nullable, NSError * _Nullable))completionHandler;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseModel (SWIFT_EXTENSION(FritzVision))
-/// Model metadata set in webapp.
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
-/// Model tags set in webapp.
-@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
 @end
 
 
@@ -3048,7 +3234,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger modelInput
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
-@class FritzPose;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
@@ -3215,6 +3400,21 @@ SWIFT_CLASS_NAMED("Keypoint")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class Point3D;
+
+/// Predicted keypoint containing part, score, and position identified.
+SWIFT_CLASS_NAMED("Keypoint3D")
+@interface FritzPoseKeypoint3D : NSObject
+@property (nonatomic, readonly) NSInteger id;
+@property (nonatomic, readonly, strong) Point3D * _Nonnull position;
+@property (nonatomic, readonly) double score;
+@property (nonatomic, readonly) enum PosePart part;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 
 SWIFT_CLASS_NAMED("ModelSegmentationClass")
 @interface ModelSegmentationClass : NSObject
@@ -3249,6 +3449,32 @@ SWIFT_CLASS_NAMED("Point")
 
 
 
+
+
+
+
+SWIFT_CLASS("_TtC11FritzVision7Point3D")
+@interface Point3D : NSObject
+@property (nonatomic, readonly) double x;
+@property (nonatomic, readonly) double y;
+@property (nonatomic, readonly) double z;
+- (nonnull instancetype)initWithX:(double)x y:(double)y z:(double)z OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (NSArray<NSNumber *> * _Nonnull)toArray SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface Point3D (SWIFT_EXTENSION(FritzVision))
+- (nonnull instancetype)initWith:(NSArray<NSNumber *> * _Nonnull)array;
+@end
+
+
+
+
+
+
 /// Detected pose with Keypoints and corresponding score.
 SWIFT_CLASS_NAMED("Pose") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzPose : NSObject
@@ -3261,8 +3487,40 @@ SWIFT_CLASS_NAMED("Pose") SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// New Pose with position inset in provided rect
 - (FritzPose * _Nonnull)inRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+
+
+
+/// Detected pose with Keypoints and corresponding score.
+SWIFT_CLASS_NAMED("Pose3D") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzPose3D : NSObject
+@property (nonatomic, readonly, copy) NSArray<FritzPoseKeypoint3D *> * _Nonnull keypoints;
+@property (nonatomic, readonly) double score;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+
+
+
+/// Options for Pose Model.
+SWIFT_CLASS("_TtC11FritzVision27PoseLiftingPredictorOptions")
+@interface PoseLiftingPredictorOptions : NSObject
+/// Default Pose model options.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingPredictorOptions * _Nonnull defaults;)
++ (PoseLiftingPredictorOptions * _Nonnull)defaults SWIFT_WARN_UNUSED_RESULT;
+/// If true only uses CPU to run predictions.
+@property (nonatomic) BOOL useCPUOnly;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 typedef SWIFT_ENUM(NSInteger, PosePart, closed) {
@@ -3284,24 +3542,6 @@ typedef SWIFT_ENUM(NSInteger, PosePart, closed) {
   PosePartLeftAnkle = 15,
   PosePartRightAnkle = 16,
 };
-
-
-/// Smoothes pose results. Use to help reduce the variation between pose predictions
-SWIFT_CLASS("_TtC11FritzVision12PoseSmoother") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface PoseSmoother : NSObject
-@property (nonatomic) NSInteger count;
-- (nonnull instancetype)initWithWindowSize:(NSInteger)windowSize polynomialOrder:(NSInteger)polynomialOrder OBJC_DESIGNATED_INITIALIZER;
-/// Applies Savitzky-Golay smoothing to incoming pose.
-/// Returns original pose if not enough data points to fill buffer yet.
-/// \param pose Pose
-///
-///
-/// returns:
-/// Smoothed Pose.
-- (FritzPose * _Nonnull)smoothe:(FritzPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
 
 
 
@@ -3504,6 +3744,28 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@class FritzManagedModel;
+@class FritzMLModel;
+
+SWIFT_CLASS("_TtC11FritzVision13BasePredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface BasePredictor : NSObject
+@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
+/// Initialize model with FritzMLModel
+/// \param model FritzMLModel
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+/// Initialize model with FritzMLModel
+/// \param model FritzMLModel
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+/// Model metadata set in webapp.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+/// Model tags set in webapp.
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 
 /// BoundingBox Contains coordinates to draw bounding boxes on images as predicted directly by the model.  However, because of cropping or resizing done to accomadate model size constraints, the default values may not map to coordinates in your view.  Use the toCGRect functions to convert bounding box coordinates to fit the image.
 SWIFT_CLASS_NAMED("BoundingBox")
@@ -3585,9 +3847,7 @@ typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
 };
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
-@class FritzManagedModel;
 @protocol FritzSwiftIdentifiedModel;
-@class FritzMLModel;
 @class FritzVisionImage;
 @class FritzVisionFlexibleStyleModelOptions;
 
@@ -4058,13 +4318,36 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+/// Model used to create a 3D pose from 2D pose
+SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseLiftingModel : BasePredictor
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class FritzPose;
+@class PoseLiftingPredictorOptions;
+@class FritzPose3D;
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseLiftingModel (SWIFT_EXTENSION(FritzVision))
+/// Predict poses from an inputPose
+/// \param input Input pose to process.
+///
+/// \param options The options used to configure the pose results.
+///
+/// \param completion Handler to call back on the main thread with poses or error.
+///
+- (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
+@end
+
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
 
 /// A model used to predict the poses of people in images.
 SWIFT_CLASS_NAMED("FritzVisionPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseModel : NSObject
-@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
+@interface FritzVisionPoseModel : BasePredictor
 /// Model Configuration for pose model in Fritz.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
@@ -4075,14 +4358,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManaged
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
-/// Initialize model with FritzMLModel
-/// \param model FritzMLModel
-///
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
-/// Initialize model with FritzMLModel
-/// \param model FritzMLModel
-///
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 /// Predict poses from a FritzImage.
 /// \param input The image to use to dectect poses.
 ///
@@ -4091,8 +4366,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completion Handler to call back on the main thread with poses or error.
 ///
 - (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionPoseResult * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4102,15 +4377,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPoseModel * _Nullable, NSError * _Nullable))completionHandler;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseModel (SWIFT_EXTENSION(FritzVision))
-/// Model metadata set in webapp.
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
-/// Model tags set in webapp.
-@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
 @end
 
 
@@ -4151,7 +4417,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger modelInput
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
-@class FritzPose;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
@@ -4318,6 +4583,21 @@ SWIFT_CLASS_NAMED("Keypoint")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class Point3D;
+
+/// Predicted keypoint containing part, score, and position identified.
+SWIFT_CLASS_NAMED("Keypoint3D")
+@interface FritzPoseKeypoint3D : NSObject
+@property (nonatomic, readonly) NSInteger id;
+@property (nonatomic, readonly, strong) Point3D * _Nonnull position;
+@property (nonatomic, readonly) double score;
+@property (nonatomic, readonly) enum PosePart part;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 
 SWIFT_CLASS_NAMED("ModelSegmentationClass")
 @interface ModelSegmentationClass : NSObject
@@ -4352,6 +4632,32 @@ SWIFT_CLASS_NAMED("Point")
 
 
 
+
+
+
+
+SWIFT_CLASS("_TtC11FritzVision7Point3D")
+@interface Point3D : NSObject
+@property (nonatomic, readonly) double x;
+@property (nonatomic, readonly) double y;
+@property (nonatomic, readonly) double z;
+- (nonnull instancetype)initWithX:(double)x y:(double)y z:(double)z OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (NSArray<NSNumber *> * _Nonnull)toArray SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface Point3D (SWIFT_EXTENSION(FritzVision))
+- (nonnull instancetype)initWith:(NSArray<NSNumber *> * _Nonnull)array;
+@end
+
+
+
+
+
+
 /// Detected pose with Keypoints and corresponding score.
 SWIFT_CLASS_NAMED("Pose") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzPose : NSObject
@@ -4364,8 +4670,40 @@ SWIFT_CLASS_NAMED("Pose") SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// New Pose with position inset in provided rect
 - (FritzPose * _Nonnull)inRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+
+
+
+/// Detected pose with Keypoints and corresponding score.
+SWIFT_CLASS_NAMED("Pose3D") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzPose3D : NSObject
+@property (nonatomic, readonly, copy) NSArray<FritzPoseKeypoint3D *> * _Nonnull keypoints;
+@property (nonatomic, readonly) double score;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+
+
+
+/// Options for Pose Model.
+SWIFT_CLASS("_TtC11FritzVision27PoseLiftingPredictorOptions")
+@interface PoseLiftingPredictorOptions : NSObject
+/// Default Pose model options.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingPredictorOptions * _Nonnull defaults;)
++ (PoseLiftingPredictorOptions * _Nonnull)defaults SWIFT_WARN_UNUSED_RESULT;
+/// If true only uses CPU to run predictions.
+@property (nonatomic) BOOL useCPUOnly;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 typedef SWIFT_ENUM(NSInteger, PosePart, closed) {
@@ -4387,24 +4725,6 @@ typedef SWIFT_ENUM(NSInteger, PosePart, closed) {
   PosePartLeftAnkle = 15,
   PosePartRightAnkle = 16,
 };
-
-
-/// Smoothes pose results. Use to help reduce the variation between pose predictions
-SWIFT_CLASS("_TtC11FritzVision12PoseSmoother") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface PoseSmoother : NSObject
-@property (nonatomic) NSInteger count;
-- (nonnull instancetype)initWithWindowSize:(NSInteger)windowSize polynomialOrder:(NSInteger)polynomialOrder OBJC_DESIGNATED_INITIALIZER;
-/// Applies Savitzky-Golay smoothing to incoming pose.
-/// Returns original pose if not enough data points to fill buffer yet.
-/// \param pose Pose
-///
-///
-/// returns:
-/// Smoothed Pose.
-- (FritzPose * _Nonnull)smoothe:(FritzPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
 
 
 

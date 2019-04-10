@@ -5,9 +5,10 @@ Change Log
 
 ---
 
-## [3.2.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.1)
+## [3.2.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.2)
 
-1. Add public methods
+1. Add pose smoothing.
+
 
 ## [3.2.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.0-beta.2)
 
