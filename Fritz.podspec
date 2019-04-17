@@ -22,7 +22,11 @@ Pod::Spec.new do |s|
 
   s.swift_version = '5.0'
 
-  s.vendored_frameworks = 'Frameworks/FritzVision.framework'
+  s.default_subspec = 'Vision'
+
+  s.subspec 'Vision' do |vision|
+    vision.dependency 'FritzBase/Vision'
+  end
 
   s.subspec 'VisionLabelModel' do |vision|
     vision.dependency 'FritzVisionLabelModel'
@@ -53,6 +57,10 @@ Pod::Spec.new do |s|
 
     vision.subspec 'Outdoor' do |outdoor|
       outdoor.dependency 'FritzVisionOutdoorSegmentationModel'
+    end
+
+    vision.subspec 'Hair' do |hair|
+      hair.dependency 'FritzVisionHairSegmentationModel'
     end
   end
 end

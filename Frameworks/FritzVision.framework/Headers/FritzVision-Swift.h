@@ -367,6 +367,65 @@ SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class ModelSegmentationClass;
+
+/// Class labels for FritzVisionHairSegmentationModel.swift
+SWIFT_CLASS_NAMED("FritzVisionHairSegmentationClass")
+@interface FritzVisionHairSegmentationClass : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
++ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull hair;)
++ (ModelSegmentationClass * _Nonnull)hair SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
++ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class FritzVisionSegmentationModelOptions;
+@class FritzVisionSegmentationResult;
+
+SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+@interface FritzVisionSegmentationModel : NSObject
+@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes;
+/// Run image segmentation on a FritzVisionImage.
+/// \param input Image or buffer to run model on.
+///
+/// \param options Options for model execution.
+///
+/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
+///
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class FritzModelConfiguration;
+
+/// Image segmentation model to detect hair.
+SWIFT_CLASS_NAMED("FritzVisionHairSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionHairSegmentationModel : FritzVisionSegmentationModel
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
++ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
++ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
++ (void)setWifiRequiredForModelDownload:(BOOL)value;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
+/// Fetch model. Downloads model if model has not been downloaded before.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionHairSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class UIImage;
 
 /// An image or image buffer used in vision detection.
@@ -415,7 +474,6 @@ typedef SWIFT_ENUM(NSInteger, FritzVisionLabelError, closed) {
 };
 static NSString * _Nonnull const FritzVisionLabelErrorDomain = @"FritzVision.FritzVisionLabelError";
 
-@class FritzModelConfiguration;
 @class FritzVisionLabelModelOptions;
 
 SWIFT_CLASS_NAMED("FritzVisionLabelModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
@@ -474,7 +532,6 @@ SWIFT_CLASS_NAMED("FritzVisionLabelModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class ModelSegmentationClass;
 
 SWIFT_CLASS_NAMED("FritzVisionLivingRoomClass")
 @interface FritzVisionLivingRoomClass : NSObject
@@ -503,29 +560,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegment
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
 + (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class FritzVisionSegmentationModelOptions;
-@class FritzVisionSegmentationResult;
-
-SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
-@interface FritzVisionSegmentationModel : NSObject
-@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
-@property (nonatomic, readonly, copy) NSString * _Nonnull name;
-@property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes;
-/// Run image segmentation on a FritzVisionImage.
-/// \param input Image or buffer to run model on.
-///
-/// \param options Options for model execution.
-///
-/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
-///
-- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
@@ -1550,6 +1584,65 @@ SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class ModelSegmentationClass;
+
+/// Class labels for FritzVisionHairSegmentationModel.swift
+SWIFT_CLASS_NAMED("FritzVisionHairSegmentationClass")
+@interface FritzVisionHairSegmentationClass : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
++ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull hair;)
++ (ModelSegmentationClass * _Nonnull)hair SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
++ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class FritzVisionSegmentationModelOptions;
+@class FritzVisionSegmentationResult;
+
+SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+@interface FritzVisionSegmentationModel : NSObject
+@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes;
+/// Run image segmentation on a FritzVisionImage.
+/// \param input Image or buffer to run model on.
+///
+/// \param options Options for model execution.
+///
+/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
+///
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class FritzModelConfiguration;
+
+/// Image segmentation model to detect hair.
+SWIFT_CLASS_NAMED("FritzVisionHairSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionHairSegmentationModel : FritzVisionSegmentationModel
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
++ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
++ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
++ (void)setWifiRequiredForModelDownload:(BOOL)value;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
+/// Fetch model. Downloads model if model has not been downloaded before.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionHairSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class UIImage;
 
 /// An image or image buffer used in vision detection.
@@ -1598,7 +1691,6 @@ typedef SWIFT_ENUM(NSInteger, FritzVisionLabelError, closed) {
 };
 static NSString * _Nonnull const FritzVisionLabelErrorDomain = @"FritzVision.FritzVisionLabelError";
 
-@class FritzModelConfiguration;
 @class FritzVisionLabelModelOptions;
 
 SWIFT_CLASS_NAMED("FritzVisionLabelModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
@@ -1657,7 +1749,6 @@ SWIFT_CLASS_NAMED("FritzVisionLabelModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class ModelSegmentationClass;
 
 SWIFT_CLASS_NAMED("FritzVisionLivingRoomClass")
 @interface FritzVisionLivingRoomClass : NSObject
@@ -1686,29 +1777,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegment
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
 + (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class FritzVisionSegmentationModelOptions;
-@class FritzVisionSegmentationResult;
-
-SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
-@interface FritzVisionSegmentationModel : NSObject
-@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
-@property (nonatomic, readonly, copy) NSString * _Nonnull name;
-@property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes;
-/// Run image segmentation on a FritzVisionImage.
-/// \param input Image or buffer to run model on.
-///
-/// \param options Options for model execution.
-///
-/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
-///
-- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
@@ -2736,6 +2804,65 @@ SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class ModelSegmentationClass;
+
+/// Class labels for FritzVisionHairSegmentationModel.swift
+SWIFT_CLASS_NAMED("FritzVisionHairSegmentationClass")
+@interface FritzVisionHairSegmentationClass : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
++ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull hair;)
++ (ModelSegmentationClass * _Nonnull)hair SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
++ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class FritzVisionSegmentationModelOptions;
+@class FritzVisionSegmentationResult;
+
+SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+@interface FritzVisionSegmentationModel : NSObject
+@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes;
+/// Run image segmentation on a FritzVisionImage.
+/// \param input Image or buffer to run model on.
+///
+/// \param options Options for model execution.
+///
+/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
+///
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class FritzModelConfiguration;
+
+/// Image segmentation model to detect hair.
+SWIFT_CLASS_NAMED("FritzVisionHairSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionHairSegmentationModel : FritzVisionSegmentationModel
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
++ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
++ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
++ (void)setWifiRequiredForModelDownload:(BOOL)value;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
+/// Fetch model. Downloads model if model has not been downloaded before.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionHairSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class UIImage;
 
 /// An image or image buffer used in vision detection.
@@ -2784,7 +2911,6 @@ typedef SWIFT_ENUM(NSInteger, FritzVisionLabelError, closed) {
 };
 static NSString * _Nonnull const FritzVisionLabelErrorDomain = @"FritzVision.FritzVisionLabelError";
 
-@class FritzModelConfiguration;
 @class FritzVisionLabelModelOptions;
 
 SWIFT_CLASS_NAMED("FritzVisionLabelModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
@@ -2843,7 +2969,6 @@ SWIFT_CLASS_NAMED("FritzVisionLabelModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class ModelSegmentationClass;
 
 SWIFT_CLASS_NAMED("FritzVisionLivingRoomClass")
 @interface FritzVisionLivingRoomClass : NSObject
@@ -2872,29 +2997,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegment
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
 + (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class FritzVisionSegmentationModelOptions;
-@class FritzVisionSegmentationResult;
-
-SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
-@interface FritzVisionSegmentationModel : NSObject
-@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
-@property (nonatomic, readonly, copy) NSString * _Nonnull name;
-@property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes;
-/// Run image segmentation on a FritzVisionImage.
-/// \param input Image or buffer to run model on.
-///
-/// \param options Options for model execution.
-///
-/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
-///
-- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
@@ -3919,6 +4021,65 @@ SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class ModelSegmentationClass;
+
+/// Class labels for FritzVisionHairSegmentationModel.swift
+SWIFT_CLASS_NAMED("FritzVisionHairSegmentationClass")
+@interface FritzVisionHairSegmentationClass : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
++ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull hair;)
++ (ModelSegmentationClass * _Nonnull)hair SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
++ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class FritzVisionSegmentationModelOptions;
+@class FritzVisionSegmentationResult;
+
+SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
+@interface FritzVisionSegmentationModel : NSObject
+@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes;
+/// Run image segmentation on a FritzVisionImage.
+/// \param input Image or buffer to run model on.
+///
+/// \param options Options for model execution.
+///
+/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
+///
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class FritzModelConfiguration;
+
+/// Image segmentation model to detect hair.
+SWIFT_CLASS_NAMED("FritzVisionHairSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionHairSegmentationModel : FritzVisionSegmentationModel
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
++ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
++ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
++ (void)setWifiRequiredForModelDownload:(BOOL)value;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
+/// Fetch model. Downloads model if model has not been downloaded before.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionHairSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class UIImage;
 
 /// An image or image buffer used in vision detection.
@@ -3967,7 +4128,6 @@ typedef SWIFT_ENUM(NSInteger, FritzVisionLabelError, closed) {
 };
 static NSString * _Nonnull const FritzVisionLabelErrorDomain = @"FritzVision.FritzVisionLabelError";
 
-@class FritzModelConfiguration;
 @class FritzVisionLabelModelOptions;
 
 SWIFT_CLASS_NAMED("FritzVisionLabelModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
@@ -4026,7 +4186,6 @@ SWIFT_CLASS_NAMED("FritzVisionLabelModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class ModelSegmentationClass;
 
 SWIFT_CLASS_NAMED("FritzVisionLivingRoomClass")
 @interface FritzVisionLivingRoomClass : NSObject
@@ -4055,29 +4214,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegment
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
 + (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class FritzVisionSegmentationModelOptions;
-@class FritzVisionSegmentationResult;
-
-SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
-@interface FritzVisionSegmentationModel : NSObject
-@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
-@property (nonatomic, readonly, copy) NSString * _Nonnull name;
-@property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes;
-/// Run image segmentation on a FritzVisionImage.
-/// \param input Image or buffer to run model on.
-///
-/// \param options Options for model execution.
-///
-/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
-///
-- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionSegmentationModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionSegmentationResult * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 

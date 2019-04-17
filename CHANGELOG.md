@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.2.4](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.4)
+
+1. Added hair segmentation model.
+
 ## [3.2.3](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.3)
 
 1. Update build process.
