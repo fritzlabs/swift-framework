@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.2.3](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.3)
+
+1. Update build process.
+
 ## [3.2.3-beta.3](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.3-beta.3)
 
 1. Updating deploy process
