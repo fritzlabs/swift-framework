@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.2.5](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.5)
+
+1. Add initial support for custom object detection models.
+
 ## [3.2.4](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.4)
 
 1. Added hair segmentation model.
