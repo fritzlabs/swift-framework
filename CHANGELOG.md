@@ -5,6 +5,11 @@ Change Log
 
 ---
 
+## [3.3.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.3.0)
+
+1. Adding blending option for FritzVisionImages.
+2. Updating ImageSegmentation result API.
+
 ## [3.2.5](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.5)
 
 1. Add initial support for custom object detection models.
