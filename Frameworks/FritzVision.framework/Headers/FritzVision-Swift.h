@@ -434,6 +434,7 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)initWithBuffer:(CMSampleBufferRef _Nonnull)buffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image OBJC_DESIGNATED_INITIALIZER;
+- (id _Nullable)debugQuickLookObject SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -844,6 +845,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
+
+
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
@@ -1706,6 +1709,7 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)initWithBuffer:(CMSampleBufferRef _Nonnull)buffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image OBJC_DESIGNATED_INITIALIZER;
+- (id _Nullable)debugQuickLookObject SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -2116,6 +2120,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
+
+
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
@@ -2981,6 +2987,7 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)initWithBuffer:(CMSampleBufferRef _Nonnull)buffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image OBJC_DESIGNATED_INITIALIZER;
+- (id _Nullable)debugQuickLookObject SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -3391,6 +3398,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
+
+
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
@@ -4253,6 +4262,7 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)initWithBuffer:(CMSampleBufferRef _Nonnull)buffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image OBJC_DESIGNATED_INITIALIZER;
+- (id _Nullable)debugQuickLookObject SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -4663,6 +4673,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
+
+
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;

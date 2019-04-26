@@ -5,6 +5,12 @@ Change Log
 
 ---
 
+## [3.3.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.3.1)
+
+1. Fix center crop when using Core ML.
+2. Fix Model ID for the Outdoor model.
+3. 
+
 ## [3.3.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.3.0)
 
 1. Adding blending option for FritzVisionImages.
