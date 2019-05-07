@@ -632,6 +632,20 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 @property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+/// Initialize Object model with custom model that takes a 300x300 image.
+/// \param model FritzMLModel
+///
+/// \param managedModel Managed Model
+///
+/// \param classNames Custom class names
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
+/// Initialize Object model with custom model that takes a 300x300 image from BaseIdentifiedModel
+/// \param identifiedModel IdentifiedModel to use
+///
+/// \param classNames Class names for objects
+///
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1907,6 +1921,20 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 @property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+/// Initialize Object model with custom model that takes a 300x300 image.
+/// \param model FritzMLModel
+///
+/// \param managedModel Managed Model
+///
+/// \param classNames Custom class names
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
+/// Initialize Object model with custom model that takes a 300x300 image from BaseIdentifiedModel
+/// \param identifiedModel IdentifiedModel to use
+///
+/// \param classNames Class names for objects
+///
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -3185,6 +3213,20 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 @property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+/// Initialize Object model with custom model that takes a 300x300 image.
+/// \param model FritzMLModel
+///
+/// \param managedModel Managed Model
+///
+/// \param classNames Custom class names
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
+/// Initialize Object model with custom model that takes a 300x300 image from BaseIdentifiedModel
+/// \param identifiedModel IdentifiedModel to use
+///
+/// \param classNames Class names for objects
+///
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -4460,6 +4502,20 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 @property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+/// Initialize Object model with custom model that takes a 300x300 image.
+/// \param model FritzMLModel
+///
+/// \param managedModel Managed Model
+///
+/// \param classNames Custom class names
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
+/// Initialize Object model with custom model that takes a 300x300 image from BaseIdentifiedModel
+/// \param identifiedModel IdentifiedModel to use
+///
+/// \param classNames Class names for objects
+///
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end

@@ -5,6 +5,11 @@ Change Log
 
 ---
 
+## [3.3.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.3.2)
+
+1. Fix Core ML cropping bug.
+2. Add Multi Pose, People Segmentation Medium, and People and Pets Segmentation to public Fritz Pod
+
 ## [3.3.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.3.1)
 
 1. Fix center crop when using Core ML.
