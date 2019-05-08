@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.3.4](https://github.com/fritzlabs/swift-framework/releases/tag/3.3.4)
+
+1. Update Hair Segmentation model.
+
 ## [3.3.3](https://github.com/fritzlabs/swift-framework/releases/tag/3.3.3)
 
 1. Add multi pose, people seg medium, and people and pets segmentation model medium to public SDK.
