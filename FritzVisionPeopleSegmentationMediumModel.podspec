@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage = 'https://fritz.ai'
   s.license = { :type => 'Commercial', :file => 'LICENSE.md' }
   s.author = { 'Chris Kelly' => 'chris@fritz.ai' }
-  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/3.3.1/FritzVisionPeopleSegmentationMediumModel.zip' }
+  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/3.3.3/FritzVisionPeopleSegmentationMediumModel.zip' }
   s.requires_arc = true
 
   s.ios.deployment_target = '10.0'

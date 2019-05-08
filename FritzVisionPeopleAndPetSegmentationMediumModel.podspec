@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.license = { :type => 'Apache 2.0', :file => 'LICENSE.md' }
   s.author = { 'Chris Kelly' => 'chris@fritz.ai' }
   s.source = {
-    :http => 'https://github.com/fritzlabs/fritz-ios-people-and-pets-segmentation-medium/releases/download/3.3.3/FritzVisionPeopleAndPetSegmentationMediumModel.zip'
+    :http => 'https://github.com/fritzlabs/swift-framework/releases/download/3.3.3/FritzVisionPeopleAndPetSegmentationMediumModel.zip'
   }
 
   s.requires_arc = true
