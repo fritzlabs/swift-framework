@@ -1,0 +1,281 @@
+{
+  "storage" : "model.espresso.weights",
+  "properties" : {
+
+  },
+  "format_version" : 200,
+  "layers" : [
+    {
+      "axis_h" : 4,
+      "axis_w" : 0,
+      "axis_k" : 2,
+      "bottom" : "keypoints2D",
+      "axis_n" : 3,
+      "axis_seq" : 1,
+      "weights" : {
+
+      },
+      "top" : "flatten1_output__permute__",
+      "type" : "transpose",
+      "name" : "flatten1__permute__"
+    },
+    {
+      "mode" : 1,
+      "weights" : {
+
+      },
+      "top" : "flatten1_output",
+      "type" : "flatten",
+      "name" : "flatten1",
+      "bottom" : "flatten1_output__permute__"
+    },
+    {
+      "nB" : 28,
+      "top" : "dense1_output",
+      "has_biases" : 1,
+      "weights" : {
+
+      },
+      "nC" : 512,
+      "blob_weights" : 3,
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "flatten1_output",
+      "blob_biases" : 1,
+      "has_tanh" : 0,
+      "name" : "dense1",
+      "has_prelu" : 0
+    },
+    {
+      "name" : "bn1",
+      "bottom" : "dense1_output",
+      "weights" : {
+
+      },
+      "top" : "bn1_output",
+      "C" : 512,
+      "blob_batchnorm_params" : 5,
+      "type" : "batchnorm"
+    },
+    {
+      "mode" : 0,
+      "weights" : {
+
+      },
+      "top" : "relu1_output",
+      "type" : "activation",
+      "name" : "relu1",
+      "bottom" : "bn1_output"
+    },
+    {
+      "nB" : 512,
+      "top" : "linear1_dense1_output",
+      "has_biases" : 1,
+      "weights" : {
+
+      },
+      "nC" : 512,
+      "blob_weights" : 9,
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "relu1_output",
+      "blob_biases" : 7,
+      "has_tanh" : 0,
+      "name" : "linear1_dense1",
+      "has_prelu" : 0
+    },
+    {
+      "name" : "linear1_bn1",
+      "bottom" : "linear1_dense1_output",
+      "weights" : {
+
+      },
+      "top" : "linear1_bn1_output",
+      "C" : 512,
+      "blob_batchnorm_params" : 11,
+      "type" : "batchnorm"
+    },
+    {
+      "mode" : 0,
+      "weights" : {
+
+      },
+      "top" : "linear1_relu1_output",
+      "type" : "activation",
+      "name" : "linear1_relu1",
+      "bottom" : "linear1_bn1_output"
+    },
+    {
+      "nB" : 512,
+      "top" : "linear1_dense2_output",
+      "has_biases" : 1,
+      "weights" : {
+
+      },
+      "nC" : 512,
+      "blob_weights" : 15,
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "linear1_relu1_output",
+      "blob_biases" : 13,
+      "has_tanh" : 0,
+      "name" : "linear1_dense2",
+      "has_prelu" : 0
+    },
+    {
+      "name" : "linear1_bn2",
+      "bottom" : "linear1_dense2_output",
+      "weights" : {
+
+      },
+      "top" : "linear1_bn2_output",
+      "C" : 512,
+      "blob_batchnorm_params" : 17,
+      "type" : "batchnorm"
+    },
+    {
+      "mode" : 0,
+      "weights" : {
+
+      },
+      "top" : "linear1_relu2_output",
+      "type" : "activation",
+      "name" : "linear1_relu2",
+      "bottom" : "linear1_bn2_output"
+    },
+    {
+      "alpha" : 1,
+      "bottom" : "relu1_output,linear1_relu2_output",
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "top" : "resid1_output",
+      "type" : "elementwise",
+      "name" : "resid1",
+      "beta" : 0
+    },
+    {
+      "nB" : 512,
+      "top" : "linear2_dense1_output",
+      "has_biases" : 1,
+      "weights" : {
+
+      },
+      "nC" : 512,
+      "blob_weights" : 21,
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "resid1_output",
+      "blob_biases" : 19,
+      "has_tanh" : 0,
+      "name" : "linear2_dense1",
+      "has_prelu" : 0
+    },
+    {
+      "name" : "linear2_bn1",
+      "bottom" : "linear2_dense1_output",
+      "weights" : {
+
+      },
+      "top" : "linear2_bn1_output",
+      "C" : 512,
+      "blob_batchnorm_params" : 23,
+      "type" : "batchnorm"
+    },
+    {
+      "mode" : 0,
+      "weights" : {
+
+      },
+      "top" : "linear2_relu1_output",
+      "type" : "activation",
+      "name" : "linear2_relu1",
+      "bottom" : "linear2_bn1_output"
+    },
+    {
+      "nB" : 512,
+      "top" : "linear2_dense2_output",
+      "has_biases" : 1,
+      "weights" : {
+
+      },
+      "nC" : 512,
+      "blob_weights" : 27,
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "linear2_relu1_output",
+      "blob_biases" : 25,
+      "has_tanh" : 0,
+      "name" : "linear2_dense2",
+      "has_prelu" : 0
+    },
+    {
+      "name" : "linear2_bn2",
+      "bottom" : "linear2_dense2_output",
+      "weights" : {
+
+      },
+      "top" : "linear2_bn2_output",
+      "C" : 512,
+      "blob_batchnorm_params" : 29,
+      "type" : "batchnorm"
+    },
+    {
+      "mode" : 0,
+      "weights" : {
+
+      },
+      "top" : "linear2_relu2_output",
+      "type" : "activation",
+      "name" : "linear2_relu2",
+      "bottom" : "linear2_bn2_output"
+    },
+    {
+      "alpha" : 1,
+      "bottom" : "resid1_output,linear2_relu2_output",
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "top" : "resid2_output",
+      "type" : "elementwise",
+      "name" : "resid2",
+      "beta" : 0
+    },
+    {
+      "nB" : 512,
+      "top" : "dense2_output",
+      "has_biases" : 1,
+      "weights" : {
+
+      },
+      "nC" : 42,
+      "blob_weights" : 33,
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "resid2_output",
+      "blob_biases" : 31,
+      "has_tanh" : 0,
+      "name" : "dense2",
+      "has_prelu" : 0
+    },
+    {
+      "name" : "reshape1",
+      "bottom" : "dense2_output",
+      "dst_n" : 0,
+      "mode" : 0,
+      "dst_seq" : 14,
+      "dst_k" : 3,
+      "weights" : {
+
+      },
+      "top" : "keypoints3D",
+      "dst_h" : 1,
+      "dst_w" : 1,
+      "type" : "reshape"
+    }
+  ]
+}

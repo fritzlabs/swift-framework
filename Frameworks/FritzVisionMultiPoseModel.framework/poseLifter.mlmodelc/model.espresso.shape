@@ -1,0 +1,137 @@
+{
+  "layer_shapes" : {
+    "flatten1_output__permute__" : {
+      "k" : 2,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "linear2_relu2_output" : {
+      "k" : 512,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "linear1_dense2_output" : {
+      "k" : 512,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "linear1_bn2_output" : {
+      "k" : 512,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "dense1_output" : {
+      "k" : 512,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "dense2_output" : {
+      "k" : 42,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "keypoints3D" : {
+      "k" : 3,
+      "w" : 1,
+      "n" : 1,
+      "seq" : 14,
+      "h" : 1
+    },
+    "linear2_dense1_output" : {
+      "k" : 512,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "relu1_output" : {
+      "k" : 512,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "resid1_output" : {
+      "k" : 512,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "flatten1_output" : {
+      "k" : 2,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "resid2_output" : {
+      "k" : 512,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "keypoints2D" : {
+      "k" : 2,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "linear1_relu1_output" : {
+      "k" : 512,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "linear1_relu2_output" : {
+      "k" : 512,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "linear2_bn1_output" : {
+      "k" : 512,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "linear2_bn2_output" : {
+      "k" : 512,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "linear2_dense2_output" : {
+      "k" : 512,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "linear1_dense1_output" : {
+      "k" : 512,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "bn1_output" : {
+      "k" : 512,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "linear1_bn1_output" : {
+      "k" : 512,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "linear2_relu1_output" : {
+      "k" : 512,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    }
+  }
+}

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'Fritz'
 
-  s.version = '3.3.2'
+  s.version = '3.3.3'
 
   s.summary = 'Official Fritz SDK for Swift 5.0 and Objective-C'
 
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.author = { 'Chris Kelly' => 'engineering@fritz.ai' }
 
-  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/3.3.2/FritzBase.zip' }
+  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/3.3.3/FritzBase.zip' }
 
   s.requires_arc = true
 
@@ -40,6 +40,10 @@ Pod::Spec.new do |s|
     vision.dependency 'FritzVisionPoseModel'
   end
 
+  s.subspec 'VisionMultiPoseModel' do |vision|
+    vision.dependency 'FritzVisionMultiPoseModel'
+  end
+
   s.subspec 'VisionStyleModel' do |style|
     style.subspec 'Paintings' do |paintings|
       paintings.dependency 'FritzVisionStyleModelPaintings'
@@ -49,6 +53,10 @@ Pod::Spec.new do |s|
   s.subspec 'VisionSegmentationModel' do |vision|
     vision.subspec 'People' do |people|
       people.dependency 'FritzVisionPeopleSegmentationModel'
+    end
+
+    vision.subspec 'PeopleMedium' do |people|
+      people.dependency 'FritzVisionPeopleSegmentationMediumModel'
     end
 
     vision.subspec 'LivingRoom' do |livingroom|
@@ -62,5 +70,10 @@ Pod::Spec.new do |s|
     vision.subspec 'Hair' do |hair|
       hair.dependency 'FritzVisionHairSegmentationModel'
     end
+
+    vision.subspec 'PeopleAndPetMedium' do |people|
+      people.dependency 'FritzVisionPeopleAndPetSegmentationMediumModel'
+    end
+
   end
 end
