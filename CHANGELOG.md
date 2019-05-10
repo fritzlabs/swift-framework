@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.3.5](https://github.com/fritzlabs/swift-framework/releases/tag/3.3.5)
+
+1. Add support for forcing predictions to use the Vision framework.
+
 ## [3.3.4](https://github.com/fritzlabs/swift-framework/releases/tag/3.3.4)
 
 1. Update Hair Segmentation model.

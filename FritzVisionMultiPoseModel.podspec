@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'FritzVisionMultiPoseModel'
-  s.version = '3.3.4'
+  s.version = '3.3.5'
   s.summary = 'Official Fritz SDK for Swift 5.0 and Objective-C'
   s.homepage = 'https://fritz.ai'
   s.license = { :type => 'Commercial', :file => 'LICENSE.md' }
