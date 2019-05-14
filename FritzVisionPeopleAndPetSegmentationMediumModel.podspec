@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name = 'FritzVisionPeopleAndPetSegmentationMediumModel'
-  s.version = '3.3.5'
+  s.version = '3.3.6'
   s.summary = 'Official Fritz SDK for Swift 5.0 and Objective-C'
   s.homepage = 'https://fritz.ai'
   s.license = { :type => 'Apache 2.0', :file => 'LICENSE.md' }
   s.author = { 'Chris Kelly' => 'chris@fritz.ai' }
-  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/3.3.5/FritzVisionPeopleAndPetSegmentationMediumModel.zip' }
+  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/3.3.6/FritzVisionPeopleAndPetSegmentationMediumModel.zip' }
 
   s.requires_arc = true
   s.ios.deployment_target = '10.0'

@@ -549,10 +549,11 @@ SWIFT_CLASS_NAMED("FritzVisionLabelModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic, readonly) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Number of results to return from request.
@@ -702,10 +703,11 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic, readonly) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -921,10 +923,11 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Minimum score a part must have to be included in a pose.
@@ -1001,10 +1004,11 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -1144,10 +1148,11 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Resize the output to match the FritzVisionImage size.
@@ -1874,10 +1879,11 @@ SWIFT_CLASS_NAMED("FritzVisionLabelModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic, readonly) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Number of results to return from request.
@@ -2027,10 +2033,11 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic, readonly) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -2246,10 +2253,11 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Minimum score a part must have to be included in a pose.
@@ -2326,10 +2334,11 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -2469,10 +2478,11 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Resize the output to match the FritzVisionImage size.
@@ -3202,10 +3212,11 @@ SWIFT_CLASS_NAMED("FritzVisionLabelModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic, readonly) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Number of results to return from request.
@@ -3355,10 +3366,11 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic, readonly) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -3574,10 +3586,11 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Minimum score a part must have to be included in a pose.
@@ -3654,10 +3667,11 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -3797,10 +3811,11 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Resize the output to match the FritzVisionImage size.
@@ -4527,10 +4542,11 @@ SWIFT_CLASS_NAMED("FritzVisionLabelModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic, readonly) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Number of results to return from request.
@@ -4680,10 +4696,11 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic, readonly) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -4899,10 +4916,11 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Minimum score a part must have to be included in a pose.
@@ -4979,10 +4997,11 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -5122,10 +5141,11 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 /// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
 /// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model). Core ML predictions
-/// do not currently work with YUV pixel formats, which are used in ARKit. Setting this to
-/// true will force the predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1
-/// there is a bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
 /// However, if you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Resize the output to match the FritzVisionImage size.

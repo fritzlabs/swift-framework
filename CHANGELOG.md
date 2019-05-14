@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.3.6](https://github.com/fritzlabs/swift-framework/releases/tag/3.3.6)
+
+1. Force Core ML predictions by default. A bug has popped up into how we handle some images in the Vision framework.
+
 ## [3.3.5](https://github.com/fritzlabs/swift-framework/releases/tag/3.3.5)
 
 1. Add support for forcing predictions to use the Vision framework.
