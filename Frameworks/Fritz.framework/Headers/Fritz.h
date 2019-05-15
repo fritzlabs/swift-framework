@@ -77,4 +77,8 @@ import the headers individually."
 @import FritzVisionMultiPoseModel;
 #endif
 
+#if __has_include(<FritzVisionPetSegmentationModel/FritzVisionPetSegmentationModel.h>)
+@import FritzVisionPetSegmentationModel;
+#endif
+
 #endif  // defined(__has_include)

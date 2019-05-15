@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'Fritz'
 
-  s.version = '3.3.6'
+  s.version = '3.4.0'
 
   s.summary = 'Official Fritz SDK for Swift 5.0 and Objective-C'
 
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.author = { 'Chris Kelly' => 'engineering@fritz.ai' }
 
-  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/3.3.6/FritzBase.zip' }
+  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/3.4.0/FritzBase.zip' }
 
   s.requires_arc = true
 
@@ -73,6 +73,10 @@ Pod::Spec.new do |s|
 
     vision.subspec 'PeopleAndPetMedium' do |people|
       people.dependency 'FritzVisionPeopleAndPetSegmentationMediumModel'
+    end
+
+    vision.subspec 'Pet' do |pet|
+      pet.dependency 'FritzVisionPetSegmentationModel'
     end
 
   end

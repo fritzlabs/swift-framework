@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.4.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.4.0)
+
+1. Add Pet Segmentation Model.
+
 ## [3.3.6](https://github.com/fritzlabs/swift-framework/releases/tag/3.3.6)
 
 1. Force Core ML predictions by default. A bug has popped up into how we handle some images in the Vision framework.

@@ -852,12 +852,50 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 @end
 
 
+SWIFT_CLASS_NAMED("FritzVisionPetClass")
+@interface FritzVisionPetClass : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
++ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull pet;)
++ (ModelSegmentationClass * _Nonnull)pet SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
++ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Image segmentation model to detect pets.
+SWIFT_CLASS_NAMED("FritzVisionPetSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPetSegmentationModel : FritzVisionSegmentationModel
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
++ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
+/// Build Pet Segmentation Model with provided model.
+/// \param model Model to use
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
++ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
++ (void)setWifiRequiredForModelDownload:(BOOL)value;
+/// Fetch model. Downloads model if model has not been downloaded before.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPetSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 /// Model used to create a 3D pose from 2D pose
 SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseLiftingModel : BasePredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
 
 @class FritzPose;
 @class PoseLiftingPredictorOptions;
@@ -874,8 +912,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
-
-
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
@@ -2182,12 +2218,50 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 @end
 
 
+SWIFT_CLASS_NAMED("FritzVisionPetClass")
+@interface FritzVisionPetClass : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
++ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull pet;)
++ (ModelSegmentationClass * _Nonnull)pet SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
++ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Image segmentation model to detect pets.
+SWIFT_CLASS_NAMED("FritzVisionPetSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPetSegmentationModel : FritzVisionSegmentationModel
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
++ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
+/// Build Pet Segmentation Model with provided model.
+/// \param model Model to use
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
++ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
++ (void)setWifiRequiredForModelDownload:(BOOL)value;
+/// Fetch model. Downloads model if model has not been downloaded before.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPetSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 /// Model used to create a 3D pose from 2D pose
 SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseLiftingModel : BasePredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
 
 @class FritzPose;
 @class PoseLiftingPredictorOptions;
@@ -2204,8 +2278,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
-
-
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
@@ -3515,12 +3587,50 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 @end
 
 
+SWIFT_CLASS_NAMED("FritzVisionPetClass")
+@interface FritzVisionPetClass : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
++ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull pet;)
++ (ModelSegmentationClass * _Nonnull)pet SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
++ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Image segmentation model to detect pets.
+SWIFT_CLASS_NAMED("FritzVisionPetSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPetSegmentationModel : FritzVisionSegmentationModel
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
++ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
+/// Build Pet Segmentation Model with provided model.
+/// \param model Model to use
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
++ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
++ (void)setWifiRequiredForModelDownload:(BOOL)value;
+/// Fetch model. Downloads model if model has not been downloaded before.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPetSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 /// Model used to create a 3D pose from 2D pose
 SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseLiftingModel : BasePredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
 
 @class FritzPose;
 @class PoseLiftingPredictorOptions;
@@ -3537,8 +3647,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
-
-
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
@@ -4845,12 +4953,50 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 @end
 
 
+SWIFT_CLASS_NAMED("FritzVisionPetClass")
+@interface FritzVisionPetClass : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
++ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull pet;)
++ (ModelSegmentationClass * _Nonnull)pet SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
++ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Image segmentation model to detect pets.
+SWIFT_CLASS_NAMED("FritzVisionPetSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPetSegmentationModel : FritzVisionSegmentationModel
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
++ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
+/// Build Pet Segmentation Model with provided model.
+/// \param model Model to use
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
++ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
++ (void)setWifiRequiredForModelDownload:(BOOL)value;
+/// Fetch model. Downloads model if model has not been downloaded before.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPetSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 /// Model used to create a 3D pose from 2D pose
 SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseLiftingModel : BasePredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
 
 @class FritzPose;
 @class PoseLiftingPredictorOptions;
@@ -4867,8 +5013,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
-
-
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
