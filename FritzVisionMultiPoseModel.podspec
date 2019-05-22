@@ -13,6 +13,6 @@ Pod::Spec.new do |s|
   s.swift_version = '5.0'
   s.frameworks = 'UIKit', 'CoreML', 'Foundation'
 
-  s.dependency 'FritzBase/Vision'
+  s.dependency 'FritzBase/Vision', '3.5.0-beta.2'
   s.vendored_framework = 'Frameworks/FritzVisionMultiPoseModel.framework'
 end

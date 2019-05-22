@@ -5,6 +5,15 @@ Change Log
 
 ---
 
+## [3.5.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.0-beta.2)
+
+1. Fixing Rigid Pose Build
+
+## [3.5.0-beta.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.0-beta.1)
+
+1. Add Rigid Pose model lifting points from 2D -> 3D using Open CV.
+2. Add custom pose model predictor for models built with fritz model training library.
+
 ## [3.4.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.4.0)
 
 1. Add Pet Segmentation Model.

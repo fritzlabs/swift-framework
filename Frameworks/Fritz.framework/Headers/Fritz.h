@@ -81,4 +81,8 @@ import the headers individually."
 @import FritzVisionPetSegmentationModel;
 #endif
 
+#if __has_include(<FritzVisionRigidPose/FritzVisionRigidPose.h>)
+@import FritzVisionRigidPose;
+#endif
+
 #endif  // defined(__has_include)

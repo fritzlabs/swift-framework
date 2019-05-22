@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.frameworks = 'Foundation', 'UIKit', 'AVFoundation', 'Accelerate', 'CoreImage', 'VideoToolbox'
   s.weak_frameworks = 'CoreML', 'Vision'
 
-  s.dependency 'FritzBase/Vision'
+  s.dependency 'FritzBase/Vision', '3.5.0-beta.2'
 
   s.ios.deployment_target = '10.0'
 

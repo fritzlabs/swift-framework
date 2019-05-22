@@ -25,58 +25,62 @@ Pod::Spec.new do |s|
   s.default_subspec = 'Vision'
 
   s.subspec 'Vision' do |vision|
-    vision.dependency 'FritzBase/Vision'
+    vision.dependency 'FritzBase/Vision', '3.5.0-beta.2'
   end
 
   s.subspec 'VisionLabelModel' do |vision|
-    vision.dependency 'FritzVisionLabelModel'
+    vision.dependency 'FritzVisionLabelModel', '3.5.0-beta.2'
   end
 
   s.subspec 'VisionObjectModel' do |vision|
-    vision.dependency 'FritzVisionObjectModel'
+    vision.dependency 'FritzVisionObjectModel', '3.5.0-beta.2'
   end
 
   s.subspec 'VisionPoseModel' do |vision|
-    vision.dependency 'FritzVisionPoseModel'
+    vision.dependency 'FritzVisionPoseModel', '3.5.0-beta.2'
+  end
+
+  s.subspec 'VisionRigidPose' do |vision|
+    vision.dependency 'FritzVisionRigidPose', '3.5.0-beta.2'
   end
 
   s.subspec 'VisionMultiPoseModel' do |vision|
-    vision.dependency 'FritzVisionMultiPoseModel'
+    vision.dependency 'FritzVisionMultiPoseModel', '3.5.0-beta.2'
   end
 
   s.subspec 'VisionStyleModel' do |style|
     style.subspec 'Paintings' do |paintings|
-      paintings.dependency 'FritzVisionStyleModelPaintings'
+      paintings.dependency 'FritzVisionStyleModelPaintings', '3.5.0-beta.2'
     end
   end
 
   s.subspec 'VisionSegmentationModel' do |vision|
     vision.subspec 'People' do |people|
-      people.dependency 'FritzVisionPeopleSegmentationModel'
+      people.dependency 'FritzVisionPeopleSegmentationModel', '3.5.0-beta.2'
     end
 
     vision.subspec 'PeopleMedium' do |people|
-      people.dependency 'FritzVisionPeopleSegmentationMediumModel'
+      people.dependency 'FritzVisionPeopleSegmentationMediumModel', '3.5.0-beta.2'
     end
 
     vision.subspec 'LivingRoom' do |livingroom|
-      livingroom.dependency 'FritzVisionLivingRoomSegmentationModel'
+      livingroom.dependency 'FritzVisionLivingRoomSegmentationModel', '3.5.0-beta.2'
     end
 
     vision.subspec 'Outdoor' do |outdoor|
-      outdoor.dependency 'FritzVisionOutdoorSegmentationModel'
+      outdoor.dependency 'FritzVisionOutdoorSegmentationModel', '3.5.0-beta.2'
     end
 
     vision.subspec 'Hair' do |hair|
-      hair.dependency 'FritzVisionHairSegmentationModel'
+      hair.dependency 'FritzVisionHairSegmentationModel', '3.5.0-beta.2'
     end
 
     vision.subspec 'PeopleAndPetMedium' do |people|
-      people.dependency 'FritzVisionPeopleAndPetSegmentationMediumModel'
+      people.dependency 'FritzVisionPeopleAndPetSegmentationMediumModel', '3.5.0-beta.2'
     end
 
     vision.subspec 'Pet' do |pet|
-      pet.dependency 'FritzVisionPetSegmentationModel'
+      pet.dependency 'FritzVisionPetSegmentationModel', '3.5.0-beta.2'
     end
 
   end

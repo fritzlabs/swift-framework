@@ -215,32 +215,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPoseLiftingModel * _Nullable, NSError * _Nullable))completionHandler;
 @end
 
-@class FritzPose;
-@class UIImage;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVisionMultiPoseModel))
-/// Decodes all poses above pose threshold.
-///
-/// returns:
-/// Pose list of poses above mininimum pose threshold option.
-- (NSArray<FritzPose *> * _Nonnull)decodePoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT;
-/// Decode poses and draws on original UIImage.
-/// \param numPoses Maximum number of poses to find.
-///
-///
-/// returns:
-/// UIImage if poses detected.
-- (UIImage * _Nullable)drawNumPoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT;
-/// Draw detected poses on input image.
-/// \param poses List of poses to draw
-///
-///
-/// returns:
-/// Original image with poses drawn on image.
-- (UIImage * _Nullable)drawPosesFor:(NSArray<FritzPose *> * _Nonnull)poses SWIFT_WARN_UNUSED_RESULT;
-@end
-
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
 #endif
@@ -459,32 +433,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPoseLiftingModel * _Nullable, NSError * _Nullable))completionHandler;
-@end
-
-@class FritzPose;
-@class UIImage;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVisionMultiPoseModel))
-/// Decodes all poses above pose threshold.
-///
-/// returns:
-/// Pose list of poses above mininimum pose threshold option.
-- (NSArray<FritzPose *> * _Nonnull)decodePoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT;
-/// Decode poses and draws on original UIImage.
-/// \param numPoses Maximum number of poses to find.
-///
-///
-/// returns:
-/// UIImage if poses detected.
-- (UIImage * _Nullable)drawNumPoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT;
-/// Draw detected poses on input image.
-/// \param poses List of poses to draw
-///
-///
-/// returns:
-/// Original image with poses drawn on image.
-- (UIImage * _Nullable)drawPosesFor:(NSArray<FritzPose *> * _Nonnull)poses SWIFT_WARN_UNUSED_RESULT;
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -710,32 +658,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPoseLiftingModel * _Nullable, NSError * _Nullable))completionHandler;
 @end
 
-@class FritzPose;
-@class UIImage;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVisionMultiPoseModel))
-/// Decodes all poses above pose threshold.
-///
-/// returns:
-/// Pose list of poses above mininimum pose threshold option.
-- (NSArray<FritzPose *> * _Nonnull)decodePoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT;
-/// Decode poses and draws on original UIImage.
-/// \param numPoses Maximum number of poses to find.
-///
-///
-/// returns:
-/// UIImage if poses detected.
-- (UIImage * _Nullable)drawNumPoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT;
-/// Draw detected poses on input image.
-/// \param poses List of poses to draw
-///
-///
-/// returns:
-/// Original image with poses drawn on image.
-- (UIImage * _Nullable)drawPosesFor:(NSArray<FritzPose *> * _Nonnull)poses SWIFT_WARN_UNUSED_RESULT;
-@end
-
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
 #endif
@@ -954,32 +876,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPoseLiftingModel * _Nullable, NSError * _Nullable))completionHandler;
-@end
-
-@class FritzPose;
-@class UIImage;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVisionMultiPoseModel))
-/// Decodes all poses above pose threshold.
-///
-/// returns:
-/// Pose list of poses above mininimum pose threshold option.
-- (NSArray<FritzPose *> * _Nonnull)decodePoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT;
-/// Decode poses and draws on original UIImage.
-/// \param numPoses Maximum number of poses to find.
-///
-///
-/// returns:
-/// UIImage if poses detected.
-- (UIImage * _Nullable)drawNumPoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT;
-/// Draw detected poses on input image.
-/// \param poses List of poses to draw
-///
-///
-/// returns:
-/// Original image with poses drawn on image.
-- (UIImage * _Nullable)drawPosesFor:(NSArray<FritzPose *> * _Nonnull)poses SWIFT_WARN_UNUSED_RESULT;
 @end
 
 #if __has_attribute(external_source_symbol)

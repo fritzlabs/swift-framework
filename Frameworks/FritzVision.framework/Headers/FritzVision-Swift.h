@@ -251,6 +251,54 @@ SWIFT_CLASS_NAMED("BoundingBoxOutline")
 @end
 
 
+SWIFT_CLASS("_TtC11FritzVision14CustomKeypoint")
+@interface CustomKeypoint : NSObject
+@property (nonatomic, readonly) CGPoint position;
+@property (nonatomic, readonly) NSInteger index;
+@property (nonatomic, readonly) double score;
+- (nonnull instancetype)initWithPosition:(CGPoint)position index:(NSInteger)index score:(double)score OBJC_DESIGNATED_INITIALIZER;
+- (CustomKeypoint * _Nonnull)newKeypointWith:(CGPoint)point SWIFT_WARN_UNUSED_RESULT;
+- (CustomKeypoint * _Nonnull)scaledFrom:(CGSize)originalSize to:(CGSize)targetSize SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC11FritzVision10CustomPose")
+@interface CustomPose : NSObject
+@property (nonatomic, readonly, copy) NSArray<CustomKeypoint *> * _Nonnull keypoints;
+- (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class FritzVisionImage;
+@class FritzVisionCustomPoseModelOptions;
+@protocol MLFeatureProvider;
+@class MLMultiArray;
+@class UIImage;
+
+SWIFT_CLASS("_TtC11FritzVision21CustomPoseModelResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CustomPoseModelResult : NSObject
+@property (nonatomic, readonly, strong) FritzVisionImage * _Nonnull image;
+@property (nonatomic, readonly, strong) FritzVisionCustomPoseModelOptions * _Nonnull options;
+/// Unavailable.  Use <code>FritzVisionPoseModel.predict</code> function to build.
+- (nonnull instancetype)initFor:(id <MLFeatureProvider> _Nonnull)results with:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionCustomPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithHeatmap:(MLMultiArray * _Nonnull)heatmap offsets:(MLMultiArray * _Nonnull)offsets withImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionCustomPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
+- (CustomPose * _Nonnull)decodePoseWithScale:(BOOL)scale SWIFT_WARN_UNUSED_RESULT;
+/// Draw detected poses on input image.
+/// \param pose List of poses to draw
+///
+///
+/// returns:
+/// Original image with poses drawn on image.
+- (UIImage * _Nullable)drawPose:(CustomPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 SWIFT_CLASS_NAMED("FlexibleModelDimensions")
 @interface FlexibleModelDimensions : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -289,6 +337,52 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionCropAndScale, "FritzVisionCropAnd
   FritzVisionCropAndScaleScaleFit = 3,
 };
 
+
+/// A model used to predict the poses of people in images.
+SWIFT_CLASS_NAMED("FritzVisionCustomPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionCustomPoseModel : NSObject
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+/// Predict poses from a FritzImage.
+/// \param input The image to use to dectect poses.
+///
+/// \param options The options used to configure the pose results.
+///
+/// \param completion Handler to call back on the main thread with poses or error.
+///
+- (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionCustomPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CustomPoseModelResult * _Nullable, NSError * _Nullable))completion;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionCustomPoseModel (SWIFT_EXTENSION(FritzVision))
+/// Model metadata set in webapp.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+/// Model tags set in webapp.
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
+@end
+
+
+/// Options for Pose Model.
+SWIFT_CLASS_NAMED("FritzVisionCustomPoseModelOptions")
+@interface FritzVisionCustomPoseModelOptions : NSObject
+/// Crop and scale option. Default value is scaleFit.
+@property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
+/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
+/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
+@property (nonatomic) BOOL forceCoreMLPrediction;
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// However, if you are using ARKit, you must set this to true.
+@property (nonatomic) BOOL forceVisionPrediction;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
   FritzVisionErrorInvalidSampleImageBuffer = 0,
   FritzVisionErrorErrorProcessingImage = 1,
@@ -296,7 +390,6 @@ typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
 @protocol FritzSwiftIdentifiedModel;
-@class FritzVisionImage;
 @class FritzVisionFlexibleStyleModelOptions;
 
 /// Construct a Flexible Style Transfer model and run on any FritzVisionImage. Use this class over <code>FritzVisionStyleTransferModel</code> to produce stylized images with customizable output sizes.
@@ -427,7 +520,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UIImage;
 
 /// An image or image buffer used in vision detection.
 SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
@@ -895,8 +987,6 @@ SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduc
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
-
-
 @class FritzPose;
 @class PoseLiftingPredictorOptions;
 @class FritzPose3D;
@@ -912,6 +1002,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
+
+
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
@@ -975,7 +1067,6 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@protocol MLFeatureProvider;
 
 SWIFT_CLASS_NAMED("FritzVisionPoseResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseResult : NSObject
@@ -993,6 +1084,30 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger modelInput
 - (nonnull instancetype)initForResults:(id <MLFeatureProvider> _Nonnull)results fritzImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
+/// Decodes all poses above pose threshold.
+///
+/// returns:
+/// Pose list of poses above mininimum pose threshold option.
+- (NSArray<FritzPose *> * _Nonnull)decodePoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT;
+/// Decode poses and draws on original UIImage.
+/// \param numPoses Maximum number of poses to find.
+///
+///
+/// returns:
+/// UIImage if poses detected.
+- (UIImage * _Nullable)drawNumPoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT;
+/// Draw detected poses on input image.
+/// \param poses List of poses to draw
+///
+///
+/// returns:
+/// Original image with poses drawn on image.
+- (UIImage * _Nullable)drawPosesFor:(NSArray<FritzPose *> * _Nonnull)poses SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -1050,7 +1165,6 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class MLMultiArray;
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationResult") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzVisionSegmentationResult : NSObject
@@ -1196,8 +1310,27 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+typedef SWIFT_ENUM(NSInteger, HumanPosePart, closed) {
+  HumanPosePartNose = 0,
+  HumanPosePartLeftEye = 1,
+  HumanPosePartRightEye = 2,
+  HumanPosePartLeftEar = 3,
+  HumanPosePartRightEar = 4,
+  HumanPosePartLeftShoulder = 5,
+  HumanPosePartRightShoulder = 6,
+  HumanPosePartLeftElbow = 7,
+  HumanPosePartRightElbow = 8,
+  HumanPosePartLeftWrist = 9,
+  HumanPosePartRightWrist = 10,
+  HumanPosePartLeftHip = 11,
+  HumanPosePartRightHip = 12,
+  HumanPosePartLeftKnee = 13,
+  HumanPosePartRightKnee = 14,
+  HumanPosePartLeftAnkle = 15,
+  HumanPosePartRightAnkle = 16,
+};
+
 @class FritzPosePoint;
-enum PosePart : NSInteger;
 
 /// Predicted keypoint containing part, score, and position identified.
 SWIFT_CLASS_NAMED("Keypoint")
@@ -1205,7 +1338,7 @@ SWIFT_CLASS_NAMED("Keypoint")
 @property (nonatomic, readonly) NSInteger id;
 @property (nonatomic, readonly, strong) FritzPosePoint * _Nonnull position;
 @property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) enum PosePart part;
+@property (nonatomic, readonly) enum HumanPosePart part;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -1220,7 +1353,7 @@ SWIFT_CLASS_NAMED("Keypoint3D")
 @property (nonatomic, readonly) NSInteger id;
 @property (nonatomic, readonly, strong) Point3D * _Nonnull position;
 @property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) enum PosePart part;
+@property (nonatomic, readonly) enum HumanPosePart part;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -1334,26 +1467,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingP
 @property (nonatomic) BOOL useCPUOnly;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
-
-typedef SWIFT_ENUM(NSInteger, PosePart, closed) {
-  PosePartNose = 0,
-  PosePartLeftEye = 1,
-  PosePartRightEye = 2,
-  PosePartLeftEar = 3,
-  PosePartRightEar = 4,
-  PosePartLeftShoulder = 5,
-  PosePartRightShoulder = 6,
-  PosePartLeftElbow = 7,
-  PosePartRightElbow = 8,
-  PosePartLeftWrist = 9,
-  PosePartRightWrist = 10,
-  PosePartLeftHip = 11,
-  PosePartRightHip = 12,
-  PosePartLeftKnee = 13,
-  PosePartRightKnee = 14,
-  PosePartLeftAnkle = 15,
-  PosePartRightAnkle = 16,
-};
 
 
 
@@ -1617,6 +1730,54 @@ SWIFT_CLASS_NAMED("BoundingBoxOutline")
 @end
 
 
+SWIFT_CLASS("_TtC11FritzVision14CustomKeypoint")
+@interface CustomKeypoint : NSObject
+@property (nonatomic, readonly) CGPoint position;
+@property (nonatomic, readonly) NSInteger index;
+@property (nonatomic, readonly) double score;
+- (nonnull instancetype)initWithPosition:(CGPoint)position index:(NSInteger)index score:(double)score OBJC_DESIGNATED_INITIALIZER;
+- (CustomKeypoint * _Nonnull)newKeypointWith:(CGPoint)point SWIFT_WARN_UNUSED_RESULT;
+- (CustomKeypoint * _Nonnull)scaledFrom:(CGSize)originalSize to:(CGSize)targetSize SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC11FritzVision10CustomPose")
+@interface CustomPose : NSObject
+@property (nonatomic, readonly, copy) NSArray<CustomKeypoint *> * _Nonnull keypoints;
+- (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class FritzVisionImage;
+@class FritzVisionCustomPoseModelOptions;
+@protocol MLFeatureProvider;
+@class MLMultiArray;
+@class UIImage;
+
+SWIFT_CLASS("_TtC11FritzVision21CustomPoseModelResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CustomPoseModelResult : NSObject
+@property (nonatomic, readonly, strong) FritzVisionImage * _Nonnull image;
+@property (nonatomic, readonly, strong) FritzVisionCustomPoseModelOptions * _Nonnull options;
+/// Unavailable.  Use <code>FritzVisionPoseModel.predict</code> function to build.
+- (nonnull instancetype)initFor:(id <MLFeatureProvider> _Nonnull)results with:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionCustomPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithHeatmap:(MLMultiArray * _Nonnull)heatmap offsets:(MLMultiArray * _Nonnull)offsets withImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionCustomPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
+- (CustomPose * _Nonnull)decodePoseWithScale:(BOOL)scale SWIFT_WARN_UNUSED_RESULT;
+/// Draw detected poses on input image.
+/// \param pose List of poses to draw
+///
+///
+/// returns:
+/// Original image with poses drawn on image.
+- (UIImage * _Nullable)drawPose:(CustomPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 SWIFT_CLASS_NAMED("FlexibleModelDimensions")
 @interface FlexibleModelDimensions : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -1655,6 +1816,52 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionCropAndScale, "FritzVisionCropAnd
   FritzVisionCropAndScaleScaleFit = 3,
 };
 
+
+/// A model used to predict the poses of people in images.
+SWIFT_CLASS_NAMED("FritzVisionCustomPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionCustomPoseModel : NSObject
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+/// Predict poses from a FritzImage.
+/// \param input The image to use to dectect poses.
+///
+/// \param options The options used to configure the pose results.
+///
+/// \param completion Handler to call back on the main thread with poses or error.
+///
+- (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionCustomPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CustomPoseModelResult * _Nullable, NSError * _Nullable))completion;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionCustomPoseModel (SWIFT_EXTENSION(FritzVision))
+/// Model metadata set in webapp.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+/// Model tags set in webapp.
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
+@end
+
+
+/// Options for Pose Model.
+SWIFT_CLASS_NAMED("FritzVisionCustomPoseModelOptions")
+@interface FritzVisionCustomPoseModelOptions : NSObject
+/// Crop and scale option. Default value is scaleFit.
+@property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
+/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
+/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
+@property (nonatomic) BOOL forceCoreMLPrediction;
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// However, if you are using ARKit, you must set this to true.
+@property (nonatomic) BOOL forceVisionPrediction;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
   FritzVisionErrorInvalidSampleImageBuffer = 0,
   FritzVisionErrorErrorProcessingImage = 1,
@@ -1662,7 +1869,6 @@ typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
 @protocol FritzSwiftIdentifiedModel;
-@class FritzVisionImage;
 @class FritzVisionFlexibleStyleModelOptions;
 
 /// Construct a Flexible Style Transfer model and run on any FritzVisionImage. Use this class over <code>FritzVisionStyleTransferModel</code> to produce stylized images with customizable output sizes.
@@ -1793,7 +1999,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UIImage;
 
 /// An image or image buffer used in vision detection.
 SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
@@ -2261,8 +2466,6 @@ SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduc
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
-
-
 @class FritzPose;
 @class PoseLiftingPredictorOptions;
 @class FritzPose3D;
@@ -2278,6 +2481,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
+
+
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
@@ -2341,7 +2546,6 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@protocol MLFeatureProvider;
 
 SWIFT_CLASS_NAMED("FritzVisionPoseResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseResult : NSObject
@@ -2359,6 +2563,30 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger modelInput
 - (nonnull instancetype)initForResults:(id <MLFeatureProvider> _Nonnull)results fritzImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
+/// Decodes all poses above pose threshold.
+///
+/// returns:
+/// Pose list of poses above mininimum pose threshold option.
+- (NSArray<FritzPose *> * _Nonnull)decodePoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT;
+/// Decode poses and draws on original UIImage.
+/// \param numPoses Maximum number of poses to find.
+///
+///
+/// returns:
+/// UIImage if poses detected.
+- (UIImage * _Nullable)drawNumPoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT;
+/// Draw detected poses on input image.
+/// \param poses List of poses to draw
+///
+///
+/// returns:
+/// Original image with poses drawn on image.
+- (UIImage * _Nullable)drawPosesFor:(NSArray<FritzPose *> * _Nonnull)poses SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -2416,7 +2644,6 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class MLMultiArray;
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationResult") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzVisionSegmentationResult : NSObject
@@ -2562,8 +2789,27 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+typedef SWIFT_ENUM(NSInteger, HumanPosePart, closed) {
+  HumanPosePartNose = 0,
+  HumanPosePartLeftEye = 1,
+  HumanPosePartRightEye = 2,
+  HumanPosePartLeftEar = 3,
+  HumanPosePartRightEar = 4,
+  HumanPosePartLeftShoulder = 5,
+  HumanPosePartRightShoulder = 6,
+  HumanPosePartLeftElbow = 7,
+  HumanPosePartRightElbow = 8,
+  HumanPosePartLeftWrist = 9,
+  HumanPosePartRightWrist = 10,
+  HumanPosePartLeftHip = 11,
+  HumanPosePartRightHip = 12,
+  HumanPosePartLeftKnee = 13,
+  HumanPosePartRightKnee = 14,
+  HumanPosePartLeftAnkle = 15,
+  HumanPosePartRightAnkle = 16,
+};
+
 @class FritzPosePoint;
-enum PosePart : NSInteger;
 
 /// Predicted keypoint containing part, score, and position identified.
 SWIFT_CLASS_NAMED("Keypoint")
@@ -2571,7 +2817,7 @@ SWIFT_CLASS_NAMED("Keypoint")
 @property (nonatomic, readonly) NSInteger id;
 @property (nonatomic, readonly, strong) FritzPosePoint * _Nonnull position;
 @property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) enum PosePart part;
+@property (nonatomic, readonly) enum HumanPosePart part;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -2586,7 +2832,7 @@ SWIFT_CLASS_NAMED("Keypoint3D")
 @property (nonatomic, readonly) NSInteger id;
 @property (nonatomic, readonly, strong) Point3D * _Nonnull position;
 @property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) enum PosePart part;
+@property (nonatomic, readonly) enum HumanPosePart part;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -2700,26 +2946,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingP
 @property (nonatomic) BOOL useCPUOnly;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
-
-typedef SWIFT_ENUM(NSInteger, PosePart, closed) {
-  PosePartNose = 0,
-  PosePartLeftEye = 1,
-  PosePartRightEye = 2,
-  PosePartLeftEar = 3,
-  PosePartRightEar = 4,
-  PosePartLeftShoulder = 5,
-  PosePartRightShoulder = 6,
-  PosePartLeftElbow = 7,
-  PosePartRightElbow = 8,
-  PosePartLeftWrist = 9,
-  PosePartRightWrist = 10,
-  PosePartLeftHip = 11,
-  PosePartRightHip = 12,
-  PosePartLeftKnee = 13,
-  PosePartRightKnee = 14,
-  PosePartLeftAnkle = 15,
-  PosePartRightAnkle = 16,
-};
 
 
 
@@ -2986,6 +3212,54 @@ SWIFT_CLASS_NAMED("BoundingBoxOutline")
 @end
 
 
+SWIFT_CLASS("_TtC11FritzVision14CustomKeypoint")
+@interface CustomKeypoint : NSObject
+@property (nonatomic, readonly) CGPoint position;
+@property (nonatomic, readonly) NSInteger index;
+@property (nonatomic, readonly) double score;
+- (nonnull instancetype)initWithPosition:(CGPoint)position index:(NSInteger)index score:(double)score OBJC_DESIGNATED_INITIALIZER;
+- (CustomKeypoint * _Nonnull)newKeypointWith:(CGPoint)point SWIFT_WARN_UNUSED_RESULT;
+- (CustomKeypoint * _Nonnull)scaledFrom:(CGSize)originalSize to:(CGSize)targetSize SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC11FritzVision10CustomPose")
+@interface CustomPose : NSObject
+@property (nonatomic, readonly, copy) NSArray<CustomKeypoint *> * _Nonnull keypoints;
+- (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class FritzVisionImage;
+@class FritzVisionCustomPoseModelOptions;
+@protocol MLFeatureProvider;
+@class MLMultiArray;
+@class UIImage;
+
+SWIFT_CLASS("_TtC11FritzVision21CustomPoseModelResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CustomPoseModelResult : NSObject
+@property (nonatomic, readonly, strong) FritzVisionImage * _Nonnull image;
+@property (nonatomic, readonly, strong) FritzVisionCustomPoseModelOptions * _Nonnull options;
+/// Unavailable.  Use <code>FritzVisionPoseModel.predict</code> function to build.
+- (nonnull instancetype)initFor:(id <MLFeatureProvider> _Nonnull)results with:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionCustomPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithHeatmap:(MLMultiArray * _Nonnull)heatmap offsets:(MLMultiArray * _Nonnull)offsets withImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionCustomPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
+- (CustomPose * _Nonnull)decodePoseWithScale:(BOOL)scale SWIFT_WARN_UNUSED_RESULT;
+/// Draw detected poses on input image.
+/// \param pose List of poses to draw
+///
+///
+/// returns:
+/// Original image with poses drawn on image.
+- (UIImage * _Nullable)drawPose:(CustomPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 SWIFT_CLASS_NAMED("FlexibleModelDimensions")
 @interface FlexibleModelDimensions : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -3024,6 +3298,52 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionCropAndScale, "FritzVisionCropAnd
   FritzVisionCropAndScaleScaleFit = 3,
 };
 
+
+/// A model used to predict the poses of people in images.
+SWIFT_CLASS_NAMED("FritzVisionCustomPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionCustomPoseModel : NSObject
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+/// Predict poses from a FritzImage.
+/// \param input The image to use to dectect poses.
+///
+/// \param options The options used to configure the pose results.
+///
+/// \param completion Handler to call back on the main thread with poses or error.
+///
+- (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionCustomPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CustomPoseModelResult * _Nullable, NSError * _Nullable))completion;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionCustomPoseModel (SWIFT_EXTENSION(FritzVision))
+/// Model metadata set in webapp.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+/// Model tags set in webapp.
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
+@end
+
+
+/// Options for Pose Model.
+SWIFT_CLASS_NAMED("FritzVisionCustomPoseModelOptions")
+@interface FritzVisionCustomPoseModelOptions : NSObject
+/// Crop and scale option. Default value is scaleFit.
+@property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
+/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
+/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
+@property (nonatomic) BOOL forceCoreMLPrediction;
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// However, if you are using ARKit, you must set this to true.
+@property (nonatomic) BOOL forceVisionPrediction;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
   FritzVisionErrorInvalidSampleImageBuffer = 0,
   FritzVisionErrorErrorProcessingImage = 1,
@@ -3031,7 +3351,6 @@ typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
 @protocol FritzSwiftIdentifiedModel;
-@class FritzVisionImage;
 @class FritzVisionFlexibleStyleModelOptions;
 
 /// Construct a Flexible Style Transfer model and run on any FritzVisionImage. Use this class over <code>FritzVisionStyleTransferModel</code> to produce stylized images with customizable output sizes.
@@ -3162,7 +3481,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UIImage;
 
 /// An image or image buffer used in vision detection.
 SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
@@ -3630,8 +3948,6 @@ SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduc
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
-
-
 @class FritzPose;
 @class PoseLiftingPredictorOptions;
 @class FritzPose3D;
@@ -3647,6 +3963,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
+
+
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
@@ -3710,7 +4028,6 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@protocol MLFeatureProvider;
 
 SWIFT_CLASS_NAMED("FritzVisionPoseResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseResult : NSObject
@@ -3728,6 +4045,30 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger modelInput
 - (nonnull instancetype)initForResults:(id <MLFeatureProvider> _Nonnull)results fritzImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
+/// Decodes all poses above pose threshold.
+///
+/// returns:
+/// Pose list of poses above mininimum pose threshold option.
+- (NSArray<FritzPose *> * _Nonnull)decodePoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT;
+/// Decode poses and draws on original UIImage.
+/// \param numPoses Maximum number of poses to find.
+///
+///
+/// returns:
+/// UIImage if poses detected.
+- (UIImage * _Nullable)drawNumPoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT;
+/// Draw detected poses on input image.
+/// \param poses List of poses to draw
+///
+///
+/// returns:
+/// Original image with poses drawn on image.
+- (UIImage * _Nullable)drawPosesFor:(NSArray<FritzPose *> * _Nonnull)poses SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -3785,7 +4126,6 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class MLMultiArray;
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationResult") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzVisionSegmentationResult : NSObject
@@ -3931,8 +4271,27 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+typedef SWIFT_ENUM(NSInteger, HumanPosePart, closed) {
+  HumanPosePartNose = 0,
+  HumanPosePartLeftEye = 1,
+  HumanPosePartRightEye = 2,
+  HumanPosePartLeftEar = 3,
+  HumanPosePartRightEar = 4,
+  HumanPosePartLeftShoulder = 5,
+  HumanPosePartRightShoulder = 6,
+  HumanPosePartLeftElbow = 7,
+  HumanPosePartRightElbow = 8,
+  HumanPosePartLeftWrist = 9,
+  HumanPosePartRightWrist = 10,
+  HumanPosePartLeftHip = 11,
+  HumanPosePartRightHip = 12,
+  HumanPosePartLeftKnee = 13,
+  HumanPosePartRightKnee = 14,
+  HumanPosePartLeftAnkle = 15,
+  HumanPosePartRightAnkle = 16,
+};
+
 @class FritzPosePoint;
-enum PosePart : NSInteger;
 
 /// Predicted keypoint containing part, score, and position identified.
 SWIFT_CLASS_NAMED("Keypoint")
@@ -3940,7 +4299,7 @@ SWIFT_CLASS_NAMED("Keypoint")
 @property (nonatomic, readonly) NSInteger id;
 @property (nonatomic, readonly, strong) FritzPosePoint * _Nonnull position;
 @property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) enum PosePart part;
+@property (nonatomic, readonly) enum HumanPosePart part;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -3955,7 +4314,7 @@ SWIFT_CLASS_NAMED("Keypoint3D")
 @property (nonatomic, readonly) NSInteger id;
 @property (nonatomic, readonly, strong) Point3D * _Nonnull position;
 @property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) enum PosePart part;
+@property (nonatomic, readonly) enum HumanPosePart part;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -4069,26 +4428,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingP
 @property (nonatomic) BOOL useCPUOnly;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
-
-typedef SWIFT_ENUM(NSInteger, PosePart, closed) {
-  PosePartNose = 0,
-  PosePartLeftEye = 1,
-  PosePartRightEye = 2,
-  PosePartLeftEar = 3,
-  PosePartRightEar = 4,
-  PosePartLeftShoulder = 5,
-  PosePartRightShoulder = 6,
-  PosePartLeftElbow = 7,
-  PosePartRightElbow = 8,
-  PosePartLeftWrist = 9,
-  PosePartRightWrist = 10,
-  PosePartLeftHip = 11,
-  PosePartRightHip = 12,
-  PosePartLeftKnee = 13,
-  PosePartRightKnee = 14,
-  PosePartLeftAnkle = 15,
-  PosePartRightAnkle = 16,
-};
 
 
 
@@ -4352,6 +4691,54 @@ SWIFT_CLASS_NAMED("BoundingBoxOutline")
 @end
 
 
+SWIFT_CLASS("_TtC11FritzVision14CustomKeypoint")
+@interface CustomKeypoint : NSObject
+@property (nonatomic, readonly) CGPoint position;
+@property (nonatomic, readonly) NSInteger index;
+@property (nonatomic, readonly) double score;
+- (nonnull instancetype)initWithPosition:(CGPoint)position index:(NSInteger)index score:(double)score OBJC_DESIGNATED_INITIALIZER;
+- (CustomKeypoint * _Nonnull)newKeypointWith:(CGPoint)point SWIFT_WARN_UNUSED_RESULT;
+- (CustomKeypoint * _Nonnull)scaledFrom:(CGSize)originalSize to:(CGSize)targetSize SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC11FritzVision10CustomPose")
+@interface CustomPose : NSObject
+@property (nonatomic, readonly, copy) NSArray<CustomKeypoint *> * _Nonnull keypoints;
+- (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class FritzVisionImage;
+@class FritzVisionCustomPoseModelOptions;
+@protocol MLFeatureProvider;
+@class MLMultiArray;
+@class UIImage;
+
+SWIFT_CLASS("_TtC11FritzVision21CustomPoseModelResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CustomPoseModelResult : NSObject
+@property (nonatomic, readonly, strong) FritzVisionImage * _Nonnull image;
+@property (nonatomic, readonly, strong) FritzVisionCustomPoseModelOptions * _Nonnull options;
+/// Unavailable.  Use <code>FritzVisionPoseModel.predict</code> function to build.
+- (nonnull instancetype)initFor:(id <MLFeatureProvider> _Nonnull)results with:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionCustomPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithHeatmap:(MLMultiArray * _Nonnull)heatmap offsets:(MLMultiArray * _Nonnull)offsets withImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionCustomPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
+- (CustomPose * _Nonnull)decodePoseWithScale:(BOOL)scale SWIFT_WARN_UNUSED_RESULT;
+/// Draw detected poses on input image.
+/// \param pose List of poses to draw
+///
+///
+/// returns:
+/// Original image with poses drawn on image.
+- (UIImage * _Nullable)drawPose:(CustomPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 SWIFT_CLASS_NAMED("FlexibleModelDimensions")
 @interface FlexibleModelDimensions : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -4390,6 +4777,52 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionCropAndScale, "FritzVisionCropAnd
   FritzVisionCropAndScaleScaleFit = 3,
 };
 
+
+/// A model used to predict the poses of people in images.
+SWIFT_CLASS_NAMED("FritzVisionCustomPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionCustomPoseModel : NSObject
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+/// Predict poses from a FritzImage.
+/// \param input The image to use to dectect poses.
+///
+/// \param options The options used to configure the pose results.
+///
+/// \param completion Handler to call back on the main thread with poses or error.
+///
+- (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionCustomPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CustomPoseModelResult * _Nullable, NSError * _Nullable))completion;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionCustomPoseModel (SWIFT_EXTENSION(FritzVision))
+/// Model metadata set in webapp.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+/// Model tags set in webapp.
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
+@end
+
+
+/// Options for Pose Model.
+SWIFT_CLASS_NAMED("FritzVisionCustomPoseModelOptions")
+@interface FritzVisionCustomPoseModelOptions : NSObject
+/// Crop and scale option. Default value is scaleFit.
+@property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
+/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
+/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
+@property (nonatomic) BOOL forceCoreMLPrediction;
+/// Force predictions to use the Vision framework (if supported by model).
+/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
+/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
+/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
+/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
+/// However, if you are using ARKit, you must set this to true.
+@property (nonatomic) BOOL forceVisionPrediction;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
   FritzVisionErrorInvalidSampleImageBuffer = 0,
   FritzVisionErrorErrorProcessingImage = 1,
@@ -4397,7 +4830,6 @@ typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
 @protocol FritzSwiftIdentifiedModel;
-@class FritzVisionImage;
 @class FritzVisionFlexibleStyleModelOptions;
 
 /// Construct a Flexible Style Transfer model and run on any FritzVisionImage. Use this class over <code>FritzVisionStyleTransferModel</code> to produce stylized images with customizable output sizes.
@@ -4528,7 +4960,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UIImage;
 
 /// An image or image buffer used in vision detection.
 SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
@@ -4996,8 +5427,6 @@ SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduc
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
-
-
 @class FritzPose;
 @class PoseLiftingPredictorOptions;
 @class FritzPose3D;
@@ -5013,6 +5442,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
+
+
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
@@ -5076,7 +5507,6 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@protocol MLFeatureProvider;
 
 SWIFT_CLASS_NAMED("FritzVisionPoseResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseResult : NSObject
@@ -5094,6 +5524,30 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger modelInput
 - (nonnull instancetype)initForResults:(id <MLFeatureProvider> _Nonnull)results fritzImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
+/// Decodes all poses above pose threshold.
+///
+/// returns:
+/// Pose list of poses above mininimum pose threshold option.
+- (NSArray<FritzPose *> * _Nonnull)decodePoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT;
+/// Decode poses and draws on original UIImage.
+/// \param numPoses Maximum number of poses to find.
+///
+///
+/// returns:
+/// UIImage if poses detected.
+- (UIImage * _Nullable)drawNumPoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT;
+/// Draw detected poses on input image.
+/// \param poses List of poses to draw
+///
+///
+/// returns:
+/// Original image with poses drawn on image.
+- (UIImage * _Nullable)drawPosesFor:(NSArray<FritzPose *> * _Nonnull)poses SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -5151,7 +5605,6 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class MLMultiArray;
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationResult") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzVisionSegmentationResult : NSObject
@@ -5297,8 +5750,27 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+typedef SWIFT_ENUM(NSInteger, HumanPosePart, closed) {
+  HumanPosePartNose = 0,
+  HumanPosePartLeftEye = 1,
+  HumanPosePartRightEye = 2,
+  HumanPosePartLeftEar = 3,
+  HumanPosePartRightEar = 4,
+  HumanPosePartLeftShoulder = 5,
+  HumanPosePartRightShoulder = 6,
+  HumanPosePartLeftElbow = 7,
+  HumanPosePartRightElbow = 8,
+  HumanPosePartLeftWrist = 9,
+  HumanPosePartRightWrist = 10,
+  HumanPosePartLeftHip = 11,
+  HumanPosePartRightHip = 12,
+  HumanPosePartLeftKnee = 13,
+  HumanPosePartRightKnee = 14,
+  HumanPosePartLeftAnkle = 15,
+  HumanPosePartRightAnkle = 16,
+};
+
 @class FritzPosePoint;
-enum PosePart : NSInteger;
 
 /// Predicted keypoint containing part, score, and position identified.
 SWIFT_CLASS_NAMED("Keypoint")
@@ -5306,7 +5778,7 @@ SWIFT_CLASS_NAMED("Keypoint")
 @property (nonatomic, readonly) NSInteger id;
 @property (nonatomic, readonly, strong) FritzPosePoint * _Nonnull position;
 @property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) enum PosePart part;
+@property (nonatomic, readonly) enum HumanPosePart part;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -5321,7 +5793,7 @@ SWIFT_CLASS_NAMED("Keypoint3D")
 @property (nonatomic, readonly) NSInteger id;
 @property (nonatomic, readonly, strong) Point3D * _Nonnull position;
 @property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) enum PosePart part;
+@property (nonatomic, readonly) enum HumanPosePart part;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -5435,26 +5907,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingP
 @property (nonatomic) BOOL useCPUOnly;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
-
-typedef SWIFT_ENUM(NSInteger, PosePart, closed) {
-  PosePartNose = 0,
-  PosePartLeftEye = 1,
-  PosePartRightEye = 2,
-  PosePartLeftEar = 3,
-  PosePartRightEar = 4,
-  PosePartLeftShoulder = 5,
-  PosePartRightShoulder = 6,
-  PosePartLeftElbow = 7,
-  PosePartRightElbow = 8,
-  PosePartLeftWrist = 9,
-  PosePartRightWrist = 10,
-  PosePartLeftHip = 11,
-  PosePartRightHip = 12,
-  PosePartLeftKnee = 13,
-  PosePartRightKnee = 14,
-  PosePartLeftAnkle = 15,
-  PosePartRightAnkle = 16,
-};
 
 
 
