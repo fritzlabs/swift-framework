@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.5.0-beta.3](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.0-beta.3)
+
+1. Add pose smoothing to custom pose models.
+
 ## [3.5.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.0-beta.2)
 
 1. Fixing Rigid Pose Build

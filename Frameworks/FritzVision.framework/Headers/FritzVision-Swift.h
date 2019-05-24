@@ -253,13 +253,15 @@ SWIFT_CLASS_NAMED("BoundingBoxOutline")
 
 SWIFT_CLASS("_TtC11FritzVision14CustomKeypoint")
 @interface CustomKeypoint : NSObject
+@property (nonatomic, readonly) NSInteger id SWIFT_DEPRECATED_MSG("", "index");
 @property (nonatomic, readonly) CGPoint position;
-@property (nonatomic, readonly) NSInteger index;
 @property (nonatomic, readonly) double score;
+@property (nonatomic, readonly) NSInteger index;
 - (nonnull instancetype)initWithPosition:(CGPoint)position index:(NSInteger)index score:(double)score OBJC_DESIGNATED_INITIALIZER;
 - (CustomKeypoint * _Nonnull)newKeypointWith:(CGPoint)point SWIFT_WARN_UNUSED_RESULT;
 - (CustomKeypoint * _Nonnull)scaledFrom:(CGSize)originalSize to:(CGSize)targetSize SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (CustomKeypoint * _Nonnull)fromPosition:(CGPoint)position SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -268,6 +270,8 @@ SWIFT_CLASS("_TtC11FritzVision14CustomKeypoint")
 SWIFT_CLASS("_TtC11FritzVision10CustomPose")
 @interface CustomPose : NSObject
 @property (nonatomic, readonly, copy) NSArray<CustomKeypoint *> * _Nonnull keypoints;
+@property (nonatomic, readonly) double score;
+- (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints score:(double)score OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -1335,7 +1339,7 @@ typedef SWIFT_ENUM(NSInteger, HumanPosePart, closed) {
 /// Predicted keypoint containing part, score, and position identified.
 SWIFT_CLASS_NAMED("Keypoint")
 @interface FritzPoseKeypoint : NSObject
-@property (nonatomic, readonly) NSInteger id;
+@property (nonatomic, readonly) NSInteger index;
 @property (nonatomic, readonly, strong) FritzPosePoint * _Nonnull position;
 @property (nonatomic, readonly) double score;
 @property (nonatomic, readonly) enum HumanPosePart part;
@@ -1350,7 +1354,7 @@ SWIFT_CLASS_NAMED("Keypoint")
 /// Predicted keypoint containing part, score, and position identified.
 SWIFT_CLASS_NAMED("Keypoint3D")
 @interface FritzPoseKeypoint3D : NSObject
-@property (nonatomic, readonly) NSInteger id;
+@property (nonatomic, readonly) NSInteger index;
 @property (nonatomic, readonly, strong) Point3D * _Nonnull position;
 @property (nonatomic, readonly) double score;
 @property (nonatomic, readonly) enum HumanPosePart part;
@@ -1732,13 +1736,15 @@ SWIFT_CLASS_NAMED("BoundingBoxOutline")
 
 SWIFT_CLASS("_TtC11FritzVision14CustomKeypoint")
 @interface CustomKeypoint : NSObject
+@property (nonatomic, readonly) NSInteger id SWIFT_DEPRECATED_MSG("", "index");
 @property (nonatomic, readonly) CGPoint position;
-@property (nonatomic, readonly) NSInteger index;
 @property (nonatomic, readonly) double score;
+@property (nonatomic, readonly) NSInteger index;
 - (nonnull instancetype)initWithPosition:(CGPoint)position index:(NSInteger)index score:(double)score OBJC_DESIGNATED_INITIALIZER;
 - (CustomKeypoint * _Nonnull)newKeypointWith:(CGPoint)point SWIFT_WARN_UNUSED_RESULT;
 - (CustomKeypoint * _Nonnull)scaledFrom:(CGSize)originalSize to:(CGSize)targetSize SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (CustomKeypoint * _Nonnull)fromPosition:(CGPoint)position SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1747,6 +1753,8 @@ SWIFT_CLASS("_TtC11FritzVision14CustomKeypoint")
 SWIFT_CLASS("_TtC11FritzVision10CustomPose")
 @interface CustomPose : NSObject
 @property (nonatomic, readonly, copy) NSArray<CustomKeypoint *> * _Nonnull keypoints;
+@property (nonatomic, readonly) double score;
+- (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints score:(double)score OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -2814,7 +2822,7 @@ typedef SWIFT_ENUM(NSInteger, HumanPosePart, closed) {
 /// Predicted keypoint containing part, score, and position identified.
 SWIFT_CLASS_NAMED("Keypoint")
 @interface FritzPoseKeypoint : NSObject
-@property (nonatomic, readonly) NSInteger id;
+@property (nonatomic, readonly) NSInteger index;
 @property (nonatomic, readonly, strong) FritzPosePoint * _Nonnull position;
 @property (nonatomic, readonly) double score;
 @property (nonatomic, readonly) enum HumanPosePart part;
@@ -2829,7 +2837,7 @@ SWIFT_CLASS_NAMED("Keypoint")
 /// Predicted keypoint containing part, score, and position identified.
 SWIFT_CLASS_NAMED("Keypoint3D")
 @interface FritzPoseKeypoint3D : NSObject
-@property (nonatomic, readonly) NSInteger id;
+@property (nonatomic, readonly) NSInteger index;
 @property (nonatomic, readonly, strong) Point3D * _Nonnull position;
 @property (nonatomic, readonly) double score;
 @property (nonatomic, readonly) enum HumanPosePart part;
@@ -3214,13 +3222,15 @@ SWIFT_CLASS_NAMED("BoundingBoxOutline")
 
 SWIFT_CLASS("_TtC11FritzVision14CustomKeypoint")
 @interface CustomKeypoint : NSObject
+@property (nonatomic, readonly) NSInteger id SWIFT_DEPRECATED_MSG("", "index");
 @property (nonatomic, readonly) CGPoint position;
-@property (nonatomic, readonly) NSInteger index;
 @property (nonatomic, readonly) double score;
+@property (nonatomic, readonly) NSInteger index;
 - (nonnull instancetype)initWithPosition:(CGPoint)position index:(NSInteger)index score:(double)score OBJC_DESIGNATED_INITIALIZER;
 - (CustomKeypoint * _Nonnull)newKeypointWith:(CGPoint)point SWIFT_WARN_UNUSED_RESULT;
 - (CustomKeypoint * _Nonnull)scaledFrom:(CGSize)originalSize to:(CGSize)targetSize SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (CustomKeypoint * _Nonnull)fromPosition:(CGPoint)position SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -3229,6 +3239,8 @@ SWIFT_CLASS("_TtC11FritzVision14CustomKeypoint")
 SWIFT_CLASS("_TtC11FritzVision10CustomPose")
 @interface CustomPose : NSObject
 @property (nonatomic, readonly, copy) NSArray<CustomKeypoint *> * _Nonnull keypoints;
+@property (nonatomic, readonly) double score;
+- (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints score:(double)score OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -4296,7 +4308,7 @@ typedef SWIFT_ENUM(NSInteger, HumanPosePart, closed) {
 /// Predicted keypoint containing part, score, and position identified.
 SWIFT_CLASS_NAMED("Keypoint")
 @interface FritzPoseKeypoint : NSObject
-@property (nonatomic, readonly) NSInteger id;
+@property (nonatomic, readonly) NSInteger index;
 @property (nonatomic, readonly, strong) FritzPosePoint * _Nonnull position;
 @property (nonatomic, readonly) double score;
 @property (nonatomic, readonly) enum HumanPosePart part;
@@ -4311,7 +4323,7 @@ SWIFT_CLASS_NAMED("Keypoint")
 /// Predicted keypoint containing part, score, and position identified.
 SWIFT_CLASS_NAMED("Keypoint3D")
 @interface FritzPoseKeypoint3D : NSObject
-@property (nonatomic, readonly) NSInteger id;
+@property (nonatomic, readonly) NSInteger index;
 @property (nonatomic, readonly, strong) Point3D * _Nonnull position;
 @property (nonatomic, readonly) double score;
 @property (nonatomic, readonly) enum HumanPosePart part;
@@ -4693,13 +4705,15 @@ SWIFT_CLASS_NAMED("BoundingBoxOutline")
 
 SWIFT_CLASS("_TtC11FritzVision14CustomKeypoint")
 @interface CustomKeypoint : NSObject
+@property (nonatomic, readonly) NSInteger id SWIFT_DEPRECATED_MSG("", "index");
 @property (nonatomic, readonly) CGPoint position;
-@property (nonatomic, readonly) NSInteger index;
 @property (nonatomic, readonly) double score;
+@property (nonatomic, readonly) NSInteger index;
 - (nonnull instancetype)initWithPosition:(CGPoint)position index:(NSInteger)index score:(double)score OBJC_DESIGNATED_INITIALIZER;
 - (CustomKeypoint * _Nonnull)newKeypointWith:(CGPoint)point SWIFT_WARN_UNUSED_RESULT;
 - (CustomKeypoint * _Nonnull)scaledFrom:(CGSize)originalSize to:(CGSize)targetSize SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (CustomKeypoint * _Nonnull)fromPosition:(CGPoint)position SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -4708,6 +4722,8 @@ SWIFT_CLASS("_TtC11FritzVision14CustomKeypoint")
 SWIFT_CLASS("_TtC11FritzVision10CustomPose")
 @interface CustomPose : NSObject
 @property (nonatomic, readonly, copy) NSArray<CustomKeypoint *> * _Nonnull keypoints;
+@property (nonatomic, readonly) double score;
+- (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints score:(double)score OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -5775,7 +5791,7 @@ typedef SWIFT_ENUM(NSInteger, HumanPosePart, closed) {
 /// Predicted keypoint containing part, score, and position identified.
 SWIFT_CLASS_NAMED("Keypoint")
 @interface FritzPoseKeypoint : NSObject
-@property (nonatomic, readonly) NSInteger id;
+@property (nonatomic, readonly) NSInteger index;
 @property (nonatomic, readonly, strong) FritzPosePoint * _Nonnull position;
 @property (nonatomic, readonly) double score;
 @property (nonatomic, readonly) enum HumanPosePart part;
@@ -5790,7 +5806,7 @@ SWIFT_CLASS_NAMED("Keypoint")
 /// Predicted keypoint containing part, score, and position identified.
 SWIFT_CLASS_NAMED("Keypoint3D")
 @interface FritzPoseKeypoint3D : NSObject
-@property (nonatomic, readonly) NSInteger id;
+@property (nonatomic, readonly) NSInteger index;
 @property (nonatomic, readonly, strong) Point3D * _Nonnull position;
 @property (nonatomic, readonly) double score;
 @property (nonatomic, readonly) enum HumanPosePart part;
