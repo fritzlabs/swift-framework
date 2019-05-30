@@ -5,6 +5,11 @@ Change Log
 
 ---
 
+## [3.5.0-beta.4](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.0-beta.4)
+
+1. Fix some rotation issues in rigid pose model.
+2. Use CIImage to prepare images for Core ML pipeline.
+
 ## [3.5.0-beta.3](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.0-beta.3)
 
 1. Add pose smoothing to custom pose models.

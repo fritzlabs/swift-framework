@@ -273,11 +273,25 @@ SWIFT_CLASS("_TtC11FritzVision10CustomPose")
 @property (nonatomic, readonly) double score;
 - (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints score:(double)score OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints OBJC_DESIGNATED_INITIALIZER;
+- (CustomPose * _Nonnull)applying:(CGAffineTransform)t SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 @class FritzVisionImage;
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CustomPose (SWIFT_EXTENSION(FritzVision))
+/// Rotates keypoints to match original image orientation.
+/// Note: Currently only works on .up and .right original image orientations.
+/// \param image FritzVisionImage
+///
+///
+/// returns:
+/// Pose with keypoints rotated.
+- (CustomPose * _Nonnull)rotateKeypointsToOriginalImageWithImage:(FritzVisionImage * _Nonnull)image SWIFT_WARN_UNUSED_RESULT;
+@end
+
 @class FritzVisionCustomPoseModelOptions;
 @protocol MLFeatureProvider;
 @class MLMultiArray;
@@ -531,6 +545,8 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)initWithBuffer:(CMSampleBufferRef _Nonnull)buffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image orientation:(CGImagePropertyOrientation)orientation OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer orientation:(CGImagePropertyOrientation)orientation OBJC_DESIGNATED_INITIALIZER;
 - (id _Nullable)debugQuickLookObject SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -991,6 +1007,8 @@ SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduc
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+
 @class FritzPose;
 @class PoseLiftingPredictorOptions;
 @class FritzPose3D;
@@ -1006,8 +1024,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
-
-
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
@@ -1756,11 +1772,25 @@ SWIFT_CLASS("_TtC11FritzVision10CustomPose")
 @property (nonatomic, readonly) double score;
 - (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints score:(double)score OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints OBJC_DESIGNATED_INITIALIZER;
+- (CustomPose * _Nonnull)applying:(CGAffineTransform)t SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 @class FritzVisionImage;
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CustomPose (SWIFT_EXTENSION(FritzVision))
+/// Rotates keypoints to match original image orientation.
+/// Note: Currently only works on .up and .right original image orientations.
+/// \param image FritzVisionImage
+///
+///
+/// returns:
+/// Pose with keypoints rotated.
+- (CustomPose * _Nonnull)rotateKeypointsToOriginalImageWithImage:(FritzVisionImage * _Nonnull)image SWIFT_WARN_UNUSED_RESULT;
+@end
+
 @class FritzVisionCustomPoseModelOptions;
 @protocol MLFeatureProvider;
 @class MLMultiArray;
@@ -2014,6 +2044,8 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)initWithBuffer:(CMSampleBufferRef _Nonnull)buffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image orientation:(CGImagePropertyOrientation)orientation OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer orientation:(CGImagePropertyOrientation)orientation OBJC_DESIGNATED_INITIALIZER;
 - (id _Nullable)debugQuickLookObject SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -2474,6 +2506,8 @@ SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduc
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+
 @class FritzPose;
 @class PoseLiftingPredictorOptions;
 @class FritzPose3D;
@@ -2489,8 +2523,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
-
-
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
@@ -3242,11 +3274,25 @@ SWIFT_CLASS("_TtC11FritzVision10CustomPose")
 @property (nonatomic, readonly) double score;
 - (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints score:(double)score OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints OBJC_DESIGNATED_INITIALIZER;
+- (CustomPose * _Nonnull)applying:(CGAffineTransform)t SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 @class FritzVisionImage;
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CustomPose (SWIFT_EXTENSION(FritzVision))
+/// Rotates keypoints to match original image orientation.
+/// Note: Currently only works on .up and .right original image orientations.
+/// \param image FritzVisionImage
+///
+///
+/// returns:
+/// Pose with keypoints rotated.
+- (CustomPose * _Nonnull)rotateKeypointsToOriginalImageWithImage:(FritzVisionImage * _Nonnull)image SWIFT_WARN_UNUSED_RESULT;
+@end
+
 @class FritzVisionCustomPoseModelOptions;
 @protocol MLFeatureProvider;
 @class MLMultiArray;
@@ -3500,6 +3546,8 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)initWithBuffer:(CMSampleBufferRef _Nonnull)buffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image orientation:(CGImagePropertyOrientation)orientation OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer orientation:(CGImagePropertyOrientation)orientation OBJC_DESIGNATED_INITIALIZER;
 - (id _Nullable)debugQuickLookObject SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -3960,6 +4008,8 @@ SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduc
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+
 @class FritzPose;
 @class PoseLiftingPredictorOptions;
 @class FritzPose3D;
@@ -3975,8 +4025,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
-
-
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
@@ -4725,11 +4773,25 @@ SWIFT_CLASS("_TtC11FritzVision10CustomPose")
 @property (nonatomic, readonly) double score;
 - (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints score:(double)score OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints OBJC_DESIGNATED_INITIALIZER;
+- (CustomPose * _Nonnull)applying:(CGAffineTransform)t SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 @class FritzVisionImage;
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CustomPose (SWIFT_EXTENSION(FritzVision))
+/// Rotates keypoints to match original image orientation.
+/// Note: Currently only works on .up and .right original image orientations.
+/// \param image FritzVisionImage
+///
+///
+/// returns:
+/// Pose with keypoints rotated.
+- (CustomPose * _Nonnull)rotateKeypointsToOriginalImageWithImage:(FritzVisionImage * _Nonnull)image SWIFT_WARN_UNUSED_RESULT;
+@end
+
 @class FritzVisionCustomPoseModelOptions;
 @protocol MLFeatureProvider;
 @class MLMultiArray;
@@ -4983,6 +5045,8 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)initWithBuffer:(CMSampleBufferRef _Nonnull)buffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image orientation:(CGImagePropertyOrientation)orientation OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer orientation:(CGImagePropertyOrientation)orientation OBJC_DESIGNATED_INITIALIZER;
 - (id _Nullable)debugQuickLookObject SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -5443,6 +5507,8 @@ SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduc
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+
 @class FritzPose;
 @class PoseLiftingPredictorOptions;
 @class FritzPose3D;
@@ -5458,8 +5524,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
-
-
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
