@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.5.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.1)
+
+1. Bump version to fix push to cocoapods
+
 ## [3.5.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.0)
 
 1. Adding Sky Segmentation Model.
