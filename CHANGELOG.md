@@ -5,6 +5,11 @@ Change Log
 
 ---
 
+## [3.5.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.0)
+
+1. Adding Sky Segmentation Model.
+2. Add Rigid Body pose model to support lifting 2D pose models to 3D space.
+
 ## [3.5.0-beta.4](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.0-beta.4)
 
 1. Fix some rotation issues in rigid pose model.

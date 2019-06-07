@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name = 'FritzVisionMultiPoseModel'
-  s.version = '3.5.0-beta.4'
+  s.version = '3.5.0'
   s.summary = 'Official Fritz SDK for Swift 5.0 and Objective-C'
   s.homepage = 'https://fritz.ai'
   s.license = { :type => 'Commercial', :file => 'LICENSE.md' }
   s.author = { 'Chris Kelly' => 'engineering@fritz.ai' }
-  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/3.5.0-beta.4/FritzVisionMultiPoseModel.zip' }
+  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/3.5.0/FritzVisionMultiPoseModel.zip' }
 
   s.requires_arc = true
 
@@ -13,6 +13,6 @@ Pod::Spec.new do |s|
   s.swift_version = '5.0'
   s.frameworks = 'UIKit', 'CoreML', 'Foundation'
 
-  s.dependency 'FritzBase/Vision', '3.5.0-beta.4'
+  s.dependency 'FritzBase/Vision', '3.5.0'
   s.vendored_framework = 'Frameworks/FritzVisionMultiPoseModel.framework'
 end

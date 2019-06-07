@@ -69,6 +69,11 @@ import the headers individually."
 @import FritzVisionHairSegmentationModel;
 #endif
 
+#if __has_include(<FritzVisionSkySegmentationModel/FritzVisionSkySegmentationModel.h>)
+@import FritzVisionSkySegmentationModel;
+#endif
+
+
 #if __has_include(<FritzVisionPoseModel/FritzVisionPoseModel.h>)
 @import FritzVisionPoseModel;
 #endif

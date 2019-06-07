@@ -1255,6 +1255,42 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha minThresholdAccepted:(double)minThresholdAccepted resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildSingleClassMask");
 @end
 
+
+SWIFT_CLASS_NAMED("FritzVisionSkyClass")
+@interface FritzVisionSkyClass : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
++ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull sky;)
++ (ModelSegmentationClass * _Nonnull)sky SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
++ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Image segmentation model to detect skys.
+SWIFT_CLASS_NAMED("FritzVisionSkySegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSkySegmentationModel : FritzVisionSegmentationModel
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
++ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
+/// Build sky Segmentation Model with provided model.
+/// \param model Model to use
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
++ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
++ (void)setWifiRequiredForModelDownload:(BOOL)value;
+/// Fetch model. Downloads model if model has not been downloaded before.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionSkySegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class FritzVisionStyleModelOptions;
 
 SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -2752,6 +2788,42 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Mask for class.
 - (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha minThresholdAccepted:(double)minThresholdAccepted resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildSingleClassMask");
+@end
+
+
+SWIFT_CLASS_NAMED("FritzVisionSkyClass")
+@interface FritzVisionSkyClass : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
++ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull sky;)
++ (ModelSegmentationClass * _Nonnull)sky SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
++ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Image segmentation model to detect skys.
+SWIFT_CLASS_NAMED("FritzVisionSkySegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSkySegmentationModel : FritzVisionSegmentationModel
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
++ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
+/// Build sky Segmentation Model with provided model.
+/// \param model Model to use
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
++ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
++ (void)setWifiRequiredForModelDownload:(BOOL)value;
+/// Fetch model. Downloads model if model has not been downloaded before.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionSkySegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class FritzVisionStyleModelOptions;
@@ -4256,6 +4328,42 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha minThresholdAccepted:(double)minThresholdAccepted resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildSingleClassMask");
 @end
 
+
+SWIFT_CLASS_NAMED("FritzVisionSkyClass")
+@interface FritzVisionSkyClass : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
++ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull sky;)
++ (ModelSegmentationClass * _Nonnull)sky SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
++ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Image segmentation model to detect skys.
+SWIFT_CLASS_NAMED("FritzVisionSkySegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSkySegmentationModel : FritzVisionSegmentationModel
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
++ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
+/// Build sky Segmentation Model with provided model.
+/// \param model Model to use
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
++ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
++ (void)setWifiRequiredForModelDownload:(BOOL)value;
+/// Fetch model. Downloads model if model has not been downloaded before.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionSkySegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class FritzVisionStyleModelOptions;
 
 SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -5753,6 +5861,42 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Mask for class.
 - (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha minThresholdAccepted:(double)minThresholdAccepted resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildSingleClassMask");
+@end
+
+
+SWIFT_CLASS_NAMED("FritzVisionSkyClass")
+@interface FritzVisionSkyClass : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
++ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull sky;)
++ (ModelSegmentationClass * _Nonnull)sky SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
++ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Image segmentation model to detect skys.
+SWIFT_CLASS_NAMED("FritzVisionSkySegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSkySegmentationModel : FritzVisionSegmentationModel
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
++ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
+/// Build sky Segmentation Model with provided model.
+/// \param model Model to use
+///
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
++ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
++ (void)setWifiRequiredForModelDownload:(BOOL)value;
+/// Fetch model. Downloads model if model has not been downloaded before.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionSkySegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class FritzVisionStyleModelOptions;
