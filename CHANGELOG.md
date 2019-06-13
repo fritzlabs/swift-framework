@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.5.3](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.3)
+
+1. Add Sky Segmentation model to Fritz podspec.
+
 ## [3.5.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.2)
 
 1. Fix Pet and Sky seg linking in Fritz to be optional.
