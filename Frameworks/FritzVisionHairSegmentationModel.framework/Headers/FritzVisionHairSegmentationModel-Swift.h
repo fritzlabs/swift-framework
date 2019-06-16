@@ -190,6 +190,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionHairSegmentationModel (SWIFT_EXTENSION(FritzVisionHairSegmentationModel))
+/// Initialize Fritz Hair segmentation model form built in class.
 - (nonnull instancetype)init;
 + (nonnull instancetype)new;
 @end
@@ -389,6 +390,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionHairSegmentationModel (SWIFT_EXTENSION(FritzVisionHairSegmentationModel))
+/// Initialize Fritz Hair segmentation model form built in class.
 - (nonnull instancetype)init;
 + (nonnull instancetype)new;
 @end
@@ -591,6 +593,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionHairSegmentationModel (SWIFT_EXTENSION(FritzVisionHairSegmentationModel))
+/// Initialize Fritz Hair segmentation model form built in class.
 - (nonnull instancetype)init;
 + (nonnull instancetype)new;
 @end
@@ -790,6 +793,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionHairSegmentationModel (SWIFT_EXTENSION(FritzVisionHairSegmentationModel))
+/// Initialize Fritz Hair segmentation model form built in class.
 - (nonnull instancetype)init;
 + (nonnull instancetype)new;
 @end

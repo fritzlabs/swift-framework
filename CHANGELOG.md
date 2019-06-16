@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.5.4](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.4)
+
+1. Remove hardcoded number of keypoints for CustomPoseSmoother.
+
 ## [3.5.3](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.3)
 
 1. Add Sky Segmentation model to Fritz podspec.
