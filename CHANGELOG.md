@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.5.5](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.5)
+
+1. Fixed pose scaling in drawPose function.
+
 ## [3.5.4](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.4)
 
 1. Remove hardcoded number of keypoints for CustomPoseSmoother.

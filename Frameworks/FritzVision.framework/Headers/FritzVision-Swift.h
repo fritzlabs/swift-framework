@@ -1133,7 +1133,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
-/// Decode single pose result
+/// Decode single pose result in the coordinates of the original input image (after it is rotated
+/// to the .up position.
 ///
 /// returns:
 /// Pose
@@ -1148,7 +1149,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// UIImage if pose detected.
 - (UIImage * _Nullable)drawPose SWIFT_WARN_UNUSED_RESULT;
-/// Draw detected poses on input image.
+/// Draw detected poses on input image.  Poses must be in the coordinate space of the original image.
+/// If they are not, use the <code>pose.scale</code> method to convert coordinate spaces.
 /// \param pose List of poses to draw
 ///
 ///
@@ -1487,7 +1489,17 @@ SWIFT_CLASS_NAMED("Pose") SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// New Pose with position inset in provided rect
-- (FritzPose * _Nonnull)inRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT;
+- (FritzPose * _Nonnull)inRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use scale instead. inRect has a bug causing scaling issues.", "scale");
+/// Scale pose coordinates from one CGRect to another CGRect.  Use when transforming coordinate
+/// spaces.
+/// \param currentDimensions Dimensions of coordinate space pose is currently in.
+///
+/// \param targetDimensions Dimensions of coordinate space to scale keypoint positions to.
+///
+///
+/// returns:
+/// Pose with scaled keypoints.
+- (FritzPose * _Nonnull)inOriginalDimensions:(CGSize)currentDimensions toTargetDimensions:(CGSize)targetDimensions SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -2668,7 +2680,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
-/// Decode single pose result
+/// Decode single pose result in the coordinates of the original input image (after it is rotated
+/// to the .up position.
 ///
 /// returns:
 /// Pose
@@ -2683,7 +2696,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// UIImage if pose detected.
 - (UIImage * _Nullable)drawPose SWIFT_WARN_UNUSED_RESULT;
-/// Draw detected poses on input image.
+/// Draw detected poses on input image.  Poses must be in the coordinate space of the original image.
+/// If they are not, use the <code>pose.scale</code> method to convert coordinate spaces.
 /// \param pose List of poses to draw
 ///
 ///
@@ -3022,7 +3036,17 @@ SWIFT_CLASS_NAMED("Pose") SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// New Pose with position inset in provided rect
-- (FritzPose * _Nonnull)inRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT;
+- (FritzPose * _Nonnull)inRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use scale instead. inRect has a bug causing scaling issues.", "scale");
+/// Scale pose coordinates from one CGRect to another CGRect.  Use when transforming coordinate
+/// spaces.
+/// \param currentDimensions Dimensions of coordinate space pose is currently in.
+///
+/// \param targetDimensions Dimensions of coordinate space to scale keypoint positions to.
+///
+///
+/// returns:
+/// Pose with scaled keypoints.
+- (FritzPose * _Nonnull)inOriginalDimensions:(CGSize)currentDimensions toTargetDimensions:(CGSize)targetDimensions SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -4206,7 +4230,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
-/// Decode single pose result
+/// Decode single pose result in the coordinates of the original input image (after it is rotated
+/// to the .up position.
 ///
 /// returns:
 /// Pose
@@ -4221,7 +4246,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// UIImage if pose detected.
 - (UIImage * _Nullable)drawPose SWIFT_WARN_UNUSED_RESULT;
-/// Draw detected poses on input image.
+/// Draw detected poses on input image.  Poses must be in the coordinate space of the original image.
+/// If they are not, use the <code>pose.scale</code> method to convert coordinate spaces.
 /// \param pose List of poses to draw
 ///
 ///
@@ -4560,7 +4586,17 @@ SWIFT_CLASS_NAMED("Pose") SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// New Pose with position inset in provided rect
-- (FritzPose * _Nonnull)inRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT;
+- (FritzPose * _Nonnull)inRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use scale instead. inRect has a bug causing scaling issues.", "scale");
+/// Scale pose coordinates from one CGRect to another CGRect.  Use when transforming coordinate
+/// spaces.
+/// \param currentDimensions Dimensions of coordinate space pose is currently in.
+///
+/// \param targetDimensions Dimensions of coordinate space to scale keypoint positions to.
+///
+///
+/// returns:
+/// Pose with scaled keypoints.
+- (FritzPose * _Nonnull)inOriginalDimensions:(CGSize)currentDimensions toTargetDimensions:(CGSize)targetDimensions SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -5741,7 +5777,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
-/// Decode single pose result
+/// Decode single pose result in the coordinates of the original input image (after it is rotated
+/// to the .up position.
 ///
 /// returns:
 /// Pose
@@ -5756,7 +5793,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// UIImage if pose detected.
 - (UIImage * _Nullable)drawPose SWIFT_WARN_UNUSED_RESULT;
-/// Draw detected poses on input image.
+/// Draw detected poses on input image.  Poses must be in the coordinate space of the original image.
+/// If they are not, use the <code>pose.scale</code> method to convert coordinate spaces.
 /// \param pose List of poses to draw
 ///
 ///
@@ -6095,7 +6133,17 @@ SWIFT_CLASS_NAMED("Pose") SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// New Pose with position inset in provided rect
-- (FritzPose * _Nonnull)inRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT;
+- (FritzPose * _Nonnull)inRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use scale instead. inRect has a bug causing scaling issues.", "scale");
+/// Scale pose coordinates from one CGRect to another CGRect.  Use when transforming coordinate
+/// spaces.
+/// \param currentDimensions Dimensions of coordinate space pose is currently in.
+///
+/// \param targetDimensions Dimensions of coordinate space to scale keypoint positions to.
+///
+///
+/// returns:
+/// Pose with scaled keypoints.
+- (FritzPose * _Nonnull)inOriginalDimensions:(CGSize)currentDimensions toTargetDimensions:(CGSize)targetDimensions SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
