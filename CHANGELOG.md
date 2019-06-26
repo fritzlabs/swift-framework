@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.5.6](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.6)
+
+1. Decrease minimum Deployment target to 9.0.
+
 ## [3.5.5](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.5)
 
 1. Fixed pose scaling in drawPose function.
