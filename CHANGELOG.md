@@ -4,6 +4,14 @@ Change Log
 `Fritz` follows [Semantic Versioning](http://semver.org/)
 
 ---
+## [3.6.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.6.0-beta.2)
+
+1. Building with Xcode 11 Beta 3.
+
+
+## [3.6.0-beta.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.6.0-beta.1)
+
+1. Building with Xcode 11 Beta 2.
 
 ## [3.5.6](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.6)
 
@@ -81,7 +89,7 @@ Change Log
 
 1. Fix center crop when using Core ML.
 2. Fix Model ID for the Outdoor model.
-3. 
+3.
 
 ## [3.3.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.3.0)
 

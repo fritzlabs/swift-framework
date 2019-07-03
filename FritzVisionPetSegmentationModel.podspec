@@ -1,18 +1,18 @@
 Pod::Spec.new do |s|
   s.name = 'FritzVisionPetSegmentationModel'
-  s.version = '3.6.0-beta.1'
+  s.version = '3.6.0-beta.2'
   s.summary = 'Official Fritz SDK for Swift 5.0 and Objective-C'
   s.homepage = 'https://fritz.ai'
   s.license = { :type => 'Apache 2.0', :file => 'LICENSE.md' }
   s.author = { 'Chris Kelly' => 'chris@fritz.ai' }
-  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/3.6.0-beta.1/FritzVisionPetSegmentationModel.zip' }
+  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/3.6.0-beta.2/FritzVisionPetSegmentationModel.zip' }
 
   s.requires_arc = true
   s.ios.deployment_target = '10.0'
   s.swift_version = '5.0'
   s.frameworks = 'UIKit', 'CoreML'
 
-  s.dependency 'FritzBase/Vision', '3.6.0-beta.1'
+  s.dependency 'FritzBase/Vision', '3.6.0-beta.2'
 
   s.vendored_framework = 'Frameworks/FritzVisionPetSegmentationModel.framework'
 end
