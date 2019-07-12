@@ -5,6 +5,11 @@ Change Log
 
 ---
 
+## [3.5.7](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.7)
+
+1. Fix multi pose results
+2. Expose objective-c method for buildSingleClassMask
+
 ## [3.5.6](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.6)
 
 1. Decrease minimum Deployment target to 9.0.
