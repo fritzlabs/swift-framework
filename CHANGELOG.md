@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.5.8](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.8)
+
+1. Build with swift 5.0
+
 ## [3.5.7](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.7)
 
 1. Fix multi pose results
