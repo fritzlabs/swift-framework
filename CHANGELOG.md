@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.6.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.6.0)
+
+1. Fixing documentation.
+
 ## [3.5.8](https://github.com/fritzlabs/swift-framework/releases/tag/3.5.8)
 
 1. Build with swift 5.0
