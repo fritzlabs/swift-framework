@@ -5,9 +5,9 @@ Change Log
 
 ---
 
-## [3.6.0-beta.3](https://github.com/fritzlabs/swift-framework/releases/tag/3.6.0-beta.3)
+## [3.6.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.6.1)
 
-1. Compatibility with Xcode 11 Beta 4
+1. Add in masked function in FritzVisionImage
 
 ## [3.6.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.6.0)
 
