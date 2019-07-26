@@ -538,6 +538,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class AVCaptureConnection;
 
 /// An image or image buffer used in vision detection.
 SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
@@ -547,6 +548,7 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image orientation:(CGImagePropertyOrientation)orientation OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer orientation:(CGImagePropertyOrientation)orientation OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithSampleBuffer:(CMSampleBufferRef _Nonnull)sampleBuffer connection:(AVCaptureConnection * _Nonnull)connection OBJC_DESIGNATED_INITIALIZER;
 - (id _Nullable)debugQuickLookObject SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -2158,6 +2160,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class AVCaptureConnection;
 
 /// An image or image buffer used in vision detection.
 SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
@@ -2167,6 +2170,7 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image orientation:(CGImagePropertyOrientation)orientation OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer orientation:(CGImagePropertyOrientation)orientation OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithSampleBuffer:(CMSampleBufferRef _Nonnull)sampleBuffer connection:(AVCaptureConnection * _Nonnull)connection OBJC_DESIGNATED_INITIALIZER;
 - (id _Nullable)debugQuickLookObject SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -3781,6 +3785,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class AVCaptureConnection;
 
 /// An image or image buffer used in vision detection.
 SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
@@ -3790,6 +3795,7 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image orientation:(CGImagePropertyOrientation)orientation OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer orientation:(CGImagePropertyOrientation)orientation OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithSampleBuffer:(CMSampleBufferRef _Nonnull)sampleBuffer connection:(AVCaptureConnection * _Nonnull)connection OBJC_DESIGNATED_INITIALIZER;
 - (id _Nullable)debugQuickLookObject SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -5401,6 +5407,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class AVCaptureConnection;
 
 /// An image or image buffer used in vision detection.
 SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
@@ -5410,6 +5417,7 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image orientation:(CGImagePropertyOrientation)orientation OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer orientation:(CGImagePropertyOrientation)orientation OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithSampleBuffer:(CMSampleBufferRef _Nonnull)sampleBuffer connection:(AVCaptureConnection * _Nonnull)connection OBJC_DESIGNATED_INITIALIZER;
 - (id _Nullable)debugQuickLookObject SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");

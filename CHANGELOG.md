@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.6.3](https://github.com/fritzlabs/swift-framework/releases/tag/3.6.3)
+
+1. Fixing device orientation listener.
+
 ## [3.6.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.6.2)
 
 1. Update Image processing pipeline to use GPU more effectively. See speedups of 50%.

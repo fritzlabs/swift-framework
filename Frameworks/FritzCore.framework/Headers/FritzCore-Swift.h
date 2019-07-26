@@ -201,6 +201,7 @@ SWIFT_CLASS_NAMED("Configuration") SWIFT_AVAILABILITY(watchos,introduced=4.0) SW
 @end
 
 
+/// Tracks Device Orientation changes.
 SWIFT_CLASS_NAMED("DeviceOrientationManager")
 @interface DeviceOrientationManager : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -539,6 +540,7 @@ SWIFT_CLASS_NAMED("Configuration") SWIFT_AVAILABILITY(watchos,introduced=4.0) SW
 @end
 
 
+/// Tracks Device Orientation changes.
 SWIFT_CLASS_NAMED("DeviceOrientationManager")
 @interface DeviceOrientationManager : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -880,6 +882,7 @@ SWIFT_CLASS_NAMED("Configuration") SWIFT_AVAILABILITY(watchos,introduced=4.0) SW
 @end
 
 
+/// Tracks Device Orientation changes.
 SWIFT_CLASS_NAMED("DeviceOrientationManager")
 @interface DeviceOrientationManager : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -1218,6 +1221,7 @@ SWIFT_CLASS_NAMED("Configuration") SWIFT_AVAILABILITY(watchos,introduced=4.0) SW
 @end
 
 
+/// Tracks Device Orientation changes.
 SWIFT_CLASS_NAMED("DeviceOrientationManager")
 @interface DeviceOrientationManager : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
