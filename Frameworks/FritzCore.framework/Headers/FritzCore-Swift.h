@@ -200,6 +200,13 @@ SWIFT_CLASS_NAMED("Configuration") SWIFT_AVAILABILITY(watchos,introduced=4.0) SW
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
+SWIFT_CLASS_NAMED("DeviceOrientationManager")
+@interface DeviceOrientationManager : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (void)handleOrientationChangedNotification:(NSNotification * _Nonnull)notification;
+@end
+
 /// The type of error encountered
 typedef SWIFT_ENUM_NAMED(NSInteger, FritzErrorCode, "ErrorCode", closed) {
   FritzErrorCodeModelCompilation = 0,
@@ -216,6 +223,9 @@ SWIFT_CLASS_NAMED("FritzCore") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_
 /// Shared configuration
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzConfiguration * _Nonnull configuration;)
 + (FritzConfiguration * _Nonnull)configuration SWIFT_WARN_UNUSED_RESULT;
+/// Shared configuration
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) DeviceOrientationManager * _Nonnull orientationManager;)
++ (DeviceOrientationManager * _Nonnull)orientationManager SWIFT_WARN_UNUSED_RESULT;
 /// Configure the Fritz SDK
 + (void)configure;
 /// Configure the Fritz SDK with a custom configuration
@@ -528,6 +538,13 @@ SWIFT_CLASS_NAMED("Configuration") SWIFT_AVAILABILITY(watchos,introduced=4.0) SW
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
+SWIFT_CLASS_NAMED("DeviceOrientationManager")
+@interface DeviceOrientationManager : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (void)handleOrientationChangedNotification:(NSNotification * _Nonnull)notification;
+@end
+
 /// The type of error encountered
 typedef SWIFT_ENUM_NAMED(NSInteger, FritzErrorCode, "ErrorCode", closed) {
   FritzErrorCodeModelCompilation = 0,
@@ -544,6 +561,9 @@ SWIFT_CLASS_NAMED("FritzCore") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_
 /// Shared configuration
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzConfiguration * _Nonnull configuration;)
 + (FritzConfiguration * _Nonnull)configuration SWIFT_WARN_UNUSED_RESULT;
+/// Shared configuration
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) DeviceOrientationManager * _Nonnull orientationManager;)
++ (DeviceOrientationManager * _Nonnull)orientationManager SWIFT_WARN_UNUSED_RESULT;
 /// Configure the Fritz SDK
 + (void)configure;
 /// Configure the Fritz SDK with a custom configuration
@@ -859,6 +879,13 @@ SWIFT_CLASS_NAMED("Configuration") SWIFT_AVAILABILITY(watchos,introduced=4.0) SW
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
+SWIFT_CLASS_NAMED("DeviceOrientationManager")
+@interface DeviceOrientationManager : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (void)handleOrientationChangedNotification:(NSNotification * _Nonnull)notification;
+@end
+
 /// The type of error encountered
 typedef SWIFT_ENUM_NAMED(NSInteger, FritzErrorCode, "ErrorCode", closed) {
   FritzErrorCodeModelCompilation = 0,
@@ -875,6 +902,9 @@ SWIFT_CLASS_NAMED("FritzCore") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_
 /// Shared configuration
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzConfiguration * _Nonnull configuration;)
 + (FritzConfiguration * _Nonnull)configuration SWIFT_WARN_UNUSED_RESULT;
+/// Shared configuration
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) DeviceOrientationManager * _Nonnull orientationManager;)
++ (DeviceOrientationManager * _Nonnull)orientationManager SWIFT_WARN_UNUSED_RESULT;
 /// Configure the Fritz SDK
 + (void)configure;
 /// Configure the Fritz SDK with a custom configuration
@@ -1187,6 +1217,13 @@ SWIFT_CLASS_NAMED("Configuration") SWIFT_AVAILABILITY(watchos,introduced=4.0) SW
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
+SWIFT_CLASS_NAMED("DeviceOrientationManager")
+@interface DeviceOrientationManager : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (void)handleOrientationChangedNotification:(NSNotification * _Nonnull)notification;
+@end
+
 /// The type of error encountered
 typedef SWIFT_ENUM_NAMED(NSInteger, FritzErrorCode, "ErrorCode", closed) {
   FritzErrorCodeModelCompilation = 0,
@@ -1203,6 +1240,9 @@ SWIFT_CLASS_NAMED("FritzCore") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_
 /// Shared configuration
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzConfiguration * _Nonnull configuration;)
 + (FritzConfiguration * _Nonnull)configuration SWIFT_WARN_UNUSED_RESULT;
+/// Shared configuration
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) DeviceOrientationManager * _Nonnull orientationManager;)
++ (DeviceOrientationManager * _Nonnull)orientationManager SWIFT_WARN_UNUSED_RESULT;
 /// Configure the Fritz SDK
 + (void)configure;
 /// Configure the Fritz SDK with a custom configuration

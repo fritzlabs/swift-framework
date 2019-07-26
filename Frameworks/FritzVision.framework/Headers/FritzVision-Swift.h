@@ -554,6 +554,23 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 
 
 
+@class CIContext;
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+/// Uses an alpha mask with image to cut out a section.
+/// Rotates source image to <code>up</code> orientation before masking.
+/// \param mask Alpha mask
+///
+/// \param providedContext Optional CIContext. If it is not specified, uses sharedContext from FritzVisionImage
+///
+///
+/// returns:
+/// the masked image
+- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)mask providedContext:(CIContext * _Nullable)providedContext SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@class CIBlendKernel;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
@@ -570,23 +587,27 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-@class CIContext;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Uses an alpha mask with image to cut out a section.
-/// Rotates source image to <code>up</code> orientation before masking.
-/// \param image the alpha mask to apply
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+/// Blends mask with current image.
+/// Rotates source image to <code>up</code> orientation before blending.
+/// \param mask Overlaying image
 ///
-/// \param providedContext Optional CIContext. If it is not specified, uses sharedContext from FritzVisionImage
+/// \param blendMode Blend mode used to blend images.
+///
+/// \param interpolationQuality Quality of interpolation when resizing image.
+///
+/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
 ///
 ///
 /// returns:
-/// the masked image
-- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)mask providedContext:(CIContext * _Nullable)providedContext SWIFT_WARN_UNUSED_RESULT;
+/// Blended image
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -594,11 +615,12 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
-- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
-SWIFT_CLASS_NAMED("FritzVisionImageMetadata")
+
+
+SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImageMetadata : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 /// Orientation defaults to <code>FritzImageOrientation.right</code> which should work for rear facing cameras with a device orientation of Portrait.
@@ -1023,6 +1045,8 @@ SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduc
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+
 @class FritzPose;
 @class PoseLiftingPredictorOptions;
 @class FritzPose3D;
@@ -1038,8 +1062,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
-
-
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
@@ -1251,11 +1273,11 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// Generate UIImage mask from most likely class at each pixel.
 /// The generated image size will fit the original image passed into prediction, applying rotation.
 /// If the image was center cropped, will return an image that covers the cropped image.
-/// \param minThreshold Minimum threshold value needed to count. By default zero.
+/// \param minScore Minimum threshold value needed to count. By default zero.
 /// You can set this property to filter out classes that may be the most likely but still
 /// have a lower probability.
 ///
-/// \param alpha Alpha value of the color (0-255) for detected classes. By default completely opaque.
+/// \param maxAlpha Alpha value of the color (0-255) for detected classes. By default completely opaque.
 ///
 /// \param resize If true (default) mask will be scaled to the size of the input image.
 ///
@@ -1266,7 +1288,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// Generate UIImage mask for given class.
 /// The generated image size will fit the original image passed into prediction, applying rotation.
 /// If the image was center cropped, will return an image that covers the cropped image.
-/// \param forClass Class for the mask.
+/// \param segmentClass Class for the mask.
 ///
 /// \param clippingThreshold All confidence scores above this value will be clipped to 1.
 /// Range [0.0-1.0].
@@ -2152,6 +2174,23 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 
 
 
+@class CIContext;
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+/// Uses an alpha mask with image to cut out a section.
+/// Rotates source image to <code>up</code> orientation before masking.
+/// \param mask Alpha mask
+///
+/// \param providedContext Optional CIContext. If it is not specified, uses sharedContext from FritzVisionImage
+///
+///
+/// returns:
+/// the masked image
+- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)mask providedContext:(CIContext * _Nullable)providedContext SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@class CIBlendKernel;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
@@ -2168,23 +2207,27 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-@class CIContext;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Uses an alpha mask with image to cut out a section.
-/// Rotates source image to <code>up</code> orientation before masking.
-/// \param image the alpha mask to apply
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+/// Blends mask with current image.
+/// Rotates source image to <code>up</code> orientation before blending.
+/// \param mask Overlaying image
 ///
-/// \param providedContext Optional CIContext. If it is not specified, uses sharedContext from FritzVisionImage
+/// \param blendMode Blend mode used to blend images.
+///
+/// \param interpolationQuality Quality of interpolation when resizing image.
+///
+/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
 ///
 ///
 /// returns:
-/// the masked image
-- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)mask providedContext:(CIContext * _Nullable)providedContext SWIFT_WARN_UNUSED_RESULT;
+/// Blended image
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -2192,11 +2235,12 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
-- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
-SWIFT_CLASS_NAMED("FritzVisionImageMetadata")
+
+
+SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImageMetadata : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 /// Orientation defaults to <code>FritzImageOrientation.right</code> which should work for rear facing cameras with a device orientation of Portrait.
@@ -2621,6 +2665,8 @@ SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduc
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+
 @class FritzPose;
 @class PoseLiftingPredictorOptions;
 @class FritzPose3D;
@@ -2636,8 +2682,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
-
-
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
@@ -2849,11 +2893,11 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// Generate UIImage mask from most likely class at each pixel.
 /// The generated image size will fit the original image passed into prediction, applying rotation.
 /// If the image was center cropped, will return an image that covers the cropped image.
-/// \param minThreshold Minimum threshold value needed to count. By default zero.
+/// \param minScore Minimum threshold value needed to count. By default zero.
 /// You can set this property to filter out classes that may be the most likely but still
 /// have a lower probability.
 ///
-/// \param alpha Alpha value of the color (0-255) for detected classes. By default completely opaque.
+/// \param maxAlpha Alpha value of the color (0-255) for detected classes. By default completely opaque.
 ///
 /// \param resize If true (default) mask will be scaled to the size of the input image.
 ///
@@ -2864,7 +2908,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// Generate UIImage mask for given class.
 /// The generated image size will fit the original image passed into prediction, applying rotation.
 /// If the image was center cropped, will return an image that covers the cropped image.
-/// \param forClass Class for the mask.
+/// \param segmentClass Class for the mask.
 ///
 /// \param clippingThreshold All confidence scores above this value will be clipped to 1.
 /// Range [0.0-1.0].
@@ -3753,6 +3797,23 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 
 
 
+@class CIContext;
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+/// Uses an alpha mask with image to cut out a section.
+/// Rotates source image to <code>up</code> orientation before masking.
+/// \param mask Alpha mask
+///
+/// \param providedContext Optional CIContext. If it is not specified, uses sharedContext from FritzVisionImage
+///
+///
+/// returns:
+/// the masked image
+- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)mask providedContext:(CIContext * _Nullable)providedContext SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@class CIBlendKernel;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
@@ -3769,23 +3830,27 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-@class CIContext;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Uses an alpha mask with image to cut out a section.
-/// Rotates source image to <code>up</code> orientation before masking.
-/// \param image the alpha mask to apply
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+/// Blends mask with current image.
+/// Rotates source image to <code>up</code> orientation before blending.
+/// \param mask Overlaying image
 ///
-/// \param providedContext Optional CIContext. If it is not specified, uses sharedContext from FritzVisionImage
+/// \param blendMode Blend mode used to blend images.
+///
+/// \param interpolationQuality Quality of interpolation when resizing image.
+///
+/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
 ///
 ///
 /// returns:
-/// the masked image
-- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)mask providedContext:(CIContext * _Nullable)providedContext SWIFT_WARN_UNUSED_RESULT;
+/// Blended image
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -3793,11 +3858,12 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
-- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
-SWIFT_CLASS_NAMED("FritzVisionImageMetadata")
+
+
+SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImageMetadata : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 /// Orientation defaults to <code>FritzImageOrientation.right</code> which should work for rear facing cameras with a device orientation of Portrait.
@@ -4222,6 +4288,8 @@ SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduc
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+
 @class FritzPose;
 @class PoseLiftingPredictorOptions;
 @class FritzPose3D;
@@ -4237,8 +4305,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
-
-
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
@@ -4450,11 +4516,11 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// Generate UIImage mask from most likely class at each pixel.
 /// The generated image size will fit the original image passed into prediction, applying rotation.
 /// If the image was center cropped, will return an image that covers the cropped image.
-/// \param minThreshold Minimum threshold value needed to count. By default zero.
+/// \param minScore Minimum threshold value needed to count. By default zero.
 /// You can set this property to filter out classes that may be the most likely but still
 /// have a lower probability.
 ///
-/// \param alpha Alpha value of the color (0-255) for detected classes. By default completely opaque.
+/// \param maxAlpha Alpha value of the color (0-255) for detected classes. By default completely opaque.
 ///
 /// \param resize If true (default) mask will be scaled to the size of the input image.
 ///
@@ -4465,7 +4531,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// Generate UIImage mask for given class.
 /// The generated image size will fit the original image passed into prediction, applying rotation.
 /// If the image was center cropped, will return an image that covers the cropped image.
-/// \param forClass Class for the mask.
+/// \param segmentClass Class for the mask.
 ///
 /// \param clippingThreshold All confidence scores above this value will be clipped to 1.
 /// Range [0.0-1.0].
@@ -5351,6 +5417,23 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 
 
 
+@class CIContext;
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+/// Uses an alpha mask with image to cut out a section.
+/// Rotates source image to <code>up</code> orientation before masking.
+/// \param mask Alpha mask
+///
+/// \param providedContext Optional CIContext. If it is not specified, uses sharedContext from FritzVisionImage
+///
+///
+/// returns:
+/// the masked image
+- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)mask providedContext:(CIContext * _Nullable)providedContext SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@class CIBlendKernel;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
@@ -5367,23 +5450,27 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-@class CIContext;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Uses an alpha mask with image to cut out a section.
-/// Rotates source image to <code>up</code> orientation before masking.
-/// \param image the alpha mask to apply
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+/// Blends mask with current image.
+/// Rotates source image to <code>up</code> orientation before blending.
+/// \param mask Overlaying image
 ///
-/// \param providedContext Optional CIContext. If it is not specified, uses sharedContext from FritzVisionImage
+/// \param blendMode Blend mode used to blend images.
+///
+/// \param interpolationQuality Quality of interpolation when resizing image.
+///
+/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
 ///
 ///
 /// returns:
-/// the masked image
-- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)mask providedContext:(CIContext * _Nullable)providedContext SWIFT_WARN_UNUSED_RESULT;
+/// Blended image
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -5391,11 +5478,12 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
-- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
-SWIFT_CLASS_NAMED("FritzVisionImageMetadata")
+
+
+SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImageMetadata : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 /// Orientation defaults to <code>FritzImageOrientation.right</code> which should work for rear facing cameras with a device orientation of Portrait.
@@ -5820,6 +5908,8 @@ SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduc
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+
 @class FritzPose;
 @class PoseLiftingPredictorOptions;
 @class FritzPose3D;
@@ -5835,8 +5925,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
 @end
-
-
 
 @class FritzVisionPoseModelOptions;
 @class FritzVisionPoseResult;
@@ -6048,11 +6136,11 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// Generate UIImage mask from most likely class at each pixel.
 /// The generated image size will fit the original image passed into prediction, applying rotation.
 /// If the image was center cropped, will return an image that covers the cropped image.
-/// \param minThreshold Minimum threshold value needed to count. By default zero.
+/// \param minScore Minimum threshold value needed to count. By default zero.
 /// You can set this property to filter out classes that may be the most likely but still
 /// have a lower probability.
 ///
-/// \param alpha Alpha value of the color (0-255) for detected classes. By default completely opaque.
+/// \param maxAlpha Alpha value of the color (0-255) for detected classes. By default completely opaque.
 ///
 /// \param resize If true (default) mask will be scaled to the size of the input image.
 ///
@@ -6063,7 +6151,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// Generate UIImage mask for given class.
 /// The generated image size will fit the original image passed into prediction, applying rotation.
 /// If the image was center cropped, will return an image that covers the cropped image.
-/// \param forClass Class for the mask.
+/// \param segmentClass Class for the mask.
 ///
 /// \param clippingThreshold All confidence scores above this value will be clipped to 1.
 /// Range [0.0-1.0].

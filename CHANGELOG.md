@@ -5,6 +5,11 @@ Change Log
 
 ---
 
+## [3.6.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.6.2)
+
+1. Update Image processing pipeline to use GPU more effectively. See speedups of 50%.
+2. Fix image rotation to take device orientation into account with initializing from AVCaptureConnection.
+
 ## [3.6.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.6.1)
 
 1. Add in masked function in FritzVisionImage
