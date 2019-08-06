@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [swift-framework](https://github.com/fritzlabs/swift-framework/releases/tag/swift-framework)
+
+1. Building for Xcode 11 Beta 5.
+
 ## [3.6.3](https://github.com/fritzlabs/swift-framework/releases/tag/3.6.3)
 
 1. Fixing device orientation listener.

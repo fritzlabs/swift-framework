@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'Fritz'
 
-  s.version = '3.6.3'
+  s.version = '3.6.0-beta.4'
 
   s.summary = 'Official Fritz SDK for Swift 5.0 and Objective-C'
 
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.author = { 'Chris Kelly' => 'engineering@fritz.ai' }
 
-  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/3.6.3/FritzBase.zip' }
+  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/3.6.0-beta.4/FritzBase.zip' }
 
   s.requires_arc = true
 
@@ -25,66 +25,66 @@ Pod::Spec.new do |s|
   s.default_subspec = 'Vision'
 
   s.subspec 'Vision' do |vision|
-    vision.dependency 'FritzBase/Vision', '3.6.3'
+    vision.dependency 'FritzBase/Vision', '3.6.0-beta.4'
   end
 
   s.subspec 'VisionLabelModel' do |vision|
-    vision.dependency 'FritzVisionLabelModel', '3.6.3'
+    vision.dependency 'FritzVisionLabelModel', '3.6.0-beta.4'
   end
 
   s.subspec 'VisionObjectModel' do |vision|
-    vision.dependency 'FritzVisionObjectModel', '3.6.3'
+    vision.dependency 'FritzVisionObjectModel', '3.6.0-beta.4'
   end
 
   s.subspec 'VisionPoseModel' do |vision|
-    vision.dependency 'FritzVisionPoseModel', '3.6.3'
+    vision.dependency 'FritzVisionPoseModel', '3.6.0-beta.4'
   end
 
   s.subspec 'VisionRigidPose' do |vision|
-    vision.dependency 'FritzVisionRigidPose', '3.6.3'
+    vision.dependency 'FritzVisionRigidPose', '3.6.0-beta.4'
   end
 
   s.subspec 'VisionMultiPoseModel' do |vision|
-    vision.dependency 'FritzVisionMultiPoseModel', '3.6.3'
+    vision.dependency 'FritzVisionMultiPoseModel', '3.6.0-beta.4'
   end
 
   s.subspec 'VisionStyleModel' do |style|
     style.subspec 'Paintings' do |paintings|
-      paintings.dependency 'FritzVisionStyleModelPaintings', '3.6.3'
+      paintings.dependency 'FritzVisionStyleModelPaintings', '3.6.0-beta.4'
     end
   end
 
   s.subspec 'VisionSegmentationModel' do |vision|
     vision.subspec 'People' do |people|
-      people.dependency 'FritzVisionPeopleSegmentationModel', '3.6.3'
+      people.dependency 'FritzVisionPeopleSegmentationModel', '3.6.0-beta.4'
     end
 
     vision.subspec 'PeopleMedium' do |people|
-      people.dependency 'FritzVisionPeopleSegmentationMediumModel', '3.6.3'
+      people.dependency 'FritzVisionPeopleSegmentationMediumModel', '3.6.0-beta.4'
     end
 
     vision.subspec 'LivingRoom' do |livingroom|
-      livingroom.dependency 'FritzVisionLivingRoomSegmentationModel', '3.6.3'
+      livingroom.dependency 'FritzVisionLivingRoomSegmentationModel', '3.6.0-beta.4'
     end
 
     vision.subspec 'Outdoor' do |outdoor|
-      outdoor.dependency 'FritzVisionOutdoorSegmentationModel', '3.6.3'
+      outdoor.dependency 'FritzVisionOutdoorSegmentationModel', '3.6.0-beta.4'
     end
 
     vision.subspec 'Hair' do |hair|
-      hair.dependency 'FritzVisionHairSegmentationModel', '3.6.3'
+      hair.dependency 'FritzVisionHairSegmentationModel', '3.6.0-beta.4'
     end
 
     vision.subspec 'PeopleAndPetMedium' do |people|
-      people.dependency 'FritzVisionPeopleAndPetSegmentationMediumModel', '3.6.3'
+      people.dependency 'FritzVisionPeopleAndPetSegmentationMediumModel', '3.6.0-beta.4'
     end
 
     vision.subspec 'Pet' do |pet|
-      pet.dependency 'FritzVisionPetSegmentationModel', '3.6.3'
+      pet.dependency 'FritzVisionPetSegmentationModel', '3.6.0-beta.4'
     end
 
     vision.subspec 'Sky' do |sky|
-      sky.dependency 'FritzVisionSkySegmentationModel', '3.6.3'
+      sky.dependency 'FritzVisionSkySegmentationModel', '3.6.0-beta.4'
     end
 
   end
