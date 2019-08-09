@@ -20,15 +20,14 @@
       "name" : "flatten1__permute__"
     },
     {
-      "bottom" : "flatten1_output__permute__",
+      "mode" : 1,
       "weights" : {
 
       },
-      "mode" : 1,
-      "nd_axis" : 0,
       "top" : "flatten1_output",
       "type" : "flatten",
-      "name" : "flatten1"
+      "name" : "flatten1",
+      "bottom" : "flatten1_output__permute__"
     },
     {
       "nB" : 28,

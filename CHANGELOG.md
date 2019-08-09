@@ -5,6 +5,12 @@ Change Log
 
 ---
 
+## [3.7.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.7.0)
+
+1. Updating pose model. Runs faster with higher accuracy!
+2. Refactoring some pose logic. Pose results retrieved by `poseResult.pose()` are in the range 0 to 1.
+3. 
+
 ## [swift-framework](https://github.com/fritzlabs/swift-framework/releases/tag/swift-framework)
 
 1. Building for Xcode 11 Beta 5.
