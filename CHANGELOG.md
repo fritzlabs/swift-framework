@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.7.0-beta.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.7.0-beta.1)
+
+1. Building for Xcode 11 Beta 5
+
 ## [3.7.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.7.0)
 
 1. Updating pose model. Runs faster with higher accuracy!
