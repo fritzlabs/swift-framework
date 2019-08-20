@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [3.7.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.7.0-beta.2)
+
+1. Updating for Xcode 1 Beta 6
+
 ## [3.7.0-beta.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.7.0-beta.1)
 
 1. Building for Xcode 11 Beta 5
