@@ -5,6 +5,11 @@ Change Log
 
 ---
 
+## [4.0.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/4.0.0-beta.2)
+
+1. Building for Xcode 10.
+2. Fix linking to FritzVisionRigidPoseModel.
+
 ## [4.0.0-beta.1](https://github.com/fritzlabs/swift-framework/releases/tag/4.0.0-beta.1)
 
 1. Updating Pose Predictor with Generics. FritzVisionPoseModel is now FritzVisionHumanPoseModel.
