@@ -5,6 +5,12 @@ Change Log
 
 ---
 
+## [4.0.0-beta.1](https://github.com/fritzlabs/swift-framework/releases/tag/4.0.0-beta.1)
+
+1. Updating Pose Predictor with Generics. FritzVisionPoseModel is now FritzVisionHumanPoseModel.
+2. Removing deprecated functions.
+3. 
+
 ## [3.7.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.7.0-beta.2)
 
 1. Updating for Xcode 1 Beta 6

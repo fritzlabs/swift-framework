@@ -270,71 +270,87 @@ SWIFT_CLASS_NAMED("BoundingBoxOutline")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class CIContext;
+@class CIImage;
+enum ResizeSamplingMethod : NSInteger;
 
-SWIFT_CLASS("_TtC11FritzVision14CustomKeypoint")
-@interface CustomKeypoint : NSObject
-@property (nonatomic, readonly) NSInteger id SWIFT_DEPRECATED_MSG("", "index");
-@property (nonatomic, readonly) CGPoint position;
-@property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) NSInteger index;
-- (nonnull instancetype)initWithPosition:(CGPoint)position index:(NSInteger)index score:(double)score OBJC_DESIGNATED_INITIALIZER;
-- (CustomKeypoint * _Nonnull)newKeypointWith:(CGPoint)point SWIFT_WARN_UNUSED_RESULT;
-- (CustomKeypoint * _Nonnull)scaledFrom:(CGSize)originalSize to:(CGSize)targetSize SWIFT_WARN_UNUSED_RESULT;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (CustomKeypoint * _Nonnull)fromPosition:(CGPoint)position SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS("_TtC11FritzVision15CIImagePipeline") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CIImagePipeline : NSObject
+/// Image context used to render CIImage pipeline
+@property (nonatomic, readonly, strong) CIContext * _Nonnull context;
+/// Current CIImage.
+@property (nonatomic, strong) CIImage * _Nonnull image;
+/// Sampling method use when resizing images.  Defaults to <code>.affine</code>, which is the fastest but produces the most artifacts.
+@property (nonatomic) enum ResizeSamplingMethod resizeSamplingMethod;
+/// Create <code>CIImagePipeline</code>
+/// \param image Input CIImage
+///
+/// \param context CIImage context. If not provided, uses FritzVisionImage shared context.
+///
+- (nonnull instancetype)init:(CIImage * _Nonnull)image context:(CIContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
+/// Render current CIImage to pixelBuffer
+- (CVPixelBufferRef _Nullable)render SWIFT_WARN_UNUSED_RESULT;
+- (CVPixelBufferRef _Nullable)emptyPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+/// Sampling method used to resize image.
+typedef SWIFT_ENUM_NAMED(NSInteger, ResizeSamplingMethod, "ResizeSamplingMethod", closed) {
+/// Lanczos Sampling method
+  ResizeSamplingMethodLanczos = 0,
+/// Bicubic Sampling method.
+  ResizeSamplingMethodBicubic = 1,
+/// Affine transformation resampling. This is the fastest method but results in more edge artifacts.
+  ResizeSamplingMethodAffine = 2,
+};
 
-SWIFT_CLASS("_TtC11FritzVision10CustomPose")
-@interface CustomPose : NSObject
-@property (nonatomic, readonly, copy) NSArray<CustomKeypoint *> * _Nonnull keypoints;
-@property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) CGSize bounds;
-- (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints score:(double)score bounds:(CGSize)bounds OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints bounds:(CGSize)bounds OBJC_DESIGNATED_INITIALIZER;
-- (CustomPose * _Nonnull)applying:(CGAffineTransform)t SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-@class FritzVisionImage;
+@class UIImage;
+enum FritzSegmentationRegion : NSInteger;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface CustomPose (SWIFT_EXTENSION(FritzVision))
-/// Rotates keypoints to match original image orientation.
-/// Note: Currently only works on .up and .right original image orientations.
-/// \param image FritzVisionImage
+@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
+/// Mask image using a single class alpha RGBA mask.
+/// \param alphaMask RGBA alpha mask
 ///
+/// \param segmentationRegion Region of image to remove.  <code>background</code> removes all areas
+/// where alpha value of mask is 0.
 ///
-/// returns:
-/// Pose with keypoints rotated.
-- (CustomPose * _Nonnull)rotateKeypointsToOriginalImageWithImage:(FritzVisionImage * _Nonnull)image SWIFT_WARN_UNUSED_RESULT;
+- (void)maskWith:(UIImage * _Nonnull)alphaMask removing:(enum FritzSegmentationRegion)segmentationRegion;
 @end
 
-@class FritzVisionCustomPoseModelOptions;
-@protocol MLFeatureProvider;
-@class MLMultiArray;
-@class UIImage;
+@class CIBlendKernel;
 
-SWIFT_CLASS("_TtC11FritzVision21CustomPoseModelResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface CustomPoseModelResult : NSObject
-@property (nonatomic, readonly, strong) FritzVisionImage * _Nonnull image;
-@property (nonatomic, readonly, strong) FritzVisionCustomPoseModelOptions * _Nonnull options;
-/// Unavailable.  Use <code>FritzVisionPoseModel.predict</code> function to build.
-- (nonnull instancetype)initFor:(id <MLFeatureProvider> _Nonnull)results with:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionCustomPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithHeatmap:(MLMultiArray * _Nonnull)heatmap offsets:(MLMultiArray * _Nonnull)offsets withImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionCustomPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
-- (CustomPose * _Nonnull)decodePoseWithScale:(BOOL)scale SWIFT_WARN_UNUSED_RESULT;
-/// Draw detected poses on input image.
-/// \param pose List of poses to draw
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
+/// Center Crop Image
+/// \param scaleCropOption Scale Crop Option
 ///
+- (void)centerCrop;
+/// Orients image from given orientation to up orientation.
+/// \param orientation Orientation
 ///
-/// returns:
-/// Original image with poses drawn on image.
-- (UIImage * _Nullable)drawPose:(CustomPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)orient:(CGImagePropertyOrientation)orientation;
+/// Blends image with provided mask.
+/// \param mask Alpha matting mask to blend image with
+///
+/// \param kernel Blend kernel used to blend mask with background image.
+///
+/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
+///
+- (void)blendWith:(UIImage * _Nonnull)mask blendKernel:(CIBlendKernel * _Nonnull)kernel opacity:(CGFloat)opacity;
+- (CIImage * _Nullable)changeOpacityOn:(CIImage * _Nonnull)image to:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
+- (void)maskWith:(AVDepthData * _Nonnull)depthData focusingAtDepth:(CGFloat)depth focalWidth:(CGFloat)focalWidth;
+- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsFartherThan:(CGFloat)depth;
+- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsCloserThan:(CGFloat)depth;
+- (void)blurWith:(AVDepthData * _Nonnull)depthData focusedAt:(CGFloat)depth focalWidth:(CGFloat)focalWidth blurRadius:(CGFloat)blurRadius;
+- (void)blurWithPixelsFartherThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
+- (void)blurWithPixelsCloserThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
 @end
 
 
@@ -376,53 +392,8 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionCropAndScale, "FritzVisionCropAnd
   FritzVisionCropAndScaleScaleFit = 3,
 };
 
-
-/// A model used to predict the poses of people in images.
-SWIFT_CLASS_NAMED("FritzVisionCustomPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionCustomPoseModel : NSObject
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-/// Predict poses from a FritzImage.
-/// \param input The image to use to dectect poses.
-///
-/// \param options The options used to configure the pose results.
-///
-/// \param completion Handler to call back on the main thread with poses or error.
-///
-- (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionCustomPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CustomPoseModelResult * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionCustomPoseModel (SWIFT_EXTENSION(FritzVision))
-/// Model metadata set in webapp.
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
-/// Model tags set in webapp.
-@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
-@end
-
-
-/// Options for Pose Model.
-SWIFT_CLASS_NAMED("FritzVisionCustomPoseModelOptions")
-@interface FritzVisionCustomPoseModelOptions : NSObject
-/// Crop and scale option. Default value is scaleFit.
-@property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
-/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
-/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
-@property (nonatomic) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model).
-/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
-/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
-/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
-/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
-/// However, if you are using ARKit, you must set this to true.
-@property (nonatomic) BOOL forceVisionPrediction;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
 @protocol FritzSwiftIdentifiedModel;
+@class FritzVisionImage;
 @class FritzVisionDepthModelOptions;
 
 SWIFT_CLASS_NAMED("FritzVisionDepthModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -441,7 +412,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 ///
 /// \param options Options for model execution.
 ///
-/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionDepthMap or error message.
+/// \param completion The block to invoke after the prediction request.
+/// Contains a FritzVisionDepthMap or error message.
 ///
 - (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionDepthModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(AVDepthData * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -618,6 +590,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// An image or image buffer used in vision detection.
 SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzVisionImage : NSObject
+/// Shared CIContext
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * _Nonnull sharedContext;)
++ (CIContext * _Nonnull)sharedContext SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithBuffer:(CMSampleBufferRef _Nonnull)buffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image OBJC_DESIGNATED_INITIALIZER;
@@ -631,23 +606,27 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 
 
 
-@class CIContext;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Uses an alpha mask with image to cut out a section.
-/// Rotates source image to <code>up</code> orientation before masking.
-/// \param mask Alpha mask
+/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
+/// \param alphaMask Alpha Mask with a single class.
 ///
-/// \param providedContext Optional CIContext. If it is not specified, uses sharedContext from FritzVisionImage
+/// \param segmentationRegion Region of alpha mask to remove.
+///
+/// \param samplingMethod Resizing sampling method to use.
+///
+/// \param providedContext Optional Core Image context to use.  Defaults to
+/// <code>FritzVisionImage.sharedContext</code>
 ///
 ///
 /// returns:
-/// the masked image
-- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)mask providedContext:(CIContext * _Nullable)providedContext SWIFT_WARN_UNUSED_RESULT;
+/// Masked image.
+- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
 @end
 
-@class CIBlendKernel;
+
+
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
@@ -664,7 +643,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
 /// Blends mask with current image.
 /// Rotates source image to <code>up</code> orientation before blending.
 /// \param mask Overlaying image
@@ -678,31 +657,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-@class FritzPose;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Decode poses and draws on original UIImage.
-/// \param poses List of poses to draw on image.
-///
-/// \param partThreshold Threshold for pose part to connect to rest of skeleton.
-///
-///
-/// returns:
-/// UIImage if poses detected.
-- (UIImage * _Nullable)drawPoses:(NSArray<FritzPose *> * _Nonnull)poses meetingThreshold:(double)partThreshold SWIFT_WARN_UNUSED_RESULT;
-/// Draw pose on image.
-/// \param pose Pose
-///
-/// \param partThreshold Threshold for pose part to connect to rest of skeleton.
-///
-///
-/// returns:
-/// UIImage of pose drawn on image.
-- (UIImage * _Nullable)drawPose:(FritzPose * _Nonnull)pose meetingThreshold:(double)partThreshold SWIFT_WARN_UNUSED_RESULT;
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("`blendMode` and `interpolationQuality` changed to `blendKernel` and `resizeSamplingMethod`");
 @end
 
 
@@ -714,13 +669,13 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 
 
+
+
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
-
-
 
 
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -1142,66 +1097,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 
 
 /// Model used to create a 3D pose from 2D pose
-SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_CLASS("_TtC11FritzVision27FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseLiftingModel : BasePredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class PoseLiftingPredictorOptions;
-@class FritzPose3D;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseLiftingModel (SWIFT_EXTENSION(FritzVision))
-/// Predict poses from an inputPose
-/// \param input Input pose to process.
-///
-/// \param options The options used to configure the pose results.
-///
-/// \param completion Handler to call back on the main thread with poses or error.
-///
-- (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
-@end
 
 
 
-@class FritzVisionPoseModelOptions;
-@class FritzVisionPoseResult;
-
-/// A model used to predict the poses of people in images.
-SWIFT_CLASS_NAMED("FritzVisionPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseModel : BasePredictor
-/// Model Configuration for pose model in Fritz.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) FritzModelConfiguration * _Nonnull modelConfig;)
-+ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
-+ (void)setModelConfig:(FritzModelConfiguration * _Nonnull)value;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
-+ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
-/// Is WiFi required to download pose model over the air.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
-+ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
-+ (void)setWifiRequiredForModelDownload:(BOOL)value;
-@property (nonatomic, readonly) NSInteger outputStride;
-/// Predict poses from a FritzImage.
-/// \param input The image to use to dectect poses.
-///
-/// \param options The options used to configure the pose results.
-///
-/// \param completion Handler to call back on the main thread with poses or error.
-///
-- (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionPoseResult * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseModel (SWIFT_EXTENSION(FritzVision))
-/// Fetch model. Downloads model if model has not been downloaded before.
-/// \param completionHandler CompletionHandler called after fetchModel request finishes.
-///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPoseModel * _Nullable, NSError * _Nullable))completionHandler;
-@end
 
 
 /// Options for Pose Model.
@@ -1227,93 +1131,6 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 /// NMS radius for pose
 @property (nonatomic) NSInteger nmsRadius;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS_NAMED("FritzVisionPoseResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseResult : NSObject
-/// Original input image before it was rescaled
-@property (nonatomic, readonly, strong) FritzVisionImage * _Nonnull image;
-/// Pose model options.
-@property (nonatomic, readonly, strong) FritzVisionPoseModelOptions * _Nonnull options;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
-/// Draw detected poses on input image.
-/// \param poses List of poses to draw
-///
-///
-/// returns:
-/// Original image with poses drawn on image.
-- (UIImage * _Nullable)drawPosesFor:(NSArray<FritzPose *> * _Nonnull)poses SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Draw poses using FritzVisionImage.", "FritzVisionImage.draw");
-/// Draw detected poses on input image.  Poses must be in the coordinate space of the original image.
-/// If they are not, use the <code>pose.scale</code> method to convert coordinate spaces.
-/// \param pose List of poses to draw
-///
-///
-/// returns:
-/// Original image with poses drawn on image.
-- (UIImage * _Nullable)drawPose:(FritzPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Draw poses using FritzVisionImage.", "FritzVisionImage.draw");
-/// Decode poses and draws on original UIImage.
-/// \param numPoses Maximum number of poses to find.
-///
-///
-/// returns:
-/// UIImage if poses detected.
-- (UIImage * _Nullable)drawNumPoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Draw poses using FritzVisionImage.", "FritzVisionImage.draw");
-/// Draw single pose on input image.
-///
-/// returns:
-/// UIImage if pose detected.
-- (UIImage * _Nullable)drawPose SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Draw poses using FritzVisionImage.", "FritzVisionImage.draw");
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
-/// Decode single pose result in the coordinates of the original input image (after it is rotated
-/// to the .up position.
-///
-/// returns:
-/// Pose
-- (FritzPose * _Nullable)decodePose SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use pose to get pose with position normalized between 0 and 1", "pose");
-/// Decode single pose result
-/// \param inOriginalDimensions If true, will return keypoint positions in original image dimensions. If false
-/// coordinates are from 0 to 1.
-///
-///
-/// returns:
-/// Pose
-- (FritzPose * _Nullable)decodePoseInOriginalDimensions:(BOOL)inOriginalDimensions SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use pose to get pose with position normalized between 0 and 1", "pose");
-/// Decode all poses above the pose threshold
-/// \param numPoses the number of poses to decode
-///
-///
-/// returns:
-/// Pose list of poses above mininimum pose threshold option.
-- (NSArray<FritzPose *> * _Nonnull)decodePoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use poses to get poses with position normalized between 0 and 1", "poses:");
-/// Decodes all poses above pose threshold.
-/// \param numPoses the number of poses to decode
-///
-/// \param inOriginalDimensions use the original size of image for scaling keypoints.
-///
-///
-/// returns:
-/// Pose list of poses above mininimum pose threshold option.
-- (NSArray<FritzPose *> * _Nonnull)decodePoses:(NSInteger)numPoses inOriginalDimensions:(BOOL)inOriginalDimensions SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use poses to get poses with position normalized between 0 and 1", "poses:");
-/// Get poses
-/// \param limit Maximum number of poses to return.
-///
-///
-/// returns:
-/// List of Poses.
-- (NSArray<FritzPose *> * _Nonnull)poses:(NSInteger)limit SWIFT_WARN_UNUSED_RESULT;
-/// Get single pose.
-- (FritzPose * _Nullable)pose SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -1344,6 +1161,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class MLMultiArray;
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationResult") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzVisionSegmentationResult : NSObject
@@ -1378,6 +1196,30 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// \param resize If true (default) mask will be scaled to the size of the input image.
 ///
 - (UIImage * _Nullable)toImageMask:(double)minThreshold alpha:(uint8_t)alpha resize:(BOOL)resize SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildMultiClassMaskWithMinAcceptedScore:maxAlpha:resize:");
+/// Generate UIImage mask of given class.
+/// The generated image size will fit the original image passed into prediction, applying rotation.
+/// If the image was center cropped, will return an image that covers the cropped image.
+/// \param segmentClass Class to mask.
+///
+/// \param threshold Probability to filter.  Any probabilities below this value will be filtered out.
+///
+/// \param alpha Alpha value of the color (0-255) for detected classes.
+///
+/// \param minThresholdAccepted Any confidence score below this value will have an alpha of 0.
+/// Class confidence scores between <code>minThresholdAccepted</code> and <code>threshold</code> will retain
+/// their original value.
+///
+/// \param resize Resize mask to input image size.
+///
+///
+/// returns:
+/// Mask for class.
+- (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha minThresholdAccepted:(double)minThresholdAccepted resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildSingleClassMask:clippingScoresAbove:zeroingScoresBelow:maxAlpha:resize:color:");
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSegmentationResult (SWIFT_EXTENSION(FritzVision))
 /// Generate UIImage mask from most likely class at each pixel.
 /// The generated image size will fit the original image passed into prediction, applying rotation.
 /// If the image was center cropped, will return an image that covers the cropped image.
@@ -1415,25 +1257,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Mask for class.
 - (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass clippingScoresAbove:(double)clippingThreshold zeroingScoresBelow:(double)zeroingThreshold maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT;
-/// Generate UIImage mask of given class.
-/// The generated image size will fit the original image passed into prediction, applying rotation.
-/// If the image was center cropped, will return an image that covers the cropped image.
-/// \param segmentClass Class to mask.
-///
-/// \param threshold Probability to filter.  Any probabilities below this value will be filtered out.
-///
-/// \param alpha Alpha value of the color (0-255) for detected classes.
-///
-/// \param minThresholdAccepted Any confidence score below this value will have an alpha of 0.
-/// Class confidence scores between <code>minThresholdAccepted</code> and <code>threshold</code> will retain
-/// their original value.
-///
-/// \param resize Resize mask to input image size.
-///
-///
-/// returns:
-/// Mask for class.
-- (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha minThresholdAccepted:(double)minThresholdAccepted resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildSingleClassMask:clippingScoresAbove:zeroingScoresBelow:maxAlpha:resize:color:");
 @end
 
 
@@ -1547,55 +1370,25 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-typedef SWIFT_ENUM(NSInteger, HumanPosePart, closed) {
-  HumanPosePartNose = 0,
-  HumanPosePartLeftEye = 1,
-  HumanPosePartRightEye = 2,
-  HumanPosePartLeftEar = 3,
-  HumanPosePartRightEar = 4,
-  HumanPosePartLeftShoulder = 5,
-  HumanPosePartRightShoulder = 6,
-  HumanPosePartLeftElbow = 7,
-  HumanPosePartRightElbow = 8,
-  HumanPosePartLeftWrist = 9,
-  HumanPosePartRightWrist = 10,
-  HumanPosePartLeftHip = 11,
-  HumanPosePartRightHip = 12,
-  HumanPosePartLeftKnee = 13,
-  HumanPosePartRightKnee = 14,
-  HumanPosePartLeftAnkle = 15,
-  HumanPosePartRightAnkle = 16,
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzHumanSkeleton, "HumanSkeleton", closed) {
+  FritzHumanSkeletonNose = 0,
+  FritzHumanSkeletonLeftEye = 1,
+  FritzHumanSkeletonRightEye = 2,
+  FritzHumanSkeletonLeftEar = 3,
+  FritzHumanSkeletonRightEar = 4,
+  FritzHumanSkeletonLeftShoulder = 5,
+  FritzHumanSkeletonRightShoulder = 6,
+  FritzHumanSkeletonLeftElbow = 7,
+  FritzHumanSkeletonRightElbow = 8,
+  FritzHumanSkeletonLeftWrist = 9,
+  FritzHumanSkeletonRightWrist = 10,
+  FritzHumanSkeletonLeftHip = 11,
+  FritzHumanSkeletonRightHip = 12,
+  FritzHumanSkeletonLeftKnee = 13,
+  FritzHumanSkeletonRightKnee = 14,
+  FritzHumanSkeletonLeftAnkle = 15,
+  FritzHumanSkeletonRightAnkle = 16,
 };
-
-@class FritzPosePoint;
-
-/// Predicted keypoint containing part, score, and position identified.
-SWIFT_CLASS_NAMED("Keypoint")
-@interface FritzPoseKeypoint : NSObject
-@property (nonatomic, readonly) NSInteger index;
-@property (nonatomic, readonly, strong) FritzPosePoint * _Nonnull position;
-@property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) enum HumanPosePart part;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-@class Point3D;
-
-/// Predicted keypoint containing part, score, and position identified.
-SWIFT_CLASS_NAMED("Keypoint3D")
-@interface FritzPoseKeypoint3D : NSObject
-@property (nonatomic, readonly) NSInteger index;
-@property (nonatomic, readonly, strong) Point3D * _Nonnull position;
-@property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) enum HumanPosePart part;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
 
 
 SWIFT_CLASS_NAMED("ModelSegmentationClass")
@@ -1609,38 +1402,12 @@ SWIFT_CLASS_NAMED("ModelSegmentationClass")
 @end
 
 
-/// Predicted point on model input coordinates.
-SWIFT_CLASS_NAMED("Point")
-@interface FritzPosePoint : NSObject
-@property (nonatomic, readonly) double x;
-@property (nonatomic, readonly) double y;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 SWIFT_CLASS("_TtC11FritzVision7Point3D")
 @interface Point3D : NSObject
-@property (nonatomic, readonly) double x;
-@property (nonatomic, readonly) double y;
-@property (nonatomic, readonly) double z;
-- (nonnull instancetype)initWithX:(double)x y:(double)y z:(double)z OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly) CGFloat x;
+@property (nonatomic, readonly) CGFloat y;
+@property (nonatomic, readonly) CGFloat z;
+- (nonnull instancetype)initWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (NSArray<NSNumber *> * _Nonnull)toArray SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -1650,65 +1417,6 @@ SWIFT_CLASS("_TtC11FritzVision7Point3D")
 
 @interface Point3D (SWIFT_EXTENSION(FritzVision))
 - (nonnull instancetype)initWith:(NSArray<NSNumber *> * _Nonnull)array;
-@end
-
-
-
-
-
-
-/// Detected pose with Keypoints and corresponding score.
-SWIFT_CLASS_NAMED("Pose") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzPose : NSObject
-/// List of keypoints on pose
-@property (nonatomic, readonly, copy) NSArray<FritzPoseKeypoint *> * _Nonnull keypoints;
-/// Pose confidence score.
-@property (nonatomic, readonly) double score;
-/// Create new Pose with keypoint positions scaled to be inside of rect.
-/// \param rect Rect coordinates
-///
-///
-/// returns:
-/// New Pose with position inset in provided rect
-- (FritzPose * _Nonnull)inRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use scaled instead. inRect has a bug causing scaling issues.", "scaleToTargetDimensions:");
-/// Scale pose coordinates from one CGRect to another CGRect.  Use when transforming coordinate
-/// spaces.
-/// \param currentDimensions Dimensions of coordinate space pose is currently in.
-///
-/// \param targetDimensions Dimensions of coordinate space to scale keypoint positions to.
-///
-///
-/// returns:
-/// Pose with scaled keypoints.
-- (FritzPose * _Nonnull)inOriginalDimensions:(CGSize)currentDimensions toTargetDimensions:(CGSize)targetDimensions SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use scaled instead. Does not properly take dimensions of current pose in to effect.");
-/// Scale pose coordinates to match target dimensions.  Use when transforming coordinate
-/// spaces.
-/// \param targetDimensions Dimensions of coordinate space to scale keypoint positions to.
-///
-///
-/// returns:
-/// Pose with scaled keypoints.
-- (FritzPose * _Nonnull)scaleToTargetDimensions:(CGSize)targetDimensions SWIFT_WARN_UNUSED_RESULT;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-
-
-
-
-/// Detected pose with Keypoints and corresponding score.
-SWIFT_CLASS_NAMED("Pose3D") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzPose3D : NSObject
-/// List of keypoints on pose
-@property (nonatomic, readonly, copy) NSArray<FritzPoseKeypoint3D *> * _Nonnull keypoints;
-/// Pose confidence score.
-@property (nonatomic, readonly) double score;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
@@ -1726,6 +1434,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingP
 @property (nonatomic) BOOL useCPUOnly;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion", closed) {
+/// Foreground is the region of the image where the alpha value of a mask is greater than 0.
+  FritzSegmentationRegionForeground = 0,
+/// Background is the region of the image where the alpha value of a mask is 0.
+  FritzSegmentationRegionBackground = 1,
+};
+
+
 
 
 
@@ -2010,71 +1727,87 @@ SWIFT_CLASS_NAMED("BoundingBoxOutline")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class CIContext;
+@class CIImage;
+enum ResizeSamplingMethod : NSInteger;
 
-SWIFT_CLASS("_TtC11FritzVision14CustomKeypoint")
-@interface CustomKeypoint : NSObject
-@property (nonatomic, readonly) NSInteger id SWIFT_DEPRECATED_MSG("", "index");
-@property (nonatomic, readonly) CGPoint position;
-@property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) NSInteger index;
-- (nonnull instancetype)initWithPosition:(CGPoint)position index:(NSInteger)index score:(double)score OBJC_DESIGNATED_INITIALIZER;
-- (CustomKeypoint * _Nonnull)newKeypointWith:(CGPoint)point SWIFT_WARN_UNUSED_RESULT;
-- (CustomKeypoint * _Nonnull)scaledFrom:(CGSize)originalSize to:(CGSize)targetSize SWIFT_WARN_UNUSED_RESULT;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (CustomKeypoint * _Nonnull)fromPosition:(CGPoint)position SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS("_TtC11FritzVision15CIImagePipeline") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CIImagePipeline : NSObject
+/// Image context used to render CIImage pipeline
+@property (nonatomic, readonly, strong) CIContext * _Nonnull context;
+/// Current CIImage.
+@property (nonatomic, strong) CIImage * _Nonnull image;
+/// Sampling method use when resizing images.  Defaults to <code>.affine</code>, which is the fastest but produces the most artifacts.
+@property (nonatomic) enum ResizeSamplingMethod resizeSamplingMethod;
+/// Create <code>CIImagePipeline</code>
+/// \param image Input CIImage
+///
+/// \param context CIImage context. If not provided, uses FritzVisionImage shared context.
+///
+- (nonnull instancetype)init:(CIImage * _Nonnull)image context:(CIContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
+/// Render current CIImage to pixelBuffer
+- (CVPixelBufferRef _Nullable)render SWIFT_WARN_UNUSED_RESULT;
+- (CVPixelBufferRef _Nullable)emptyPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+/// Sampling method used to resize image.
+typedef SWIFT_ENUM_NAMED(NSInteger, ResizeSamplingMethod, "ResizeSamplingMethod", closed) {
+/// Lanczos Sampling method
+  ResizeSamplingMethodLanczos = 0,
+/// Bicubic Sampling method.
+  ResizeSamplingMethodBicubic = 1,
+/// Affine transformation resampling. This is the fastest method but results in more edge artifacts.
+  ResizeSamplingMethodAffine = 2,
+};
 
-SWIFT_CLASS("_TtC11FritzVision10CustomPose")
-@interface CustomPose : NSObject
-@property (nonatomic, readonly, copy) NSArray<CustomKeypoint *> * _Nonnull keypoints;
-@property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) CGSize bounds;
-- (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints score:(double)score bounds:(CGSize)bounds OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints bounds:(CGSize)bounds OBJC_DESIGNATED_INITIALIZER;
-- (CustomPose * _Nonnull)applying:(CGAffineTransform)t SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-@class FritzVisionImage;
+@class UIImage;
+enum FritzSegmentationRegion : NSInteger;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface CustomPose (SWIFT_EXTENSION(FritzVision))
-/// Rotates keypoints to match original image orientation.
-/// Note: Currently only works on .up and .right original image orientations.
-/// \param image FritzVisionImage
+@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
+/// Mask image using a single class alpha RGBA mask.
+/// \param alphaMask RGBA alpha mask
 ///
+/// \param segmentationRegion Region of image to remove.  <code>background</code> removes all areas
+/// where alpha value of mask is 0.
 ///
-/// returns:
-/// Pose with keypoints rotated.
-- (CustomPose * _Nonnull)rotateKeypointsToOriginalImageWithImage:(FritzVisionImage * _Nonnull)image SWIFT_WARN_UNUSED_RESULT;
+- (void)maskWith:(UIImage * _Nonnull)alphaMask removing:(enum FritzSegmentationRegion)segmentationRegion;
 @end
 
-@class FritzVisionCustomPoseModelOptions;
-@protocol MLFeatureProvider;
-@class MLMultiArray;
-@class UIImage;
+@class CIBlendKernel;
 
-SWIFT_CLASS("_TtC11FritzVision21CustomPoseModelResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface CustomPoseModelResult : NSObject
-@property (nonatomic, readonly, strong) FritzVisionImage * _Nonnull image;
-@property (nonatomic, readonly, strong) FritzVisionCustomPoseModelOptions * _Nonnull options;
-/// Unavailable.  Use <code>FritzVisionPoseModel.predict</code> function to build.
-- (nonnull instancetype)initFor:(id <MLFeatureProvider> _Nonnull)results with:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionCustomPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithHeatmap:(MLMultiArray * _Nonnull)heatmap offsets:(MLMultiArray * _Nonnull)offsets withImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionCustomPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
-- (CustomPose * _Nonnull)decodePoseWithScale:(BOOL)scale SWIFT_WARN_UNUSED_RESULT;
-/// Draw detected poses on input image.
-/// \param pose List of poses to draw
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
+/// Center Crop Image
+/// \param scaleCropOption Scale Crop Option
 ///
+- (void)centerCrop;
+/// Orients image from given orientation to up orientation.
+/// \param orientation Orientation
 ///
-/// returns:
-/// Original image with poses drawn on image.
-- (UIImage * _Nullable)drawPose:(CustomPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)orient:(CGImagePropertyOrientation)orientation;
+/// Blends image with provided mask.
+/// \param mask Alpha matting mask to blend image with
+///
+/// \param kernel Blend kernel used to blend mask with background image.
+///
+/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
+///
+- (void)blendWith:(UIImage * _Nonnull)mask blendKernel:(CIBlendKernel * _Nonnull)kernel opacity:(CGFloat)opacity;
+- (CIImage * _Nullable)changeOpacityOn:(CIImage * _Nonnull)image to:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
+- (void)maskWith:(AVDepthData * _Nonnull)depthData focusingAtDepth:(CGFloat)depth focalWidth:(CGFloat)focalWidth;
+- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsFartherThan:(CGFloat)depth;
+- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsCloserThan:(CGFloat)depth;
+- (void)blurWith:(AVDepthData * _Nonnull)depthData focusedAt:(CGFloat)depth focalWidth:(CGFloat)focalWidth blurRadius:(CGFloat)blurRadius;
+- (void)blurWithPixelsFartherThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
+- (void)blurWithPixelsCloserThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
 @end
 
 
@@ -2116,53 +1849,8 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionCropAndScale, "FritzVisionCropAnd
   FritzVisionCropAndScaleScaleFit = 3,
 };
 
-
-/// A model used to predict the poses of people in images.
-SWIFT_CLASS_NAMED("FritzVisionCustomPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionCustomPoseModel : NSObject
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-/// Predict poses from a FritzImage.
-/// \param input The image to use to dectect poses.
-///
-/// \param options The options used to configure the pose results.
-///
-/// \param completion Handler to call back on the main thread with poses or error.
-///
-- (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionCustomPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CustomPoseModelResult * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionCustomPoseModel (SWIFT_EXTENSION(FritzVision))
-/// Model metadata set in webapp.
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
-/// Model tags set in webapp.
-@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
-@end
-
-
-/// Options for Pose Model.
-SWIFT_CLASS_NAMED("FritzVisionCustomPoseModelOptions")
-@interface FritzVisionCustomPoseModelOptions : NSObject
-/// Crop and scale option. Default value is scaleFit.
-@property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
-/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
-/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
-@property (nonatomic) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model).
-/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
-/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
-/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
-/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
-/// However, if you are using ARKit, you must set this to true.
-@property (nonatomic) BOOL forceVisionPrediction;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
 @protocol FritzSwiftIdentifiedModel;
+@class FritzVisionImage;
 @class FritzVisionDepthModelOptions;
 
 SWIFT_CLASS_NAMED("FritzVisionDepthModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -2181,7 +1869,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 ///
 /// \param options Options for model execution.
 ///
-/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionDepthMap or error message.
+/// \param completion The block to invoke after the prediction request.
+/// Contains a FritzVisionDepthMap or error message.
 ///
 - (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionDepthModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(AVDepthData * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -2358,6 +2047,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// An image or image buffer used in vision detection.
 SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzVisionImage : NSObject
+/// Shared CIContext
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * _Nonnull sharedContext;)
++ (CIContext * _Nonnull)sharedContext SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithBuffer:(CMSampleBufferRef _Nonnull)buffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image OBJC_DESIGNATED_INITIALIZER;
@@ -2371,23 +2063,27 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 
 
 
-@class CIContext;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Uses an alpha mask with image to cut out a section.
-/// Rotates source image to <code>up</code> orientation before masking.
-/// \param mask Alpha mask
+/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
+/// \param alphaMask Alpha Mask with a single class.
 ///
-/// \param providedContext Optional CIContext. If it is not specified, uses sharedContext from FritzVisionImage
+/// \param segmentationRegion Region of alpha mask to remove.
+///
+/// \param samplingMethod Resizing sampling method to use.
+///
+/// \param providedContext Optional Core Image context to use.  Defaults to
+/// <code>FritzVisionImage.sharedContext</code>
 ///
 ///
 /// returns:
-/// the masked image
-- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)mask providedContext:(CIContext * _Nullable)providedContext SWIFT_WARN_UNUSED_RESULT;
+/// Masked image.
+- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
 @end
 
-@class CIBlendKernel;
+
+
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
@@ -2404,7 +2100,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
 /// Blends mask with current image.
 /// Rotates source image to <code>up</code> orientation before blending.
 /// \param mask Overlaying image
@@ -2418,31 +2114,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-@class FritzPose;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Decode poses and draws on original UIImage.
-/// \param poses List of poses to draw on image.
-///
-/// \param partThreshold Threshold for pose part to connect to rest of skeleton.
-///
-///
-/// returns:
-/// UIImage if poses detected.
-- (UIImage * _Nullable)drawPoses:(NSArray<FritzPose *> * _Nonnull)poses meetingThreshold:(double)partThreshold SWIFT_WARN_UNUSED_RESULT;
-/// Draw pose on image.
-/// \param pose Pose
-///
-/// \param partThreshold Threshold for pose part to connect to rest of skeleton.
-///
-///
-/// returns:
-/// UIImage of pose drawn on image.
-- (UIImage * _Nullable)drawPose:(FritzPose * _Nonnull)pose meetingThreshold:(double)partThreshold SWIFT_WARN_UNUSED_RESULT;
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("`blendMode` and `interpolationQuality` changed to `blendKernel` and `resizeSamplingMethod`");
 @end
 
 
@@ -2454,13 +2126,13 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 
 
+
+
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
-
-
 
 
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -2882,66 +2554,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 
 
 /// Model used to create a 3D pose from 2D pose
-SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_CLASS("_TtC11FritzVision27FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseLiftingModel : BasePredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class PoseLiftingPredictorOptions;
-@class FritzPose3D;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseLiftingModel (SWIFT_EXTENSION(FritzVision))
-/// Predict poses from an inputPose
-/// \param input Input pose to process.
-///
-/// \param options The options used to configure the pose results.
-///
-/// \param completion Handler to call back on the main thread with poses or error.
-///
-- (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
-@end
 
 
 
-@class FritzVisionPoseModelOptions;
-@class FritzVisionPoseResult;
-
-/// A model used to predict the poses of people in images.
-SWIFT_CLASS_NAMED("FritzVisionPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseModel : BasePredictor
-/// Model Configuration for pose model in Fritz.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) FritzModelConfiguration * _Nonnull modelConfig;)
-+ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
-+ (void)setModelConfig:(FritzModelConfiguration * _Nonnull)value;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
-+ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
-/// Is WiFi required to download pose model over the air.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
-+ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
-+ (void)setWifiRequiredForModelDownload:(BOOL)value;
-@property (nonatomic, readonly) NSInteger outputStride;
-/// Predict poses from a FritzImage.
-/// \param input The image to use to dectect poses.
-///
-/// \param options The options used to configure the pose results.
-///
-/// \param completion Handler to call back on the main thread with poses or error.
-///
-- (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionPoseResult * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseModel (SWIFT_EXTENSION(FritzVision))
-/// Fetch model. Downloads model if model has not been downloaded before.
-/// \param completionHandler CompletionHandler called after fetchModel request finishes.
-///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPoseModel * _Nullable, NSError * _Nullable))completionHandler;
-@end
 
 
 /// Options for Pose Model.
@@ -2967,93 +2588,6 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 /// NMS radius for pose
 @property (nonatomic) NSInteger nmsRadius;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS_NAMED("FritzVisionPoseResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseResult : NSObject
-/// Original input image before it was rescaled
-@property (nonatomic, readonly, strong) FritzVisionImage * _Nonnull image;
-/// Pose model options.
-@property (nonatomic, readonly, strong) FritzVisionPoseModelOptions * _Nonnull options;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
-/// Draw detected poses on input image.
-/// \param poses List of poses to draw
-///
-///
-/// returns:
-/// Original image with poses drawn on image.
-- (UIImage * _Nullable)drawPosesFor:(NSArray<FritzPose *> * _Nonnull)poses SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Draw poses using FritzVisionImage.", "FritzVisionImage.draw");
-/// Draw detected poses on input image.  Poses must be in the coordinate space of the original image.
-/// If they are not, use the <code>pose.scale</code> method to convert coordinate spaces.
-/// \param pose List of poses to draw
-///
-///
-/// returns:
-/// Original image with poses drawn on image.
-- (UIImage * _Nullable)drawPose:(FritzPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Draw poses using FritzVisionImage.", "FritzVisionImage.draw");
-/// Decode poses and draws on original UIImage.
-/// \param numPoses Maximum number of poses to find.
-///
-///
-/// returns:
-/// UIImage if poses detected.
-- (UIImage * _Nullable)drawNumPoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Draw poses using FritzVisionImage.", "FritzVisionImage.draw");
-/// Draw single pose on input image.
-///
-/// returns:
-/// UIImage if pose detected.
-- (UIImage * _Nullable)drawPose SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Draw poses using FritzVisionImage.", "FritzVisionImage.draw");
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
-/// Decode single pose result in the coordinates of the original input image (after it is rotated
-/// to the .up position.
-///
-/// returns:
-/// Pose
-- (FritzPose * _Nullable)decodePose SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use pose to get pose with position normalized between 0 and 1", "pose");
-/// Decode single pose result
-/// \param inOriginalDimensions If true, will return keypoint positions in original image dimensions. If false
-/// coordinates are from 0 to 1.
-///
-///
-/// returns:
-/// Pose
-- (FritzPose * _Nullable)decodePoseInOriginalDimensions:(BOOL)inOriginalDimensions SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use pose to get pose with position normalized between 0 and 1", "pose");
-/// Decode all poses above the pose threshold
-/// \param numPoses the number of poses to decode
-///
-///
-/// returns:
-/// Pose list of poses above mininimum pose threshold option.
-- (NSArray<FritzPose *> * _Nonnull)decodePoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use poses to get poses with position normalized between 0 and 1", "poses:");
-/// Decodes all poses above pose threshold.
-/// \param numPoses the number of poses to decode
-///
-/// \param inOriginalDimensions use the original size of image for scaling keypoints.
-///
-///
-/// returns:
-/// Pose list of poses above mininimum pose threshold option.
-- (NSArray<FritzPose *> * _Nonnull)decodePoses:(NSInteger)numPoses inOriginalDimensions:(BOOL)inOriginalDimensions SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use poses to get poses with position normalized between 0 and 1", "poses:");
-/// Get poses
-/// \param limit Maximum number of poses to return.
-///
-///
-/// returns:
-/// List of Poses.
-- (NSArray<FritzPose *> * _Nonnull)poses:(NSInteger)limit SWIFT_WARN_UNUSED_RESULT;
-/// Get single pose.
-- (FritzPose * _Nullable)pose SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -3084,6 +2618,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class MLMultiArray;
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationResult") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzVisionSegmentationResult : NSObject
@@ -3118,6 +2653,30 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// \param resize If true (default) mask will be scaled to the size of the input image.
 ///
 - (UIImage * _Nullable)toImageMask:(double)minThreshold alpha:(uint8_t)alpha resize:(BOOL)resize SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildMultiClassMaskWithMinAcceptedScore:maxAlpha:resize:");
+/// Generate UIImage mask of given class.
+/// The generated image size will fit the original image passed into prediction, applying rotation.
+/// If the image was center cropped, will return an image that covers the cropped image.
+/// \param segmentClass Class to mask.
+///
+/// \param threshold Probability to filter.  Any probabilities below this value will be filtered out.
+///
+/// \param alpha Alpha value of the color (0-255) for detected classes.
+///
+/// \param minThresholdAccepted Any confidence score below this value will have an alpha of 0.
+/// Class confidence scores between <code>minThresholdAccepted</code> and <code>threshold</code> will retain
+/// their original value.
+///
+/// \param resize Resize mask to input image size.
+///
+///
+/// returns:
+/// Mask for class.
+- (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha minThresholdAccepted:(double)minThresholdAccepted resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildSingleClassMask:clippingScoresAbove:zeroingScoresBelow:maxAlpha:resize:color:");
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSegmentationResult (SWIFT_EXTENSION(FritzVision))
 /// Generate UIImage mask from most likely class at each pixel.
 /// The generated image size will fit the original image passed into prediction, applying rotation.
 /// If the image was center cropped, will return an image that covers the cropped image.
@@ -3155,25 +2714,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Mask for class.
 - (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass clippingScoresAbove:(double)clippingThreshold zeroingScoresBelow:(double)zeroingThreshold maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT;
-/// Generate UIImage mask of given class.
-/// The generated image size will fit the original image passed into prediction, applying rotation.
-/// If the image was center cropped, will return an image that covers the cropped image.
-/// \param segmentClass Class to mask.
-///
-/// \param threshold Probability to filter.  Any probabilities below this value will be filtered out.
-///
-/// \param alpha Alpha value of the color (0-255) for detected classes.
-///
-/// \param minThresholdAccepted Any confidence score below this value will have an alpha of 0.
-/// Class confidence scores between <code>minThresholdAccepted</code> and <code>threshold</code> will retain
-/// their original value.
-///
-/// \param resize Resize mask to input image size.
-///
-///
-/// returns:
-/// Mask for class.
-- (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha minThresholdAccepted:(double)minThresholdAccepted resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildSingleClassMask:clippingScoresAbove:zeroingScoresBelow:maxAlpha:resize:color:");
 @end
 
 
@@ -3287,55 +2827,25 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-typedef SWIFT_ENUM(NSInteger, HumanPosePart, closed) {
-  HumanPosePartNose = 0,
-  HumanPosePartLeftEye = 1,
-  HumanPosePartRightEye = 2,
-  HumanPosePartLeftEar = 3,
-  HumanPosePartRightEar = 4,
-  HumanPosePartLeftShoulder = 5,
-  HumanPosePartRightShoulder = 6,
-  HumanPosePartLeftElbow = 7,
-  HumanPosePartRightElbow = 8,
-  HumanPosePartLeftWrist = 9,
-  HumanPosePartRightWrist = 10,
-  HumanPosePartLeftHip = 11,
-  HumanPosePartRightHip = 12,
-  HumanPosePartLeftKnee = 13,
-  HumanPosePartRightKnee = 14,
-  HumanPosePartLeftAnkle = 15,
-  HumanPosePartRightAnkle = 16,
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzHumanSkeleton, "HumanSkeleton", closed) {
+  FritzHumanSkeletonNose = 0,
+  FritzHumanSkeletonLeftEye = 1,
+  FritzHumanSkeletonRightEye = 2,
+  FritzHumanSkeletonLeftEar = 3,
+  FritzHumanSkeletonRightEar = 4,
+  FritzHumanSkeletonLeftShoulder = 5,
+  FritzHumanSkeletonRightShoulder = 6,
+  FritzHumanSkeletonLeftElbow = 7,
+  FritzHumanSkeletonRightElbow = 8,
+  FritzHumanSkeletonLeftWrist = 9,
+  FritzHumanSkeletonRightWrist = 10,
+  FritzHumanSkeletonLeftHip = 11,
+  FritzHumanSkeletonRightHip = 12,
+  FritzHumanSkeletonLeftKnee = 13,
+  FritzHumanSkeletonRightKnee = 14,
+  FritzHumanSkeletonLeftAnkle = 15,
+  FritzHumanSkeletonRightAnkle = 16,
 };
-
-@class FritzPosePoint;
-
-/// Predicted keypoint containing part, score, and position identified.
-SWIFT_CLASS_NAMED("Keypoint")
-@interface FritzPoseKeypoint : NSObject
-@property (nonatomic, readonly) NSInteger index;
-@property (nonatomic, readonly, strong) FritzPosePoint * _Nonnull position;
-@property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) enum HumanPosePart part;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-@class Point3D;
-
-/// Predicted keypoint containing part, score, and position identified.
-SWIFT_CLASS_NAMED("Keypoint3D")
-@interface FritzPoseKeypoint3D : NSObject
-@property (nonatomic, readonly) NSInteger index;
-@property (nonatomic, readonly, strong) Point3D * _Nonnull position;
-@property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) enum HumanPosePart part;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
 
 
 SWIFT_CLASS_NAMED("ModelSegmentationClass")
@@ -3349,38 +2859,12 @@ SWIFT_CLASS_NAMED("ModelSegmentationClass")
 @end
 
 
-/// Predicted point on model input coordinates.
-SWIFT_CLASS_NAMED("Point")
-@interface FritzPosePoint : NSObject
-@property (nonatomic, readonly) double x;
-@property (nonatomic, readonly) double y;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 SWIFT_CLASS("_TtC11FritzVision7Point3D")
 @interface Point3D : NSObject
-@property (nonatomic, readonly) double x;
-@property (nonatomic, readonly) double y;
-@property (nonatomic, readonly) double z;
-- (nonnull instancetype)initWithX:(double)x y:(double)y z:(double)z OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly) CGFloat x;
+@property (nonatomic, readonly) CGFloat y;
+@property (nonatomic, readonly) CGFloat z;
+- (nonnull instancetype)initWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (NSArray<NSNumber *> * _Nonnull)toArray SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -3390,65 +2874,6 @@ SWIFT_CLASS("_TtC11FritzVision7Point3D")
 
 @interface Point3D (SWIFT_EXTENSION(FritzVision))
 - (nonnull instancetype)initWith:(NSArray<NSNumber *> * _Nonnull)array;
-@end
-
-
-
-
-
-
-/// Detected pose with Keypoints and corresponding score.
-SWIFT_CLASS_NAMED("Pose") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzPose : NSObject
-/// List of keypoints on pose
-@property (nonatomic, readonly, copy) NSArray<FritzPoseKeypoint *> * _Nonnull keypoints;
-/// Pose confidence score.
-@property (nonatomic, readonly) double score;
-/// Create new Pose with keypoint positions scaled to be inside of rect.
-/// \param rect Rect coordinates
-///
-///
-/// returns:
-/// New Pose with position inset in provided rect
-- (FritzPose * _Nonnull)inRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use scaled instead. inRect has a bug causing scaling issues.", "scaleToTargetDimensions:");
-/// Scale pose coordinates from one CGRect to another CGRect.  Use when transforming coordinate
-/// spaces.
-/// \param currentDimensions Dimensions of coordinate space pose is currently in.
-///
-/// \param targetDimensions Dimensions of coordinate space to scale keypoint positions to.
-///
-///
-/// returns:
-/// Pose with scaled keypoints.
-- (FritzPose * _Nonnull)inOriginalDimensions:(CGSize)currentDimensions toTargetDimensions:(CGSize)targetDimensions SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use scaled instead. Does not properly take dimensions of current pose in to effect.");
-/// Scale pose coordinates to match target dimensions.  Use when transforming coordinate
-/// spaces.
-/// \param targetDimensions Dimensions of coordinate space to scale keypoint positions to.
-///
-///
-/// returns:
-/// Pose with scaled keypoints.
-- (FritzPose * _Nonnull)scaleToTargetDimensions:(CGSize)targetDimensions SWIFT_WARN_UNUSED_RESULT;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-
-
-
-
-/// Detected pose with Keypoints and corresponding score.
-SWIFT_CLASS_NAMED("Pose3D") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzPose3D : NSObject
-/// List of keypoints on pose
-@property (nonatomic, readonly, copy) NSArray<FritzPoseKeypoint3D *> * _Nonnull keypoints;
-/// Pose confidence score.
-@property (nonatomic, readonly) double score;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
@@ -3466,6 +2891,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingP
 @property (nonatomic) BOOL useCPUOnly;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion", closed) {
+/// Foreground is the region of the image where the alpha value of a mask is greater than 0.
+  FritzSegmentationRegionForeground = 0,
+/// Background is the region of the image where the alpha value of a mask is 0.
+  FritzSegmentationRegionBackground = 1,
+};
+
+
 
 
 
@@ -3753,71 +3187,87 @@ SWIFT_CLASS_NAMED("BoundingBoxOutline")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class CIContext;
+@class CIImage;
+enum ResizeSamplingMethod : NSInteger;
 
-SWIFT_CLASS("_TtC11FritzVision14CustomKeypoint")
-@interface CustomKeypoint : NSObject
-@property (nonatomic, readonly) NSInteger id SWIFT_DEPRECATED_MSG("", "index");
-@property (nonatomic, readonly) CGPoint position;
-@property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) NSInteger index;
-- (nonnull instancetype)initWithPosition:(CGPoint)position index:(NSInteger)index score:(double)score OBJC_DESIGNATED_INITIALIZER;
-- (CustomKeypoint * _Nonnull)newKeypointWith:(CGPoint)point SWIFT_WARN_UNUSED_RESULT;
-- (CustomKeypoint * _Nonnull)scaledFrom:(CGSize)originalSize to:(CGSize)targetSize SWIFT_WARN_UNUSED_RESULT;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (CustomKeypoint * _Nonnull)fromPosition:(CGPoint)position SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS("_TtC11FritzVision15CIImagePipeline") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CIImagePipeline : NSObject
+/// Image context used to render CIImage pipeline
+@property (nonatomic, readonly, strong) CIContext * _Nonnull context;
+/// Current CIImage.
+@property (nonatomic, strong) CIImage * _Nonnull image;
+/// Sampling method use when resizing images.  Defaults to <code>.affine</code>, which is the fastest but produces the most artifacts.
+@property (nonatomic) enum ResizeSamplingMethod resizeSamplingMethod;
+/// Create <code>CIImagePipeline</code>
+/// \param image Input CIImage
+///
+/// \param context CIImage context. If not provided, uses FritzVisionImage shared context.
+///
+- (nonnull instancetype)init:(CIImage * _Nonnull)image context:(CIContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
+/// Render current CIImage to pixelBuffer
+- (CVPixelBufferRef _Nullable)render SWIFT_WARN_UNUSED_RESULT;
+- (CVPixelBufferRef _Nullable)emptyPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+/// Sampling method used to resize image.
+typedef SWIFT_ENUM_NAMED(NSInteger, ResizeSamplingMethod, "ResizeSamplingMethod", closed) {
+/// Lanczos Sampling method
+  ResizeSamplingMethodLanczos = 0,
+/// Bicubic Sampling method.
+  ResizeSamplingMethodBicubic = 1,
+/// Affine transformation resampling. This is the fastest method but results in more edge artifacts.
+  ResizeSamplingMethodAffine = 2,
+};
 
-SWIFT_CLASS("_TtC11FritzVision10CustomPose")
-@interface CustomPose : NSObject
-@property (nonatomic, readonly, copy) NSArray<CustomKeypoint *> * _Nonnull keypoints;
-@property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) CGSize bounds;
-- (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints score:(double)score bounds:(CGSize)bounds OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints bounds:(CGSize)bounds OBJC_DESIGNATED_INITIALIZER;
-- (CustomPose * _Nonnull)applying:(CGAffineTransform)t SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-@class FritzVisionImage;
+@class UIImage;
+enum FritzSegmentationRegion : NSInteger;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface CustomPose (SWIFT_EXTENSION(FritzVision))
-/// Rotates keypoints to match original image orientation.
-/// Note: Currently only works on .up and .right original image orientations.
-/// \param image FritzVisionImage
+@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
+/// Mask image using a single class alpha RGBA mask.
+/// \param alphaMask RGBA alpha mask
 ///
+/// \param segmentationRegion Region of image to remove.  <code>background</code> removes all areas
+/// where alpha value of mask is 0.
 ///
-/// returns:
-/// Pose with keypoints rotated.
-- (CustomPose * _Nonnull)rotateKeypointsToOriginalImageWithImage:(FritzVisionImage * _Nonnull)image SWIFT_WARN_UNUSED_RESULT;
+- (void)maskWith:(UIImage * _Nonnull)alphaMask removing:(enum FritzSegmentationRegion)segmentationRegion;
 @end
 
-@class FritzVisionCustomPoseModelOptions;
-@protocol MLFeatureProvider;
-@class MLMultiArray;
-@class UIImage;
+@class CIBlendKernel;
 
-SWIFT_CLASS("_TtC11FritzVision21CustomPoseModelResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface CustomPoseModelResult : NSObject
-@property (nonatomic, readonly, strong) FritzVisionImage * _Nonnull image;
-@property (nonatomic, readonly, strong) FritzVisionCustomPoseModelOptions * _Nonnull options;
-/// Unavailable.  Use <code>FritzVisionPoseModel.predict</code> function to build.
-- (nonnull instancetype)initFor:(id <MLFeatureProvider> _Nonnull)results with:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionCustomPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithHeatmap:(MLMultiArray * _Nonnull)heatmap offsets:(MLMultiArray * _Nonnull)offsets withImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionCustomPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
-- (CustomPose * _Nonnull)decodePoseWithScale:(BOOL)scale SWIFT_WARN_UNUSED_RESULT;
-/// Draw detected poses on input image.
-/// \param pose List of poses to draw
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
+/// Center Crop Image
+/// \param scaleCropOption Scale Crop Option
 ///
+- (void)centerCrop;
+/// Orients image from given orientation to up orientation.
+/// \param orientation Orientation
 ///
-/// returns:
-/// Original image with poses drawn on image.
-- (UIImage * _Nullable)drawPose:(CustomPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)orient:(CGImagePropertyOrientation)orientation;
+/// Blends image with provided mask.
+/// \param mask Alpha matting mask to blend image with
+///
+/// \param kernel Blend kernel used to blend mask with background image.
+///
+/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
+///
+- (void)blendWith:(UIImage * _Nonnull)mask blendKernel:(CIBlendKernel * _Nonnull)kernel opacity:(CGFloat)opacity;
+- (CIImage * _Nullable)changeOpacityOn:(CIImage * _Nonnull)image to:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
+- (void)maskWith:(AVDepthData * _Nonnull)depthData focusingAtDepth:(CGFloat)depth focalWidth:(CGFloat)focalWidth;
+- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsFartherThan:(CGFloat)depth;
+- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsCloserThan:(CGFloat)depth;
+- (void)blurWith:(AVDepthData * _Nonnull)depthData focusedAt:(CGFloat)depth focalWidth:(CGFloat)focalWidth blurRadius:(CGFloat)blurRadius;
+- (void)blurWithPixelsFartherThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
+- (void)blurWithPixelsCloserThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
 @end
 
 
@@ -3859,53 +3309,8 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionCropAndScale, "FritzVisionCropAnd
   FritzVisionCropAndScaleScaleFit = 3,
 };
 
-
-/// A model used to predict the poses of people in images.
-SWIFT_CLASS_NAMED("FritzVisionCustomPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionCustomPoseModel : NSObject
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-/// Predict poses from a FritzImage.
-/// \param input The image to use to dectect poses.
-///
-/// \param options The options used to configure the pose results.
-///
-/// \param completion Handler to call back on the main thread with poses or error.
-///
-- (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionCustomPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CustomPoseModelResult * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionCustomPoseModel (SWIFT_EXTENSION(FritzVision))
-/// Model metadata set in webapp.
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
-/// Model tags set in webapp.
-@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
-@end
-
-
-/// Options for Pose Model.
-SWIFT_CLASS_NAMED("FritzVisionCustomPoseModelOptions")
-@interface FritzVisionCustomPoseModelOptions : NSObject
-/// Crop and scale option. Default value is scaleFit.
-@property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
-/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
-/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
-@property (nonatomic) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model).
-/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
-/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
-/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
-/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
-/// However, if you are using ARKit, you must set this to true.
-@property (nonatomic) BOOL forceVisionPrediction;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
 @protocol FritzSwiftIdentifiedModel;
+@class FritzVisionImage;
 @class FritzVisionDepthModelOptions;
 
 SWIFT_CLASS_NAMED("FritzVisionDepthModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -3924,7 +3329,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 ///
 /// \param options Options for model execution.
 ///
-/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionDepthMap or error message.
+/// \param completion The block to invoke after the prediction request.
+/// Contains a FritzVisionDepthMap or error message.
 ///
 - (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionDepthModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(AVDepthData * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -4101,6 +3507,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// An image or image buffer used in vision detection.
 SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzVisionImage : NSObject
+/// Shared CIContext
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * _Nonnull sharedContext;)
++ (CIContext * _Nonnull)sharedContext SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithBuffer:(CMSampleBufferRef _Nonnull)buffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image OBJC_DESIGNATED_INITIALIZER;
@@ -4114,23 +3523,27 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 
 
 
-@class CIContext;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Uses an alpha mask with image to cut out a section.
-/// Rotates source image to <code>up</code> orientation before masking.
-/// \param mask Alpha mask
+/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
+/// \param alphaMask Alpha Mask with a single class.
 ///
-/// \param providedContext Optional CIContext. If it is not specified, uses sharedContext from FritzVisionImage
+/// \param segmentationRegion Region of alpha mask to remove.
+///
+/// \param samplingMethod Resizing sampling method to use.
+///
+/// \param providedContext Optional Core Image context to use.  Defaults to
+/// <code>FritzVisionImage.sharedContext</code>
 ///
 ///
 /// returns:
-/// the masked image
-- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)mask providedContext:(CIContext * _Nullable)providedContext SWIFT_WARN_UNUSED_RESULT;
+/// Masked image.
+- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
 @end
 
-@class CIBlendKernel;
+
+
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
@@ -4147,7 +3560,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
 /// Blends mask with current image.
 /// Rotates source image to <code>up</code> orientation before blending.
 /// \param mask Overlaying image
@@ -4161,31 +3574,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-@class FritzPose;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Decode poses and draws on original UIImage.
-/// \param poses List of poses to draw on image.
-///
-/// \param partThreshold Threshold for pose part to connect to rest of skeleton.
-///
-///
-/// returns:
-/// UIImage if poses detected.
-- (UIImage * _Nullable)drawPoses:(NSArray<FritzPose *> * _Nonnull)poses meetingThreshold:(double)partThreshold SWIFT_WARN_UNUSED_RESULT;
-/// Draw pose on image.
-/// \param pose Pose
-///
-/// \param partThreshold Threshold for pose part to connect to rest of skeleton.
-///
-///
-/// returns:
-/// UIImage of pose drawn on image.
-- (UIImage * _Nullable)drawPose:(FritzPose * _Nonnull)pose meetingThreshold:(double)partThreshold SWIFT_WARN_UNUSED_RESULT;
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("`blendMode` and `interpolationQuality` changed to `blendKernel` and `resizeSamplingMethod`");
 @end
 
 
@@ -4197,13 +3586,13 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 
 
+
+
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
-
-
 
 
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -4625,66 +4014,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 
 
 /// Model used to create a 3D pose from 2D pose
-SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_CLASS("_TtC11FritzVision27FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseLiftingModel : BasePredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class PoseLiftingPredictorOptions;
-@class FritzPose3D;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseLiftingModel (SWIFT_EXTENSION(FritzVision))
-/// Predict poses from an inputPose
-/// \param input Input pose to process.
-///
-/// \param options The options used to configure the pose results.
-///
-/// \param completion Handler to call back on the main thread with poses or error.
-///
-- (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
-@end
 
 
 
-@class FritzVisionPoseModelOptions;
-@class FritzVisionPoseResult;
-
-/// A model used to predict the poses of people in images.
-SWIFT_CLASS_NAMED("FritzVisionPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseModel : BasePredictor
-/// Model Configuration for pose model in Fritz.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) FritzModelConfiguration * _Nonnull modelConfig;)
-+ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
-+ (void)setModelConfig:(FritzModelConfiguration * _Nonnull)value;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
-+ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
-/// Is WiFi required to download pose model over the air.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
-+ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
-+ (void)setWifiRequiredForModelDownload:(BOOL)value;
-@property (nonatomic, readonly) NSInteger outputStride;
-/// Predict poses from a FritzImage.
-/// \param input The image to use to dectect poses.
-///
-/// \param options The options used to configure the pose results.
-///
-/// \param completion Handler to call back on the main thread with poses or error.
-///
-- (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionPoseResult * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseModel (SWIFT_EXTENSION(FritzVision))
-/// Fetch model. Downloads model if model has not been downloaded before.
-/// \param completionHandler CompletionHandler called after fetchModel request finishes.
-///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPoseModel * _Nullable, NSError * _Nullable))completionHandler;
-@end
 
 
 /// Options for Pose Model.
@@ -4710,93 +4048,6 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 /// NMS radius for pose
 @property (nonatomic) NSInteger nmsRadius;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS_NAMED("FritzVisionPoseResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseResult : NSObject
-/// Original input image before it was rescaled
-@property (nonatomic, readonly, strong) FritzVisionImage * _Nonnull image;
-/// Pose model options.
-@property (nonatomic, readonly, strong) FritzVisionPoseModelOptions * _Nonnull options;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
-/// Draw detected poses on input image.
-/// \param poses List of poses to draw
-///
-///
-/// returns:
-/// Original image with poses drawn on image.
-- (UIImage * _Nullable)drawPosesFor:(NSArray<FritzPose *> * _Nonnull)poses SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Draw poses using FritzVisionImage.", "FritzVisionImage.draw");
-/// Draw detected poses on input image.  Poses must be in the coordinate space of the original image.
-/// If they are not, use the <code>pose.scale</code> method to convert coordinate spaces.
-/// \param pose List of poses to draw
-///
-///
-/// returns:
-/// Original image with poses drawn on image.
-- (UIImage * _Nullable)drawPose:(FritzPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Draw poses using FritzVisionImage.", "FritzVisionImage.draw");
-/// Decode poses and draws on original UIImage.
-/// \param numPoses Maximum number of poses to find.
-///
-///
-/// returns:
-/// UIImage if poses detected.
-- (UIImage * _Nullable)drawNumPoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Draw poses using FritzVisionImage.", "FritzVisionImage.draw");
-/// Draw single pose on input image.
-///
-/// returns:
-/// UIImage if pose detected.
-- (UIImage * _Nullable)drawPose SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Draw poses using FritzVisionImage.", "FritzVisionImage.draw");
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
-/// Decode single pose result in the coordinates of the original input image (after it is rotated
-/// to the .up position.
-///
-/// returns:
-/// Pose
-- (FritzPose * _Nullable)decodePose SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use pose to get pose with position normalized between 0 and 1", "pose");
-/// Decode single pose result
-/// \param inOriginalDimensions If true, will return keypoint positions in original image dimensions. If false
-/// coordinates are from 0 to 1.
-///
-///
-/// returns:
-/// Pose
-- (FritzPose * _Nullable)decodePoseInOriginalDimensions:(BOOL)inOriginalDimensions SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use pose to get pose with position normalized between 0 and 1", "pose");
-/// Decode all poses above the pose threshold
-/// \param numPoses the number of poses to decode
-///
-///
-/// returns:
-/// Pose list of poses above mininimum pose threshold option.
-- (NSArray<FritzPose *> * _Nonnull)decodePoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use poses to get poses with position normalized between 0 and 1", "poses:");
-/// Decodes all poses above pose threshold.
-/// \param numPoses the number of poses to decode
-///
-/// \param inOriginalDimensions use the original size of image for scaling keypoints.
-///
-///
-/// returns:
-/// Pose list of poses above mininimum pose threshold option.
-- (NSArray<FritzPose *> * _Nonnull)decodePoses:(NSInteger)numPoses inOriginalDimensions:(BOOL)inOriginalDimensions SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use poses to get poses with position normalized between 0 and 1", "poses:");
-/// Get poses
-/// \param limit Maximum number of poses to return.
-///
-///
-/// returns:
-/// List of Poses.
-- (NSArray<FritzPose *> * _Nonnull)poses:(NSInteger)limit SWIFT_WARN_UNUSED_RESULT;
-/// Get single pose.
-- (FritzPose * _Nullable)pose SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -4827,6 +4078,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class MLMultiArray;
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationResult") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzVisionSegmentationResult : NSObject
@@ -4861,6 +4113,30 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// \param resize If true (default) mask will be scaled to the size of the input image.
 ///
 - (UIImage * _Nullable)toImageMask:(double)minThreshold alpha:(uint8_t)alpha resize:(BOOL)resize SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildMultiClassMaskWithMinAcceptedScore:maxAlpha:resize:");
+/// Generate UIImage mask of given class.
+/// The generated image size will fit the original image passed into prediction, applying rotation.
+/// If the image was center cropped, will return an image that covers the cropped image.
+/// \param segmentClass Class to mask.
+///
+/// \param threshold Probability to filter.  Any probabilities below this value will be filtered out.
+///
+/// \param alpha Alpha value of the color (0-255) for detected classes.
+///
+/// \param minThresholdAccepted Any confidence score below this value will have an alpha of 0.
+/// Class confidence scores between <code>minThresholdAccepted</code> and <code>threshold</code> will retain
+/// their original value.
+///
+/// \param resize Resize mask to input image size.
+///
+///
+/// returns:
+/// Mask for class.
+- (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha minThresholdAccepted:(double)minThresholdAccepted resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildSingleClassMask:clippingScoresAbove:zeroingScoresBelow:maxAlpha:resize:color:");
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSegmentationResult (SWIFT_EXTENSION(FritzVision))
 /// Generate UIImage mask from most likely class at each pixel.
 /// The generated image size will fit the original image passed into prediction, applying rotation.
 /// If the image was center cropped, will return an image that covers the cropped image.
@@ -4898,25 +4174,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Mask for class.
 - (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass clippingScoresAbove:(double)clippingThreshold zeroingScoresBelow:(double)zeroingThreshold maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT;
-/// Generate UIImage mask of given class.
-/// The generated image size will fit the original image passed into prediction, applying rotation.
-/// If the image was center cropped, will return an image that covers the cropped image.
-/// \param segmentClass Class to mask.
-///
-/// \param threshold Probability to filter.  Any probabilities below this value will be filtered out.
-///
-/// \param alpha Alpha value of the color (0-255) for detected classes.
-///
-/// \param minThresholdAccepted Any confidence score below this value will have an alpha of 0.
-/// Class confidence scores between <code>minThresholdAccepted</code> and <code>threshold</code> will retain
-/// their original value.
-///
-/// \param resize Resize mask to input image size.
-///
-///
-/// returns:
-/// Mask for class.
-- (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha minThresholdAccepted:(double)minThresholdAccepted resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildSingleClassMask:clippingScoresAbove:zeroingScoresBelow:maxAlpha:resize:color:");
 @end
 
 
@@ -5030,55 +4287,25 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-typedef SWIFT_ENUM(NSInteger, HumanPosePart, closed) {
-  HumanPosePartNose = 0,
-  HumanPosePartLeftEye = 1,
-  HumanPosePartRightEye = 2,
-  HumanPosePartLeftEar = 3,
-  HumanPosePartRightEar = 4,
-  HumanPosePartLeftShoulder = 5,
-  HumanPosePartRightShoulder = 6,
-  HumanPosePartLeftElbow = 7,
-  HumanPosePartRightElbow = 8,
-  HumanPosePartLeftWrist = 9,
-  HumanPosePartRightWrist = 10,
-  HumanPosePartLeftHip = 11,
-  HumanPosePartRightHip = 12,
-  HumanPosePartLeftKnee = 13,
-  HumanPosePartRightKnee = 14,
-  HumanPosePartLeftAnkle = 15,
-  HumanPosePartRightAnkle = 16,
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzHumanSkeleton, "HumanSkeleton", closed) {
+  FritzHumanSkeletonNose = 0,
+  FritzHumanSkeletonLeftEye = 1,
+  FritzHumanSkeletonRightEye = 2,
+  FritzHumanSkeletonLeftEar = 3,
+  FritzHumanSkeletonRightEar = 4,
+  FritzHumanSkeletonLeftShoulder = 5,
+  FritzHumanSkeletonRightShoulder = 6,
+  FritzHumanSkeletonLeftElbow = 7,
+  FritzHumanSkeletonRightElbow = 8,
+  FritzHumanSkeletonLeftWrist = 9,
+  FritzHumanSkeletonRightWrist = 10,
+  FritzHumanSkeletonLeftHip = 11,
+  FritzHumanSkeletonRightHip = 12,
+  FritzHumanSkeletonLeftKnee = 13,
+  FritzHumanSkeletonRightKnee = 14,
+  FritzHumanSkeletonLeftAnkle = 15,
+  FritzHumanSkeletonRightAnkle = 16,
 };
-
-@class FritzPosePoint;
-
-/// Predicted keypoint containing part, score, and position identified.
-SWIFT_CLASS_NAMED("Keypoint")
-@interface FritzPoseKeypoint : NSObject
-@property (nonatomic, readonly) NSInteger index;
-@property (nonatomic, readonly, strong) FritzPosePoint * _Nonnull position;
-@property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) enum HumanPosePart part;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-@class Point3D;
-
-/// Predicted keypoint containing part, score, and position identified.
-SWIFT_CLASS_NAMED("Keypoint3D")
-@interface FritzPoseKeypoint3D : NSObject
-@property (nonatomic, readonly) NSInteger index;
-@property (nonatomic, readonly, strong) Point3D * _Nonnull position;
-@property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) enum HumanPosePart part;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
 
 
 SWIFT_CLASS_NAMED("ModelSegmentationClass")
@@ -5092,38 +4319,12 @@ SWIFT_CLASS_NAMED("ModelSegmentationClass")
 @end
 
 
-/// Predicted point on model input coordinates.
-SWIFT_CLASS_NAMED("Point")
-@interface FritzPosePoint : NSObject
-@property (nonatomic, readonly) double x;
-@property (nonatomic, readonly) double y;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 SWIFT_CLASS("_TtC11FritzVision7Point3D")
 @interface Point3D : NSObject
-@property (nonatomic, readonly) double x;
-@property (nonatomic, readonly) double y;
-@property (nonatomic, readonly) double z;
-- (nonnull instancetype)initWithX:(double)x y:(double)y z:(double)z OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly) CGFloat x;
+@property (nonatomic, readonly) CGFloat y;
+@property (nonatomic, readonly) CGFloat z;
+- (nonnull instancetype)initWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (NSArray<NSNumber *> * _Nonnull)toArray SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -5133,65 +4334,6 @@ SWIFT_CLASS("_TtC11FritzVision7Point3D")
 
 @interface Point3D (SWIFT_EXTENSION(FritzVision))
 - (nonnull instancetype)initWith:(NSArray<NSNumber *> * _Nonnull)array;
-@end
-
-
-
-
-
-
-/// Detected pose with Keypoints and corresponding score.
-SWIFT_CLASS_NAMED("Pose") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzPose : NSObject
-/// List of keypoints on pose
-@property (nonatomic, readonly, copy) NSArray<FritzPoseKeypoint *> * _Nonnull keypoints;
-/// Pose confidence score.
-@property (nonatomic, readonly) double score;
-/// Create new Pose with keypoint positions scaled to be inside of rect.
-/// \param rect Rect coordinates
-///
-///
-/// returns:
-/// New Pose with position inset in provided rect
-- (FritzPose * _Nonnull)inRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use scaled instead. inRect has a bug causing scaling issues.", "scaleToTargetDimensions:");
-/// Scale pose coordinates from one CGRect to another CGRect.  Use when transforming coordinate
-/// spaces.
-/// \param currentDimensions Dimensions of coordinate space pose is currently in.
-///
-/// \param targetDimensions Dimensions of coordinate space to scale keypoint positions to.
-///
-///
-/// returns:
-/// Pose with scaled keypoints.
-- (FritzPose * _Nonnull)inOriginalDimensions:(CGSize)currentDimensions toTargetDimensions:(CGSize)targetDimensions SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use scaled instead. Does not properly take dimensions of current pose in to effect.");
-/// Scale pose coordinates to match target dimensions.  Use when transforming coordinate
-/// spaces.
-/// \param targetDimensions Dimensions of coordinate space to scale keypoint positions to.
-///
-///
-/// returns:
-/// Pose with scaled keypoints.
-- (FritzPose * _Nonnull)scaleToTargetDimensions:(CGSize)targetDimensions SWIFT_WARN_UNUSED_RESULT;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-
-
-
-
-/// Detected pose with Keypoints and corresponding score.
-SWIFT_CLASS_NAMED("Pose3D") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzPose3D : NSObject
-/// List of keypoints on pose
-@property (nonatomic, readonly, copy) NSArray<FritzPoseKeypoint3D *> * _Nonnull keypoints;
-/// Pose confidence score.
-@property (nonatomic, readonly) double score;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
@@ -5209,6 +4351,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingP
 @property (nonatomic) BOOL useCPUOnly;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion", closed) {
+/// Foreground is the region of the image where the alpha value of a mask is greater than 0.
+  FritzSegmentationRegionForeground = 0,
+/// Background is the region of the image where the alpha value of a mask is 0.
+  FritzSegmentationRegionBackground = 1,
+};
+
+
 
 
 
@@ -5493,71 +4644,87 @@ SWIFT_CLASS_NAMED("BoundingBoxOutline")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class CIContext;
+@class CIImage;
+enum ResizeSamplingMethod : NSInteger;
 
-SWIFT_CLASS("_TtC11FritzVision14CustomKeypoint")
-@interface CustomKeypoint : NSObject
-@property (nonatomic, readonly) NSInteger id SWIFT_DEPRECATED_MSG("", "index");
-@property (nonatomic, readonly) CGPoint position;
-@property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) NSInteger index;
-- (nonnull instancetype)initWithPosition:(CGPoint)position index:(NSInteger)index score:(double)score OBJC_DESIGNATED_INITIALIZER;
-- (CustomKeypoint * _Nonnull)newKeypointWith:(CGPoint)point SWIFT_WARN_UNUSED_RESULT;
-- (CustomKeypoint * _Nonnull)scaledFrom:(CGSize)originalSize to:(CGSize)targetSize SWIFT_WARN_UNUSED_RESULT;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (CustomKeypoint * _Nonnull)fromPosition:(CGPoint)position SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS("_TtC11FritzVision15CIImagePipeline") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CIImagePipeline : NSObject
+/// Image context used to render CIImage pipeline
+@property (nonatomic, readonly, strong) CIContext * _Nonnull context;
+/// Current CIImage.
+@property (nonatomic, strong) CIImage * _Nonnull image;
+/// Sampling method use when resizing images.  Defaults to <code>.affine</code>, which is the fastest but produces the most artifacts.
+@property (nonatomic) enum ResizeSamplingMethod resizeSamplingMethod;
+/// Create <code>CIImagePipeline</code>
+/// \param image Input CIImage
+///
+/// \param context CIImage context. If not provided, uses FritzVisionImage shared context.
+///
+- (nonnull instancetype)init:(CIImage * _Nonnull)image context:(CIContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
+/// Render current CIImage to pixelBuffer
+- (CVPixelBufferRef _Nullable)render SWIFT_WARN_UNUSED_RESULT;
+- (CVPixelBufferRef _Nullable)emptyPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+/// Sampling method used to resize image.
+typedef SWIFT_ENUM_NAMED(NSInteger, ResizeSamplingMethod, "ResizeSamplingMethod", closed) {
+/// Lanczos Sampling method
+  ResizeSamplingMethodLanczos = 0,
+/// Bicubic Sampling method.
+  ResizeSamplingMethodBicubic = 1,
+/// Affine transformation resampling. This is the fastest method but results in more edge artifacts.
+  ResizeSamplingMethodAffine = 2,
+};
 
-SWIFT_CLASS("_TtC11FritzVision10CustomPose")
-@interface CustomPose : NSObject
-@property (nonatomic, readonly, copy) NSArray<CustomKeypoint *> * _Nonnull keypoints;
-@property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) CGSize bounds;
-- (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints score:(double)score bounds:(CGSize)bounds OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithKeypoints:(NSArray<CustomKeypoint *> * _Nonnull)keypoints bounds:(CGSize)bounds OBJC_DESIGNATED_INITIALIZER;
-- (CustomPose * _Nonnull)applying:(CGAffineTransform)t SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-@class FritzVisionImage;
+@class UIImage;
+enum FritzSegmentationRegion : NSInteger;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface CustomPose (SWIFT_EXTENSION(FritzVision))
-/// Rotates keypoints to match original image orientation.
-/// Note: Currently only works on .up and .right original image orientations.
-/// \param image FritzVisionImage
+@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
+/// Mask image using a single class alpha RGBA mask.
+/// \param alphaMask RGBA alpha mask
 ///
+/// \param segmentationRegion Region of image to remove.  <code>background</code> removes all areas
+/// where alpha value of mask is 0.
 ///
-/// returns:
-/// Pose with keypoints rotated.
-- (CustomPose * _Nonnull)rotateKeypointsToOriginalImageWithImage:(FritzVisionImage * _Nonnull)image SWIFT_WARN_UNUSED_RESULT;
+- (void)maskWith:(UIImage * _Nonnull)alphaMask removing:(enum FritzSegmentationRegion)segmentationRegion;
 @end
 
-@class FritzVisionCustomPoseModelOptions;
-@protocol MLFeatureProvider;
-@class MLMultiArray;
-@class UIImage;
+@class CIBlendKernel;
 
-SWIFT_CLASS("_TtC11FritzVision21CustomPoseModelResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface CustomPoseModelResult : NSObject
-@property (nonatomic, readonly, strong) FritzVisionImage * _Nonnull image;
-@property (nonatomic, readonly, strong) FritzVisionCustomPoseModelOptions * _Nonnull options;
-/// Unavailable.  Use <code>FritzVisionPoseModel.predict</code> function to build.
-- (nonnull instancetype)initFor:(id <MLFeatureProvider> _Nonnull)results with:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionCustomPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithHeatmap:(MLMultiArray * _Nonnull)heatmap offsets:(MLMultiArray * _Nonnull)offsets withImage:(FritzVisionImage * _Nonnull)fritzImage options:(FritzVisionCustomPoseModelOptions * _Nonnull)options OBJC_DESIGNATED_INITIALIZER;
-- (CustomPose * _Nonnull)decodePoseWithScale:(BOOL)scale SWIFT_WARN_UNUSED_RESULT;
-/// Draw detected poses on input image.
-/// \param pose List of poses to draw
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
+/// Center Crop Image
+/// \param scaleCropOption Scale Crop Option
 ///
+- (void)centerCrop;
+/// Orients image from given orientation to up orientation.
+/// \param orientation Orientation
 ///
-/// returns:
-/// Original image with poses drawn on image.
-- (UIImage * _Nullable)drawPose:(CustomPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)orient:(CGImagePropertyOrientation)orientation;
+/// Blends image with provided mask.
+/// \param mask Alpha matting mask to blend image with
+///
+/// \param kernel Blend kernel used to blend mask with background image.
+///
+/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
+///
+- (void)blendWith:(UIImage * _Nonnull)mask blendKernel:(CIBlendKernel * _Nonnull)kernel opacity:(CGFloat)opacity;
+- (CIImage * _Nullable)changeOpacityOn:(CIImage * _Nonnull)image to:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
+- (void)maskWith:(AVDepthData * _Nonnull)depthData focusingAtDepth:(CGFloat)depth focalWidth:(CGFloat)focalWidth;
+- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsFartherThan:(CGFloat)depth;
+- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsCloserThan:(CGFloat)depth;
+- (void)blurWith:(AVDepthData * _Nonnull)depthData focusedAt:(CGFloat)depth focalWidth:(CGFloat)focalWidth blurRadius:(CGFloat)blurRadius;
+- (void)blurWithPixelsFartherThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
+- (void)blurWithPixelsCloserThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
 @end
 
 
@@ -5599,53 +4766,8 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionCropAndScale, "FritzVisionCropAnd
   FritzVisionCropAndScaleScaleFit = 3,
 };
 
-
-/// A model used to predict the poses of people in images.
-SWIFT_CLASS_NAMED("FritzVisionCustomPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionCustomPoseModel : NSObject
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-/// Predict poses from a FritzImage.
-/// \param input The image to use to dectect poses.
-///
-/// \param options The options used to configure the pose results.
-///
-/// \param completion Handler to call back on the main thread with poses or error.
-///
-- (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionCustomPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CustomPoseModelResult * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionCustomPoseModel (SWIFT_EXTENSION(FritzVision))
-/// Model metadata set in webapp.
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
-/// Model tags set in webapp.
-@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
-@end
-
-
-/// Options for Pose Model.
-SWIFT_CLASS_NAMED("FritzVisionCustomPoseModelOptions")
-@interface FritzVisionCustomPoseModelOptions : NSObject
-/// Crop and scale option. Default value is scaleFit.
-@property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
-/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
-/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
-@property (nonatomic) BOOL forceCoreMLPrediction;
-/// Force predictions to use the Vision framework (if supported by model).
-/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
-/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
-/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
-/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
-/// However, if you are using ARKit, you must set this to true.
-@property (nonatomic) BOOL forceVisionPrediction;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
 @protocol FritzSwiftIdentifiedModel;
+@class FritzVisionImage;
 @class FritzVisionDepthModelOptions;
 
 SWIFT_CLASS_NAMED("FritzVisionDepthModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -5664,7 +4786,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 ///
 /// \param options Options for model execution.
 ///
-/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionDepthMap or error message.
+/// \param completion The block to invoke after the prediction request.
+/// Contains a FritzVisionDepthMap or error message.
 ///
 - (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionDepthModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(AVDepthData * _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -5841,6 +4964,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// An image or image buffer used in vision detection.
 SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzVisionImage : NSObject
+/// Shared CIContext
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * _Nonnull sharedContext;)
++ (CIContext * _Nonnull)sharedContext SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithBuffer:(CMSampleBufferRef _Nonnull)buffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImageBuffer:(CVPixelBufferRef _Nonnull)imageBuffer OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image OBJC_DESIGNATED_INITIALIZER;
@@ -5854,23 +4980,27 @@ SWIFT_CLASS_NAMED("FritzVisionImage") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 
 
 
-@class CIContext;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Uses an alpha mask with image to cut out a section.
-/// Rotates source image to <code>up</code> orientation before masking.
-/// \param mask Alpha mask
+/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
+/// \param alphaMask Alpha Mask with a single class.
 ///
-/// \param providedContext Optional CIContext. If it is not specified, uses sharedContext from FritzVisionImage
+/// \param segmentationRegion Region of alpha mask to remove.
+///
+/// \param samplingMethod Resizing sampling method to use.
+///
+/// \param providedContext Optional Core Image context to use.  Defaults to
+/// <code>FritzVisionImage.sharedContext</code>
 ///
 ///
 /// returns:
-/// the masked image
-- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)mask providedContext:(CIContext * _Nullable)providedContext SWIFT_WARN_UNUSED_RESULT;
+/// Masked image.
+- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
 @end
 
-@class CIBlendKernel;
+
+
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
@@ -5887,7 +5017,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
 /// Blends mask with current image.
 /// Rotates source image to <code>up</code> orientation before blending.
 /// \param mask Overlaying image
@@ -5901,31 +5031,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-@class FritzPose;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Decode poses and draws on original UIImage.
-/// \param poses List of poses to draw on image.
-///
-/// \param partThreshold Threshold for pose part to connect to rest of skeleton.
-///
-///
-/// returns:
-/// UIImage if poses detected.
-- (UIImage * _Nullable)drawPoses:(NSArray<FritzPose *> * _Nonnull)poses meetingThreshold:(double)partThreshold SWIFT_WARN_UNUSED_RESULT;
-/// Draw pose on image.
-/// \param pose Pose
-///
-/// \param partThreshold Threshold for pose part to connect to rest of skeleton.
-///
-///
-/// returns:
-/// UIImage of pose drawn on image.
-- (UIImage * _Nullable)drawPose:(FritzPose * _Nonnull)pose meetingThreshold:(double)partThreshold SWIFT_WARN_UNUSED_RESULT;
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("`blendMode` and `interpolationQuality` changed to `blendKernel` and `resizeSamplingMethod`");
 @end
 
 
@@ -5937,13 +5043,13 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 
 
+
+
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
-
-
 
 
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -6365,66 +5471,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 
 
 /// Model used to create a 3D pose from 2D pose
-SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_CLASS("_TtC11FritzVision27FritzVisionPoseLiftingModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionPoseLiftingModel : BasePredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class PoseLiftingPredictorOptions;
-@class FritzPose3D;
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseLiftingModel (SWIFT_EXTENSION(FritzVision))
-/// Predict poses from an inputPose
-/// \param input Input pose to process.
-///
-/// \param options The options used to configure the pose results.
-///
-/// \param completion Handler to call back on the main thread with poses or error.
-///
-- (void)predictWithImage:(FritzPose * _Nonnull)input options:(PoseLiftingPredictorOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzPose3D * _Nullable, NSError * _Nullable))completion;
-@end
 
 
 
-@class FritzVisionPoseModelOptions;
-@class FritzVisionPoseResult;
-
-/// A model used to predict the poses of people in images.
-SWIFT_CLASS_NAMED("FritzVisionPoseModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseModel : BasePredictor
-/// Model Configuration for pose model in Fritz.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) FritzModelConfiguration * _Nonnull modelConfig;)
-+ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
-+ (void)setModelConfig:(FritzModelConfiguration * _Nonnull)value;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
-+ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
-/// Is WiFi required to download pose model over the air.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
-+ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
-+ (void)setWifiRequiredForModelDownload:(BOOL)value;
-@property (nonatomic, readonly) NSInteger outputStride;
-/// Predict poses from a FritzImage.
-/// \param input The image to use to dectect poses.
-///
-/// \param options The options used to configure the pose results.
-///
-/// \param completion Handler to call back on the main thread with poses or error.
-///
-- (void)predictWithImage:(FritzVisionImage * _Nonnull)input options:(FritzVisionPoseModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(FritzVisionPoseResult * _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseModel (SWIFT_EXTENSION(FritzVision))
-/// Fetch model. Downloads model if model has not been downloaded before.
-/// \param completionHandler CompletionHandler called after fetchModel request finishes.
-///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPoseModel * _Nullable, NSError * _Nullable))completionHandler;
-@end
 
 
 /// Options for Pose Model.
@@ -6450,93 +5505,6 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 /// NMS radius for pose
 @property (nonatomic) NSInteger nmsRadius;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS_NAMED("FritzVisionPoseResult") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseResult : NSObject
-/// Original input image before it was rescaled
-@property (nonatomic, readonly, strong) FritzVisionImage * _Nonnull image;
-/// Pose model options.
-@property (nonatomic, readonly, strong) FritzVisionPoseModelOptions * _Nonnull options;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
-/// Draw detected poses on input image.
-/// \param poses List of poses to draw
-///
-///
-/// returns:
-/// Original image with poses drawn on image.
-- (UIImage * _Nullable)drawPosesFor:(NSArray<FritzPose *> * _Nonnull)poses SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Draw poses using FritzVisionImage.", "FritzVisionImage.draw");
-/// Draw detected poses on input image.  Poses must be in the coordinate space of the original image.
-/// If they are not, use the <code>pose.scale</code> method to convert coordinate spaces.
-/// \param pose List of poses to draw
-///
-///
-/// returns:
-/// Original image with poses drawn on image.
-- (UIImage * _Nullable)drawPose:(FritzPose * _Nonnull)pose SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Draw poses using FritzVisionImage.", "FritzVisionImage.draw");
-/// Decode poses and draws on original UIImage.
-/// \param numPoses Maximum number of poses to find.
-///
-///
-/// returns:
-/// UIImage if poses detected.
-- (UIImage * _Nullable)drawNumPoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Draw poses using FritzVisionImage.", "FritzVisionImage.draw");
-/// Draw single pose on input image.
-///
-/// returns:
-/// UIImage if pose detected.
-- (UIImage * _Nullable)drawPose SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Draw poses using FritzVisionImage.", "FritzVisionImage.draw");
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseResult (SWIFT_EXTENSION(FritzVision))
-/// Decode single pose result in the coordinates of the original input image (after it is rotated
-/// to the .up position.
-///
-/// returns:
-/// Pose
-- (FritzPose * _Nullable)decodePose SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use pose to get pose with position normalized between 0 and 1", "pose");
-/// Decode single pose result
-/// \param inOriginalDimensions If true, will return keypoint positions in original image dimensions. If false
-/// coordinates are from 0 to 1.
-///
-///
-/// returns:
-/// Pose
-- (FritzPose * _Nullable)decodePoseInOriginalDimensions:(BOOL)inOriginalDimensions SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use pose to get pose with position normalized between 0 and 1", "pose");
-/// Decode all poses above the pose threshold
-/// \param numPoses the number of poses to decode
-///
-///
-/// returns:
-/// Pose list of poses above mininimum pose threshold option.
-- (NSArray<FritzPose *> * _Nonnull)decodePoses:(NSInteger)numPoses SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use poses to get poses with position normalized between 0 and 1", "poses:");
-/// Decodes all poses above pose threshold.
-/// \param numPoses the number of poses to decode
-///
-/// \param inOriginalDimensions use the original size of image for scaling keypoints.
-///
-///
-/// returns:
-/// Pose list of poses above mininimum pose threshold option.
-- (NSArray<FritzPose *> * _Nonnull)decodePoses:(NSInteger)numPoses inOriginalDimensions:(BOOL)inOriginalDimensions SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use poses to get poses with position normalized between 0 and 1", "poses:");
-/// Get poses
-/// \param limit Maximum number of poses to return.
-///
-///
-/// returns:
-/// List of Poses.
-- (NSArray<FritzPose *> * _Nonnull)poses:(NSInteger)limit SWIFT_WARN_UNUSED_RESULT;
-/// Get single pose.
-- (FritzPose * _Nullable)pose SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -6567,6 +5535,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class MLMultiArray;
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationResult") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzVisionSegmentationResult : NSObject
@@ -6601,6 +5570,30 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// \param resize If true (default) mask will be scaled to the size of the input image.
 ///
 - (UIImage * _Nullable)toImageMask:(double)minThreshold alpha:(uint8_t)alpha resize:(BOOL)resize SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildMultiClassMaskWithMinAcceptedScore:maxAlpha:resize:");
+/// Generate UIImage mask of given class.
+/// The generated image size will fit the original image passed into prediction, applying rotation.
+/// If the image was center cropped, will return an image that covers the cropped image.
+/// \param segmentClass Class to mask.
+///
+/// \param threshold Probability to filter.  Any probabilities below this value will be filtered out.
+///
+/// \param alpha Alpha value of the color (0-255) for detected classes.
+///
+/// \param minThresholdAccepted Any confidence score below this value will have an alpha of 0.
+/// Class confidence scores between <code>minThresholdAccepted</code> and <code>threshold</code> will retain
+/// their original value.
+///
+/// \param resize Resize mask to input image size.
+///
+///
+/// returns:
+/// Mask for class.
+- (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha minThresholdAccepted:(double)minThresholdAccepted resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildSingleClassMask:clippingScoresAbove:zeroingScoresBelow:maxAlpha:resize:color:");
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSegmentationResult (SWIFT_EXTENSION(FritzVision))
 /// Generate UIImage mask from most likely class at each pixel.
 /// The generated image size will fit the original image passed into prediction, applying rotation.
 /// If the image was center cropped, will return an image that covers the cropped image.
@@ -6638,25 +5631,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Mask for class.
 - (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass clippingScoresAbove:(double)clippingThreshold zeroingScoresBelow:(double)zeroingThreshold maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT;
-/// Generate UIImage mask of given class.
-/// The generated image size will fit the original image passed into prediction, applying rotation.
-/// If the image was center cropped, will return an image that covers the cropped image.
-/// \param segmentClass Class to mask.
-///
-/// \param threshold Probability to filter.  Any probabilities below this value will be filtered out.
-///
-/// \param alpha Alpha value of the color (0-255) for detected classes.
-///
-/// \param minThresholdAccepted Any confidence score below this value will have an alpha of 0.
-/// Class confidence scores between <code>minThresholdAccepted</code> and <code>threshold</code> will retain
-/// their original value.
-///
-/// \param resize Resize mask to input image size.
-///
-///
-/// returns:
-/// Mask for class.
-- (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha minThresholdAccepted:(double)minThresholdAccepted resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildSingleClassMask:clippingScoresAbove:zeroingScoresBelow:maxAlpha:resize:color:");
 @end
 
 
@@ -6770,55 +5744,25 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-typedef SWIFT_ENUM(NSInteger, HumanPosePart, closed) {
-  HumanPosePartNose = 0,
-  HumanPosePartLeftEye = 1,
-  HumanPosePartRightEye = 2,
-  HumanPosePartLeftEar = 3,
-  HumanPosePartRightEar = 4,
-  HumanPosePartLeftShoulder = 5,
-  HumanPosePartRightShoulder = 6,
-  HumanPosePartLeftElbow = 7,
-  HumanPosePartRightElbow = 8,
-  HumanPosePartLeftWrist = 9,
-  HumanPosePartRightWrist = 10,
-  HumanPosePartLeftHip = 11,
-  HumanPosePartRightHip = 12,
-  HumanPosePartLeftKnee = 13,
-  HumanPosePartRightKnee = 14,
-  HumanPosePartLeftAnkle = 15,
-  HumanPosePartRightAnkle = 16,
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzHumanSkeleton, "HumanSkeleton", closed) {
+  FritzHumanSkeletonNose = 0,
+  FritzHumanSkeletonLeftEye = 1,
+  FritzHumanSkeletonRightEye = 2,
+  FritzHumanSkeletonLeftEar = 3,
+  FritzHumanSkeletonRightEar = 4,
+  FritzHumanSkeletonLeftShoulder = 5,
+  FritzHumanSkeletonRightShoulder = 6,
+  FritzHumanSkeletonLeftElbow = 7,
+  FritzHumanSkeletonRightElbow = 8,
+  FritzHumanSkeletonLeftWrist = 9,
+  FritzHumanSkeletonRightWrist = 10,
+  FritzHumanSkeletonLeftHip = 11,
+  FritzHumanSkeletonRightHip = 12,
+  FritzHumanSkeletonLeftKnee = 13,
+  FritzHumanSkeletonRightKnee = 14,
+  FritzHumanSkeletonLeftAnkle = 15,
+  FritzHumanSkeletonRightAnkle = 16,
 };
-
-@class FritzPosePoint;
-
-/// Predicted keypoint containing part, score, and position identified.
-SWIFT_CLASS_NAMED("Keypoint")
-@interface FritzPoseKeypoint : NSObject
-@property (nonatomic, readonly) NSInteger index;
-@property (nonatomic, readonly, strong) FritzPosePoint * _Nonnull position;
-@property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) enum HumanPosePart part;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-@class Point3D;
-
-/// Predicted keypoint containing part, score, and position identified.
-SWIFT_CLASS_NAMED("Keypoint3D")
-@interface FritzPoseKeypoint3D : NSObject
-@property (nonatomic, readonly) NSInteger index;
-@property (nonatomic, readonly, strong) Point3D * _Nonnull position;
-@property (nonatomic, readonly) double score;
-@property (nonatomic, readonly) enum HumanPosePart part;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
 
 
 SWIFT_CLASS_NAMED("ModelSegmentationClass")
@@ -6832,38 +5776,12 @@ SWIFT_CLASS_NAMED("ModelSegmentationClass")
 @end
 
 
-/// Predicted point on model input coordinates.
-SWIFT_CLASS_NAMED("Point")
-@interface FritzPosePoint : NSObject
-@property (nonatomic, readonly) double x;
-@property (nonatomic, readonly) double y;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 SWIFT_CLASS("_TtC11FritzVision7Point3D")
 @interface Point3D : NSObject
-@property (nonatomic, readonly) double x;
-@property (nonatomic, readonly) double y;
-@property (nonatomic, readonly) double z;
-- (nonnull instancetype)initWithX:(double)x y:(double)y z:(double)z OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly) CGFloat x;
+@property (nonatomic, readonly) CGFloat y;
+@property (nonatomic, readonly) CGFloat z;
+- (nonnull instancetype)initWithX:(CGFloat)x y:(CGFloat)y z:(CGFloat)z OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (NSArray<NSNumber *> * _Nonnull)toArray SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -6873,65 +5791,6 @@ SWIFT_CLASS("_TtC11FritzVision7Point3D")
 
 @interface Point3D (SWIFT_EXTENSION(FritzVision))
 - (nonnull instancetype)initWith:(NSArray<NSNumber *> * _Nonnull)array;
-@end
-
-
-
-
-
-
-/// Detected pose with Keypoints and corresponding score.
-SWIFT_CLASS_NAMED("Pose") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzPose : NSObject
-/// List of keypoints on pose
-@property (nonatomic, readonly, copy) NSArray<FritzPoseKeypoint *> * _Nonnull keypoints;
-/// Pose confidence score.
-@property (nonatomic, readonly) double score;
-/// Create new Pose with keypoint positions scaled to be inside of rect.
-/// \param rect Rect coordinates
-///
-///
-/// returns:
-/// New Pose with position inset in provided rect
-- (FritzPose * _Nonnull)inRect:(CGRect)rect SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use scaled instead. inRect has a bug causing scaling issues.", "scaleToTargetDimensions:");
-/// Scale pose coordinates from one CGRect to another CGRect.  Use when transforming coordinate
-/// spaces.
-/// \param currentDimensions Dimensions of coordinate space pose is currently in.
-///
-/// \param targetDimensions Dimensions of coordinate space to scale keypoint positions to.
-///
-///
-/// returns:
-/// Pose with scaled keypoints.
-- (FritzPose * _Nonnull)inOriginalDimensions:(CGSize)currentDimensions toTargetDimensions:(CGSize)targetDimensions SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Use scaled instead. Does not properly take dimensions of current pose in to effect.");
-/// Scale pose coordinates to match target dimensions.  Use when transforming coordinate
-/// spaces.
-/// \param targetDimensions Dimensions of coordinate space to scale keypoint positions to.
-///
-///
-/// returns:
-/// Pose with scaled keypoints.
-- (FritzPose * _Nonnull)scaleToTargetDimensions:(CGSize)targetDimensions SWIFT_WARN_UNUSED_RESULT;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-
-
-
-
-/// Detected pose with Keypoints and corresponding score.
-SWIFT_CLASS_NAMED("Pose3D") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzPose3D : NSObject
-/// List of keypoints on pose
-@property (nonatomic, readonly, copy) NSArray<FritzPoseKeypoint3D *> * _Nonnull keypoints;
-/// Pose confidence score.
-@property (nonatomic, readonly) double score;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
@@ -6949,6 +5808,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingP
 @property (nonatomic) BOOL useCPUOnly;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion", closed) {
+/// Foreground is the region of the image where the alpha value of a mask is greater than 0.
+  FritzSegmentationRegionForeground = 0,
+/// Background is the region of the image where the alpha value of a mask is 0.
+  FritzSegmentationRegionBackground = 1,
+};
+
+
 
 
 
