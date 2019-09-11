@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [4.1.0](https://github.com/fritzlabs/swift-framework/releases/tag/4.1.0)
+
+1. Building with Xcode 11 GM.
+
 ## [4.0.1](https://github.com/fritzlabs/swift-framework/releases/tag/4.0.1)
 
 1. Fixing issue where pose smoothing could return NaN if date was the same.
