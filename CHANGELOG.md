@@ -5,6 +5,117 @@ Change Log
 
 ---
 
+## [4.0.0](https://github.com/fritzlabs/swift-framework/releases/tag/4.0.0)
+
+
+Breaking changes
+----------------
+
+## Renamed models
+
+### People Segmentation Models:
+
+Introducing models optimized for different use cases:
+ * Fast models are optimized for runtime performance with an accuracy tradeoff. This should be used in cases where model predictions need to happen quickly (e.g video processing, live preview, etc). This comes with a tradeoff in accuracy.
+ * Accurate models are optimized to display the best model prediction with a speed tradeoff. This should be used in cases where you're dealing with still images (i.e photo editing)
+ * Small models are optimized for model size at the cost of accuracy. This should be used in cases where developers are cautious of bloating their apps with models.
+Models now have their own versioning system separate from the SDK and follow semantic versioning.
+
+```diff
+-  pod 'Fritz/VisionSegmentationModel/People'
++  pod 'Fritz/VisionSegmentationModel/People/Fast'
+```
+
+```diff
+-  FritzVisionPeopleSegmentationModel()
++  FritzVisionPeopleSegmentationModelFast()
+```
+
+```diff
+-  pod 'Fritz/VisionSegmentationModel/PeopleMedium'
++  pod 'Fritz/VisionSegmentationModel/People/Accurate'
+```
+
+```diff
+-  FritzVisionPeopleSegmentationMediumModel()
++  FritzVisionPeopleSegmentationModelAccurate()
+```
+
+
+## FritzVisionImage API
+
+Size is no longer an optional:
+
+```diff
+-  let image: FritzVisionImage
+-  guard let size = image.size else { }
++  let image: FritzVisionImage
++  let size = image.size
+```
+
+Image blending:
+
+```diff
+-  let mask: UIImage
+-  let image: FritzVisionImage
+-  image.blend(withMask: mask, blendMode: .softLight, interpolationQuality: .medium)
++  let mask: UIImage
++  let image: FritzVisionImage
++  image.blend(withMask: mask, blendKernel: .softLight, resizeSamplingMethod: .lanczos)
+```
+
+## Image Segmentation Mask API
+
+```diff
+-  let result: FritzVisionSegmentationResult
+-  let mask = result.toImageMask(
+-    minThreshold: 0.5,
+-    alpha: 255
+-    resize: true
+-  )
++  let result: FritzVisionSegmentationResult
++  let mask = result.buildMultiClassMask(
++    withMinimumAcceptedScore: 0.5,
++    maxAlpha: 255
++    resize: true
++  )
+```
+
+```diff
+-  let result: FritzVisionSegmentationResult
+-  let mask = result.toImageMask(
+-    of: .person,
+-    threshold: 0.7,
+-    minThresholdAccepted: 0.4
+-  )
++  let result: FritzVisionSegmentationResult
++  let mask = result.buildSingleClassMask(
++    forClass: .person,
++    clippingScoresAbove: 0.7,
++    zeroingScoresBelow: 0.4
++  )
+```
+
+### Pose Estimation API
+
+```diff
+-  FritzVisionPoseModel()
++  FritzVisionHumanPoseModel()
+```
+
+```diff
+-  let keypoint = Keypoint(id: 0, position: Point(x: 0.0, y: 0.0), score: 0.0, part: .leftElbow)
++  let keypoint = Keypoint<HumanSkeleton>(
++    index: 0,
++    position: CGPoint(x: 0.0, y: 0.0),
++    score: 0.0,
++    part: .leftElbow
++  )
+```
+
+
+All usages of ``Point`` have been replaced with ``CGPoint``.
+
 ## [4.0.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/4.0.0-beta.2)
 
 1. Building for Xcode 10.
@@ -14,7 +125,6 @@ Change Log
 
 1. Updating Pose Predictor with Generics. FritzVisionPoseModel is now FritzVisionHumanPoseModel.
 2. Removing deprecated functions.
-3. 
 
 ## [3.7.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.7.0-beta.2)
 
@@ -28,7 +138,6 @@ Change Log
 
 1. Updating pose model. Runs faster with higher accuracy!
 2. Refactoring some pose logic. Pose results retrieved by `poseResult.pose()` are in the range 0 to 1.
-3. 
 
 ## [swift-framework](https://github.com/fritzlabs/swift-framework/releases/tag/swift-framework)
 
@@ -136,7 +245,6 @@ Change Log
 
 1. Fix center crop when using Core ML.
 2. Fix Model ID for the Outdoor model.
-3. 
 
 ## [3.3.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.3.0)
 

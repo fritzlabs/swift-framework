@@ -1,0 +1,11 @@
+framework module FritzVisionPeopleSegmentationModelAccurate {
+  umbrella header "FritzVisionPeopleSegmentationModelAccurate.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionPeopleSegmentationModelAccurate.Swift {
+    header "FritzVisionPeopleSegmentationModelAccurate-Swift.h"
+    requires objc
+}

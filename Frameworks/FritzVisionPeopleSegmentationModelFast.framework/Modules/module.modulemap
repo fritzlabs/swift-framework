@@ -1,0 +1,11 @@
+framework module FritzVisionPeopleSegmentationModelFast {
+  umbrella header "FritzVisionPeopleSegmentationModelFast.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionPeopleSegmentationModelFast.Swift {
+    header "FritzVisionPeopleSegmentationModelFast-Swift.h"
+    requires objc
+}

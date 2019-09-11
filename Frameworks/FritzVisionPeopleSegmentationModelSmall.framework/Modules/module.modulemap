@@ -1,0 +1,11 @@
+framework module FritzVisionPeopleSegmentationModelSmall {
+  umbrella header "FritzVisionPeopleSegmentationModelSmall.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionPeopleSegmentationModelSmall.Swift {
+    header "FritzVisionPeopleSegmentationModelSmall-Swift.h"
+    requires objc
+}

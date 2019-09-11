@@ -236,19 +236,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL fritzWifiRequir
 + (BOOL)fritzWifiRequiredForDownload SWIFT_WARN_UNUSED_RESULT;
 @end
 
-
-SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
-@interface FritzCore (SWIFT_EXTENSION(FritzManagedModel))
-/// Removed in v1.0.0-beta.9
-/// seealso:
-/// <code>updateModelIfNeeded:completionHandler:</code>
-+ (void)setupModel:(NSArray<Class <FritzBaseIdentifiedModel>> * _Nonnull)models completionHandler:(void (^ _Nonnull)(NSError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("This method is no longer needed. To manually trigger a model update, call Model.updateIfNeeded(_:)");
-/// Deprecated in v1.0.0-beta.9
-/// seealso:
-/// <code>updateModelIfNeeded:completionHandler:</code>
-+ (void)setupModel:(NSArray<Class <FritzBaseIdentifiedModel>> * _Nonnull)models SWIFT_UNAVAILABLE_MSG("This method is no longer needed. To manually trigger a model update, call Model.updateIfNeeded(_:)");
-@end
-
 @class FritzModelConfiguration;
 @class SessionManager;
 @class MLModelDescription;
@@ -317,8 +304,6 @@ SWIFT_CLASS("_TtC17FritzManagedModel17FritzManagedModel") SWIFT_AVAILABILITY(wat
 
 
 
-
-
 SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzManagedModel (SWIFT_EXTENSION(FritzManagedModel))
 /// Check server for latest active model defined in webapp and update local model state if different from webapp.
@@ -327,6 +312,8 @@ SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11
 ///
 - (void)updateModelIfNeededWithSkipCache:(BOOL)skipCache completionHandler:(void (^ _Nonnull)(BOOL, NSError * _Nullable))completionHandler;
 @end
+
+
 
 
 SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
@@ -726,19 +713,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL fritzWifiRequir
 + (BOOL)fritzWifiRequiredForDownload SWIFT_WARN_UNUSED_RESULT;
 @end
 
-
-SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
-@interface FritzCore (SWIFT_EXTENSION(FritzManagedModel))
-/// Removed in v1.0.0-beta.9
-/// seealso:
-/// <code>updateModelIfNeeded:completionHandler:</code>
-+ (void)setupModel:(NSArray<Class <FritzBaseIdentifiedModel>> * _Nonnull)models completionHandler:(void (^ _Nonnull)(NSError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("This method is no longer needed. To manually trigger a model update, call Model.updateIfNeeded(_:)");
-/// Deprecated in v1.0.0-beta.9
-/// seealso:
-/// <code>updateModelIfNeeded:completionHandler:</code>
-+ (void)setupModel:(NSArray<Class <FritzBaseIdentifiedModel>> * _Nonnull)models SWIFT_UNAVAILABLE_MSG("This method is no longer needed. To manually trigger a model update, call Model.updateIfNeeded(_:)");
-@end
-
 @class FritzModelConfiguration;
 @class SessionManager;
 @class MLModelDescription;
@@ -807,8 +781,6 @@ SWIFT_CLASS("_TtC17FritzManagedModel17FritzManagedModel") SWIFT_AVAILABILITY(wat
 
 
 
-
-
 SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzManagedModel (SWIFT_EXTENSION(FritzManagedModel))
 /// Check server for latest active model defined in webapp and update local model state if different from webapp.
@@ -817,6 +789,8 @@ SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11
 ///
 - (void)updateModelIfNeededWithSkipCache:(BOOL)skipCache completionHandler:(void (^ _Nonnull)(BOOL, NSError * _Nullable))completionHandler;
 @end
+
+
 
 
 SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
@@ -1219,19 +1193,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL fritzWifiRequir
 + (BOOL)fritzWifiRequiredForDownload SWIFT_WARN_UNUSED_RESULT;
 @end
 
-
-SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
-@interface FritzCore (SWIFT_EXTENSION(FritzManagedModel))
-/// Removed in v1.0.0-beta.9
-/// seealso:
-/// <code>updateModelIfNeeded:completionHandler:</code>
-+ (void)setupModel:(NSArray<Class <FritzBaseIdentifiedModel>> * _Nonnull)models completionHandler:(void (^ _Nonnull)(NSError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("This method is no longer needed. To manually trigger a model update, call Model.updateIfNeeded(_:)");
-/// Deprecated in v1.0.0-beta.9
-/// seealso:
-/// <code>updateModelIfNeeded:completionHandler:</code>
-+ (void)setupModel:(NSArray<Class <FritzBaseIdentifiedModel>> * _Nonnull)models SWIFT_UNAVAILABLE_MSG("This method is no longer needed. To manually trigger a model update, call Model.updateIfNeeded(_:)");
-@end
-
 @class FritzModelConfiguration;
 @class SessionManager;
 @class MLModelDescription;
@@ -1300,8 +1261,6 @@ SWIFT_CLASS("_TtC17FritzManagedModel17FritzManagedModel") SWIFT_AVAILABILITY(wat
 
 
 
-
-
 SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzManagedModel (SWIFT_EXTENSION(FritzManagedModel))
 /// Check server for latest active model defined in webapp and update local model state if different from webapp.
@@ -1310,6 +1269,8 @@ SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11
 ///
 - (void)updateModelIfNeededWithSkipCache:(BOOL)skipCache completionHandler:(void (^ _Nonnull)(BOOL, NSError * _Nullable))completionHandler;
 @end
+
+
 
 
 SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
@@ -1709,19 +1670,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL fritzWifiRequir
 + (BOOL)fritzWifiRequiredForDownload SWIFT_WARN_UNUSED_RESULT;
 @end
 
-
-SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
-@interface FritzCore (SWIFT_EXTENSION(FritzManagedModel))
-/// Removed in v1.0.0-beta.9
-/// seealso:
-/// <code>updateModelIfNeeded:completionHandler:</code>
-+ (void)setupModel:(NSArray<Class <FritzBaseIdentifiedModel>> * _Nonnull)models completionHandler:(void (^ _Nonnull)(NSError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("This method is no longer needed. To manually trigger a model update, call Model.updateIfNeeded(_:)");
-/// Deprecated in v1.0.0-beta.9
-/// seealso:
-/// <code>updateModelIfNeeded:completionHandler:</code>
-+ (void)setupModel:(NSArray<Class <FritzBaseIdentifiedModel>> * _Nonnull)models SWIFT_UNAVAILABLE_MSG("This method is no longer needed. To manually trigger a model update, call Model.updateIfNeeded(_:)");
-@end
-
 @class FritzModelConfiguration;
 @class SessionManager;
 @class MLModelDescription;
@@ -1790,8 +1738,6 @@ SWIFT_CLASS("_TtC17FritzManagedModel17FritzManagedModel") SWIFT_AVAILABILITY(wat
 
 
 
-
-
 SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzManagedModel (SWIFT_EXTENSION(FritzManagedModel))
 /// Check server for latest active model defined in webapp and update local model state if different from webapp.
@@ -1800,6 +1746,8 @@ SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11
 ///
 - (void)updateModelIfNeededWithSkipCache:(BOOL)skipCache completionHandler:(void (^ _Nonnull)(BOOL, NSError * _Nullable))completionHandler;
 @end
+
+
 
 
 SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)

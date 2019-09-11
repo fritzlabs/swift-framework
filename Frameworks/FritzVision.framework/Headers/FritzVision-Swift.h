@@ -611,8 +611,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @end
 
 
-
-
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Blends mask with current image.
@@ -629,20 +627,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Blended image
 - (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-/// Blends mask with current image.
-/// Rotates source image to <code>up</code> orientation before blending.
-/// \param mask Overlaying image
-///
-/// \param blendMode Blend mode used to blend images.
-///
-/// \param interpolationQuality Quality of interpolation when resizing image.
-///
-/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
-///
-///
-/// returns:
-/// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("`blendMode` and `interpolationQuality` changed to `blendKernel` and `resizeSamplingMethod`");
 @end
 
 
@@ -654,13 +638,15 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 
 
-
-
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
+
+
 
 
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -978,7 +964,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 @end
 
 
-/// Class labels for FritzVisionPeopleSegmentationModel
+/// Class labels for FritzVisionPeoplePredictor
 SWIFT_CLASS_NAMED("FritzVisionPeopleClass")
 @interface FritzVisionPeopleClass : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
@@ -991,21 +977,19 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 @end
 
 
-SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationMediumClass")
-@interface FritzVisionPeopleSegmentationMediumClass : NSObject
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
-+ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull person;)
-+ (ModelSegmentationClass * _Nonnull)person SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
-+ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+/// Predictor that takes predicts pixels that are people
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationPredictor : FritzVisionSegmentationModel
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 /// Image segmentation model to detect people.
-SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationMediumModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationMediumModel : FritzVisionSegmentationModel
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModelAccurate") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationModelAccurate : FritzVisionPeopleSegmentationPredictor
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
@@ -1013,20 +997,18 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManaged
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
 /// Fetch model. Downloads model if model has not been downloaded before.
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationMediumModel * _Nullable, NSError * _Nullable))completionHandler;
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 /// Image segmentation model to detect people.
-SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationModel : FritzVisionSegmentationModel
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModelFast") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationModelFast : FritzVisionPeopleSegmentationPredictor
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
@@ -1034,15 +1016,33 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManaged
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
 /// Fetch model. Downloads model if model has not been downloaded before.
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
+/// Image segmentation model to detect people.
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModelSmall") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionPeopleSegmentationModelSmall : FritzVisionPeopleSegmentationPredictor
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
++ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
++ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
++ (void)setWifiRequiredForModelDownload:(BOOL)value;
+/// Fetch model. Downloads model if model has not been downloaded before.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 
 SWIFT_CLASS_NAMED("FritzVisionPetClass")
@@ -1158,49 +1158,12 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationResult") SWIFT_AVAILABILITY(watchos,in
 @property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
 /// Raw MLMultiArray result from prediction.
 @property (nonatomic, readonly, strong) MLMultiArray * _Nonnull predictionResult;
-/// Create 2D-Array same size as the model output with each point representing most likely class.
-/// \param minThreshold Only include classes that have a probability greater than the minThreshold.
-///
-- (NSArray<NSNumber *> * _Nonnull)getMaxIndices:(double)minThreshold SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "getArrayOfMostLikelyClasses");
 - (NSArray<NSNumber *> * _Nonnull)getArrayOfConfidenceScoresforClass:(ModelSegmentationClass * _Nonnull)segmentClass ClippingAbove:(double)threshold zeroingBelow:(double)minThreshold SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionSegmentationResult (SWIFT_EXTENSION(FritzVision))
-/// Generate UIImage mask from most likely class at each pixel.
-/// The generated image size will fit the original image passed into prediction, applying
-/// rotation.  If the image was center cropped, will return an image that covers the cropped image.
-/// \param minThreshold Minimum threshold value needed to count. By default zero.  You can set this
-/// property to filter out classes that may be the most likely but still have a lower probability.
-///
-/// \param alpha Alpha value of the color (0-255) for detected classes. By default completely opaque.
-///
-/// \param resize If true (default) mask will be scaled to the size of the input image.
-///
-- (UIImage * _Nullable)toImageMask:(double)minThreshold alpha:(uint8_t)alpha resize:(BOOL)resize SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildMultiClassMaskWithMinAcceptedScore:maxAlpha:resize:");
-/// Generate UIImage mask of given class.
-/// The generated image size will fit the original image passed into prediction, applying rotation.
-/// If the image was center cropped, will return an image that covers the cropped image.
-/// \param segmentClass Class to mask.
-///
-/// \param threshold Probability to filter.  Any probabilities below this value will be filtered out.
-///
-/// \param alpha Alpha value of the color (0-255) for detected classes.
-///
-/// \param minThresholdAccepted Any confidence score below this value will have an alpha of 0.
-/// Class confidence scores between <code>minThresholdAccepted</code> and <code>threshold</code> will retain
-/// their original value.
-///
-/// \param resize Resize mask to input image size.
-///
-///
-/// returns:
-/// Mask for class.
-- (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha minThresholdAccepted:(double)minThresholdAccepted resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildSingleClassMask:clippingScoresAbove:zeroingScoresBelow:maxAlpha:resize:color:");
-@end
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -2053,8 +2016,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @end
 
 
-
-
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Blends mask with current image.
@@ -2071,20 +2032,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Blended image
 - (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-/// Blends mask with current image.
-/// Rotates source image to <code>up</code> orientation before blending.
-/// \param mask Overlaying image
-///
-/// \param blendMode Blend mode used to blend images.
-///
-/// \param interpolationQuality Quality of interpolation when resizing image.
-///
-/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
-///
-///
-/// returns:
-/// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("`blendMode` and `interpolationQuality` changed to `blendKernel` and `resizeSamplingMethod`");
 @end
 
 
@@ -2096,13 +2043,15 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 
 
-
-
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
+
+
 
 
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -2420,7 +2369,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 @end
 
 
-/// Class labels for FritzVisionPeopleSegmentationModel
+/// Class labels for FritzVisionPeoplePredictor
 SWIFT_CLASS_NAMED("FritzVisionPeopleClass")
 @interface FritzVisionPeopleClass : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
@@ -2433,21 +2382,19 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 @end
 
 
-SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationMediumClass")
-@interface FritzVisionPeopleSegmentationMediumClass : NSObject
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
-+ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull person;)
-+ (ModelSegmentationClass * _Nonnull)person SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
-+ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+/// Predictor that takes predicts pixels that are people
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationPredictor : FritzVisionSegmentationModel
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 /// Image segmentation model to detect people.
-SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationMediumModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationMediumModel : FritzVisionSegmentationModel
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModelAccurate") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationModelAccurate : FritzVisionPeopleSegmentationPredictor
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
@@ -2455,20 +2402,18 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManaged
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
 /// Fetch model. Downloads model if model has not been downloaded before.
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationMediumModel * _Nullable, NSError * _Nullable))completionHandler;
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 /// Image segmentation model to detect people.
-SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationModel : FritzVisionSegmentationModel
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModelFast") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationModelFast : FritzVisionPeopleSegmentationPredictor
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
@@ -2476,15 +2421,33 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManaged
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
 /// Fetch model. Downloads model if model has not been downloaded before.
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
+/// Image segmentation model to detect people.
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModelSmall") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionPeopleSegmentationModelSmall : FritzVisionPeopleSegmentationPredictor
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
++ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
++ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
++ (void)setWifiRequiredForModelDownload:(BOOL)value;
+/// Fetch model. Downloads model if model has not been downloaded before.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 
 SWIFT_CLASS_NAMED("FritzVisionPetClass")
@@ -2600,49 +2563,12 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationResult") SWIFT_AVAILABILITY(watchos,in
 @property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
 /// Raw MLMultiArray result from prediction.
 @property (nonatomic, readonly, strong) MLMultiArray * _Nonnull predictionResult;
-/// Create 2D-Array same size as the model output with each point representing most likely class.
-/// \param minThreshold Only include classes that have a probability greater than the minThreshold.
-///
-- (NSArray<NSNumber *> * _Nonnull)getMaxIndices:(double)minThreshold SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "getArrayOfMostLikelyClasses");
 - (NSArray<NSNumber *> * _Nonnull)getArrayOfConfidenceScoresforClass:(ModelSegmentationClass * _Nonnull)segmentClass ClippingAbove:(double)threshold zeroingBelow:(double)minThreshold SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionSegmentationResult (SWIFT_EXTENSION(FritzVision))
-/// Generate UIImage mask from most likely class at each pixel.
-/// The generated image size will fit the original image passed into prediction, applying
-/// rotation.  If the image was center cropped, will return an image that covers the cropped image.
-/// \param minThreshold Minimum threshold value needed to count. By default zero.  You can set this
-/// property to filter out classes that may be the most likely but still have a lower probability.
-///
-/// \param alpha Alpha value of the color (0-255) for detected classes. By default completely opaque.
-///
-/// \param resize If true (default) mask will be scaled to the size of the input image.
-///
-- (UIImage * _Nullable)toImageMask:(double)minThreshold alpha:(uint8_t)alpha resize:(BOOL)resize SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildMultiClassMaskWithMinAcceptedScore:maxAlpha:resize:");
-/// Generate UIImage mask of given class.
-/// The generated image size will fit the original image passed into prediction, applying rotation.
-/// If the image was center cropped, will return an image that covers the cropped image.
-/// \param segmentClass Class to mask.
-///
-/// \param threshold Probability to filter.  Any probabilities below this value will be filtered out.
-///
-/// \param alpha Alpha value of the color (0-255) for detected classes.
-///
-/// \param minThresholdAccepted Any confidence score below this value will have an alpha of 0.
-/// Class confidence scores between <code>minThresholdAccepted</code> and <code>threshold</code> will retain
-/// their original value.
-///
-/// \param resize Resize mask to input image size.
-///
-///
-/// returns:
-/// Mask for class.
-- (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha minThresholdAccepted:(double)minThresholdAccepted resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildSingleClassMask:clippingScoresAbove:zeroingScoresBelow:maxAlpha:resize:color:");
-@end
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -3498,8 +3424,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @end
 
 
-
-
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Blends mask with current image.
@@ -3516,20 +3440,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Blended image
 - (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-/// Blends mask with current image.
-/// Rotates source image to <code>up</code> orientation before blending.
-/// \param mask Overlaying image
-///
-/// \param blendMode Blend mode used to blend images.
-///
-/// \param interpolationQuality Quality of interpolation when resizing image.
-///
-/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
-///
-///
-/// returns:
-/// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("`blendMode` and `interpolationQuality` changed to `blendKernel` and `resizeSamplingMethod`");
 @end
 
 
@@ -3541,13 +3451,15 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 
 
-
-
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
+
+
 
 
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -3865,7 +3777,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 @end
 
 
-/// Class labels for FritzVisionPeopleSegmentationModel
+/// Class labels for FritzVisionPeoplePredictor
 SWIFT_CLASS_NAMED("FritzVisionPeopleClass")
 @interface FritzVisionPeopleClass : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
@@ -3878,21 +3790,19 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 @end
 
 
-SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationMediumClass")
-@interface FritzVisionPeopleSegmentationMediumClass : NSObject
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
-+ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull person;)
-+ (ModelSegmentationClass * _Nonnull)person SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
-+ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+/// Predictor that takes predicts pixels that are people
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationPredictor : FritzVisionSegmentationModel
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 /// Image segmentation model to detect people.
-SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationMediumModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationMediumModel : FritzVisionSegmentationModel
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModelAccurate") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationModelAccurate : FritzVisionPeopleSegmentationPredictor
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
@@ -3900,20 +3810,18 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManaged
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
 /// Fetch model. Downloads model if model has not been downloaded before.
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationMediumModel * _Nullable, NSError * _Nullable))completionHandler;
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 /// Image segmentation model to detect people.
-SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationModel : FritzVisionSegmentationModel
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModelFast") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationModelFast : FritzVisionPeopleSegmentationPredictor
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
@@ -3921,15 +3829,33 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManaged
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
 /// Fetch model. Downloads model if model has not been downloaded before.
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
+/// Image segmentation model to detect people.
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModelSmall") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionPeopleSegmentationModelSmall : FritzVisionPeopleSegmentationPredictor
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
++ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
++ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
++ (void)setWifiRequiredForModelDownload:(BOOL)value;
+/// Fetch model. Downloads model if model has not been downloaded before.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 
 SWIFT_CLASS_NAMED("FritzVisionPetClass")
@@ -4045,49 +3971,12 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationResult") SWIFT_AVAILABILITY(watchos,in
 @property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
 /// Raw MLMultiArray result from prediction.
 @property (nonatomic, readonly, strong) MLMultiArray * _Nonnull predictionResult;
-/// Create 2D-Array same size as the model output with each point representing most likely class.
-/// \param minThreshold Only include classes that have a probability greater than the minThreshold.
-///
-- (NSArray<NSNumber *> * _Nonnull)getMaxIndices:(double)minThreshold SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "getArrayOfMostLikelyClasses");
 - (NSArray<NSNumber *> * _Nonnull)getArrayOfConfidenceScoresforClass:(ModelSegmentationClass * _Nonnull)segmentClass ClippingAbove:(double)threshold zeroingBelow:(double)minThreshold SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionSegmentationResult (SWIFT_EXTENSION(FritzVision))
-/// Generate UIImage mask from most likely class at each pixel.
-/// The generated image size will fit the original image passed into prediction, applying
-/// rotation.  If the image was center cropped, will return an image that covers the cropped image.
-/// \param minThreshold Minimum threshold value needed to count. By default zero.  You can set this
-/// property to filter out classes that may be the most likely but still have a lower probability.
-///
-/// \param alpha Alpha value of the color (0-255) for detected classes. By default completely opaque.
-///
-/// \param resize If true (default) mask will be scaled to the size of the input image.
-///
-- (UIImage * _Nullable)toImageMask:(double)minThreshold alpha:(uint8_t)alpha resize:(BOOL)resize SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildMultiClassMaskWithMinAcceptedScore:maxAlpha:resize:");
-/// Generate UIImage mask of given class.
-/// The generated image size will fit the original image passed into prediction, applying rotation.
-/// If the image was center cropped, will return an image that covers the cropped image.
-/// \param segmentClass Class to mask.
-///
-/// \param threshold Probability to filter.  Any probabilities below this value will be filtered out.
-///
-/// \param alpha Alpha value of the color (0-255) for detected classes.
-///
-/// \param minThresholdAccepted Any confidence score below this value will have an alpha of 0.
-/// Class confidence scores between <code>minThresholdAccepted</code> and <code>threshold</code> will retain
-/// their original value.
-///
-/// \param resize Resize mask to input image size.
-///
-///
-/// returns:
-/// Mask for class.
-- (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha minThresholdAccepted:(double)minThresholdAccepted resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildSingleClassMask:clippingScoresAbove:zeroingScoresBelow:maxAlpha:resize:color:");
-@end
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -4940,8 +4829,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @end
 
 
-
-
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Blends mask with current image.
@@ -4958,20 +4845,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Blended image
 - (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-/// Blends mask with current image.
-/// Rotates source image to <code>up</code> orientation before blending.
-/// \param mask Overlaying image
-///
-/// \param blendMode Blend mode used to blend images.
-///
-/// \param interpolationQuality Quality of interpolation when resizing image.
-///
-/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
-///
-///
-/// returns:
-/// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CGBlendMode)blendMode interpolationQuality:(CGInterpolationQuality)interpolationQuality opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("`blendMode` and `interpolationQuality` changed to `blendKernel` and `resizeSamplingMethod`");
 @end
 
 
@@ -4983,13 +4856,15 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 
 
-
-
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
+
+
 
 
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -5307,7 +5182,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 @end
 
 
-/// Class labels for FritzVisionPeopleSegmentationModel
+/// Class labels for FritzVisionPeoplePredictor
 SWIFT_CLASS_NAMED("FritzVisionPeopleClass")
 @interface FritzVisionPeopleClass : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
@@ -5320,21 +5195,19 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 @end
 
 
-SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationMediumClass")
-@interface FritzVisionPeopleSegmentationMediumClass : NSObject
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull none;)
-+ (ModelSegmentationClass * _Nonnull)none SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegmentationClass * _Nonnull person;)
-+ (ModelSegmentationClass * _Nonnull)person SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
-+ (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+/// Predictor that takes predicts pixels that are people
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationPredictor : FritzVisionSegmentationModel
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 /// Image segmentation model to detect people.
-SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationMediumModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationMediumModel : FritzVisionSegmentationModel
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModelAccurate") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationModelAccurate : FritzVisionPeopleSegmentationPredictor
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
@@ -5342,20 +5215,18 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManaged
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
 /// Fetch model. Downloads model if model has not been downloaded before.
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationMediumModel * _Nullable, NSError * _Nullable))completionHandler;
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 /// Image segmentation model to detect people.
-SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationModel : FritzVisionSegmentationModel
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModelFast") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationModelFast : FritzVisionPeopleSegmentationPredictor
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
@@ -5363,15 +5234,33 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManaged
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
 + (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
 + (void)setWifiRequiredForModelDownload:(BOOL)value;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
 /// Fetch model. Downloads model if model has not been downloaded before.
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModel * _Nullable, NSError * _Nullable))completionHandler;
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
+/// Image segmentation model to detect people.
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModelSmall") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionPeopleSegmentationModelSmall : FritzVisionPeopleSegmentationPredictor
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
++ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
++ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
++ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
++ (void)setWifiRequiredForModelDownload:(BOOL)value;
+/// Fetch model. Downloads model if model has not been downloaded before.
+/// \param completionHandler CompletionHandler called after fetchModel request finishes.
+///
++ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 
 SWIFT_CLASS_NAMED("FritzVisionPetClass")
@@ -5487,49 +5376,12 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationResult") SWIFT_AVAILABILITY(watchos,in
 @property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
 /// Raw MLMultiArray result from prediction.
 @property (nonatomic, readonly, strong) MLMultiArray * _Nonnull predictionResult;
-/// Create 2D-Array same size as the model output with each point representing most likely class.
-/// \param minThreshold Only include classes that have a probability greater than the minThreshold.
-///
-- (NSArray<NSNumber *> * _Nonnull)getMaxIndices:(double)minThreshold SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "getArrayOfMostLikelyClasses");
 - (NSArray<NSNumber *> * _Nonnull)getArrayOfConfidenceScoresforClass:(ModelSegmentationClass * _Nonnull)segmentClass ClippingAbove:(double)threshold zeroingBelow:(double)minThreshold SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionSegmentationResult (SWIFT_EXTENSION(FritzVision))
-/// Generate UIImage mask from most likely class at each pixel.
-/// The generated image size will fit the original image passed into prediction, applying
-/// rotation.  If the image was center cropped, will return an image that covers the cropped image.
-/// \param minThreshold Minimum threshold value needed to count. By default zero.  You can set this
-/// property to filter out classes that may be the most likely but still have a lower probability.
-///
-/// \param alpha Alpha value of the color (0-255) for detected classes. By default completely opaque.
-///
-/// \param resize If true (default) mask will be scaled to the size of the input image.
-///
-- (UIImage * _Nullable)toImageMask:(double)minThreshold alpha:(uint8_t)alpha resize:(BOOL)resize SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildMultiClassMaskWithMinAcceptedScore:maxAlpha:resize:");
-/// Generate UIImage mask of given class.
-/// The generated image size will fit the original image passed into prediction, applying rotation.
-/// If the image was center cropped, will return an image that covers the cropped image.
-/// \param segmentClass Class to mask.
-///
-/// \param threshold Probability to filter.  Any probabilities below this value will be filtered out.
-///
-/// \param alpha Alpha value of the color (0-255) for detected classes.
-///
-/// \param minThresholdAccepted Any confidence score below this value will have an alpha of 0.
-/// Class confidence scores between <code>minThresholdAccepted</code> and <code>threshold</code> will retain
-/// their original value.
-///
-/// \param resize Resize mask to input image size.
-///
-///
-/// returns:
-/// Mask for class.
-- (UIImage * _Nullable)toImageMask:(ModelSegmentationClass * _Nonnull)segmentClass threshold:(double)threshold alpha:(uint8_t)alpha minThresholdAccepted:(double)minThresholdAccepted resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "buildSingleClassMask:clippingScoresAbove:zeroingScoresBelow:maxAlpha:resize:color:");
-@end
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
