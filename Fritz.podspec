@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'Fritz'
 
-  s.version = '4.0.0'
+  s.version = '4.0.1'
 
   s.summary = 'Official Fritz SDK for Swift 5.0 and Objective-C'
 
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   s.default_subspec = 'Vision'
 
   s.subspec 'Vision' do |vision|
-    vision.dependency 'FritzBase/Vision', '4.0.0'
+    vision.dependency 'FritzBase/Vision', '4.0.1'
     end
 
   s.subspec 'VisionLabelModel' do |vision|
