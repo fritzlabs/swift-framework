@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
 
   s.summary = 'Official Fritz SDK for Swift 5.0 and Objective-C'
 
-  s.homepage = 'https://fritz.ai'
+  s.homepage = 'https://www.fritz.ai'
 
   s.license = { :type => 'Apache 2.0', :file => 'LICENSE.md' }
 

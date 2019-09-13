@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   s.name = 'FritzVisionPeopleSegmentationModelAccurate'
   s.version = '4.1.0'
   s.summary = 'Official Fritz SDK for Swift 4.1 and Objective-C'
-  s.homepage = 'https://fritz.ai'
+  s.homepage = 'https://www.fritz.ai'
   s.license = { :type => 'Commercial', :file => 'LICENSE.md' }
   s.author = { 'Chris Kelly' => 'chris@fritz.ai' }
   s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/4.1.0/FritzVisionPeopleSegmentationModelAccurate.zip' }
