@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'Fritz'
 
-  s.version = '4.1.0'
+  s.version = '4.1.1'
 
   s.summary = 'Official Fritz SDK for Swift 5.0 and Objective-C'
 
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   s.default_subspec = 'Vision'
 
   s.subspec 'Vision' do |vision|
-    vision.dependency 'FritzBase/Vision', '4.1.0'
+    vision.dependency 'FritzBase/Vision', '4.1.1'
     end
 
   s.subspec 'VisionLabelModel' do |vision|
@@ -60,16 +60,17 @@ Pod::Spec.new do |s|
 
   s.subspec 'VisionSegmentationModel' do |vision|
     vision.subspec 'People' do |people|
+
       people.subspec 'Accurate' do |sub|
         sub.dependency 'FritzVisionPeopleSegmentationModelAccurate', '~> 4.1.0'
       end
 
       people.subspec 'Fast' do |sub|
-        people.dependency 'FritzVisionPeopleSegmentationModelFast', '~> 4.1.0'
+        sub.dependency 'FritzVisionPeopleSegmentationModelFast', '~> 4.1.0'
       end
 
       people.subspec 'Small' do |sub|
-        people.dependency 'FritzVisionPeopleSegmentationModelSmall', '~> 4.1.0'
+        sub.dependency 'FritzVisionPeopleSegmentationModelSmall', '~> 4.1.0'
       end
     end
 
