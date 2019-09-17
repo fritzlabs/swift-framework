@@ -5,7 +5,7 @@ Fritz SDK for Swift and Objective-C
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Fritz.svg)](https://img.shields.io/cocoapods/v/Fritz.svg)
 [![Twitter](https://img.shields.io/badge/twitter-@fritzlabs-blue.svg?style=flat)](http://twitter.com/fritzlabs)
 
-This repository contains all the iOS Frameworks that comprise the Fritz iOS SDK. The SDK can also be installed using Cocoapods. See [releases](https://github.com/fritzlabs/swift-framework/releases) for the latest update to the Fritz SDK. 
+This repository contains all the iOS Frameworks that comprise the Fritz iOS SDK. The SDK can also be installed using Cocoapods. See [releases](https://github.com/fritzlabs/swift-framework/releases) for the latest updates. 
 
 ## Fritz AI
 
