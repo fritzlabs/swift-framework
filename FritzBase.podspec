@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'FritzBase'
-  s.version = '4.1.1'
+  s.version = '4.1.2'
   s.summary = 'Official Fritz SDK for Swift 5.0 and Objective-C'
   s.homepage = 'https://www.fritz.ai'
   s.license = { :type => 'Apache 2.0', :file => 'LICENSE.md' }
@@ -23,19 +23,19 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'ManagedModel' do |analytics|
-    analytics.dependency 'FritzBase/Core', '4.1.1'
+    analytics.dependency 'FritzBase/Core', '4.1.2'
     analytics.vendored_framework = 'Frameworks/FritzManagedModel.framework'
     analytics.preserve_path = 'Frameworks/FritzManagedModel.framework/build-encrypted-model.sh'
   end
 
   s.subspec 'CoreMLHelpers' do |helpers|
-    helpers.vendored_framework = 'Frameworks/CoreMLHelpers.framework', '4.1.1'
+    helpers.vendored_framework = 'Frameworks/CoreMLHelpers.framework', '4.1.2'
   end
 
   s.subspec 'Vision' do |helpers|
-    helpers.dependency 'FritzBase/Core', '4.1.1'
-    helpers.dependency 'FritzBase/CoreMLHelpers', '4.1.1'
-    helpers.dependency 'FritzBase/ManagedModel', '4.1.1'
+    helpers.dependency 'FritzBase/Core', '4.1.2'
+    helpers.dependency 'FritzBase/CoreMLHelpers', '4.1.2'
+    helpers.dependency 'FritzBase/ManagedModel', '4.1.2'
     helpers.vendored_framework = 'Frameworks/FritzVision.framework'
   end
 end

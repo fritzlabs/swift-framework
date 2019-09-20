@@ -5,6 +5,11 @@ Change Log
 
 ---
 
+## [4.1.2](https://github.com/fritzlabs/swift-framework/releases/tag/4.1.2)
+
+1. Updating People Segmentation Accurate model.
+2. Adding model version pinning.
+
 ## [4.1.1](https://github.com/fritzlabs/swift-framework/releases/tag/4.1.1)
 
 1. Fixing People Segmentation Fast podspec to not download both Fast and Small models.

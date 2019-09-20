@@ -240,6 +240,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger fritzPackagedModelVersion;)
 + (NSInteger)fritzPackagedModelVersion SWIFT_WARN_UNUSED_RESULT;
 @optional
+/// The specific version of the model requested by the SDK.
+/// note:
+/// Specifying a pinned version will override usage of the the packaged version, granting the SDK flexibility in regards to downloading different models.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger fritzPinnedModelVersion;)
++ (NSInteger)fritzPinnedModelVersion SWIFT_WARN_UNUSED_RESULT;
 /// Signifies whether or not the model is encrypted.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<NSNumber *> * _Nonnull fritzEncryptionSeed;)
 + (NSArray<NSNumber *> * _Nonnull)fritzEncryptionSeed SWIFT_WARN_UNUSED_RESULT;
@@ -370,7 +375,9 @@ SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11
 
 SWIFT_CLASS_NAMED("FritzModelConfiguration") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzModelConfiguration : NSObject
+/// The unique id of this model
 @property (nonatomic, readonly, copy) NSString * _Nonnull identifier;
+/// The latest version of this model
 @property (nonatomic, readonly) NSInteger version;
 /// Tags data set in webapp.  Pulls from most recently updated active server response if one exists.
 @property (nonatomic, copy) NSArray<NSString *> * _Nullable tags;
@@ -383,7 +390,9 @@ SWIFT_CLASS_NAMED("FritzModelConfiguration") SWIFT_AVAILABILITY(watchos,introduc
 @property (nonatomic, readonly) BOOL isOTA;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version encryptionSeed:(NSArray<NSNumber *> * _Nullable)encryptionSeed src:(NSURL * _Nullable)src tags:(NSArray<NSString *> * _Nullable)tags isWifiRequiredForDownloads:(BOOL)wifiRequiredForModelDownload metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata cpuAndGPUOnly:(BOOL)cpuAndGPUOnly OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version pinnedVersion:(NSInteger)pinnedVersion encryptionSeed:(NSArray<NSNumber *> * _Nullable)encryptionSeed src:(NSURL * _Nullable)src tags:(NSArray<NSString *> * _Nullable)tags isWifiRequiredForDownloads:(BOOL)wifiRequiredForModelDownload metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata cpuAndGPUOnly:(BOOL)cpuAndGPUOnly OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version cpuAndGPUOnly:(BOOL)cpuAndGPUOnly;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version pinnedVersion:(NSInteger)pinnedVersion cpuAndGPUOnly:(BOOL)cpuAndGPUOnly;
 - (nonnull instancetype)initFromIdentifiedModel:(id <FritzBaseIdentifiedModel> _Nonnull)identifiedModel;
 - (nonnull instancetype)initFromIdentifiedModelType:(Class <FritzBaseIdentifiedModel> _Nonnull)identifiedModelType;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
@@ -732,6 +741,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger fritzPackagedModelVersion;)
 + (NSInteger)fritzPackagedModelVersion SWIFT_WARN_UNUSED_RESULT;
 @optional
+/// The specific version of the model requested by the SDK.
+/// note:
+/// Specifying a pinned version will override usage of the the packaged version, granting the SDK flexibility in regards to downloading different models.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger fritzPinnedModelVersion;)
++ (NSInteger)fritzPinnedModelVersion SWIFT_WARN_UNUSED_RESULT;
 /// Signifies whether or not the model is encrypted.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<NSNumber *> * _Nonnull fritzEncryptionSeed;)
 + (NSArray<NSNumber *> * _Nonnull)fritzEncryptionSeed SWIFT_WARN_UNUSED_RESULT;
@@ -862,7 +876,9 @@ SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11
 
 SWIFT_CLASS_NAMED("FritzModelConfiguration") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzModelConfiguration : NSObject
+/// The unique id of this model
 @property (nonatomic, readonly, copy) NSString * _Nonnull identifier;
+/// The latest version of this model
 @property (nonatomic, readonly) NSInteger version;
 /// Tags data set in webapp.  Pulls from most recently updated active server response if one exists.
 @property (nonatomic, copy) NSArray<NSString *> * _Nullable tags;
@@ -875,7 +891,9 @@ SWIFT_CLASS_NAMED("FritzModelConfiguration") SWIFT_AVAILABILITY(watchos,introduc
 @property (nonatomic, readonly) BOOL isOTA;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version encryptionSeed:(NSArray<NSNumber *> * _Nullable)encryptionSeed src:(NSURL * _Nullable)src tags:(NSArray<NSString *> * _Nullable)tags isWifiRequiredForDownloads:(BOOL)wifiRequiredForModelDownload metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata cpuAndGPUOnly:(BOOL)cpuAndGPUOnly OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version pinnedVersion:(NSInteger)pinnedVersion encryptionSeed:(NSArray<NSNumber *> * _Nullable)encryptionSeed src:(NSURL * _Nullable)src tags:(NSArray<NSString *> * _Nullable)tags isWifiRequiredForDownloads:(BOOL)wifiRequiredForModelDownload metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata cpuAndGPUOnly:(BOOL)cpuAndGPUOnly OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version cpuAndGPUOnly:(BOOL)cpuAndGPUOnly;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version pinnedVersion:(NSInteger)pinnedVersion cpuAndGPUOnly:(BOOL)cpuAndGPUOnly;
 - (nonnull instancetype)initFromIdentifiedModel:(id <FritzBaseIdentifiedModel> _Nonnull)identifiedModel;
 - (nonnull instancetype)initFromIdentifiedModelType:(Class <FritzBaseIdentifiedModel> _Nonnull)identifiedModelType;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
@@ -1227,6 +1245,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger fritzPackagedModelVersion;)
 + (NSInteger)fritzPackagedModelVersion SWIFT_WARN_UNUSED_RESULT;
 @optional
+/// The specific version of the model requested by the SDK.
+/// note:
+/// Specifying a pinned version will override usage of the the packaged version, granting the SDK flexibility in regards to downloading different models.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger fritzPinnedModelVersion;)
++ (NSInteger)fritzPinnedModelVersion SWIFT_WARN_UNUSED_RESULT;
 /// Signifies whether or not the model is encrypted.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<NSNumber *> * _Nonnull fritzEncryptionSeed;)
 + (NSArray<NSNumber *> * _Nonnull)fritzEncryptionSeed SWIFT_WARN_UNUSED_RESULT;
@@ -1357,7 +1380,9 @@ SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11
 
 SWIFT_CLASS_NAMED("FritzModelConfiguration") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzModelConfiguration : NSObject
+/// The unique id of this model
 @property (nonatomic, readonly, copy) NSString * _Nonnull identifier;
+/// The latest version of this model
 @property (nonatomic, readonly) NSInteger version;
 /// Tags data set in webapp.  Pulls from most recently updated active server response if one exists.
 @property (nonatomic, copy) NSArray<NSString *> * _Nullable tags;
@@ -1370,7 +1395,9 @@ SWIFT_CLASS_NAMED("FritzModelConfiguration") SWIFT_AVAILABILITY(watchos,introduc
 @property (nonatomic, readonly) BOOL isOTA;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version encryptionSeed:(NSArray<NSNumber *> * _Nullable)encryptionSeed src:(NSURL * _Nullable)src tags:(NSArray<NSString *> * _Nullable)tags isWifiRequiredForDownloads:(BOOL)wifiRequiredForModelDownload metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata cpuAndGPUOnly:(BOOL)cpuAndGPUOnly OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version pinnedVersion:(NSInteger)pinnedVersion encryptionSeed:(NSArray<NSNumber *> * _Nullable)encryptionSeed src:(NSURL * _Nullable)src tags:(NSArray<NSString *> * _Nullable)tags isWifiRequiredForDownloads:(BOOL)wifiRequiredForModelDownload metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata cpuAndGPUOnly:(BOOL)cpuAndGPUOnly OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version cpuAndGPUOnly:(BOOL)cpuAndGPUOnly;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version pinnedVersion:(NSInteger)pinnedVersion cpuAndGPUOnly:(BOOL)cpuAndGPUOnly;
 - (nonnull instancetype)initFromIdentifiedModel:(id <FritzBaseIdentifiedModel> _Nonnull)identifiedModel;
 - (nonnull instancetype)initFromIdentifiedModelType:(Class <FritzBaseIdentifiedModel> _Nonnull)identifiedModelType;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
@@ -1719,6 +1746,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger fritzPackagedModelVersion;)
 + (NSInteger)fritzPackagedModelVersion SWIFT_WARN_UNUSED_RESULT;
 @optional
+/// The specific version of the model requested by the SDK.
+/// note:
+/// Specifying a pinned version will override usage of the the packaged version, granting the SDK flexibility in regards to downloading different models.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger fritzPinnedModelVersion;)
++ (NSInteger)fritzPinnedModelVersion SWIFT_WARN_UNUSED_RESULT;
 /// Signifies whether or not the model is encrypted.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<NSNumber *> * _Nonnull fritzEncryptionSeed;)
 + (NSArray<NSNumber *> * _Nonnull)fritzEncryptionSeed SWIFT_WARN_UNUSED_RESULT;
@@ -1849,7 +1881,9 @@ SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11
 
 SWIFT_CLASS_NAMED("FritzModelConfiguration") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzModelConfiguration : NSObject
+/// The unique id of this model
 @property (nonatomic, readonly, copy) NSString * _Nonnull identifier;
+/// The latest version of this model
 @property (nonatomic, readonly) NSInteger version;
 /// Tags data set in webapp.  Pulls from most recently updated active server response if one exists.
 @property (nonatomic, copy) NSArray<NSString *> * _Nullable tags;
@@ -1862,7 +1896,9 @@ SWIFT_CLASS_NAMED("FritzModelConfiguration") SWIFT_AVAILABILITY(watchos,introduc
 @property (nonatomic, readonly) BOOL isOTA;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version encryptionSeed:(NSArray<NSNumber *> * _Nullable)encryptionSeed src:(NSURL * _Nullable)src tags:(NSArray<NSString *> * _Nullable)tags isWifiRequiredForDownloads:(BOOL)wifiRequiredForModelDownload metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata cpuAndGPUOnly:(BOOL)cpuAndGPUOnly OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version pinnedVersion:(NSInteger)pinnedVersion encryptionSeed:(NSArray<NSNumber *> * _Nullable)encryptionSeed src:(NSURL * _Nullable)src tags:(NSArray<NSString *> * _Nullable)tags isWifiRequiredForDownloads:(BOOL)wifiRequiredForModelDownload metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata cpuAndGPUOnly:(BOOL)cpuAndGPUOnly OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version cpuAndGPUOnly:(BOOL)cpuAndGPUOnly;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier version:(NSInteger)version pinnedVersion:(NSInteger)pinnedVersion cpuAndGPUOnly:(BOOL)cpuAndGPUOnly;
 - (nonnull instancetype)initFromIdentifiedModel:(id <FritzBaseIdentifiedModel> _Nonnull)identifiedModel;
 - (nonnull instancetype)initFromIdentifiedModelType:(Class <FritzBaseIdentifiedModel> _Nonnull)identifiedModelType;
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
