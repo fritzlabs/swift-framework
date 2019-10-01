@@ -15,5 +15,3 @@ FOUNDATION_EXPORT double FritzVisionPeopleSegmentationModelAccurateVersionNumber
 FOUNDATION_EXPORT const unsigned char FritzVisionPeopleSegmentationModelAccurateVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <FritzVisionPeopleSegmentationModelAccurate/PublicHeader.h>
-
-

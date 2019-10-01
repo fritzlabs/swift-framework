@@ -1,0 +1,11 @@
+framework module FritzVisionHairSegmentationModelAccurate {
+  umbrella header "FritzVisionHairSegmentationModelAccurate.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionHairSegmentationModelAccurate.Swift {
+    header "FritzVisionHairSegmentationModelAccurate-Swift.h"
+    requires objc
+}

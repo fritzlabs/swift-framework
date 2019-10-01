@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [4.2.0](https://github.com/fritzlabs/swift-framework/releases/tag/4.2.0)
+
+1. Adding model variants for all segmentation models.
+
 ## [4.1.2](https://github.com/fritzlabs/swift-framework/releases/tag/4.1.2)
 
 1. Updating People Segmentation Accurate model.

@@ -1,0 +1,11 @@
+framework module FritzVisionPetSegmentationModelFast {
+  umbrella header "FritzVisionPetSegmentationModelFast.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionPetSegmentationModelFast.Swift {
+    header "FritzVisionPetSegmentationModelFast-Swift.h"
+    requires objc
+}

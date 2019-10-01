@@ -1,0 +1,11 @@
+framework module FritzVisionSkySegmentationModelFast {
+  umbrella header "FritzVisionSkySegmentationModelFast.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionSkySegmentationModelFast.Swift {
+    header "FritzVisionSkySegmentationModelFast-Swift.h"
+    requires objc
+}

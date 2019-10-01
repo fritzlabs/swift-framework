@@ -1,0 +1,11 @@
+framework module FritzVisionHumanPoseModelFast {
+  umbrella header "FritzVisionHumanPoseModelFast.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionHumanPoseModelFast.Swift {
+    header "FritzVisionHumanPoseModelFast-Swift.h"
+    requires objc
+}

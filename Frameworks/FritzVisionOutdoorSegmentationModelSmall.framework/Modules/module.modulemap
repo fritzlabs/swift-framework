@@ -1,0 +1,11 @@
+framework module FritzVisionOutdoorSegmentationModelSmall {
+  umbrella header "FritzVisionOutdoorSegmentationModelSmall.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionOutdoorSegmentationModelSmall.Swift {
+    header "FritzVisionOutdoorSegmentationModelSmall-Swift.h"
+    requires objc
+}

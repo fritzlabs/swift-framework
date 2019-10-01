@@ -1,0 +1,11 @@
+framework module FritzVisionHumanPoseModelSmall {
+  umbrella header "FritzVisionHumanPoseModelSmall.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionHumanPoseModelSmall.Swift {
+    header "FritzVisionHumanPoseModelSmall-Swift.h"
+    requires objc
+}

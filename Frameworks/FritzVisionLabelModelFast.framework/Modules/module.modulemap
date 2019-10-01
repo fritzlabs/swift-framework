@@ -1,0 +1,11 @@
+framework module FritzVisionLabelModelFast {
+  umbrella header "FritzVisionLabelModelFast.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionLabelModelFast.Swift {
+    header "FritzVisionLabelModelFast-Swift.h"
+    requires objc
+}

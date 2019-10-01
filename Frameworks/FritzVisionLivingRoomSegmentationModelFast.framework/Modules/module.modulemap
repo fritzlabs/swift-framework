@@ -1,0 +1,11 @@
+framework module FritzVisionLivingRoomSegmentationModelFast {
+  umbrella header "FritzVisionLivingRoomSegmentationModelFast.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionLivingRoomSegmentationModelFast.Swift {
+    header "FritzVisionLivingRoomSegmentationModelFast-Swift.h"
+    requires objc
+}

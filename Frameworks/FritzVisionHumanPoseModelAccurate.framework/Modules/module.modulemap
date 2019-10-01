@@ -1,0 +1,11 @@
+framework module FritzVisionHumanPoseModelAccurate {
+  umbrella header "FritzVisionHumanPoseModelAccurate.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionHumanPoseModelAccurate.Swift {
+    header "FritzVisionHumanPoseModelAccurate-Swift.h"
+    requires objc
+}

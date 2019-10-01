@@ -1,0 +1,11 @@
+framework module FritzVisionPetSegmentationModelAccurate {
+  umbrella header "FritzVisionPetSegmentationModelAccurate.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionPetSegmentationModelAccurate.Swift {
+    header "FritzVisionPetSegmentationModelAccurate-Swift.h"
+    requires objc
+}

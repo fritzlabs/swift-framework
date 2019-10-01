@@ -1,0 +1,11 @@
+framework module FritzVisionSkySegmentationModelAccurate {
+  umbrella header "FritzVisionSkySegmentationModelAccurate.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionSkySegmentationModelAccurate.Swift {
+    header "FritzVisionSkySegmentationModelAccurate-Swift.h"
+    requires objc
+}

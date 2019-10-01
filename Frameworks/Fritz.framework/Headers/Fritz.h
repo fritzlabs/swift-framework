@@ -32,13 +32,13 @@ import the headers individually."
 @import FritzManagedModel;
 #endif
 
-#if __has_include(<FritzVisionLabelModel/FritzVisionLabelModel.h>)
-@import FritzVisionLabelModel;
+#if __has_include(<FritzVisionLabelModelFast/FritzVisionLabelModelFast.h>)
+@import FritzVisionLabelModelFast;
 #endif
 
 
-#if __has_include(<FritzVisionObjectModel/FritzVisionObjectModel.h>)
-@import FritzVisionObjectModel;
+#if __has_include(<FritzVisionObjectModelFast/FritzVisionObjectModelFast.h>)
+@import FritzVisionObjectModelFast;
 #endif
 
 #if __has_include(<FritzVisionStyleModelPaintings/FritzVisionStyleModelPaintings.h>)
@@ -58,37 +58,92 @@ import the headers individually."
 @import FritzVisionPeopleSegmentationModelAccurate;
 #endif
 
-#if __has_include(<FritzVisionLivingRoomSegmentationModel/FritzVisionLivingRoomSegmentationModel.h>)
-@import FritzVisionLivingRoomSegmentationModel;
+#if __has_include(<FritzVisionLivingRoomSegmentationModelAccurate/FritzVisionLivingRoomSegmentationModelAccurate.h>)
+@import FritzVisionLivingRoomSegmentationModelAccurate;
 #endif
 
-#if __has_include(<FritzVisionOutdoorSegmentationModel/FritzVisionOutdoorSegmentationModel.h>)
-@import FritzVisionOutdoorSegmentationModel;
+#if __has_include(<FritzVisionLivingRoomSegmentationModelFast/FritzVisionLivingRoomSegmentationModelFast.h>)
+@import FritzVisionLivingRoomSegmentationModelFast;
 #endif
 
-#if __has_include(<FritzVisionPeopleAndPetSegmentationMediumModel/FritzVisionPeopleAndPetSegmentationMediumModel.h>)
-@import FritzVisionPeopleAndPetSegmentationMediumModel;
+#if __has_include(<FritzVisionLivingRoomSegmentationModelSmall/FritzVisionLivingRoomSegmentationModelSmall.h>)
+@import FritzVisionLivingRoomSegmentationModelSmall;
 #endif
 
-#if __has_include(<FritzVisionHairSegmentationModel/FritzVisionHairSegmentationModel.h>)
-@import FritzVisionHairSegmentationModel;
+#if __has_include(<FritzVisionOutdoorSegmentationModelFast/FritzVisionOutdoorSegmentationModelFast.h>)
+@import FritzVisionOutdoorSegmentationModelFast;
 #endif
 
-#if __has_include(<FritzVisionSkySegmentationModel/FritzVisionSkySegmentationModel.h>)
-@import FritzVisionSkySegmentationModel;
+#if __has_include(<FritzVisionOutdoorSegmentationModelSmall/FritzVisionOutdoorSegmentationModelSmall.h>)
+@import FritzVisionOutdoorSegmentationModelSmall;
+#endif
+
+#if __has_include(<FritzVisionOutdoorSegmentationModelAccurate/FritzVisionOutdoorSegmentationModelAccurate.h>)
+@import FritzVisionOutdoorSegmentationModelAccurate;
 #endif
 
 
-#if __has_include(<FritzVisionPoseModel/FritzVisionPoseModel.h>)
-@import FritzVisionPoseModel;
+#if __has_include(<FritzVisionPeopleAndPetSegmentationModelFast/FritzVisionPeopleAndPetSegmentationModelFast.h>)
+@import FritzVisionPeopleAndPetSegmentationModelFast;
+#endif
+
+#if __has_include(<FritzVisionPeopleAndPetSegmentationModelAccurate/FritzVisionPeopleAndPetSegmentationModelAccurate.h>)
+@import FritzVisionPeopleAndPetSegmentationModelAccurate;
+#endif
+
+#if __has_include(<FritzVisionPeopleAndPetSegmentationModelSmall/FritzVisionPeopleAndPetSegmentationModelSmall.h>)
+@import FritzVisionPeopleAndPetSegmentationModelSmall;
+#endif
+
+#if __has_include(<FritzVisionHairSegmentationModelFast/FritzVisionHairSegmentationModelFast.h>)
+@import FritzVisionHairSegmentationModelFast;
+#endif
+
+#if __has_include(<FritzVisionHairSegmentationModelSmall/FritzVisionHairSegmentationModelSmall.h>)
+@import FritzVisionHairSegmentationModelSmall;
+#endif
+
+#if __has_include(<FritzVisionHairSegmentationModelAccurate/FritzVisionHairSegmentationModelAccurate.h>)
+@import FritzVisionHairSegmentationModelAccurate;
+#endif
+
+#if __has_include(<FritzVisionSkySegmentationModelAccurate/FritzVisionSkySegmentationModelAccurate.h>)
+@import FritzVisionSkySegmentationModelAccurate;
+#endif
+
+
+#if __has_include(<FritzVisionSkySegmentationModelFast/FritzVisionSkySegmentationModelFast.h>)
+@import FritzVisionSkySegmentationModelFast;
+#endif
+
+#if __has_include(<FritzVisionSkySegmentationModelSmall/FritzVisionSkySegmentationModelSmall.h>)
+@import FritzVisionSkySegmentationModelSmall;
+#endif
+
+#if __has_include(<FritzVisionHumanPoseModelFast/FritzVisionHumanPoseModelFast.h>)
+@import FritzVisionHumanPoseModelFast;
+#endif
+#if __has_include(<FritzVisionHumanPoseModelSmall/FritzVisionHumanPoseModelSmall.h>)
+@import FritzVisionHumanPoseModelAccurate;
+#endif
+#if __has_include(<FritzVisionHumanPoseModelSmall/FritzVisionHumanPoseModelSmall.h>)
+@import FritzVisionHumanPoseModelSmall;
 #endif
 
 #if __has_include(<FritzVisionMultiPoseModel/FritzVisionMultiPoseModel.h>)
 @import FritzVisionMultiPoseModel;
 #endif
 
-#if __has_include(<FritzVisionPetSegmentationModel/FritzVisionPetSegmentationModel.h>)
-@import FritzVisionPetSegmentationModel;
+#if __has_include(<FritzVisionPetSegmentationModelFast/FritzVisionPetSegmentationModelFast.h>)
+@import FritzVisionPetSegmentationModelFast;
+#endif
+
+#if __has_include(<FritzVisionPetSegmentationModelSmall/FritzVisionPetSegmentationModelSmall.h>)
+@import FritzVisionPetSegmentationModelSmall;
+#endif
+
+#if __has_include(<FritzVisionPetSegmentationModelAccurate/FritzVisionPetSegmentationModelAccurate.h>)
+@import FritzVisionPetSegmentationModelAccurate;
 #endif
 
 #if __has_include(<FritzVisionRigidPose/FritzVisionRigidPose.h>)

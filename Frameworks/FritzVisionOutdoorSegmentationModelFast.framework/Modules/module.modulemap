@@ -1,0 +1,11 @@
+framework module FritzVisionOutdoorSegmentationModelFast {
+  umbrella header "FritzVisionOutdoorSegmentationModelFast.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionOutdoorSegmentationModelFast.Swift {
+    header "FritzVisionOutdoorSegmentationModelFast-Swift.h"
+    requires objc
+}

@@ -1,0 +1,11 @@
+framework module FritzVisionHairSegmentationModelSmall {
+  umbrella header "FritzVisionHairSegmentationModelSmall.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionHairSegmentationModelSmall.Swift {
+    header "FritzVisionHairSegmentationModelSmall-Swift.h"
+    requires objc
+}

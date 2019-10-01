@@ -1,0 +1,11 @@
+framework module FritzVisionOutdoorSegmentationModelAccurate {
+  umbrella header "FritzVisionOutdoorSegmentationModelAccurate.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionOutdoorSegmentationModelAccurate.Swift {
+    header "FritzVisionOutdoorSegmentationModelAccurate-Swift.h"
+    requires objc
+}

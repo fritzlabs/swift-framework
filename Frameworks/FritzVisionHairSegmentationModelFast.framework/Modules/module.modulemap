@@ -1,0 +1,11 @@
+framework module FritzVisionHairSegmentationModelFast {
+  umbrella header "FritzVisionHairSegmentationModelFast.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionHairSegmentationModelFast.Swift {
+    header "FritzVisionHairSegmentationModelFast-Swift.h"
+    requires objc
+}

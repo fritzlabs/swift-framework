@@ -1,0 +1,11 @@
+framework module FritzVisionSkySegmentationModelSmall {
+  umbrella header "FritzVisionSkySegmentationModelSmall.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionSkySegmentationModelSmall.Swift {
+    header "FritzVisionSkySegmentationModelSmall-Swift.h"
+    requires objc
+}
