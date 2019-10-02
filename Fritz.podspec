@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'Vision' do |vision|
     vision.dependency 'FritzBase/Vision', '4.1.2'
-    end
+  end
 
   s.subspec 'VisionLabelModel' do |vision|
     vision.subspec 'Fast' do |sub|
@@ -157,7 +157,7 @@ Pod::Spec.new do |s|
       end
     end
 
-    vision.subspec 'PeopleAndPet' do |people|
+    vision.subspec 'PeopleAndPet' do |seg|
       seg.subspec 'Accurate' do |sub|
         sub.dependency 'FritzVisionPeopleAndPetSegmentationModelAccurate', '~> 4.2.0'
       end
