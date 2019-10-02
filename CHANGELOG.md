@@ -5,6 +5,13 @@ Change Log
 
 ---
 
+## [4.2.1](https://github.com/fritzlabs/swift-framework/releases/tag/4.2.1)
+
+1. Adding model version pinning to all OTA model downloads.
+2. Adding a blurRadius option to Segmentation Masks.
+3. Pinning Fast People Seg model to proper version.
+4. Updating pinned label model.
+
 ## [4.2.0](https://github.com/fritzlabs/swift-framework/releases/tag/4.2.0)
 
 1. Adding model variants for all segmentation models.

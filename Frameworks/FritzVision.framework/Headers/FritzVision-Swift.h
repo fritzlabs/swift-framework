@@ -319,6 +319,17 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)maskWith:(UIImage * _Nonnull)alphaMask removing:(enum FritzSegmentationRegion)segmentationRegion;
 @end
 
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
+- (void)maskWith:(AVDepthData * _Nonnull)depthData focusingAtDepth:(CGFloat)depth focalWidth:(CGFloat)focalWidth;
+- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsFartherThan:(CGFloat)depth;
+- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsCloserThan:(CGFloat)depth;
+- (void)blurWith:(AVDepthData * _Nonnull)depthData focusedAt:(CGFloat)depth focalWidth:(CGFloat)focalWidth blurRadius:(CGFloat)blurRadius;
+- (void)blurWithPixelsFartherThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
+- (void)blurWithPixelsCloserThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
+@end
+
 @class CIBlendKernel;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -338,17 +349,10 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)blendWith:(UIImage * _Nonnull)mask blendKernel:(CIBlendKernel * _Nonnull)kernel opacity:(CGFloat)opacity;
 - (CIImage * _Nullable)changeOpacityOn:(CIImage * _Nonnull)image to:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
-- (void)maskWith:(AVDepthData * _Nonnull)depthData focusingAtDepth:(CGFloat)depth focalWidth:(CGFloat)focalWidth;
-- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsFartherThan:(CGFloat)depth;
-- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsCloserThan:(CGFloat)depth;
-- (void)blurWith:(AVDepthData * _Nonnull)depthData focusedAt:(CGFloat)depth focalWidth:(CGFloat)focalWidth blurRadius:(CGFloat)blurRadius;
-- (void)blurWithPixelsFartherThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
-- (void)blurWithPixelsCloserThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
+/// Blurs image.
+/// \param blurRadius Pixel radius of the blur kernel
+///
+- (void)blurWithBlurRadius:(CGFloat)blurRadius;
 @end
 
 
@@ -1504,7 +1508,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Image
-- (UIImage * _Nullable)buildMultiClassMaskWithMinAcceptedScore:(double)minScore maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize SWIFT_WARN_UNUSED_RESULT;
+- (UIImage * _Nullable)buildMultiClassMaskWithMinAcceptedScore:(double)minScore maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize blurRadius:(CGFloat)blurRadius SWIFT_WARN_UNUSED_RESULT;
 /// Generate UIImage mask for given class.
 /// The generated image size will fit the original image passed into prediction, applying rotation.
 /// If the image was center cropped, will return an image that covers the cropped image.
@@ -1526,7 +1530,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Mask for class.
-- (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass clippingScoresAbove:(double)clippingThreshold zeroingScoresBelow:(double)zeroingThreshold maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT;
+- (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass clippingScoresAbove:(double)clippingThreshold zeroingScoresBelow:(double)zeroingThreshold maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize color:(UIColor * _Nullable)color blurRadius:(CGFloat)blurRadius SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -1774,6 +1778,8 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion
 /// Background is the region of the image where the alpha value of a mask is 0.
   FritzSegmentationRegionBackground = 1,
 };
+
+
 
 
 
@@ -2109,6 +2115,17 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)maskWith:(UIImage * _Nonnull)alphaMask removing:(enum FritzSegmentationRegion)segmentationRegion;
 @end
 
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
+- (void)maskWith:(AVDepthData * _Nonnull)depthData focusingAtDepth:(CGFloat)depth focalWidth:(CGFloat)focalWidth;
+- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsFartherThan:(CGFloat)depth;
+- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsCloserThan:(CGFloat)depth;
+- (void)blurWith:(AVDepthData * _Nonnull)depthData focusedAt:(CGFloat)depth focalWidth:(CGFloat)focalWidth blurRadius:(CGFloat)blurRadius;
+- (void)blurWithPixelsFartherThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
+- (void)blurWithPixelsCloserThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
+@end
+
 @class CIBlendKernel;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -2128,17 +2145,10 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)blendWith:(UIImage * _Nonnull)mask blendKernel:(CIBlendKernel * _Nonnull)kernel opacity:(CGFloat)opacity;
 - (CIImage * _Nullable)changeOpacityOn:(CIImage * _Nonnull)image to:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
-- (void)maskWith:(AVDepthData * _Nonnull)depthData focusingAtDepth:(CGFloat)depth focalWidth:(CGFloat)focalWidth;
-- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsFartherThan:(CGFloat)depth;
-- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsCloserThan:(CGFloat)depth;
-- (void)blurWith:(AVDepthData * _Nonnull)depthData focusedAt:(CGFloat)depth focalWidth:(CGFloat)focalWidth blurRadius:(CGFloat)blurRadius;
-- (void)blurWithPixelsFartherThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
-- (void)blurWithPixelsCloserThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
+/// Blurs image.
+/// \param blurRadius Pixel radius of the blur kernel
+///
+- (void)blurWithBlurRadius:(CGFloat)blurRadius;
 @end
 
 
@@ -3294,7 +3304,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Image
-- (UIImage * _Nullable)buildMultiClassMaskWithMinAcceptedScore:(double)minScore maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize SWIFT_WARN_UNUSED_RESULT;
+- (UIImage * _Nullable)buildMultiClassMaskWithMinAcceptedScore:(double)minScore maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize blurRadius:(CGFloat)blurRadius SWIFT_WARN_UNUSED_RESULT;
 /// Generate UIImage mask for given class.
 /// The generated image size will fit the original image passed into prediction, applying rotation.
 /// If the image was center cropped, will return an image that covers the cropped image.
@@ -3316,7 +3326,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Mask for class.
-- (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass clippingScoresAbove:(double)clippingThreshold zeroingScoresBelow:(double)zeroingThreshold maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT;
+- (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass clippingScoresAbove:(double)clippingThreshold zeroingScoresBelow:(double)zeroingThreshold maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize color:(UIColor * _Nullable)color blurRadius:(CGFloat)blurRadius SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -3564,6 +3574,8 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion
 /// Background is the region of the image where the alpha value of a mask is 0.
   FritzSegmentationRegionBackground = 1,
 };
+
+
 
 
 
@@ -3902,6 +3914,17 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)maskWith:(UIImage * _Nonnull)alphaMask removing:(enum FritzSegmentationRegion)segmentationRegion;
 @end
 
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
+- (void)maskWith:(AVDepthData * _Nonnull)depthData focusingAtDepth:(CGFloat)depth focalWidth:(CGFloat)focalWidth;
+- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsFartherThan:(CGFloat)depth;
+- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsCloserThan:(CGFloat)depth;
+- (void)blurWith:(AVDepthData * _Nonnull)depthData focusedAt:(CGFloat)depth focalWidth:(CGFloat)focalWidth blurRadius:(CGFloat)blurRadius;
+- (void)blurWithPixelsFartherThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
+- (void)blurWithPixelsCloserThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
+@end
+
 @class CIBlendKernel;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -3921,17 +3944,10 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)blendWith:(UIImage * _Nonnull)mask blendKernel:(CIBlendKernel * _Nonnull)kernel opacity:(CGFloat)opacity;
 - (CIImage * _Nullable)changeOpacityOn:(CIImage * _Nonnull)image to:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
-- (void)maskWith:(AVDepthData * _Nonnull)depthData focusingAtDepth:(CGFloat)depth focalWidth:(CGFloat)focalWidth;
-- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsFartherThan:(CGFloat)depth;
-- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsCloserThan:(CGFloat)depth;
-- (void)blurWith:(AVDepthData * _Nonnull)depthData focusedAt:(CGFloat)depth focalWidth:(CGFloat)focalWidth blurRadius:(CGFloat)blurRadius;
-- (void)blurWithPixelsFartherThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
-- (void)blurWithPixelsCloserThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
+/// Blurs image.
+/// \param blurRadius Pixel radius of the blur kernel
+///
+- (void)blurWithBlurRadius:(CGFloat)blurRadius;
 @end
 
 
@@ -5087,7 +5103,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Image
-- (UIImage * _Nullable)buildMultiClassMaskWithMinAcceptedScore:(double)minScore maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize SWIFT_WARN_UNUSED_RESULT;
+- (UIImage * _Nullable)buildMultiClassMaskWithMinAcceptedScore:(double)minScore maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize blurRadius:(CGFloat)blurRadius SWIFT_WARN_UNUSED_RESULT;
 /// Generate UIImage mask for given class.
 /// The generated image size will fit the original image passed into prediction, applying rotation.
 /// If the image was center cropped, will return an image that covers the cropped image.
@@ -5109,7 +5125,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Mask for class.
-- (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass clippingScoresAbove:(double)clippingThreshold zeroingScoresBelow:(double)zeroingThreshold maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT;
+- (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass clippingScoresAbove:(double)clippingThreshold zeroingScoresBelow:(double)zeroingThreshold maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize color:(UIColor * _Nullable)color blurRadius:(CGFloat)blurRadius SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -5357,6 +5373,8 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion
 /// Background is the region of the image where the alpha value of a mask is 0.
   FritzSegmentationRegionBackground = 1,
 };
+
+
 
 
 
@@ -5692,6 +5710,17 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)maskWith:(UIImage * _Nonnull)alphaMask removing:(enum FritzSegmentationRegion)segmentationRegion;
 @end
 
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
+- (void)maskWith:(AVDepthData * _Nonnull)depthData focusingAtDepth:(CGFloat)depth focalWidth:(CGFloat)focalWidth;
+- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsFartherThan:(CGFloat)depth;
+- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsCloserThan:(CGFloat)depth;
+- (void)blurWith:(AVDepthData * _Nonnull)depthData focusedAt:(CGFloat)depth focalWidth:(CGFloat)focalWidth blurRadius:(CGFloat)blurRadius;
+- (void)blurWithPixelsFartherThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
+- (void)blurWithPixelsCloserThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
+@end
+
 @class CIBlendKernel;
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -5711,17 +5740,10 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 - (void)blendWith:(UIImage * _Nonnull)mask blendKernel:(CIBlendKernel * _Nonnull)kernel opacity:(CGFloat)opacity;
 - (CIImage * _Nullable)changeOpacityOn:(CIImage * _Nonnull)image to:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface CIImagePipeline (SWIFT_EXTENSION(FritzVision))
-- (void)maskWith:(AVDepthData * _Nonnull)depthData focusingAtDepth:(CGFloat)depth focalWidth:(CGFloat)focalWidth;
-- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsFartherThan:(CGFloat)depth;
-- (void)maskWith:(AVDepthData * _Nonnull)depthData pixelsCloserThan:(CGFloat)depth;
-- (void)blurWith:(AVDepthData * _Nonnull)depthData focusedAt:(CGFloat)depth focalWidth:(CGFloat)focalWidth blurRadius:(CGFloat)blurRadius;
-- (void)blurWithPixelsFartherThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
-- (void)blurWithPixelsCloserThan:(CGFloat)depth using:(AVDepthData * _Nonnull)depthData blurRadius:(CGFloat)blurRadius;
+/// Blurs image.
+/// \param blurRadius Pixel radius of the blur kernel
+///
+- (void)blurWithBlurRadius:(CGFloat)blurRadius;
 @end
 
 
@@ -6877,7 +6899,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Image
-- (UIImage * _Nullable)buildMultiClassMaskWithMinAcceptedScore:(double)minScore maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize SWIFT_WARN_UNUSED_RESULT;
+- (UIImage * _Nullable)buildMultiClassMaskWithMinAcceptedScore:(double)minScore maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize blurRadius:(CGFloat)blurRadius SWIFT_WARN_UNUSED_RESULT;
 /// Generate UIImage mask for given class.
 /// The generated image size will fit the original image passed into prediction, applying rotation.
 /// If the image was center cropped, will return an image that covers the cropped image.
@@ -6899,7 +6921,7 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// returns:
 /// Mask for class.
-- (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass clippingScoresAbove:(double)clippingThreshold zeroingScoresBelow:(double)zeroingThreshold maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize color:(UIColor * _Nullable)color SWIFT_WARN_UNUSED_RESULT;
+- (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass clippingScoresAbove:(double)clippingThreshold zeroingScoresBelow:(double)zeroingThreshold maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize color:(UIColor * _Nullable)color blurRadius:(CGFloat)blurRadius SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -7147,6 +7169,8 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion
 /// Background is the region of the image where the alpha value of a mask is 0.
   FritzSegmentationRegionBackground = 1,
 };
+
+
 
 
 

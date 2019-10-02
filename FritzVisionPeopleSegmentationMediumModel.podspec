@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'FritzVisionPeopleSegmentationMediumModel'
-  s.version = '4.2.0'
+  s.version = '4.2.1'
   s.summary = 'Official Fritz SDK for Swift 4.1 and Objective-C'
   s.homepage = 'https://www.fritz.ai'
   s.license = { :type => 'Commercial', :file => 'LICENSE.md' }
@@ -12,6 +12,6 @@ Pod::Spec.new do |s|
   s.swift_version = '4.2'
   s.frameworks = 'UIKit', 'CoreML', 'Foundation'
 
-  s.dependency 'FritzBase/Vision', '4.2.0'
+  s.dependency 'FritzBase/Vision', '4.2.1'
   s.vendored_framework = 'Frameworks/FritzVisionPeopleSegmentationMediumModel.framework'
 end
