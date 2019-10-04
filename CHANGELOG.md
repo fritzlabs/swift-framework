@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [4.2.2](https://github.com/fritzlabs/swift-framework/releases/tag/4.2.2)
+
+1. Make FritzVisionLabelModelFast and FritzVisionObjectModelFast targets optional in Fritz framework.
+
 ## [4.2.1](https://github.com/fritzlabs/swift-framework/releases/tag/4.2.1)
 
 1. Adding model version pinning to all OTA model downloads.

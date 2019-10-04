@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'FritzVisionPetSegmentationModelSmall'
-  s.version = '4.2.1'
+  s.version = '4.2.2'
   s.summary = 'Official Fritz SDK for Swift 5.1 and Objective-C'
   s.homepage = 'https://www.fritz.ai'
   s.license = { :type => 'Commercial', :file => 'LICENSE.md' }
