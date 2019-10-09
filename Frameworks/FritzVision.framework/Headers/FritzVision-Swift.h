@@ -1791,6 +1791,8 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion
 
 
 
+
+
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
 #endif
@@ -3574,6 +3576,8 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion
 /// Background is the region of the image where the alpha value of a mask is 0.
   FritzSegmentationRegionBackground = 1,
 };
+
+
 
 
 
@@ -5386,6 +5390,8 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion
 
 
 
+
+
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
 #endif
@@ -7169,6 +7175,8 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion
 /// Background is the region of the image where the alpha value of a mask is 0.
   FritzSegmentationRegionBackground = 1,
 };
+
+
 
 
 

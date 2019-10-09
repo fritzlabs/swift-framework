@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name = 'FritzVisionDepthModel'
-  s.version = '4.2.3'
+  s.version = '4.2.0'
   s.summary = 'Official Fritz SDK for Swift 5.1 and Objective-C'
   s.homepage = 'https://www.fritz.ai'
   s.license = { :type => 'Apache 2.0', :file => 'LICENSE.md' }
   s.author = { 'Chris Kelly' => 'engineering@fritz.ai' }
-  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/4.2.3/FritzVisionDepthModel.zip' }
+  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/4.2.0/FritzVisionDepthModel.zip' }
 
   s.requires_arc = true
 
