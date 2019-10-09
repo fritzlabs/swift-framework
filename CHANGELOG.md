@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [4.2.3](https://github.com/fritzlabs/swift-framework/releases/tag/4.2.3)
+
+1. Fix Podspec source files to point to proper version.
+
 ## [4.2.2](https://github.com/fritzlabs/swift-framework/releases/tag/4.2.2)
 
 1. Make FritzVisionLabelModelFast and FritzVisionObjectModelFast targets optional in Fritz framework.
