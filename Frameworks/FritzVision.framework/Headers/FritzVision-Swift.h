@@ -942,16 +942,23 @@ SWIFT_CLASS_NAMED("FritzVisionObject") SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 @class FritzVisionObjectModelOptions;
 
-SWIFT_CLASS_NAMED("FritzVisionObjectPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_CLASS_NAMED("FritzVisionObjectPredictor") SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface FritzVisionObjectPredictor : BasePredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-/// Initialize Object model with custom model that takes a 300x300 image from BaseIdentifiedModel
+/// Initialize Object model using a custom model with accessible class names.
+/// For models with built-in post processing and built-in class names.
+/// Uses default class names as a fall back if none are found.
 /// \param identifiedModel IdentifiedModel to use
 ///
-/// \param classNames Class names for objects
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel OBJC_DESIGNATED_INITIALIZER;
+/// Initialize Object model using a custom model with the given class names.
+/// For models with built-in post processing without built-in class names.
+/// \param identifiedModel IdentifiedModel to use
 ///
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
+/// \param processedLabels Labels for objects
+///
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel processedLabels:(NSArray<NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
 /// Run prediction for vision object model.
 /// \param input Image or buffer to run model on.
 ///
@@ -963,7 +970,7 @@ SWIFT_CLASS_NAMED("FritzVisionObjectPredictor") SWIFT_AVAILABILITY(ios,introduce
 @end
 
 
-SWIFT_CLASS_NAMED("FritzVisionObjectModel") SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_DEPRECATED_MSG("", "FritzVisionObjectModelFast")
+SWIFT_CLASS_NAMED("FritzVisionObjectModel") SWIFT_AVAILABILITY(ios,introduced=12.0) SWIFT_DEPRECATED_MSG("", "FritzVisionObjectModelFast")
 @interface FritzVisionObjectModel : FritzVisionObjectPredictor
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
@@ -978,11 +985,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionObjectModel * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel processedLabels:(NSArray<NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
-SWIFT_CLASS_NAMED("FritzVisionObjectModelFast") SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_CLASS_NAMED("FritzVisionObjectModelFast") SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface FritzVisionObjectModelFast : FritzVisionObjectPredictor
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
@@ -997,7 +1005,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionObjectModelFast * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel processedLabels:(NSArray<NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1006,7 +1015,7 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModelOptions")
 /// Confidence threshold for prediction results in the range of [0, 1], default is 0.6.
 @property (nonatomic) double threshold;
 /// Threshold for overlap of items within a single class in range [0, 1].  Lower values are more strict.
-@property (nonatomic) float iouThreshold;
+@property (nonatomic) double iouThreshold;
 /// Number of results to return from request.
 @property (nonatomic) NSInteger numResults;
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
@@ -2740,16 +2749,23 @@ SWIFT_CLASS_NAMED("FritzVisionObject") SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 @class FritzVisionObjectModelOptions;
 
-SWIFT_CLASS_NAMED("FritzVisionObjectPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_CLASS_NAMED("FritzVisionObjectPredictor") SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface FritzVisionObjectPredictor : BasePredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-/// Initialize Object model with custom model that takes a 300x300 image from BaseIdentifiedModel
+/// Initialize Object model using a custom model with accessible class names.
+/// For models with built-in post processing and built-in class names.
+/// Uses default class names as a fall back if none are found.
 /// \param identifiedModel IdentifiedModel to use
 ///
-/// \param classNames Class names for objects
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel OBJC_DESIGNATED_INITIALIZER;
+/// Initialize Object model using a custom model with the given class names.
+/// For models with built-in post processing without built-in class names.
+/// \param identifiedModel IdentifiedModel to use
 ///
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
+/// \param processedLabels Labels for objects
+///
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel processedLabels:(NSArray<NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
 /// Run prediction for vision object model.
 /// \param input Image or buffer to run model on.
 ///
@@ -2761,7 +2777,7 @@ SWIFT_CLASS_NAMED("FritzVisionObjectPredictor") SWIFT_AVAILABILITY(ios,introduce
 @end
 
 
-SWIFT_CLASS_NAMED("FritzVisionObjectModel") SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_DEPRECATED_MSG("", "FritzVisionObjectModelFast")
+SWIFT_CLASS_NAMED("FritzVisionObjectModel") SWIFT_AVAILABILITY(ios,introduced=12.0) SWIFT_DEPRECATED_MSG("", "FritzVisionObjectModelFast")
 @interface FritzVisionObjectModel : FritzVisionObjectPredictor
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
@@ -2776,11 +2792,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionObjectModel * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel processedLabels:(NSArray<NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
-SWIFT_CLASS_NAMED("FritzVisionObjectModelFast") SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_CLASS_NAMED("FritzVisionObjectModelFast") SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface FritzVisionObjectModelFast : FritzVisionObjectPredictor
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
@@ -2795,7 +2812,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionObjectModelFast * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel processedLabels:(NSArray<NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2804,7 +2822,7 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModelOptions")
 /// Confidence threshold for prediction results in the range of [0, 1], default is 0.6.
 @property (nonatomic) double threshold;
 /// Threshold for overlap of items within a single class in range [0, 1].  Lower values are more strict.
-@property (nonatomic) float iouThreshold;
+@property (nonatomic) double iouThreshold;
 /// Number of results to return from request.
 @property (nonatomic) NSInteger numResults;
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
@@ -4541,16 +4559,23 @@ SWIFT_CLASS_NAMED("FritzVisionObject") SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 @class FritzVisionObjectModelOptions;
 
-SWIFT_CLASS_NAMED("FritzVisionObjectPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_CLASS_NAMED("FritzVisionObjectPredictor") SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface FritzVisionObjectPredictor : BasePredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-/// Initialize Object model with custom model that takes a 300x300 image from BaseIdentifiedModel
+/// Initialize Object model using a custom model with accessible class names.
+/// For models with built-in post processing and built-in class names.
+/// Uses default class names as a fall back if none are found.
 /// \param identifiedModel IdentifiedModel to use
 ///
-/// \param classNames Class names for objects
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel OBJC_DESIGNATED_INITIALIZER;
+/// Initialize Object model using a custom model with the given class names.
+/// For models with built-in post processing without built-in class names.
+/// \param identifiedModel IdentifiedModel to use
 ///
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
+/// \param processedLabels Labels for objects
+///
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel processedLabels:(NSArray<NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
 /// Run prediction for vision object model.
 /// \param input Image or buffer to run model on.
 ///
@@ -4562,7 +4587,7 @@ SWIFT_CLASS_NAMED("FritzVisionObjectPredictor") SWIFT_AVAILABILITY(ios,introduce
 @end
 
 
-SWIFT_CLASS_NAMED("FritzVisionObjectModel") SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_DEPRECATED_MSG("", "FritzVisionObjectModelFast")
+SWIFT_CLASS_NAMED("FritzVisionObjectModel") SWIFT_AVAILABILITY(ios,introduced=12.0) SWIFT_DEPRECATED_MSG("", "FritzVisionObjectModelFast")
 @interface FritzVisionObjectModel : FritzVisionObjectPredictor
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
@@ -4577,11 +4602,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionObjectModel * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel processedLabels:(NSArray<NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
-SWIFT_CLASS_NAMED("FritzVisionObjectModelFast") SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_CLASS_NAMED("FritzVisionObjectModelFast") SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface FritzVisionObjectModelFast : FritzVisionObjectPredictor
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
@@ -4596,7 +4622,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionObjectModelFast * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel processedLabels:(NSArray<NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4605,7 +4632,7 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModelOptions")
 /// Confidence threshold for prediction results in the range of [0, 1], default is 0.6.
 @property (nonatomic) double threshold;
 /// Threshold for overlap of items within a single class in range [0, 1].  Lower values are more strict.
-@property (nonatomic) float iouThreshold;
+@property (nonatomic) double iouThreshold;
 /// Number of results to return from request.
 @property (nonatomic) NSInteger numResults;
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
@@ -6339,16 +6366,23 @@ SWIFT_CLASS_NAMED("FritzVisionObject") SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 @class FritzVisionObjectModelOptions;
 
-SWIFT_CLASS_NAMED("FritzVisionObjectPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_CLASS_NAMED("FritzVisionObjectPredictor") SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface FritzVisionObjectPredictor : BasePredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-/// Initialize Object model with custom model that takes a 300x300 image from BaseIdentifiedModel
+/// Initialize Object model using a custom model with accessible class names.
+/// For models with built-in post processing and built-in class names.
+/// Uses default class names as a fall back if none are found.
 /// \param identifiedModel IdentifiedModel to use
 ///
-/// \param classNames Class names for objects
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel OBJC_DESIGNATED_INITIALIZER;
+/// Initialize Object model using a custom model with the given class names.
+/// For models with built-in post processing without built-in class names.
+/// \param identifiedModel IdentifiedModel to use
 ///
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
+/// \param processedLabels Labels for objects
+///
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel processedLabels:(NSArray<NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
 /// Run prediction for vision object model.
 /// \param input Image or buffer to run model on.
 ///
@@ -6360,7 +6394,7 @@ SWIFT_CLASS_NAMED("FritzVisionObjectPredictor") SWIFT_AVAILABILITY(ios,introduce
 @end
 
 
-SWIFT_CLASS_NAMED("FritzVisionObjectModel") SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_DEPRECATED_MSG("", "FritzVisionObjectModelFast")
+SWIFT_CLASS_NAMED("FritzVisionObjectModel") SWIFT_AVAILABILITY(ios,introduced=12.0) SWIFT_DEPRECATED_MSG("", "FritzVisionObjectModelFast")
 @interface FritzVisionObjectModel : FritzVisionObjectPredictor
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
@@ -6375,11 +6409,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionObjectModel * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel processedLabels:(NSArray<NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
-SWIFT_CLASS_NAMED("FritzVisionObjectModelFast") SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_CLASS_NAMED("FritzVisionObjectModelFast") SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface FritzVisionObjectModelFast : FritzVisionObjectPredictor
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzModelConfiguration * _Nonnull modelConfig;)
 + (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
@@ -6394,7 +6429,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionObjectModelFast * _Nullable, NSError * _Nullable))completionHandler;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel classNames:(NSDictionary<NSNumber *, NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)identifiedModel processedLabels:(NSArray<NSString *> * _Nonnull)classNames OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6403,7 +6439,7 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModelOptions")
 /// Confidence threshold for prediction results in the range of [0, 1], default is 0.6.
 @property (nonatomic) double threshold;
 /// Threshold for overlap of items within a single class in range [0, 1].  Lower values are more strict.
-@property (nonatomic) float iouThreshold;
+@property (nonatomic) double iouThreshold;
 /// Number of results to return from request.
 @property (nonatomic) NSInteger numResults;
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;

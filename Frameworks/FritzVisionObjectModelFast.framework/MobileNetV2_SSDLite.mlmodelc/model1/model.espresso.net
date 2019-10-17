@@ -1,0 +1,236 @@
+{
+  "storage" : "model.espresso.weights",
+  "properties" : {
+
+  },
+  "format_version" : 200,
+  "layers" : [
+    {
+      "axis_h" : 1,
+      "axis_w" : 2,
+      "axis_k" : 0,
+      "bottom" : "scores",
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "top" : "permute_scores_output",
+      "type" : "transpose",
+      "name" : "permute_scores"
+    },
+    {
+      "end" : 91,
+      "bottom" : "permute_scores_output",
+      "start" : 1,
+      "weights" : {
+
+      },
+      "axis" : 0,
+      "top" : "raw_confidence",
+      "type" : "slice",
+      "name" : "slice_scores"
+    },
+    {
+      "end" : 2,
+      "bottom" : "boxes",
+      "start" : 0,
+      "weights" : {
+
+      },
+      "axis" : 2,
+      "top" : "slice_yx_output",
+      "type" : "slice",
+      "name" : "slice_yx"
+    },
+    {
+      "alpha" : 0.10000000149011612,
+      "bottom" : "slice_yx_output",
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "top" : "scale_yx_output",
+      "type" : "elementwise",
+      "name" : "scale_yx",
+      "beta" : 0
+    },
+    {
+      "k" : 2,
+      "bottom" : "",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1917,
+      "constant_blob" : 1,
+      "top" : "anchors_yx",
+      "w" : 1,
+      "type" : "load_constant",
+      "name" : "anchors_yx"
+    },
+    {
+      "k" : 2,
+      "bottom" : "",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1917,
+      "constant_blob" : 3,
+      "top" : "anchors_hw",
+      "w" : 1,
+      "type" : "load_constant",
+      "name" : "anchors_hw"
+    },
+    {
+      "alpha" : 1,
+      "bottom" : "scale_yx_output,anchors_hw",
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "top" : "yw_times_hw_output",
+      "type" : "elementwise",
+      "name" : "yw_times_hw",
+      "beta" : 0
+    },
+    {
+      "alpha" : 1,
+      "bottom" : "yw_times_hw_output,anchors_yx",
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "top" : "decoded_yx_output",
+      "type" : "elementwise",
+      "name" : "decoded_yx",
+      "beta" : 0
+    },
+    {
+      "end" : 4,
+      "bottom" : "boxes",
+      "start" : 2,
+      "weights" : {
+
+      },
+      "axis" : 2,
+      "top" : "slice_hw_output",
+      "type" : "slice",
+      "name" : "slice_hw"
+    },
+    {
+      "alpha" : 0.20000000298023224,
+      "bottom" : "slice_hw_output",
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "top" : "scale_hw_output",
+      "type" : "elementwise",
+      "name" : "scale_hw",
+      "beta" : 0
+    },
+    {
+      "alpha" : 1,
+      "bottom" : "scale_hw_output",
+      "operation" : 27,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "top" : "exp_hw_output",
+      "type" : "elementwise",
+      "name" : "exp_hw",
+      "beta" : 0
+    },
+    {
+      "alpha" : 1,
+      "bottom" : "exp_hw_output,anchors_hw",
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "top" : "decoded_hw_output",
+      "type" : "elementwise",
+      "name" : "decoded_hw",
+      "beta" : 0
+    },
+    {
+      "end" : 1,
+      "bottom" : "decoded_yx_output",
+      "start" : 0,
+      "weights" : {
+
+      },
+      "axis" : 2,
+      "top" : "slice_y_output",
+      "type" : "slice",
+      "name" : "slice_y"
+    },
+    {
+      "end" : 2,
+      "bottom" : "decoded_yx_output",
+      "start" : 1,
+      "weights" : {
+
+      },
+      "axis" : 2,
+      "top" : "slice_x_output",
+      "type" : "slice",
+      "name" : "slice_x"
+    },
+    {
+      "end" : 1,
+      "bottom" : "decoded_hw_output",
+      "start" : 0,
+      "weights" : {
+
+      },
+      "axis" : 2,
+      "top" : "slice_h_output",
+      "type" : "slice",
+      "name" : "slice_h"
+    },
+    {
+      "end" : 2,
+      "bottom" : "decoded_hw_output",
+      "start" : 1,
+      "weights" : {
+
+      },
+      "axis" : 2,
+      "top" : "slice_w_output",
+      "type" : "slice",
+      "name" : "slice_w"
+    },
+    {
+      "weights" : {
+
+      },
+      "top" : "concat_output",
+      "type" : "concat",
+      "name" : "concat",
+      "bottom" : "slice_x_output,slice_y_output,slice_w_output,slice_h_output"
+    },
+    {
+      "axis_h" : 1,
+      "axis_w" : 2,
+      "axis_k" : 0,
+      "bottom" : "concat_output",
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "top" : "raw_coordinates",
+      "type" : "transpose",
+      "name" : "permute_output"
+    }
+  ]
+}

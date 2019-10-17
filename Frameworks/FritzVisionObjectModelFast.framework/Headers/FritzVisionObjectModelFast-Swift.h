@@ -204,13 +204,13 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 @class FritzMLModel;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface FritzVisionObjectModel (SWIFT_EXTENSION(FritzVisionObjectModelFast))
 - (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
 @end
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface FritzVisionObjectModelFast (SWIFT_EXTENSION(FritzVisionObjectModelFast))
 - (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
 @end
@@ -424,13 +424,13 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 @class FritzMLModel;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface FritzVisionObjectModel (SWIFT_EXTENSION(FritzVisionObjectModelFast))
 - (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
 @end
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface FritzVisionObjectModelFast (SWIFT_EXTENSION(FritzVisionObjectModelFast))
 - (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
 @end
@@ -647,13 +647,13 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 @class FritzMLModel;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface FritzVisionObjectModel (SWIFT_EXTENSION(FritzVisionObjectModelFast))
 - (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
 @end
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface FritzVisionObjectModelFast (SWIFT_EXTENSION(FritzVisionObjectModelFast))
 - (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
 @end
@@ -867,13 +867,13 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 @class FritzMLModel;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface FritzVisionObjectModel (SWIFT_EXTENSION(FritzVisionObjectModelFast))
 - (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
 @end
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
+SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface FritzVisionObjectModelFast (SWIFT_EXTENSION(FritzVisionObjectModelFast))
 - (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
 @end

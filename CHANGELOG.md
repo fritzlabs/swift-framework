@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [4.2.5](https://github.com/fritzlabs/swift-framework/releases/tag/4.2.5)
+
+1. Passing BlendKernel through in FritzVisionImage.blend function.
+
 ## [4.2.4](https://github.com/fritzlabs/swift-framework/releases/tag/4.2.4)
 
 1. Standardizing all UIImages to be backed by Core Image objects. Before APIs returned a mix of UIImages backed by `cgImage` and `ciImage`.
