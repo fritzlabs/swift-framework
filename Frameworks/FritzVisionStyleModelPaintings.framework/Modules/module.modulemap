@@ -1,11 +1,4 @@
 framework module FritzVisionStyleModelPaintings {
-  umbrella header "FritzVisionStyleModelPaintings.h"
-
-  export *
-  module * { export * }
-}
-
-module FritzVisionStyleModelPaintings.Swift {
-    header "FritzVisionStyleModelPaintings-Swift.h"
-    requires objc
+  header "FritzVisionStyleModelPaintings-Swift.h"
+  requires objc
 }

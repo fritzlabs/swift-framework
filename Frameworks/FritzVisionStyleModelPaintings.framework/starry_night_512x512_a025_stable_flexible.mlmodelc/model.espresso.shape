@@ -1,0 +1,334 @@
+{
+  "layer_shapes" : {
+    "instance_normalization_15_output" : {
+      "k" : 8,
+      "w" : 100,
+      "n" : 1,
+      "h" : 100
+    },
+    "activation_7_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "activation_9_output" : {
+      "k" : 16,
+      "w" : 50,
+      "n" : 1,
+      "h" : 50
+    },
+    "instance_normalization_3_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "add_1_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "add_2_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "conv2d_6_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "instance_normalization_12_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "add_3_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "add_4_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "instance_normalization_6_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "add_5_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "deprocess_stylized_image_1_mul_out" : {
+      "k" : 3,
+      "w" : 100,
+      "n" : 1,
+      "h" : 100
+    },
+    "instance_normalization_9_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "conv2d_4_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "deprocess_stylized_image_1_constant_in_scale" : {
+      "k" : 3,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "up_sampling2d_1_output" : {
+      "k" : 32,
+      "w" : 50,
+      "n" : 1,
+      "h" : 50
+    },
+    "activation_10_output" : {
+      "k" : 8,
+      "w" : 100,
+      "n" : 1,
+      "h" : 100
+    },
+    "instance_normalization_2_output" : {
+      "k" : 16,
+      "w" : 50,
+      "n" : 1,
+      "h" : 50
+    },
+    "instance_normalization_14_output" : {
+      "k" : 16,
+      "w" : 50,
+      "n" : 1,
+      "h" : 50
+    },
+    "conv2d_9_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "conv2d_2_output" : {
+      "k" : 16,
+      "w" : 50,
+      "n" : 1,
+      "h" : 50
+    },
+    "image" : {
+      "k" : 3,
+      "w" : 100,
+      "n" : 1,
+      "h" : 100
+    },
+    "instance_normalization_5_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "instance_normalization_11_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "activation_2_output" : {
+      "k" : 16,
+      "w" : 50,
+      "n" : 1,
+      "h" : 50
+    },
+    "activation_4_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "activation_6_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "conv2d_7_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "activation_8_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "instance_normalization_8_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "activation_11_output" : {
+      "k" : 3,
+      "w" : 100,
+      "n" : 1,
+      "h" : 100
+    },
+    "instance_normalization_16_output" : {
+      "k" : 3,
+      "w" : 100,
+      "n" : 1,
+      "h" : 100
+    },
+    "conv2d_5_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "instance_normalization_1_output" : {
+      "k" : 8,
+      "w" : 100,
+      "n" : 1,
+      "h" : 100
+    },
+    "up_sampling2d_2_output" : {
+      "k" : 16,
+      "w" : 100,
+      "n" : 1,
+      "h" : 100
+    },
+    "instance_normalization_13_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "instance_normalization_4_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "conv2d_10_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "instance_normalization_10_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "conv2d_3_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "instance_normalization_7_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "conv2d_11_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "conv2d_12_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "deprocess_stylized_image_1_constant_in_bias" : {
+      "k" : 3,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "stylizedImage" : {
+      "k" : 3,
+      "w" : 100,
+      "n" : 1,
+      "h" : 100
+    },
+    "conv2d_13_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "conv2d_8_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "conv2d_14_output" : {
+      "k" : 16,
+      "w" : 50,
+      "n" : 1,
+      "h" : 50
+    },
+    "activation_1_output" : {
+      "k" : 8,
+      "w" : 100,
+      "n" : 1,
+      "h" : 100
+    },
+    "activation_3_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "conv2d_15_output" : {
+      "k" : 8,
+      "w" : 100,
+      "n" : 1,
+      "h" : 100
+    },
+    "conv2d_1_output" : {
+      "k" : 8,
+      "w" : 100,
+      "n" : 1,
+      "h" : 100
+    },
+    "activation_5_output" : {
+      "k" : 32,
+      "w" : 25,
+      "n" : 1,
+      "h" : 25
+    },
+    "conv2d_16_output" : {
+      "k" : 3,
+      "w" : 100,
+      "n" : 1,
+      "h" : 100
+    }
+  }
+}

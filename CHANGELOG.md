@@ -5,6 +5,15 @@ Change Log
 
 ---
 
+## [4.3.0-beta.1](https://github.com/fritzlabs/swift-framework/releases/tag/4.3.0-beta.1)
+
+1. Add Pattern Style Models.
+2. Non-flexible style transfer is now deprecated, use FritzVisionStylePredictor for style models going forward.
+3. Revert Accurate image segmentation model to previous version as results were better.
+4. Changed object detection model to add postprocessing in Core ML Model.
+5. Model downloads now resume progress if interrupted.
+6. Updating Pose model to check model metadata for output_stride.
+
 ## [4.2.5](https://github.com/fritzlabs/swift-framework/releases/tag/4.2.5)
 
 1. Passing BlendKernel through in FritzVisionImage.blend function.

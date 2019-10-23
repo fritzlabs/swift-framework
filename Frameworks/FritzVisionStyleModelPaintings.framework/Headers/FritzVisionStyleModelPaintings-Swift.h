@@ -204,65 +204,86 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVisionStyleModelPaintings))
-/// Style Model based on Vincent Van Gogh’s Starry Night painting
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull starryNight;)
-+ (FritzVisionStyleModel * _Nonnull)starryNight SWIFT_WARN_UNUSED_RESULT;
-/// Style Model with shapes of pink and blue rhombuses.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull pinkBlueRhombus;)
-+ (FritzVisionStyleModel * _Nonnull)pinkBlueRhombus SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on Edvard Munch’s The Scream painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull theScream;)
-+ (FritzVisionStyleModel * _Nonnull)theScream SWIFT_WARN_UNUSED_RESULT;
+SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionStylePredictor (SWIFT_EXTENSION(FritzVisionStyleModelPaintings))
 /// Style Model based on Roy Lichtenstein’s Bicentennial Print from America: The Third Century
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull bicentennialPrint;)
-+ (FritzVisionStyleModel * _Nonnull)bicentennialPrint SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on Claude Monet’s The Poppy Field painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull poppyField;)
-+ (FritzVisionStyleModel * _Nonnull)poppyField SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on an image depicting the view through a kaleidoscope.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull kaleidoscope;)
-+ (FritzVisionStyleModel * _Nonnull)kaleidoscope SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull bicentennialPrint SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.bicentennialPrint.build()");)
++ (FritzVisionStylePredictor * _Nonnull)bicentennialPrint SWIFT_WARN_UNUSED_RESULT;
 /// Style Model based on Picasso’s Les Femmes d’Alger painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull femmes;)
-+ (FritzVisionStyleModel * _Nonnull)femmes SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull femmes SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.femmes.build()");)
++ (FritzVisionStylePredictor * _Nonnull)femmes SWIFT_WARN_UNUSED_RESULT;
 /// Style Model based on Joseph Kutter’s Head of a Clown painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull headOfClown;)
-+ (FritzVisionStyleModel * _Nonnull)headOfClown SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on Giorgio de Chirico’s Horses on the Seashore painting
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull horsesOnSeashore;)
-+ (FritzVisionStyleModel * _Nonnull)horsesOnSeashore SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on Sidney Nolan’s The Trial painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull theTrial;)
-+ (FritzVisionStyleModel * _Nonnull)theTrial SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull headOfClown SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.headOfClown.build()");)
++ (FritzVisionStylePredictor * _Nonnull)headOfClown SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Giorgio de Chirico’s Horses on the Seashore painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull horsesOnSeashore SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.horsesOnSeashore.build()");)
++ (FritzVisionStylePredictor * _Nonnull)horsesOnSeashore SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on an image depicting the view through a kaleidoscope.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull kaleidoscope SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.kaleidoscope.build()");)
++ (FritzVisionStylePredictor * _Nonnull)kaleidoscope SWIFT_WARN_UNUSED_RESULT;
+/// Style Model with shapes of pink and blue rhombuses.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull pinkBlueRhombus SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.pinkBlueRhombus.build()");)
++ (FritzVisionStylePredictor * _Nonnull)pinkBlueRhombus SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Claude Monet’s The Poppy Field painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull poppyField SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.poppyField.build()");)
++ (FritzVisionStylePredictor * _Nonnull)poppyField SWIFT_WARN_UNUSED_RESULT;
 /// Style Model based on Gino Severini’s Ritmo Plastico painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull ritmoPlastico;)
-+ (FritzVisionStyleModel * _Nonnull)ritmoPlastico SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull ritmoPlastico SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.ritmoPlastico.build()");)
++ (FritzVisionStylePredictor * _Nonnull)ritmoPlastico SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Vincent van Gogh’s Starry Night painting
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull starryNight SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.starryNight.build()");)
++ (FritzVisionStylePredictor * _Nonnull)starryNight SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Edvard Munch’s The Scream painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull theScream SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.theScream.build()");)
++ (FritzVisionStylePredictor * _Nonnull)theScream SWIFT_WARN_UNUSED_RESULT;
 /// A list of all Style Models.
-+ (NSArray<FritzVisionStyleModel *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
-/// Enumeration of all Painting Styles available.
-SWIFT_CLASS_NAMED("PaintingStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzPaintingStyle : NSObject
+SWIFT_CLASS_NAMED("PaintingStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface PaintingStyleModel : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-/// Available Painting Styles.
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPaintingStyleModel, "Style", closed) {
-  FritzVisionPaintingStyleModelStarryNight = 0,
-  FritzVisionPaintingStyleModelPinkBlueRhombus = 1,
-  FritzVisionPaintingStyleModelTheScream = 2,
-  FritzVisionPaintingStyleModelBicentennialPrint = 3,
-  FritzVisionPaintingStyleModelPoppyField = 4,
-  FritzVisionPaintingStyleModelKaleidoscope = 5,
-  FritzVisionPaintingStyleModelFemmes = 6,
-  FritzVisionPaintingStyleModelHeadOfClown = 7,
-  FritzVisionPaintingStyleModelHorsesOnSeashore = 8,
-  FritzVisionPaintingStyleModelTheTrial = 9,
-  FritzVisionPaintingStyleModelRitmoPlastico = 10,
+/// Available styles.
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPaintingStyle, "Style", closed) {
+  FritzVisionPaintingStyleBicentennialPrint = 0,
+  FritzVisionPaintingStyleFemmes = 1,
+  FritzVisionPaintingStyleHeadOfClown = 2,
+  FritzVisionPaintingStyleHorsesOnSeashore = 3,
+  FritzVisionPaintingStyleKaleidoscope = 4,
+  FritzVisionPaintingStylePinkBlueRhombus = 5,
+  FritzVisionPaintingStylePoppyField = 6,
+  FritzVisionPaintingStyleRitmoPlastico = 7,
+  FritzVisionPaintingStyleStarryNight = 8,
+  FritzVisionPaintingStyleTheScream = 9,
+  FritzVisionPaintingStyleTheTrial = 10,
+};
+
+
+/// Enumeration of all available styles.
+SWIFT_CLASS_NAMED("PatternStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface PatternStyleModel : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+/// Available styles.
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", closed) {
+  FritzVisionPatternStyleBlueArrow = 0,
+  FritzVisionPatternStyleChristmasLights = 1,
+  FritzVisionPatternStyleComic = 2,
+  FritzVisionPatternStyleFilament = 3,
+  FritzVisionPatternStyleLampPost = 4,
+  FritzVisionPatternStyleMosaic = 5,
+  FritzVisionPatternStyleNotreDame = 6,
+  FritzVisionPatternStyleShades = 7,
+  FritzVisionPatternStyleSketch = 8,
+  FritzVisionPatternStyleSnowflake = 9,
+  FritzVisionPatternStyleSprinkles = 10,
+  FritzVisionPatternStyleSwirl = 11,
+  FritzVisionPatternStyleTile = 12,
+  FritzVisionPatternStyleVector = 13,
 };
 
 #if __has_attribute(external_source_symbol)
@@ -474,65 +495,86 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVisionStyleModelPaintings))
-/// Style Model based on Vincent Van Gogh’s Starry Night painting
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull starryNight;)
-+ (FritzVisionStyleModel * _Nonnull)starryNight SWIFT_WARN_UNUSED_RESULT;
-/// Style Model with shapes of pink and blue rhombuses.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull pinkBlueRhombus;)
-+ (FritzVisionStyleModel * _Nonnull)pinkBlueRhombus SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on Edvard Munch’s The Scream painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull theScream;)
-+ (FritzVisionStyleModel * _Nonnull)theScream SWIFT_WARN_UNUSED_RESULT;
+SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionStylePredictor (SWIFT_EXTENSION(FritzVisionStyleModelPaintings))
 /// Style Model based on Roy Lichtenstein’s Bicentennial Print from America: The Third Century
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull bicentennialPrint;)
-+ (FritzVisionStyleModel * _Nonnull)bicentennialPrint SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on Claude Monet’s The Poppy Field painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull poppyField;)
-+ (FritzVisionStyleModel * _Nonnull)poppyField SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on an image depicting the view through a kaleidoscope.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull kaleidoscope;)
-+ (FritzVisionStyleModel * _Nonnull)kaleidoscope SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull bicentennialPrint SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.bicentennialPrint.build()");)
++ (FritzVisionStylePredictor * _Nonnull)bicentennialPrint SWIFT_WARN_UNUSED_RESULT;
 /// Style Model based on Picasso’s Les Femmes d’Alger painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull femmes;)
-+ (FritzVisionStyleModel * _Nonnull)femmes SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull femmes SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.femmes.build()");)
++ (FritzVisionStylePredictor * _Nonnull)femmes SWIFT_WARN_UNUSED_RESULT;
 /// Style Model based on Joseph Kutter’s Head of a Clown painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull headOfClown;)
-+ (FritzVisionStyleModel * _Nonnull)headOfClown SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on Giorgio de Chirico’s Horses on the Seashore painting
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull horsesOnSeashore;)
-+ (FritzVisionStyleModel * _Nonnull)horsesOnSeashore SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on Sidney Nolan’s The Trial painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull theTrial;)
-+ (FritzVisionStyleModel * _Nonnull)theTrial SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull headOfClown SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.headOfClown.build()");)
++ (FritzVisionStylePredictor * _Nonnull)headOfClown SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Giorgio de Chirico’s Horses on the Seashore painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull horsesOnSeashore SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.horsesOnSeashore.build()");)
++ (FritzVisionStylePredictor * _Nonnull)horsesOnSeashore SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on an image depicting the view through a kaleidoscope.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull kaleidoscope SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.kaleidoscope.build()");)
++ (FritzVisionStylePredictor * _Nonnull)kaleidoscope SWIFT_WARN_UNUSED_RESULT;
+/// Style Model with shapes of pink and blue rhombuses.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull pinkBlueRhombus SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.pinkBlueRhombus.build()");)
++ (FritzVisionStylePredictor * _Nonnull)pinkBlueRhombus SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Claude Monet’s The Poppy Field painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull poppyField SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.poppyField.build()");)
++ (FritzVisionStylePredictor * _Nonnull)poppyField SWIFT_WARN_UNUSED_RESULT;
 /// Style Model based on Gino Severini’s Ritmo Plastico painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull ritmoPlastico;)
-+ (FritzVisionStyleModel * _Nonnull)ritmoPlastico SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull ritmoPlastico SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.ritmoPlastico.build()");)
++ (FritzVisionStylePredictor * _Nonnull)ritmoPlastico SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Vincent van Gogh’s Starry Night painting
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull starryNight SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.starryNight.build()");)
++ (FritzVisionStylePredictor * _Nonnull)starryNight SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Edvard Munch’s The Scream painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull theScream SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.theScream.build()");)
++ (FritzVisionStylePredictor * _Nonnull)theScream SWIFT_WARN_UNUSED_RESULT;
 /// A list of all Style Models.
-+ (NSArray<FritzVisionStyleModel *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
-/// Enumeration of all Painting Styles available.
-SWIFT_CLASS_NAMED("PaintingStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzPaintingStyle : NSObject
+SWIFT_CLASS_NAMED("PaintingStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface PaintingStyleModel : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-/// Available Painting Styles.
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPaintingStyleModel, "Style", closed) {
-  FritzVisionPaintingStyleModelStarryNight = 0,
-  FritzVisionPaintingStyleModelPinkBlueRhombus = 1,
-  FritzVisionPaintingStyleModelTheScream = 2,
-  FritzVisionPaintingStyleModelBicentennialPrint = 3,
-  FritzVisionPaintingStyleModelPoppyField = 4,
-  FritzVisionPaintingStyleModelKaleidoscope = 5,
-  FritzVisionPaintingStyleModelFemmes = 6,
-  FritzVisionPaintingStyleModelHeadOfClown = 7,
-  FritzVisionPaintingStyleModelHorsesOnSeashore = 8,
-  FritzVisionPaintingStyleModelTheTrial = 9,
-  FritzVisionPaintingStyleModelRitmoPlastico = 10,
+/// Available styles.
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPaintingStyle, "Style", closed) {
+  FritzVisionPaintingStyleBicentennialPrint = 0,
+  FritzVisionPaintingStyleFemmes = 1,
+  FritzVisionPaintingStyleHeadOfClown = 2,
+  FritzVisionPaintingStyleHorsesOnSeashore = 3,
+  FritzVisionPaintingStyleKaleidoscope = 4,
+  FritzVisionPaintingStylePinkBlueRhombus = 5,
+  FritzVisionPaintingStylePoppyField = 6,
+  FritzVisionPaintingStyleRitmoPlastico = 7,
+  FritzVisionPaintingStyleStarryNight = 8,
+  FritzVisionPaintingStyleTheScream = 9,
+  FritzVisionPaintingStyleTheTrial = 10,
+};
+
+
+/// Enumeration of all available styles.
+SWIFT_CLASS_NAMED("PatternStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface PatternStyleModel : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+/// Available styles.
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", closed) {
+  FritzVisionPatternStyleBlueArrow = 0,
+  FritzVisionPatternStyleChristmasLights = 1,
+  FritzVisionPatternStyleComic = 2,
+  FritzVisionPatternStyleFilament = 3,
+  FritzVisionPatternStyleLampPost = 4,
+  FritzVisionPatternStyleMosaic = 5,
+  FritzVisionPatternStyleNotreDame = 6,
+  FritzVisionPatternStyleShades = 7,
+  FritzVisionPatternStyleSketch = 8,
+  FritzVisionPatternStyleSnowflake = 9,
+  FritzVisionPatternStyleSprinkles = 10,
+  FritzVisionPatternStyleSwirl = 11,
+  FritzVisionPatternStyleTile = 12,
+  FritzVisionPatternStyleVector = 13,
 };
 
 #if __has_attribute(external_source_symbol)
@@ -747,65 +789,86 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVisionStyleModelPaintings))
-/// Style Model based on Vincent Van Gogh’s Starry Night painting
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull starryNight;)
-+ (FritzVisionStyleModel * _Nonnull)starryNight SWIFT_WARN_UNUSED_RESULT;
-/// Style Model with shapes of pink and blue rhombuses.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull pinkBlueRhombus;)
-+ (FritzVisionStyleModel * _Nonnull)pinkBlueRhombus SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on Edvard Munch’s The Scream painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull theScream;)
-+ (FritzVisionStyleModel * _Nonnull)theScream SWIFT_WARN_UNUSED_RESULT;
+SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionStylePredictor (SWIFT_EXTENSION(FritzVisionStyleModelPaintings))
 /// Style Model based on Roy Lichtenstein’s Bicentennial Print from America: The Third Century
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull bicentennialPrint;)
-+ (FritzVisionStyleModel * _Nonnull)bicentennialPrint SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on Claude Monet’s The Poppy Field painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull poppyField;)
-+ (FritzVisionStyleModel * _Nonnull)poppyField SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on an image depicting the view through a kaleidoscope.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull kaleidoscope;)
-+ (FritzVisionStyleModel * _Nonnull)kaleidoscope SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull bicentennialPrint SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.bicentennialPrint.build()");)
++ (FritzVisionStylePredictor * _Nonnull)bicentennialPrint SWIFT_WARN_UNUSED_RESULT;
 /// Style Model based on Picasso’s Les Femmes d’Alger painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull femmes;)
-+ (FritzVisionStyleModel * _Nonnull)femmes SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull femmes SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.femmes.build()");)
++ (FritzVisionStylePredictor * _Nonnull)femmes SWIFT_WARN_UNUSED_RESULT;
 /// Style Model based on Joseph Kutter’s Head of a Clown painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull headOfClown;)
-+ (FritzVisionStyleModel * _Nonnull)headOfClown SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on Giorgio de Chirico’s Horses on the Seashore painting
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull horsesOnSeashore;)
-+ (FritzVisionStyleModel * _Nonnull)horsesOnSeashore SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on Sidney Nolan’s The Trial painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull theTrial;)
-+ (FritzVisionStyleModel * _Nonnull)theTrial SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull headOfClown SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.headOfClown.build()");)
++ (FritzVisionStylePredictor * _Nonnull)headOfClown SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Giorgio de Chirico’s Horses on the Seashore painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull horsesOnSeashore SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.horsesOnSeashore.build()");)
++ (FritzVisionStylePredictor * _Nonnull)horsesOnSeashore SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on an image depicting the view through a kaleidoscope.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull kaleidoscope SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.kaleidoscope.build()");)
++ (FritzVisionStylePredictor * _Nonnull)kaleidoscope SWIFT_WARN_UNUSED_RESULT;
+/// Style Model with shapes of pink and blue rhombuses.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull pinkBlueRhombus SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.pinkBlueRhombus.build()");)
++ (FritzVisionStylePredictor * _Nonnull)pinkBlueRhombus SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Claude Monet’s The Poppy Field painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull poppyField SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.poppyField.build()");)
++ (FritzVisionStylePredictor * _Nonnull)poppyField SWIFT_WARN_UNUSED_RESULT;
 /// Style Model based on Gino Severini’s Ritmo Plastico painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull ritmoPlastico;)
-+ (FritzVisionStyleModel * _Nonnull)ritmoPlastico SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull ritmoPlastico SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.ritmoPlastico.build()");)
++ (FritzVisionStylePredictor * _Nonnull)ritmoPlastico SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Vincent van Gogh’s Starry Night painting
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull starryNight SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.starryNight.build()");)
++ (FritzVisionStylePredictor * _Nonnull)starryNight SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Edvard Munch’s The Scream painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull theScream SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.theScream.build()");)
++ (FritzVisionStylePredictor * _Nonnull)theScream SWIFT_WARN_UNUSED_RESULT;
 /// A list of all Style Models.
-+ (NSArray<FritzVisionStyleModel *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
-/// Enumeration of all Painting Styles available.
-SWIFT_CLASS_NAMED("PaintingStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzPaintingStyle : NSObject
+SWIFT_CLASS_NAMED("PaintingStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface PaintingStyleModel : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-/// Available Painting Styles.
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPaintingStyleModel, "Style", closed) {
-  FritzVisionPaintingStyleModelStarryNight = 0,
-  FritzVisionPaintingStyleModelPinkBlueRhombus = 1,
-  FritzVisionPaintingStyleModelTheScream = 2,
-  FritzVisionPaintingStyleModelBicentennialPrint = 3,
-  FritzVisionPaintingStyleModelPoppyField = 4,
-  FritzVisionPaintingStyleModelKaleidoscope = 5,
-  FritzVisionPaintingStyleModelFemmes = 6,
-  FritzVisionPaintingStyleModelHeadOfClown = 7,
-  FritzVisionPaintingStyleModelHorsesOnSeashore = 8,
-  FritzVisionPaintingStyleModelTheTrial = 9,
-  FritzVisionPaintingStyleModelRitmoPlastico = 10,
+/// Available styles.
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPaintingStyle, "Style", closed) {
+  FritzVisionPaintingStyleBicentennialPrint = 0,
+  FritzVisionPaintingStyleFemmes = 1,
+  FritzVisionPaintingStyleHeadOfClown = 2,
+  FritzVisionPaintingStyleHorsesOnSeashore = 3,
+  FritzVisionPaintingStyleKaleidoscope = 4,
+  FritzVisionPaintingStylePinkBlueRhombus = 5,
+  FritzVisionPaintingStylePoppyField = 6,
+  FritzVisionPaintingStyleRitmoPlastico = 7,
+  FritzVisionPaintingStyleStarryNight = 8,
+  FritzVisionPaintingStyleTheScream = 9,
+  FritzVisionPaintingStyleTheTrial = 10,
+};
+
+
+/// Enumeration of all available styles.
+SWIFT_CLASS_NAMED("PatternStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface PatternStyleModel : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+/// Available styles.
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", closed) {
+  FritzVisionPatternStyleBlueArrow = 0,
+  FritzVisionPatternStyleChristmasLights = 1,
+  FritzVisionPatternStyleComic = 2,
+  FritzVisionPatternStyleFilament = 3,
+  FritzVisionPatternStyleLampPost = 4,
+  FritzVisionPatternStyleMosaic = 5,
+  FritzVisionPatternStyleNotreDame = 6,
+  FritzVisionPatternStyleShades = 7,
+  FritzVisionPatternStyleSketch = 8,
+  FritzVisionPatternStyleSnowflake = 9,
+  FritzVisionPatternStyleSprinkles = 10,
+  FritzVisionPatternStyleSwirl = 11,
+  FritzVisionPatternStyleTile = 12,
+  FritzVisionPatternStyleVector = 13,
 };
 
 #if __has_attribute(external_source_symbol)
@@ -1017,65 +1080,86 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVisionStyleModelPaintings))
-/// Style Model based on Vincent Van Gogh’s Starry Night painting
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull starryNight;)
-+ (FritzVisionStyleModel * _Nonnull)starryNight SWIFT_WARN_UNUSED_RESULT;
-/// Style Model with shapes of pink and blue rhombuses.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull pinkBlueRhombus;)
-+ (FritzVisionStyleModel * _Nonnull)pinkBlueRhombus SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on Edvard Munch’s The Scream painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull theScream;)
-+ (FritzVisionStyleModel * _Nonnull)theScream SWIFT_WARN_UNUSED_RESULT;
+SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionStylePredictor (SWIFT_EXTENSION(FritzVisionStyleModelPaintings))
 /// Style Model based on Roy Lichtenstein’s Bicentennial Print from America: The Third Century
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull bicentennialPrint;)
-+ (FritzVisionStyleModel * _Nonnull)bicentennialPrint SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on Claude Monet’s The Poppy Field painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull poppyField;)
-+ (FritzVisionStyleModel * _Nonnull)poppyField SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on an image depicting the view through a kaleidoscope.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull kaleidoscope;)
-+ (FritzVisionStyleModel * _Nonnull)kaleidoscope SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull bicentennialPrint SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.bicentennialPrint.build()");)
++ (FritzVisionStylePredictor * _Nonnull)bicentennialPrint SWIFT_WARN_UNUSED_RESULT;
 /// Style Model based on Picasso’s Les Femmes d’Alger painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull femmes;)
-+ (FritzVisionStyleModel * _Nonnull)femmes SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull femmes SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.femmes.build()");)
++ (FritzVisionStylePredictor * _Nonnull)femmes SWIFT_WARN_UNUSED_RESULT;
 /// Style Model based on Joseph Kutter’s Head of a Clown painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull headOfClown;)
-+ (FritzVisionStyleModel * _Nonnull)headOfClown SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on Giorgio de Chirico’s Horses on the Seashore painting
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull horsesOnSeashore;)
-+ (FritzVisionStyleModel * _Nonnull)horsesOnSeashore SWIFT_WARN_UNUSED_RESULT;
-/// Style Model based on Sidney Nolan’s The Trial painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull theTrial;)
-+ (FritzVisionStyleModel * _Nonnull)theTrial SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull headOfClown SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.headOfClown.build()");)
++ (FritzVisionStylePredictor * _Nonnull)headOfClown SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Giorgio de Chirico’s Horses on the Seashore painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull horsesOnSeashore SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.horsesOnSeashore.build()");)
++ (FritzVisionStylePredictor * _Nonnull)horsesOnSeashore SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on an image depicting the view through a kaleidoscope.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull kaleidoscope SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.kaleidoscope.build()");)
++ (FritzVisionStylePredictor * _Nonnull)kaleidoscope SWIFT_WARN_UNUSED_RESULT;
+/// Style Model with shapes of pink and blue rhombuses.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull pinkBlueRhombus SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.pinkBlueRhombus.build()");)
++ (FritzVisionStylePredictor * _Nonnull)pinkBlueRhombus SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Claude Monet’s The Poppy Field painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull poppyField SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.poppyField.build()");)
++ (FritzVisionStylePredictor * _Nonnull)poppyField SWIFT_WARN_UNUSED_RESULT;
 /// Style Model based on Gino Severini’s Ritmo Plastico painting.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStyleModel * _Nonnull ritmoPlastico;)
-+ (FritzVisionStyleModel * _Nonnull)ritmoPlastico SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull ritmoPlastico SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.ritmoPlastico.build()");)
++ (FritzVisionStylePredictor * _Nonnull)ritmoPlastico SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Vincent van Gogh’s Starry Night painting
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull starryNight SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.starryNight.build()");)
++ (FritzVisionStylePredictor * _Nonnull)starryNight SWIFT_WARN_UNUSED_RESULT;
+/// Style Model based on Edvard Munch’s The Scream painting.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull theScream SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.theScream.build()");)
++ (FritzVisionStylePredictor * _Nonnull)theScream SWIFT_WARN_UNUSED_RESULT;
 /// A list of all Style Models.
-+ (NSArray<FritzVisionStyleModel *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
-/// Enumeration of all Painting Styles available.
-SWIFT_CLASS_NAMED("PaintingStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzPaintingStyle : NSObject
+SWIFT_CLASS_NAMED("PaintingStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface PaintingStyleModel : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-/// Available Painting Styles.
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPaintingStyleModel, "Style", closed) {
-  FritzVisionPaintingStyleModelStarryNight = 0,
-  FritzVisionPaintingStyleModelPinkBlueRhombus = 1,
-  FritzVisionPaintingStyleModelTheScream = 2,
-  FritzVisionPaintingStyleModelBicentennialPrint = 3,
-  FritzVisionPaintingStyleModelPoppyField = 4,
-  FritzVisionPaintingStyleModelKaleidoscope = 5,
-  FritzVisionPaintingStyleModelFemmes = 6,
-  FritzVisionPaintingStyleModelHeadOfClown = 7,
-  FritzVisionPaintingStyleModelHorsesOnSeashore = 8,
-  FritzVisionPaintingStyleModelTheTrial = 9,
-  FritzVisionPaintingStyleModelRitmoPlastico = 10,
+/// Available styles.
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPaintingStyle, "Style", closed) {
+  FritzVisionPaintingStyleBicentennialPrint = 0,
+  FritzVisionPaintingStyleFemmes = 1,
+  FritzVisionPaintingStyleHeadOfClown = 2,
+  FritzVisionPaintingStyleHorsesOnSeashore = 3,
+  FritzVisionPaintingStyleKaleidoscope = 4,
+  FritzVisionPaintingStylePinkBlueRhombus = 5,
+  FritzVisionPaintingStylePoppyField = 6,
+  FritzVisionPaintingStyleRitmoPlastico = 7,
+  FritzVisionPaintingStyleStarryNight = 8,
+  FritzVisionPaintingStyleTheScream = 9,
+  FritzVisionPaintingStyleTheTrial = 10,
+};
+
+
+/// Enumeration of all available styles.
+SWIFT_CLASS_NAMED("PatternStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface PatternStyleModel : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+/// Available styles.
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", closed) {
+  FritzVisionPatternStyleBlueArrow = 0,
+  FritzVisionPatternStyleChristmasLights = 1,
+  FritzVisionPatternStyleComic = 2,
+  FritzVisionPatternStyleFilament = 3,
+  FritzVisionPatternStyleLampPost = 4,
+  FritzVisionPatternStyleMosaic = 5,
+  FritzVisionPatternStyleNotreDame = 6,
+  FritzVisionPatternStyleShades = 7,
+  FritzVisionPatternStyleSketch = 8,
+  FritzVisionPatternStyleSnowflake = 9,
+  FritzVisionPatternStyleSprinkles = 10,
+  FritzVisionPatternStyleSwirl = 11,
+  FritzVisionPatternStyleTile = 12,
+  FritzVisionPatternStyleVector = 13,
 };
 
 #if __has_attribute(external_source_symbol)
