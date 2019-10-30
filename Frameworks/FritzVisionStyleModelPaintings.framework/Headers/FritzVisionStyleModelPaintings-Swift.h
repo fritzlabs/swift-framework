@@ -237,7 +237,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionS
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull theScream SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.theScream.build()");)
 + (FritzVisionStylePredictor * _Nonnull)theScream SWIFT_WARN_UNUSED_RESULT;
 /// A list of all Style Models.
-+ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "allPaintingModels");
+/// A list of all Style Models.
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPaintingModels SWIFT_WARN_UNUSED_RESULT;
+/// A list of all Style Models.
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPatternModels SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -528,7 +532,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionS
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull theScream SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.theScream.build()");)
 + (FritzVisionStylePredictor * _Nonnull)theScream SWIFT_WARN_UNUSED_RESULT;
 /// A list of all Style Models.
-+ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "allPaintingModels");
+/// A list of all Style Models.
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPaintingModels SWIFT_WARN_UNUSED_RESULT;
+/// A list of all Style Models.
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPatternModels SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -822,7 +830,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionS
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull theScream SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.theScream.build()");)
 + (FritzVisionStylePredictor * _Nonnull)theScream SWIFT_WARN_UNUSED_RESULT;
 /// A list of all Style Models.
-+ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "allPaintingModels");
+/// A list of all Style Models.
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPaintingModels SWIFT_WARN_UNUSED_RESULT;
+/// A list of all Style Models.
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPatternModels SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -1113,7 +1125,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionS
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionStylePredictor * _Nonnull theScream SWIFT_DEPRECATED_MSG("", "PaintingStyleModel.Style.theScream.build()");)
 + (FritzVisionStylePredictor * _Nonnull)theScream SWIFT_WARN_UNUSED_RESULT;
 /// A list of all Style Models.
-+ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "allPaintingModels");
+/// A list of all Style Models.
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPaintingModels SWIFT_WARN_UNUSED_RESULT;
+/// A list of all Style Models.
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPatternModels SWIFT_WARN_UNUSED_RESULT;
 @end
 
 

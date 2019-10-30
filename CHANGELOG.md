@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [4.3.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/4.3.0-beta.2)
+
+1. Fixing NaN bug in pose smoother.
+
 ## [4.3.0-beta.1](https://github.com/fritzlabs/swift-framework/releases/tag/4.3.0-beta.1)
 
 1. Add Pattern Style Models.
