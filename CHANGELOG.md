@@ -5,6 +5,11 @@ Change Log
 
 ---
 
+## [4.3.0-beta.3](https://github.com/fritzlabs/swift-framework/releases/tag/4.3.0-beta.3)
+
+1. Preview version of new FritzVisionVideo API.
+2. Update for Xcode 11.2
+
 ## [4.3.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/4.3.0-beta.2)
 
 1. Fixing NaN bug in pose smoother.
