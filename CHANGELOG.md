@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [4.3.0-beta.4](https://github.com/fritzlabs/swift-framework/releases/tag/4.3.0-beta.4)
+
+1. Updating People And Pet segmentaiton model.
+
 ## [4.3.0-beta.3](https://github.com/fritzlabs/swift-framework/releases/tag/4.3.0-beta.3)
 
 1. Preview version of new FritzVisionVideo API.

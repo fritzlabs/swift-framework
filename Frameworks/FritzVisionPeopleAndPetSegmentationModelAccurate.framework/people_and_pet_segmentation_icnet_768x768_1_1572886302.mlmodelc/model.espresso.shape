@@ -1,0 +1,964 @@
+{
+  "layer_shapes" : {
+    "sub2_conv2_1_add_output" : {
+      "k" : 128,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv4_3_relu_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv2_1_1x1_reduce_bn_output" : {
+      "k" : 32,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv4_2_3x3__activation___output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv2_3_3x3__activation___output" : {
+      "k" : 32,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub2_conv_2_3x3__activation___output" : {
+      "k" : 32,
+      "w" : 192,
+      "n" : 1,
+      "h" : 192
+    },
+    "sub4_conv5_2_1x1_increase_bn_output" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_1_add_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv3_3_1x1_reduce__activation___output" : {
+      "k" : 64,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv5_3_3x3__activation___output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub1_conv_1_3x3_bn_output" : {
+      "k" : 32,
+      "w" : 384,
+      "n" : 1,
+      "h" : 384
+    },
+    "sub4_conv4_1_relu_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub1_conv_3_3x3_bn_output" : {
+      "k" : 64,
+      "w" : 96,
+      "n" : 1,
+      "h" : 96
+    },
+    "sub4_conv4_1_1x1_reduce__activation___output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv5_3_pool3_output" : {
+      "k" : 1024,
+      "w" : 3,
+      "n" : 1,
+      "h" : 3
+    },
+    "sub4_conv3_2_1x1_reduce_bn_output" : {
+      "k" : 64,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv2_3_3x3_bn_output" : {
+      "k" : 32,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv5_2_add_output" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv_1_3x3_bn_output" : {
+      "k" : 32,
+      "w" : 192,
+      "n" : 1,
+      "h" : 192
+    },
+    "sub2_conv2_3_relu_output" : {
+      "k" : 128,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv5_2_relu_output" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_1_3x3_bn_output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv3_3_add_output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_5_1x1_increase_bn_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv3_4_1x1_reduce_bn_output" : {
+      "k" : 64,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv2_3_add_output" : {
+      "k" : 128,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv5_3_pool4_output" : {
+      "k" : 1024,
+      "w" : 4,
+      "n" : 1,
+      "h" : 4
+    },
+    "sub4_conv5_1_3x3_bn_output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv3_2_1x1_reduce__activation___output" : {
+      "k" : 64,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_1_1x1_increase_bn_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv3_3_3x3__activation___output" : {
+      "k" : 64,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv_3_3x3__activation___output" : {
+      "k" : 64,
+      "w" : 192,
+      "n" : 1,
+      "h" : 192
+    },
+    "sub4_conv4_1_1x1_proj_bn_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv5_1_1x1_reduce_bn_output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_4_3x3__activation___output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv2_1_relu_output" : {
+      "k" : 128,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv4_3_1x1_reduce_bn_output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv5_3_pool1_interp_output" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv5_2_3x3_bn_output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_5_1x1_reduce_bn_output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv3_4_relu_output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub12_cff_conv_bn_output" : {
+      "k" : 128,
+      "w" : 96,
+      "n" : 1,
+      "h" : 96
+    },
+    "sub4_conv5_3_sum_output_tmp_3" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv5_3_pool6_interp_output" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv3_3_1x1_increase_bn_output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv3_1_3x3__activation___output" : {
+      "k" : 64,
+      "w" : 48,
+      "n" : 1,
+      "h" : 48
+    },
+    "sub24_cff_conv_bn_output" : {
+      "k" : 128,
+      "w" : 48,
+      "n" : 1,
+      "h" : 48
+    },
+    "sub4_conv3_2_relu_output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "output" : {
+      "k" : 2,
+      "w" : 768,
+      "n" : 1,
+      "h" : 768
+    },
+    "conv6_cls_output" : {
+      "k" : 2,
+      "w" : 192,
+      "n" : 1,
+      "h" : 192
+    },
+    "sub4_conv4_6_add_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv5_3_pool1_output" : {
+      "k" : 1024,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "sub4_conv5_1_1x1_proj_bn_output" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv3_1_1x1_increase_bn_output" : {
+      "k" : 256,
+      "w" : 48,
+      "n" : 1,
+      "h" : 48
+    },
+    "sub4_conv4_5_3x3_bn_output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_6_1x1_increase_bn_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub1_conv_1_3x3__activation___output" : {
+      "k" : 32,
+      "w" : 384,
+      "n" : 1,
+      "h" : 384
+    },
+    "sub12_cff_interp_output" : {
+      "k" : 128,
+      "w" : 96,
+      "n" : 1,
+      "h" : 96
+    },
+    "sub4_conv4_6_3x3__activation___output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_2_1x1_increase_bn_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_pool1_3x3_output" : {
+      "k" : 64,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub2_conv2_2_add_output" : {
+      "k" : 128,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv4_4_1x1_reduce__activation___output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv2_2_3x3_bn_output" : {
+      "k" : 32,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv5_3_pool2_output" : {
+      "k" : 1024,
+      "w" : 2,
+      "n" : 1,
+      "h" : 2
+    },
+    "sub4_conv5_3_relu_output" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv3_3_1x1_reduce_bn_output" : {
+      "k" : 64,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv5_2_1x1_reduce__activation___output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub1_conv_proj_bn_output" : {
+      "k" : 128,
+      "w" : 96,
+      "n" : 1,
+      "h" : 96
+    },
+    "sub4_conv4_2_add_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_6_3x3_bn_output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv2_3_1x1_reduce_bn_output" : {
+      "k" : 32,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv5_3_pool3_interp_output" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv2_2_3x3__activation___output" : {
+      "k" : 32,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv5_2_3x3__activation___output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv2_2_relu_output" : {
+      "k" : 128,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub2_conv2_3_1x1_increase_bn_output" : {
+      "k" : 128,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv5_1_relu_output" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub1_conv_2_3x3__activation___output" : {
+      "k" : 32,
+      "w" : 192,
+      "n" : 1,
+      "h" : 192
+    },
+    "sub4_conv5_3_add_output" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_2_1x1_reduce_bn_output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_3_1x1_reduce__activation___output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv_3_3x3_bn_output" : {
+      "k" : 64,
+      "w" : 192,
+      "n" : 1,
+      "h" : 192
+    },
+    "sub4_conv5_3_sum_output_tmp_2" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv3_3_3x3_bn_output" : {
+      "k" : 64,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv5_1_1x1_reduce__activation___output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_4_1x1_reduce_bn_output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_4_1x1_increase_bn_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv3_4_1x1_reduce__activation___output" : {
+      "k" : 64,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub1_conv_2_3x3_bn_output" : {
+      "k" : 32,
+      "w" : 192,
+      "n" : 1,
+      "h" : 192
+    },
+    "sub4_conv4_4_add_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_6_relu_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv3_3_relu_output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv3_1_relu_output" : {
+      "k" : 256,
+      "w" : 48,
+      "n" : 1,
+      "h" : 48
+    },
+    "sub4_conv4_2_1x1_reduce__activation___output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv5_3_1x1_reduce_bn_output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_3_3x3__activation___output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv3_4_3x3_bn_output" : {
+      "k" : 64,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv2_3_1x1_reduce__activation___output" : {
+      "k" : 32,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub1_conv_3_3x3__activation___output" : {
+      "k" : 64,
+      "w" : 96,
+      "n" : 1,
+      "h" : 96
+    },
+    "sub2_conv_2_3x3_bn_output" : {
+      "k" : 32,
+      "w" : 192,
+      "n" : 1,
+      "h" : 192
+    },
+    "sub4_conv5_3_1x1_increase_bn_output" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_4_3x3_bn_output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_data_output" : {
+      "k" : 3,
+      "w" : 384,
+      "n" : 1,
+      "h" : 384
+    },
+    "sub4_conv4_4_relu_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv3_1_1x1_reduce__activation___output" : {
+      "k" : 64,
+      "w" : 48,
+      "n" : 1,
+      "h" : 48
+    },
+    "sub2_conv2_1_1x1_increase_bn_output" : {
+      "k" : 128,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub2_conv3_1_add_output" : {
+      "k" : 256,
+      "w" : 48,
+      "n" : 1,
+      "h" : 48
+    },
+    "sub2_conv2_1_3x3_bn_output" : {
+      "k" : 32,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv3_2_1x1_increase_bn_output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv3_1_3x3_bn_output" : {
+      "k" : 64,
+      "w" : 48,
+      "n" : 1,
+      "h" : 48
+    },
+    "sub2_conv2_2_1x1_reduce_bn_output" : {
+      "k" : 32,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv4_2_relu_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv2_2_1x1_reduce__activation___output" : {
+      "k" : 32,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv5_1_add_output" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv3_2_add_output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv3_4_3x3__activation___output" : {
+      "k" : 64,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub12_cff_sum_output" : {
+      "k" : 128,
+      "w" : 96,
+      "n" : 1,
+      "h" : 96
+    },
+    "image" : {
+      "k" : 3,
+      "w" : 768,
+      "n" : 1,
+      "h" : 768
+    },
+    "sub4_conv4_5_3x3__activation___output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv2_1_1x1_proj_bn_output" : {
+      "k" : 128,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv4_1_1x1_reduce_bn_output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv3_1_1x1_reduce_bn_output" : {
+      "k" : 64,
+      "w" : 48,
+      "n" : 1,
+      "h" : 48
+    },
+    "sub4_conv3_1_output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv5_3_sum_output_tmp_1" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub24_cff_sum_output" : {
+      "k" : 128,
+      "w" : 48,
+      "n" : 1,
+      "h" : 48
+    },
+    "sub4_conv4_6_1x1_reduce__activation___output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_1_3x3__activation___output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv3_2_3x3_bn_output" : {
+      "k" : 64,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_3_add_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "conv6_cls__activation___output" : {
+      "k" : 2,
+      "w" : 192,
+      "n" : 1,
+      "h" : 192
+    },
+    "sub12_cff_sum_relu_output" : {
+      "k" : 128,
+      "w" : 96,
+      "n" : 1,
+      "h" : 96
+    },
+    "sub4_conv5_1_1x1_increase_bn_output" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv5_4_k1__activation___output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv2_1_1x1_reduce__activation___output" : {
+      "k" : 32,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv4_2_3x3_bn_output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv5_3_pool2_interp_output" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv5_4_k1_bn_output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub24_cff_proj_bn_output" : {
+      "k" : 128,
+      "w" : 48,
+      "n" : 1,
+      "h" : 48
+    },
+    "sub2_conv2_1_3x3__activation___output" : {
+      "k" : 32,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv5_1_3x3__activation___output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv3_4_1x1_increase_bn_output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub24_cff_interp_output" : {
+      "k" : 256,
+      "w" : 48,
+      "n" : 1,
+      "h" : 48
+    },
+    "sub2_conv2_2_1x1_increase_bn_output" : {
+      "k" : 128,
+      "w" : 95,
+      "n" : 1,
+      "h" : 95
+    },
+    "sub4_conv3_4_add_output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv5_2_1x1_reduce_bn_output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv_1_3x3__activation___output" : {
+      "k" : 32,
+      "w" : 192,
+      "n" : 1,
+      "h" : 192
+    },
+    "sub4_conv4_5_1x1_reduce__activation___output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv5_3_sum_output" : {
+      "k" : 1024,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_3_3x3_bn_output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub12_sum_interp_output" : {
+      "k" : 128,
+      "w" : 192,
+      "n" : 1,
+      "h" : 192
+    },
+    "sub4_conv4_5_relu_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub2_conv3_1_1x1_proj_bn_output" : {
+      "k" : 256,
+      "w" : 48,
+      "n" : 1,
+      "h" : 48
+    },
+    "sub4_conv5_3_1x1_reduce__activation___output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv3_2_3x3__activation___output" : {
+      "k" : 64,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_6_1x1_reduce_bn_output" : {
+      "k" : 128,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv5_3_3x3_bn_output" : {
+      "k" : 256,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_5_add_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub4_conv4_3_1x1_increase_bn_output" : {
+      "k" : 512,
+      "w" : 24,
+      "n" : 1,
+      "h" : 24
+    },
+    "sub24_cff_sum_relu_output" : {
+      "k" : 128,
+      "w" : 48,
+      "n" : 1,
+      "h" : 48
+    }
+  }
+}
