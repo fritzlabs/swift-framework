@@ -364,27 +364,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)blurWithBlurRadius:(CGFloat)blurRadius;
 @end
 
-
-SWIFT_CLASS_NAMED("FlexibleModelDimensions")
-@interface FlexibleModelDimensions : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithWidth:(NSInteger)width withHeight:(NSInteger)height OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-@interface FlexibleModelDimensions (SWIFT_EXTENSION(FritzVision))
-/// Use original image dimensions.  Model will throw an error if image dimensions are not within range of acceptable input sizes.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull original;)
-+ (FlexibleModelDimensions * _Nonnull)original SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull lowResolution;)
-+ (FlexibleModelDimensions * _Nonnull)lowResolution SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull mediumResolution;)
-+ (FlexibleModelDimensions * _Nonnull)mediumResolution SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull highResolution;)
-+ (FlexibleModelDimensions * _Nonnull)highResolution SWIFT_WARN_UNUSED_RESULT;
-@end
-
 /// Describes the orientation of the image. The orientations match the <a href="https://developer.apple.com/documentation/imageio/cgimagepropertyorientation">CGImagePropertyOrientation</a> Enumeration from Apple. Refer to that documentation for clear descriptions of each case.
 typedef SWIFT_ENUM(int32_t, FritzImageOrientation, closed) {
   FritzImageOrientationUp = 1,
@@ -472,16 +451,16 @@ SWIFT_CLASS_NAMED("FritzVisionDepthModelOptions")
 @end
 
 typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
-  FritzVisionErrorInvalidSampleImageBuffer = 0,
+  FritzVisionErrorInvalidImageBuffer = 0,
   FritzVisionErrorErrorProcessingImage = 1,
 };
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
-@class FritzVisionFlexibleStyleModelOptions;
+@class FritzVisionStyleModelOptions;
 
 /// Construct a Flexible Style Transfer model and run on any FritzVisionImage.
 /// Produces stylized images with customizable output sizes.
-SWIFT_CLASS_NAMED("FritzVisionStylePredictor") SWIFT_AVAILABILITY(ios,introduced=12.0)
+SWIFT_CLASS_NAMED("FritzVisionStylePredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStylePredictor : NSObject
 @property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
 /// Initialize FritzStyleTransferModel with your own trained style model.
@@ -506,7 +485,7 @@ SWIFT_CLASS_NAMED("FritzVisionStylePredictor") SWIFT_AVAILABILITY(ios,introduced
 /// \param completion The block to invoke after the prediction request.
 /// Contains a FritzVisionSegmentationResult or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionFlexibleStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -516,21 +495,6 @@ SWIFT_CLASS("_TtC11FritzVision29FritzVisionFlexibleStyleModel") SWIFT_AVAILABILI
 @interface FritzVisionFlexibleStyleModel : FritzVisionStylePredictor
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-/// Options for how to run flexible style transfer model.
-SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModelOptions")
-@interface FritzVisionFlexibleStyleModelOptions : NSObject
-/// Crop and scale option. Default option is .scaleFit.
-@property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
-/// Force predictions to use Core ML (if supported by model).
-/// In iOS 12, scaleFit would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
-@property (nonatomic) BOOL forceCoreMLPrediction;
-@property (nonatomic) BOOL forceVisionPrediction;
-/// Set dimensions for output result of flexible model.
-@property (nonatomic, strong) FlexibleModelDimensions * _Nonnull flexibleModelDimensions;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class ModelSegmentationClass;
@@ -691,25 +655,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
-/// \param alphaMask Alpha Mask with a single class.
-///
-/// \param segmentationRegion Region of alpha mask to remove.
-///
-/// \param samplingMethod Resizing sampling method to use.
-///
-/// \param context Optional Core Image context to use.  Defaults to
-/// <code>FritzVisionImage.sharedContext</code>
-///
-///
-/// returns:
-/// Masked image.
-- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Blends mask with current image.
 /// Rotates source image to <code>up</code> orientation before blending.
 /// \param mask Overlaying image
@@ -729,12 +674,27 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
+/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
+/// \param alphaMask Alpha Mask with a single class.
+///
+/// \param segmentationRegion Region of alpha mask to remove.
+///
+/// \param samplingMethod Resizing sampling method to use.
+///
+/// \param context Optional Core Image context to use.  Defaults to
+/// <code>FritzVisionImage.sharedContext</code>
+///
+///
+/// returns:
+/// Masked image.
+- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
-
-
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
+@end
 
 
 
@@ -744,6 +704,10 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
+
+
 
 
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -1660,84 +1624,39 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 @end
 
 
-@class FritzVisionStyleModelOptions;
 
-SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_DEPRECATED_MSG("", "FritzVisionStylePredictor")
-@interface FritzVisionStyleModel : NSObject
-@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
-/// Initialize FritzStyleTransferModel with your own trained style model.
-/// \param model Fritz model to use.
-///
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
-/// Initialize FritzStyleTransferModel with your own trained style model.
-/// \param model Fritz model to use.
-///
-- (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model error:(NSError * _Nullable * _Nullable)error;
-/// Initialize FritzStyleTransferModel with your own trained style model.
-/// \param model Fritz model to use.
-///
-/// \param managedModel ManagedModel to use.
-///
+SWIFT_CLASS("_TtC11FritzVision21FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_DEPRECATED_MSG("", "FritzVisionStylePredictor")
+@interface FritzVisionStyleModel : FritzVisionStylePredictor
+- (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
-/// Run Style Transfer on a FritzVisionImage.
-/// \param input Image or buffer to run model on.
-///
-/// \param options Options for model execution.
-///
-/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
-///
-- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class StyleOutputDimensions;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVision))
-/// Fetch and load Style Models for the given tags.
-/// Note that this instantiates all models which could cause memory pressure if you are loading many models.
-/// If you do not want to immediately instantiate the models, create a ModelTagManager and manage loading yourself.
-/// \param tags List of tags to load models for.
-///
-/// \param wifiRequiredForModelDownload If true, client must be connected to a wifi network to download a model. Default is false.
-///
-/// \param completionHandler Completion handler with instantiated FritzVisionStyleModels
-///
-+ (void)fetchStyleModelsForTags:(NSArray<NSString *> * _Nonnull)tags wifiRequiredForModelDownload:(BOOL)wifiRequiredForModelDownload withCompletionHandler:(void (^ _Nonnull)(NSArray<FritzVisionStyleModel *> * _Nullable, NSError * _Nullable))completionHandler;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVision))
-/// Model metadata set in webapp.
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
-/// Model tags set in webapp.
-@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
-@end
-
-
-SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions") SWIFT_DEPRECATED_MSG("", "FritzVisionFlexibleStyleModelOptions")
+/// Options for running style transfer models.
+SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 @interface FritzVisionStyleModelOptions : NSObject
-/// Crop and scale option.
+/// Crop and scale option. Default option is .scaleFit.
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
-/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
-/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
+/// Force predictions to use Core ML (if supported by model).
+/// In iOS 12, scaleFit would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic) BOOL forceCoreMLPrediction;
 /// Force predictions to use the Vision framework (if supported by model).
-/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
-/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
-/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
-/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
-/// However, if you are using ARKit, you must set this to true.
+/// If you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Resize the output to match the FritzVisionImage size.
 @property (nonatomic) BOOL resizeOutputToInputDimensions;
+/// Set the expected output dimensions for models with flexible dimensions.
+@property (nonatomic, strong) StyleOutputDimensions * _Nonnull expectedOutputDimensions SWIFT_DEPRECATED_MSG("", "flexibleInputDimensions");
+/// Sets dimensions of input image for flexible model. Note that setting this to higher resolutions will increase
+/// model processing time.
+@property (nonatomic, strong) StyleOutputDimensions * _Nonnull flexibleInputDimensions;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 
-SWIFT_AVAILABILITY(ios,introduced=12.0)
+SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStylePredictor (SWIFT_EXTENSION(FritzVision))
 /// Fetch and load Style Models for the given tags.
 /// Note that this instantiates all models which could cause memory pressure if you are loading many models.
@@ -1752,7 +1671,11 @@ SWIFT_AVAILABILITY(ios,introduced=12.0)
 @end
 
 
-SWIFT_AVAILABILITY(ios,introduced=12.0)
+
+
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStylePredictor (SWIFT_EXTENSION(FritzVision))
 /// Model metadata set in webapp.
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
@@ -1839,6 +1762,27 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion
 /// Background is the region of the image where the alpha value of a mask is 0.
   FritzSegmentationRegionBackground = 1,
 };
+
+
+SWIFT_CLASS_NAMED("StyleOutputDimensions")
+@interface StyleOutputDimensions : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithWidth:(NSInteger)width withHeight:(NSInteger)height OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface StyleOutputDimensions (SWIFT_EXTENSION(FritzVision))
+/// Use original image dimensions.  Model will throw an error if image dimensions are not within range of acceptable input sizes.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull original;)
++ (StyleOutputDimensions * _Nonnull)original SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull lowResolution;)
++ (StyleOutputDimensions * _Nonnull)lowResolution SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull mediumResolution;)
++ (StyleOutputDimensions * _Nonnull)mediumResolution SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull highResolution;)
++ (StyleOutputDimensions * _Nonnull)highResolution SWIFT_WARN_UNUSED_RESULT;
+@end
 
 
 
@@ -2223,27 +2167,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)blurWithBlurRadius:(CGFloat)blurRadius;
 @end
 
-
-SWIFT_CLASS_NAMED("FlexibleModelDimensions")
-@interface FlexibleModelDimensions : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithWidth:(NSInteger)width withHeight:(NSInteger)height OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-@interface FlexibleModelDimensions (SWIFT_EXTENSION(FritzVision))
-/// Use original image dimensions.  Model will throw an error if image dimensions are not within range of acceptable input sizes.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull original;)
-+ (FlexibleModelDimensions * _Nonnull)original SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull lowResolution;)
-+ (FlexibleModelDimensions * _Nonnull)lowResolution SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull mediumResolution;)
-+ (FlexibleModelDimensions * _Nonnull)mediumResolution SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull highResolution;)
-+ (FlexibleModelDimensions * _Nonnull)highResolution SWIFT_WARN_UNUSED_RESULT;
-@end
-
 /// Describes the orientation of the image. The orientations match the <a href="https://developer.apple.com/documentation/imageio/cgimagepropertyorientation">CGImagePropertyOrientation</a> Enumeration from Apple. Refer to that documentation for clear descriptions of each case.
 typedef SWIFT_ENUM(int32_t, FritzImageOrientation, closed) {
   FritzImageOrientationUp = 1,
@@ -2331,16 +2254,16 @@ SWIFT_CLASS_NAMED("FritzVisionDepthModelOptions")
 @end
 
 typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
-  FritzVisionErrorInvalidSampleImageBuffer = 0,
+  FritzVisionErrorInvalidImageBuffer = 0,
   FritzVisionErrorErrorProcessingImage = 1,
 };
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
-@class FritzVisionFlexibleStyleModelOptions;
+@class FritzVisionStyleModelOptions;
 
 /// Construct a Flexible Style Transfer model and run on any FritzVisionImage.
 /// Produces stylized images with customizable output sizes.
-SWIFT_CLASS_NAMED("FritzVisionStylePredictor") SWIFT_AVAILABILITY(ios,introduced=12.0)
+SWIFT_CLASS_NAMED("FritzVisionStylePredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStylePredictor : NSObject
 @property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
 /// Initialize FritzStyleTransferModel with your own trained style model.
@@ -2365,7 +2288,7 @@ SWIFT_CLASS_NAMED("FritzVisionStylePredictor") SWIFT_AVAILABILITY(ios,introduced
 /// \param completion The block to invoke after the prediction request.
 /// Contains a FritzVisionSegmentationResult or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionFlexibleStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -2375,21 +2298,6 @@ SWIFT_CLASS("_TtC11FritzVision29FritzVisionFlexibleStyleModel") SWIFT_AVAILABILI
 @interface FritzVisionFlexibleStyleModel : FritzVisionStylePredictor
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-/// Options for how to run flexible style transfer model.
-SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModelOptions")
-@interface FritzVisionFlexibleStyleModelOptions : NSObject
-/// Crop and scale option. Default option is .scaleFit.
-@property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
-/// Force predictions to use Core ML (if supported by model).
-/// In iOS 12, scaleFit would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
-@property (nonatomic) BOOL forceCoreMLPrediction;
-@property (nonatomic) BOOL forceVisionPrediction;
-/// Set dimensions for output result of flexible model.
-@property (nonatomic, strong) FlexibleModelDimensions * _Nonnull flexibleModelDimensions;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class ModelSegmentationClass;
@@ -2550,25 +2458,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
-/// \param alphaMask Alpha Mask with a single class.
-///
-/// \param segmentationRegion Region of alpha mask to remove.
-///
-/// \param samplingMethod Resizing sampling method to use.
-///
-/// \param context Optional Core Image context to use.  Defaults to
-/// <code>FritzVisionImage.sharedContext</code>
-///
-///
-/// returns:
-/// Masked image.
-- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Blends mask with current image.
 /// Rotates source image to <code>up</code> orientation before blending.
 /// \param mask Overlaying image
@@ -2588,12 +2477,27 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
+/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
+/// \param alphaMask Alpha Mask with a single class.
+///
+/// \param segmentationRegion Region of alpha mask to remove.
+///
+/// \param samplingMethod Resizing sampling method to use.
+///
+/// \param context Optional Core Image context to use.  Defaults to
+/// <code>FritzVisionImage.sharedContext</code>
+///
+///
+/// returns:
+/// Masked image.
+- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
-
-
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
+@end
 
 
 
@@ -2603,6 +2507,10 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
+
+
 
 
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -3519,84 +3427,39 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 @end
 
 
-@class FritzVisionStyleModelOptions;
 
-SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_DEPRECATED_MSG("", "FritzVisionStylePredictor")
-@interface FritzVisionStyleModel : NSObject
-@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
-/// Initialize FritzStyleTransferModel with your own trained style model.
-/// \param model Fritz model to use.
-///
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
-/// Initialize FritzStyleTransferModel with your own trained style model.
-/// \param model Fritz model to use.
-///
-- (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model error:(NSError * _Nullable * _Nullable)error;
-/// Initialize FritzStyleTransferModel with your own trained style model.
-/// \param model Fritz model to use.
-///
-/// \param managedModel ManagedModel to use.
-///
+SWIFT_CLASS("_TtC11FritzVision21FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_DEPRECATED_MSG("", "FritzVisionStylePredictor")
+@interface FritzVisionStyleModel : FritzVisionStylePredictor
+- (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
-/// Run Style Transfer on a FritzVisionImage.
-/// \param input Image or buffer to run model on.
-///
-/// \param options Options for model execution.
-///
-/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
-///
-- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class StyleOutputDimensions;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVision))
-/// Fetch and load Style Models for the given tags.
-/// Note that this instantiates all models which could cause memory pressure if you are loading many models.
-/// If you do not want to immediately instantiate the models, create a ModelTagManager and manage loading yourself.
-/// \param tags List of tags to load models for.
-///
-/// \param wifiRequiredForModelDownload If true, client must be connected to a wifi network to download a model. Default is false.
-///
-/// \param completionHandler Completion handler with instantiated FritzVisionStyleModels
-///
-+ (void)fetchStyleModelsForTags:(NSArray<NSString *> * _Nonnull)tags wifiRequiredForModelDownload:(BOOL)wifiRequiredForModelDownload withCompletionHandler:(void (^ _Nonnull)(NSArray<FritzVisionStyleModel *> * _Nullable, NSError * _Nullable))completionHandler;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVision))
-/// Model metadata set in webapp.
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
-/// Model tags set in webapp.
-@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
-@end
-
-
-SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions") SWIFT_DEPRECATED_MSG("", "FritzVisionFlexibleStyleModelOptions")
+/// Options for running style transfer models.
+SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 @interface FritzVisionStyleModelOptions : NSObject
-/// Crop and scale option.
+/// Crop and scale option. Default option is .scaleFit.
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
-/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
-/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
+/// Force predictions to use Core ML (if supported by model).
+/// In iOS 12, scaleFit would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic) BOOL forceCoreMLPrediction;
 /// Force predictions to use the Vision framework (if supported by model).
-/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
-/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
-/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
-/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
-/// However, if you are using ARKit, you must set this to true.
+/// If you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Resize the output to match the FritzVisionImage size.
 @property (nonatomic) BOOL resizeOutputToInputDimensions;
+/// Set the expected output dimensions for models with flexible dimensions.
+@property (nonatomic, strong) StyleOutputDimensions * _Nonnull expectedOutputDimensions SWIFT_DEPRECATED_MSG("", "flexibleInputDimensions");
+/// Sets dimensions of input image for flexible model. Note that setting this to higher resolutions will increase
+/// model processing time.
+@property (nonatomic, strong) StyleOutputDimensions * _Nonnull flexibleInputDimensions;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 
-SWIFT_AVAILABILITY(ios,introduced=12.0)
+SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStylePredictor (SWIFT_EXTENSION(FritzVision))
 /// Fetch and load Style Models for the given tags.
 /// Note that this instantiates all models which could cause memory pressure if you are loading many models.
@@ -3611,7 +3474,11 @@ SWIFT_AVAILABILITY(ios,introduced=12.0)
 @end
 
 
-SWIFT_AVAILABILITY(ios,introduced=12.0)
+
+
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStylePredictor (SWIFT_EXTENSION(FritzVision))
 /// Model metadata set in webapp.
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
@@ -3698,6 +3565,27 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion
 /// Background is the region of the image where the alpha value of a mask is 0.
   FritzSegmentationRegionBackground = 1,
 };
+
+
+SWIFT_CLASS_NAMED("StyleOutputDimensions")
+@interface StyleOutputDimensions : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithWidth:(NSInteger)width withHeight:(NSInteger)height OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface StyleOutputDimensions (SWIFT_EXTENSION(FritzVision))
+/// Use original image dimensions.  Model will throw an error if image dimensions are not within range of acceptable input sizes.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull original;)
++ (StyleOutputDimensions * _Nonnull)original SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull lowResolution;)
++ (StyleOutputDimensions * _Nonnull)lowResolution SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull mediumResolution;)
++ (StyleOutputDimensions * _Nonnull)mediumResolution SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull highResolution;)
++ (StyleOutputDimensions * _Nonnull)highResolution SWIFT_WARN_UNUSED_RESULT;
+@end
 
 
 
@@ -4085,27 +3973,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)blurWithBlurRadius:(CGFloat)blurRadius;
 @end
 
-
-SWIFT_CLASS_NAMED("FlexibleModelDimensions")
-@interface FlexibleModelDimensions : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithWidth:(NSInteger)width withHeight:(NSInteger)height OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-@interface FlexibleModelDimensions (SWIFT_EXTENSION(FritzVision))
-/// Use original image dimensions.  Model will throw an error if image dimensions are not within range of acceptable input sizes.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull original;)
-+ (FlexibleModelDimensions * _Nonnull)original SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull lowResolution;)
-+ (FlexibleModelDimensions * _Nonnull)lowResolution SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull mediumResolution;)
-+ (FlexibleModelDimensions * _Nonnull)mediumResolution SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull highResolution;)
-+ (FlexibleModelDimensions * _Nonnull)highResolution SWIFT_WARN_UNUSED_RESULT;
-@end
-
 /// Describes the orientation of the image. The orientations match the <a href="https://developer.apple.com/documentation/imageio/cgimagepropertyorientation">CGImagePropertyOrientation</a> Enumeration from Apple. Refer to that documentation for clear descriptions of each case.
 typedef SWIFT_ENUM(int32_t, FritzImageOrientation, closed) {
   FritzImageOrientationUp = 1,
@@ -4193,16 +4060,16 @@ SWIFT_CLASS_NAMED("FritzVisionDepthModelOptions")
 @end
 
 typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
-  FritzVisionErrorInvalidSampleImageBuffer = 0,
+  FritzVisionErrorInvalidImageBuffer = 0,
   FritzVisionErrorErrorProcessingImage = 1,
 };
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
-@class FritzVisionFlexibleStyleModelOptions;
+@class FritzVisionStyleModelOptions;
 
 /// Construct a Flexible Style Transfer model and run on any FritzVisionImage.
 /// Produces stylized images with customizable output sizes.
-SWIFT_CLASS_NAMED("FritzVisionStylePredictor") SWIFT_AVAILABILITY(ios,introduced=12.0)
+SWIFT_CLASS_NAMED("FritzVisionStylePredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStylePredictor : NSObject
 @property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
 /// Initialize FritzStyleTransferModel with your own trained style model.
@@ -4227,7 +4094,7 @@ SWIFT_CLASS_NAMED("FritzVisionStylePredictor") SWIFT_AVAILABILITY(ios,introduced
 /// \param completion The block to invoke after the prediction request.
 /// Contains a FritzVisionSegmentationResult or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionFlexibleStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -4237,21 +4104,6 @@ SWIFT_CLASS("_TtC11FritzVision29FritzVisionFlexibleStyleModel") SWIFT_AVAILABILI
 @interface FritzVisionFlexibleStyleModel : FritzVisionStylePredictor
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-/// Options for how to run flexible style transfer model.
-SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModelOptions")
-@interface FritzVisionFlexibleStyleModelOptions : NSObject
-/// Crop and scale option. Default option is .scaleFit.
-@property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
-/// Force predictions to use Core ML (if supported by model).
-/// In iOS 12, scaleFit would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
-@property (nonatomic) BOOL forceCoreMLPrediction;
-@property (nonatomic) BOOL forceVisionPrediction;
-/// Set dimensions for output result of flexible model.
-@property (nonatomic, strong) FlexibleModelDimensions * _Nonnull flexibleModelDimensions;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class ModelSegmentationClass;
@@ -4412,25 +4264,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
-/// \param alphaMask Alpha Mask with a single class.
-///
-/// \param segmentationRegion Region of alpha mask to remove.
-///
-/// \param samplingMethod Resizing sampling method to use.
-///
-/// \param context Optional Core Image context to use.  Defaults to
-/// <code>FritzVisionImage.sharedContext</code>
-///
-///
-/// returns:
-/// Masked image.
-- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Blends mask with current image.
 /// Rotates source image to <code>up</code> orientation before blending.
 /// \param mask Overlaying image
@@ -4450,12 +4283,27 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
+/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
+/// \param alphaMask Alpha Mask with a single class.
+///
+/// \param segmentationRegion Region of alpha mask to remove.
+///
+/// \param samplingMethod Resizing sampling method to use.
+///
+/// \param context Optional Core Image context to use.  Defaults to
+/// <code>FritzVisionImage.sharedContext</code>
+///
+///
+/// returns:
+/// Masked image.
+- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
-
-
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
+@end
 
 
 
@@ -4465,6 +4313,10 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
+
+
 
 
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -5381,84 +5233,39 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 @end
 
 
-@class FritzVisionStyleModelOptions;
 
-SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_DEPRECATED_MSG("", "FritzVisionStylePredictor")
-@interface FritzVisionStyleModel : NSObject
-@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
-/// Initialize FritzStyleTransferModel with your own trained style model.
-/// \param model Fritz model to use.
-///
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
-/// Initialize FritzStyleTransferModel with your own trained style model.
-/// \param model Fritz model to use.
-///
-- (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model error:(NSError * _Nullable * _Nullable)error;
-/// Initialize FritzStyleTransferModel with your own trained style model.
-/// \param model Fritz model to use.
-///
-/// \param managedModel ManagedModel to use.
-///
+SWIFT_CLASS("_TtC11FritzVision21FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_DEPRECATED_MSG("", "FritzVisionStylePredictor")
+@interface FritzVisionStyleModel : FritzVisionStylePredictor
+- (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
-/// Run Style Transfer on a FritzVisionImage.
-/// \param input Image or buffer to run model on.
-///
-/// \param options Options for model execution.
-///
-/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
-///
-- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class StyleOutputDimensions;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVision))
-/// Fetch and load Style Models for the given tags.
-/// Note that this instantiates all models which could cause memory pressure if you are loading many models.
-/// If you do not want to immediately instantiate the models, create a ModelTagManager and manage loading yourself.
-/// \param tags List of tags to load models for.
-///
-/// \param wifiRequiredForModelDownload If true, client must be connected to a wifi network to download a model. Default is false.
-///
-/// \param completionHandler Completion handler with instantiated FritzVisionStyleModels
-///
-+ (void)fetchStyleModelsForTags:(NSArray<NSString *> * _Nonnull)tags wifiRequiredForModelDownload:(BOOL)wifiRequiredForModelDownload withCompletionHandler:(void (^ _Nonnull)(NSArray<FritzVisionStyleModel *> * _Nullable, NSError * _Nullable))completionHandler;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVision))
-/// Model metadata set in webapp.
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
-/// Model tags set in webapp.
-@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
-@end
-
-
-SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions") SWIFT_DEPRECATED_MSG("", "FritzVisionFlexibleStyleModelOptions")
+/// Options for running style transfer models.
+SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 @interface FritzVisionStyleModelOptions : NSObject
-/// Crop and scale option.
+/// Crop and scale option. Default option is .scaleFit.
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
-/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
-/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
+/// Force predictions to use Core ML (if supported by model).
+/// In iOS 12, scaleFit would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic) BOOL forceCoreMLPrediction;
 /// Force predictions to use the Vision framework (if supported by model).
-/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
-/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
-/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
-/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
-/// However, if you are using ARKit, you must set this to true.
+/// If you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Resize the output to match the FritzVisionImage size.
 @property (nonatomic) BOOL resizeOutputToInputDimensions;
+/// Set the expected output dimensions for models with flexible dimensions.
+@property (nonatomic, strong) StyleOutputDimensions * _Nonnull expectedOutputDimensions SWIFT_DEPRECATED_MSG("", "flexibleInputDimensions");
+/// Sets dimensions of input image for flexible model. Note that setting this to higher resolutions will increase
+/// model processing time.
+@property (nonatomic, strong) StyleOutputDimensions * _Nonnull flexibleInputDimensions;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 
-SWIFT_AVAILABILITY(ios,introduced=12.0)
+SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStylePredictor (SWIFT_EXTENSION(FritzVision))
 /// Fetch and load Style Models for the given tags.
 /// Note that this instantiates all models which could cause memory pressure if you are loading many models.
@@ -5473,7 +5280,11 @@ SWIFT_AVAILABILITY(ios,introduced=12.0)
 @end
 
 
-SWIFT_AVAILABILITY(ios,introduced=12.0)
+
+
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStylePredictor (SWIFT_EXTENSION(FritzVision))
 /// Model metadata set in webapp.
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
@@ -5560,6 +5371,27 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion
 /// Background is the region of the image where the alpha value of a mask is 0.
   FritzSegmentationRegionBackground = 1,
 };
+
+
+SWIFT_CLASS_NAMED("StyleOutputDimensions")
+@interface StyleOutputDimensions : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithWidth:(NSInteger)width withHeight:(NSInteger)height OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface StyleOutputDimensions (SWIFT_EXTENSION(FritzVision))
+/// Use original image dimensions.  Model will throw an error if image dimensions are not within range of acceptable input sizes.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull original;)
++ (StyleOutputDimensions * _Nonnull)original SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull lowResolution;)
++ (StyleOutputDimensions * _Nonnull)lowResolution SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull mediumResolution;)
++ (StyleOutputDimensions * _Nonnull)mediumResolution SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull highResolution;)
++ (StyleOutputDimensions * _Nonnull)highResolution SWIFT_WARN_UNUSED_RESULT;
+@end
 
 
 
@@ -5944,27 +5776,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)blurWithBlurRadius:(CGFloat)blurRadius;
 @end
 
-
-SWIFT_CLASS_NAMED("FlexibleModelDimensions")
-@interface FlexibleModelDimensions : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithWidth:(NSInteger)width withHeight:(NSInteger)height OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-@interface FlexibleModelDimensions (SWIFT_EXTENSION(FritzVision))
-/// Use original image dimensions.  Model will throw an error if image dimensions are not within range of acceptable input sizes.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull original;)
-+ (FlexibleModelDimensions * _Nonnull)original SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull lowResolution;)
-+ (FlexibleModelDimensions * _Nonnull)lowResolution SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull mediumResolution;)
-+ (FlexibleModelDimensions * _Nonnull)mediumResolution SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull highResolution;)
-+ (FlexibleModelDimensions * _Nonnull)highResolution SWIFT_WARN_UNUSED_RESULT;
-@end
-
 /// Describes the orientation of the image. The orientations match the <a href="https://developer.apple.com/documentation/imageio/cgimagepropertyorientation">CGImagePropertyOrientation</a> Enumeration from Apple. Refer to that documentation for clear descriptions of each case.
 typedef SWIFT_ENUM(int32_t, FritzImageOrientation, closed) {
   FritzImageOrientationUp = 1,
@@ -6052,16 +5863,16 @@ SWIFT_CLASS_NAMED("FritzVisionDepthModelOptions")
 @end
 
 typedef SWIFT_ENUM(NSInteger, FritzVisionError, closed) {
-  FritzVisionErrorInvalidSampleImageBuffer = 0,
+  FritzVisionErrorInvalidImageBuffer = 0,
   FritzVisionErrorErrorProcessingImage = 1,
 };
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
-@class FritzVisionFlexibleStyleModelOptions;
+@class FritzVisionStyleModelOptions;
 
 /// Construct a Flexible Style Transfer model and run on any FritzVisionImage.
 /// Produces stylized images with customizable output sizes.
-SWIFT_CLASS_NAMED("FritzVisionStylePredictor") SWIFT_AVAILABILITY(ios,introduced=12.0)
+SWIFT_CLASS_NAMED("FritzVisionStylePredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStylePredictor : NSObject
 @property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
 /// Initialize FritzStyleTransferModel with your own trained style model.
@@ -6086,7 +5897,7 @@ SWIFT_CLASS_NAMED("FritzVisionStylePredictor") SWIFT_AVAILABILITY(ios,introduced
 /// \param completion The block to invoke after the prediction request.
 /// Contains a FritzVisionSegmentationResult or error message.
 ///
-- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionFlexibleStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
+- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -6096,21 +5907,6 @@ SWIFT_CLASS("_TtC11FritzVision29FritzVisionFlexibleStyleModel") SWIFT_AVAILABILI
 @interface FritzVisionFlexibleStyleModel : FritzVisionStylePredictor
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-/// Options for how to run flexible style transfer model.
-SWIFT_CLASS_NAMED("FritzVisionFlexibleStyleModelOptions")
-@interface FritzVisionFlexibleStyleModelOptions : NSObject
-/// Crop and scale option. Default option is .scaleFit.
-@property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
-/// Force predictions to use Core ML (if supported by model).
-/// In iOS 12, scaleFit would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
-@property (nonatomic) BOOL forceCoreMLPrediction;
-@property (nonatomic) BOOL forceVisionPrediction;
-/// Set dimensions for output result of flexible model.
-@property (nonatomic, strong) FlexibleModelDimensions * _Nonnull flexibleModelDimensions;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class ModelSegmentationClass;
@@ -6271,25 +6067,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
-/// \param alphaMask Alpha Mask with a single class.
-///
-/// \param segmentationRegion Region of alpha mask to remove.
-///
-/// \param samplingMethod Resizing sampling method to use.
-///
-/// \param context Optional Core Image context to use.  Defaults to
-/// <code>FritzVisionImage.sharedContext</code>
-///
-///
-/// returns:
-/// Masked image.
-- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Blends mask with current image.
 /// Rotates source image to <code>up</code> orientation before blending.
 /// \param mask Overlaying image
@@ -6309,12 +6086,27 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
+/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
+/// \param alphaMask Alpha Mask with a single class.
+///
+/// \param segmentationRegion Region of alpha mask to remove.
+///
+/// \param samplingMethod Resizing sampling method to use.
+///
+/// \param context Optional Core Image context to use.  Defaults to
+/// <code>FritzVisionImage.sharedContext</code>
+///
+///
+/// returns:
+/// Masked image.
+- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
-
-
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
+@end
 
 
 
@@ -6324,6 +6116,10 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
+
+
 
 
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -7240,84 +7036,39 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 @end
 
 
-@class FritzVisionStyleModelOptions;
 
-SWIFT_CLASS_NAMED("FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_DEPRECATED_MSG("", "FritzVisionStylePredictor")
-@interface FritzVisionStyleModel : NSObject
-@property (nonatomic, readonly, strong) FritzManagedModel * _Nonnull managedModel;
-/// Initialize FritzStyleTransferModel with your own trained style model.
-/// \param model Fritz model to use.
-///
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
-/// Initialize FritzStyleTransferModel with your own trained style model.
-/// \param model Fritz model to use.
-///
-- (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model error:(NSError * _Nullable * _Nullable)error;
-/// Initialize FritzStyleTransferModel with your own trained style model.
-/// \param model Fritz model to use.
-///
-/// \param managedModel ManagedModel to use.
-///
+SWIFT_CLASS("_TtC11FritzVision21FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_DEPRECATED_MSG("", "FritzVisionStylePredictor")
+@interface FritzVisionStyleModel : FritzVisionStylePredictor
+- (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
-/// Run Style Transfer on a FritzVisionImage.
-/// \param input Image or buffer to run model on.
-///
-/// \param options Options for model execution.
-///
-/// \param completion The block to invoke after the prediction request.  Contains a FritzVisionSegmentationResult or error message.
-///
-- (void)predict:(FritzVisionImage * _Nonnull)input options:(FritzVisionStyleModelOptions * _Nonnull)options completion:(SWIFT_NOESCAPE void (^ _Nonnull)(CVPixelBufferRef _Nullable, NSError * _Nullable))completion;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class StyleOutputDimensions;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVision))
-/// Fetch and load Style Models for the given tags.
-/// Note that this instantiates all models which could cause memory pressure if you are loading many models.
-/// If you do not want to immediately instantiate the models, create a ModelTagManager and manage loading yourself.
-/// \param tags List of tags to load models for.
-///
-/// \param wifiRequiredForModelDownload If true, client must be connected to a wifi network to download a model. Default is false.
-///
-/// \param completionHandler Completion handler with instantiated FritzVisionStyleModels
-///
-+ (void)fetchStyleModelsForTags:(NSArray<NSString *> * _Nonnull)tags wifiRequiredForModelDownload:(BOOL)wifiRequiredForModelDownload withCompletionHandler:(void (^ _Nonnull)(NSArray<FritzVisionStyleModel *> * _Nullable, NSError * _Nullable))completionHandler;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionStyleModel (SWIFT_EXTENSION(FritzVision))
-/// Model metadata set in webapp.
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
-/// Model tags set in webapp.
-@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
-@end
-
-
-SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions") SWIFT_DEPRECATED_MSG("", "FritzVisionFlexibleStyleModelOptions")
+/// Options for running style transfer models.
+SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 @interface FritzVisionStyleModelOptions : NSObject
-/// Crop and scale option.
+/// Crop and scale option. Default option is .scaleFit.
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
-/// Force predictions to use Core ML (if supported by model). In iOS 12, scaleFit
-/// would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
+/// Force predictions to use Core ML (if supported by model).
+/// In iOS 12, scaleFit would incorrectly crop image.  When True (or on iOS 12) model will run using CoreML.
 @property (nonatomic) BOOL forceCoreMLPrediction;
 /// Force predictions to use the Vision framework (if supported by model).
-/// Takes precedence over <code>forceCoreMLPrediction</code>.  Core ML predictions do not currently work
-/// with YUV pixel formats, which are used in ARKit. Setting this to true will force the
-/// predictor to use the Vision framework.  Unfortunately, in iOS 11.1 - 12.1 there is a
-/// bug that incorrectly crops images with the imageCropAndScaleOption set to <code>.scaleFit</code>.
-/// However, if you are using ARKit, you must set this to true.
+/// If you are using ARKit, you must set this to true.
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Resize the output to match the FritzVisionImage size.
 @property (nonatomic) BOOL resizeOutputToInputDimensions;
+/// Set the expected output dimensions for models with flexible dimensions.
+@property (nonatomic, strong) StyleOutputDimensions * _Nonnull expectedOutputDimensions SWIFT_DEPRECATED_MSG("", "flexibleInputDimensions");
+/// Sets dimensions of input image for flexible model. Note that setting this to higher resolutions will increase
+/// model processing time.
+@property (nonatomic, strong) StyleOutputDimensions * _Nonnull flexibleInputDimensions;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 
-SWIFT_AVAILABILITY(ios,introduced=12.0)
+SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStylePredictor (SWIFT_EXTENSION(FritzVision))
 /// Fetch and load Style Models for the given tags.
 /// Note that this instantiates all models which could cause memory pressure if you are loading many models.
@@ -7332,7 +7083,11 @@ SWIFT_AVAILABILITY(ios,introduced=12.0)
 @end
 
 
-SWIFT_AVAILABILITY(ios,introduced=12.0)
+
+
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionStylePredictor (SWIFT_EXTENSION(FritzVision))
 /// Model metadata set in webapp.
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
@@ -7419,6 +7174,27 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion
 /// Background is the region of the image where the alpha value of a mask is 0.
   FritzSegmentationRegionBackground = 1,
 };
+
+
+SWIFT_CLASS_NAMED("StyleOutputDimensions")
+@interface StyleOutputDimensions : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithWidth:(NSInteger)width withHeight:(NSInteger)height OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface StyleOutputDimensions (SWIFT_EXTENSION(FritzVision))
+/// Use original image dimensions.  Model will throw an error if image dimensions are not within range of acceptable input sizes.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull original;)
++ (StyleOutputDimensions * _Nonnull)original SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull lowResolution;)
++ (StyleOutputDimensions * _Nonnull)lowResolution SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull mediumResolution;)
++ (StyleOutputDimensions * _Nonnull)mediumResolution SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull highResolution;)
++ (StyleOutputDimensions * _Nonnull)highResolution SWIFT_WARN_UNUSED_RESULT;
+@end
 
 
 

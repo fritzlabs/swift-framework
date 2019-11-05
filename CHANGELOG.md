@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [4.3.0-beta.5](https://github.com/fritzlabs/swift-framework/releases/tag/4.3.0-beta.5)
+
+1. Merging flexible and rigid style transfer.
+
 ## [4.3.0-beta.4](https://github.com/fritzlabs/swift-framework/releases/tag/4.3.0-beta.4)
 
 1. Updating People And Pet segmentaiton model.
