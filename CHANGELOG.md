@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [4.3.0](https://github.com/fritzlabs/swift-framework/releases/tag/4.3.0)
+
+1. Releasing 4.3.0
+
 ## [4.3.0-beta.5](https://github.com/fritzlabs/swift-framework/releases/tag/4.3.0-beta.5)
 
 1. Merging flexible and rigid style transfer.

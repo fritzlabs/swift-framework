@@ -364,6 +364,27 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)blurWithBlurRadius:(CGFloat)blurRadius;
 @end
 
+
+SWIFT_CLASS_NAMED("FlexibleModelDimensions")
+@interface FlexibleModelDimensions : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithWidth:(NSInteger)width withHeight:(NSInteger)height OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface FlexibleModelDimensions (SWIFT_EXTENSION(FritzVision))
+/// Use original image dimensions.  Model will throw an error if image dimensions are not within range of acceptable input sizes.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull original;)
++ (FlexibleModelDimensions * _Nonnull)original SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull lowResolution;)
++ (FlexibleModelDimensions * _Nonnull)lowResolution SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull mediumResolution;)
++ (FlexibleModelDimensions * _Nonnull)mediumResolution SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull highResolution;)
++ (FlexibleModelDimensions * _Nonnull)highResolution SWIFT_WARN_UNUSED_RESULT;
+@end
+
 /// Describes the orientation of the image. The orientations match the <a href="https://developer.apple.com/documentation/imageio/cgimagepropertyorientation">CGImagePropertyOrientation</a> Enumeration from Apple. Refer to that documentation for clear descriptions of each case.
 typedef SWIFT_ENUM(int32_t, FritzImageOrientation, closed) {
   FritzImageOrientationUp = 1,
@@ -655,25 +676,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Blends mask with current image.
-/// Rotates source image to <code>up</code> orientation before blending.
-/// \param mask Overlaying image
-///
-/// \param blendKernel Blend mode used to blend images.
-///
-/// \param samplingMethod Method used to sample images when resizing images.
-///
-/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
-///
-///
-/// returns:
-/// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
 /// \param alphaMask Alpha Mask with a single class.
 ///
@@ -693,8 +695,31 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+/// Blends mask with current image.
+/// Rotates source image to <code>up</code> orientation before blending.
+/// \param mask Overlaying image
+///
+/// \param blendKernel Blend mode used to blend images.
+///
+/// \param samplingMethod Method used to sample images when resizing images.
+///
+/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
+///
+///
+/// returns:
+/// Blended image
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 - (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
+
+
 
 
 
@@ -704,10 +729,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
-
-
-
-
 
 
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -1631,7 +1652,6 @@ SWIFT_CLASS("_TtC11FritzVision21FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,i
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class StyleOutputDimensions;
 
 /// Options for running style transfer models.
 SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
@@ -1646,11 +1666,9 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Resize the output to match the FritzVisionImage size.
 @property (nonatomic) BOOL resizeOutputToInputDimensions;
-/// Set the expected output dimensions for models with flexible dimensions.
-@property (nonatomic, strong) StyleOutputDimensions * _Nonnull expectedOutputDimensions SWIFT_DEPRECATED_MSG("", "flexibleInputDimensions");
 /// Sets dimensions of input image for flexible model. Note that setting this to higher resolutions will increase
 /// model processing time.
-@property (nonatomic, strong) StyleOutputDimensions * _Nonnull flexibleInputDimensions;
+@property (nonatomic, strong) FlexibleModelDimensions * _Nonnull flexibleModelDimensions;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -1764,24 +1782,11 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion
 };
 
 
-SWIFT_CLASS_NAMED("StyleOutputDimensions")
-@interface StyleOutputDimensions : NSObject
+SWIFT_CLASS_NAMED("StyleOutputDimensions") SWIFT_DEPRECATED_MSG("", "FlexibleModelDimensions")
+@interface StyleOutputDimensions : FlexibleModelDimensions
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithWidth:(NSInteger)width withHeight:(NSInteger)height OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-@interface StyleOutputDimensions (SWIFT_EXTENSION(FritzVision))
-/// Use original image dimensions.  Model will throw an error if image dimensions are not within range of acceptable input sizes.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull original;)
-+ (StyleOutputDimensions * _Nonnull)original SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull lowResolution;)
-+ (StyleOutputDimensions * _Nonnull)lowResolution SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull mediumResolution;)
-+ (StyleOutputDimensions * _Nonnull)mediumResolution SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull highResolution;)
-+ (StyleOutputDimensions * _Nonnull)highResolution SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -2167,6 +2172,27 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)blurWithBlurRadius:(CGFloat)blurRadius;
 @end
 
+
+SWIFT_CLASS_NAMED("FlexibleModelDimensions")
+@interface FlexibleModelDimensions : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithWidth:(NSInteger)width withHeight:(NSInteger)height OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface FlexibleModelDimensions (SWIFT_EXTENSION(FritzVision))
+/// Use original image dimensions.  Model will throw an error if image dimensions are not within range of acceptable input sizes.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull original;)
++ (FlexibleModelDimensions * _Nonnull)original SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull lowResolution;)
++ (FlexibleModelDimensions * _Nonnull)lowResolution SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull mediumResolution;)
++ (FlexibleModelDimensions * _Nonnull)mediumResolution SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull highResolution;)
++ (FlexibleModelDimensions * _Nonnull)highResolution SWIFT_WARN_UNUSED_RESULT;
+@end
+
 /// Describes the orientation of the image. The orientations match the <a href="https://developer.apple.com/documentation/imageio/cgimagepropertyorientation">CGImagePropertyOrientation</a> Enumeration from Apple. Refer to that documentation for clear descriptions of each case.
 typedef SWIFT_ENUM(int32_t, FritzImageOrientation, closed) {
   FritzImageOrientationUp = 1,
@@ -2458,25 +2484,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Blends mask with current image.
-/// Rotates source image to <code>up</code> orientation before blending.
-/// \param mask Overlaying image
-///
-/// \param blendKernel Blend mode used to blend images.
-///
-/// \param samplingMethod Method used to sample images when resizing images.
-///
-/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
-///
-///
-/// returns:
-/// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
 /// \param alphaMask Alpha Mask with a single class.
 ///
@@ -2496,8 +2503,31 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+/// Blends mask with current image.
+/// Rotates source image to <code>up</code> orientation before blending.
+/// \param mask Overlaying image
+///
+/// \param blendKernel Blend mode used to blend images.
+///
+/// \param samplingMethod Method used to sample images when resizing images.
+///
+/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
+///
+///
+/// returns:
+/// Blended image
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 - (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
+
+
 
 
 
@@ -2507,10 +2537,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
-
-
-
-
 
 
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -3434,7 +3460,6 @@ SWIFT_CLASS("_TtC11FritzVision21FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,i
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class StyleOutputDimensions;
 
 /// Options for running style transfer models.
 SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
@@ -3449,11 +3474,9 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Resize the output to match the FritzVisionImage size.
 @property (nonatomic) BOOL resizeOutputToInputDimensions;
-/// Set the expected output dimensions for models with flexible dimensions.
-@property (nonatomic, strong) StyleOutputDimensions * _Nonnull expectedOutputDimensions SWIFT_DEPRECATED_MSG("", "flexibleInputDimensions");
 /// Sets dimensions of input image for flexible model. Note that setting this to higher resolutions will increase
 /// model processing time.
-@property (nonatomic, strong) StyleOutputDimensions * _Nonnull flexibleInputDimensions;
+@property (nonatomic, strong) FlexibleModelDimensions * _Nonnull flexibleModelDimensions;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -3567,24 +3590,11 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion
 };
 
 
-SWIFT_CLASS_NAMED("StyleOutputDimensions")
-@interface StyleOutputDimensions : NSObject
+SWIFT_CLASS_NAMED("StyleOutputDimensions") SWIFT_DEPRECATED_MSG("", "FlexibleModelDimensions")
+@interface StyleOutputDimensions : FlexibleModelDimensions
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithWidth:(NSInteger)width withHeight:(NSInteger)height OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-@interface StyleOutputDimensions (SWIFT_EXTENSION(FritzVision))
-/// Use original image dimensions.  Model will throw an error if image dimensions are not within range of acceptable input sizes.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull original;)
-+ (StyleOutputDimensions * _Nonnull)original SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull lowResolution;)
-+ (StyleOutputDimensions * _Nonnull)lowResolution SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull mediumResolution;)
-+ (StyleOutputDimensions * _Nonnull)mediumResolution SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull highResolution;)
-+ (StyleOutputDimensions * _Nonnull)highResolution SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -3973,6 +3983,27 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)blurWithBlurRadius:(CGFloat)blurRadius;
 @end
 
+
+SWIFT_CLASS_NAMED("FlexibleModelDimensions")
+@interface FlexibleModelDimensions : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithWidth:(NSInteger)width withHeight:(NSInteger)height OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface FlexibleModelDimensions (SWIFT_EXTENSION(FritzVision))
+/// Use original image dimensions.  Model will throw an error if image dimensions are not within range of acceptable input sizes.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull original;)
++ (FlexibleModelDimensions * _Nonnull)original SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull lowResolution;)
++ (FlexibleModelDimensions * _Nonnull)lowResolution SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull mediumResolution;)
++ (FlexibleModelDimensions * _Nonnull)mediumResolution SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull highResolution;)
++ (FlexibleModelDimensions * _Nonnull)highResolution SWIFT_WARN_UNUSED_RESULT;
+@end
+
 /// Describes the orientation of the image. The orientations match the <a href="https://developer.apple.com/documentation/imageio/cgimagepropertyorientation">CGImagePropertyOrientation</a> Enumeration from Apple. Refer to that documentation for clear descriptions of each case.
 typedef SWIFT_ENUM(int32_t, FritzImageOrientation, closed) {
   FritzImageOrientationUp = 1,
@@ -4264,25 +4295,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Blends mask with current image.
-/// Rotates source image to <code>up</code> orientation before blending.
-/// \param mask Overlaying image
-///
-/// \param blendKernel Blend mode used to blend images.
-///
-/// \param samplingMethod Method used to sample images when resizing images.
-///
-/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
-///
-///
-/// returns:
-/// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
 /// \param alphaMask Alpha Mask with a single class.
 ///
@@ -4302,8 +4314,31 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+/// Blends mask with current image.
+/// Rotates source image to <code>up</code> orientation before blending.
+/// \param mask Overlaying image
+///
+/// \param blendKernel Blend mode used to blend images.
+///
+/// \param samplingMethod Method used to sample images when resizing images.
+///
+/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
+///
+///
+/// returns:
+/// Blended image
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 - (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
+
+
 
 
 
@@ -4313,10 +4348,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
-
-
-
-
 
 
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -5240,7 +5271,6 @@ SWIFT_CLASS("_TtC11FritzVision21FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,i
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class StyleOutputDimensions;
 
 /// Options for running style transfer models.
 SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
@@ -5255,11 +5285,9 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Resize the output to match the FritzVisionImage size.
 @property (nonatomic) BOOL resizeOutputToInputDimensions;
-/// Set the expected output dimensions for models with flexible dimensions.
-@property (nonatomic, strong) StyleOutputDimensions * _Nonnull expectedOutputDimensions SWIFT_DEPRECATED_MSG("", "flexibleInputDimensions");
 /// Sets dimensions of input image for flexible model. Note that setting this to higher resolutions will increase
 /// model processing time.
-@property (nonatomic, strong) StyleOutputDimensions * _Nonnull flexibleInputDimensions;
+@property (nonatomic, strong) FlexibleModelDimensions * _Nonnull flexibleModelDimensions;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -5373,24 +5401,11 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion
 };
 
 
-SWIFT_CLASS_NAMED("StyleOutputDimensions")
-@interface StyleOutputDimensions : NSObject
+SWIFT_CLASS_NAMED("StyleOutputDimensions") SWIFT_DEPRECATED_MSG("", "FlexibleModelDimensions")
+@interface StyleOutputDimensions : FlexibleModelDimensions
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithWidth:(NSInteger)width withHeight:(NSInteger)height OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-@interface StyleOutputDimensions (SWIFT_EXTENSION(FritzVision))
-/// Use original image dimensions.  Model will throw an error if image dimensions are not within range of acceptable input sizes.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull original;)
-+ (StyleOutputDimensions * _Nonnull)original SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull lowResolution;)
-+ (StyleOutputDimensions * _Nonnull)lowResolution SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull mediumResolution;)
-+ (StyleOutputDimensions * _Nonnull)mediumResolution SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull highResolution;)
-+ (StyleOutputDimensions * _Nonnull)highResolution SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -5776,6 +5791,27 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)blurWithBlurRadius:(CGFloat)blurRadius;
 @end
 
+
+SWIFT_CLASS_NAMED("FlexibleModelDimensions")
+@interface FlexibleModelDimensions : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithWidth:(NSInteger)width withHeight:(NSInteger)height OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface FlexibleModelDimensions (SWIFT_EXTENSION(FritzVision))
+/// Use original image dimensions.  Model will throw an error if image dimensions are not within range of acceptable input sizes.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull original;)
++ (FlexibleModelDimensions * _Nonnull)original SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull lowResolution;)
++ (FlexibleModelDimensions * _Nonnull)lowResolution SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull mediumResolution;)
++ (FlexibleModelDimensions * _Nonnull)mediumResolution SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlexibleModelDimensions * _Nonnull highResolution;)
++ (FlexibleModelDimensions * _Nonnull)highResolution SWIFT_WARN_UNUSED_RESULT;
+@end
+
 /// Describes the orientation of the image. The orientations match the <a href="https://developer.apple.com/documentation/imageio/cgimagepropertyorientation">CGImagePropertyOrientation</a> Enumeration from Apple. Refer to that documentation for clear descriptions of each case.
 typedef SWIFT_ENUM(int32_t, FritzImageOrientation, closed) {
   FritzImageOrientationUp = 1,
@@ -6067,25 +6103,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Blends mask with current image.
-/// Rotates source image to <code>up</code> orientation before blending.
-/// \param mask Overlaying image
-///
-/// \param blendKernel Blend mode used to blend images.
-///
-/// \param samplingMethod Method used to sample images when resizing images.
-///
-/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
-///
-///
-/// returns:
-/// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
 /// \param alphaMask Alpha Mask with a single class.
 ///
@@ -6105,8 +6122,31 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+/// Blends mask with current image.
+/// Rotates source image to <code>up</code> orientation before blending.
+/// \param mask Overlaying image
+///
+/// \param blendKernel Blend mode used to blend images.
+///
+/// \param samplingMethod Method used to sample images when resizing images.
+///
+/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
+///
+///
+/// returns:
+/// Blended image
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 - (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
+
+
 
 
 
@@ -6116,10 +6156,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
-
-
-
-
 
 
 SWIFT_CLASS_NAMED("FritzVisionImageMetadata") SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -7043,7 +7079,6 @@ SWIFT_CLASS("_TtC11FritzVision21FritzVisionStyleModel") SWIFT_AVAILABILITY(ios,i
 - (nullable instancetype)initWithFritzMLModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class StyleOutputDimensions;
 
 /// Options for running style transfer models.
 SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
@@ -7058,11 +7093,9 @@ SWIFT_CLASS_NAMED("FritzVisionStyleModelOptions")
 @property (nonatomic) BOOL forceVisionPrediction;
 /// Resize the output to match the FritzVisionImage size.
 @property (nonatomic) BOOL resizeOutputToInputDimensions;
-/// Set the expected output dimensions for models with flexible dimensions.
-@property (nonatomic, strong) StyleOutputDimensions * _Nonnull expectedOutputDimensions SWIFT_DEPRECATED_MSG("", "flexibleInputDimensions");
 /// Sets dimensions of input image for flexible model. Note that setting this to higher resolutions will increase
 /// model processing time.
-@property (nonatomic, strong) StyleOutputDimensions * _Nonnull flexibleInputDimensions;
+@property (nonatomic, strong) FlexibleModelDimensions * _Nonnull flexibleModelDimensions;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -7176,24 +7209,11 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion
 };
 
 
-SWIFT_CLASS_NAMED("StyleOutputDimensions")
-@interface StyleOutputDimensions : NSObject
+SWIFT_CLASS_NAMED("StyleOutputDimensions") SWIFT_DEPRECATED_MSG("", "FlexibleModelDimensions")
+@interface StyleOutputDimensions : FlexibleModelDimensions
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithWidth:(NSInteger)width withHeight:(NSInteger)height OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-@interface StyleOutputDimensions (SWIFT_EXTENSION(FritzVision))
-/// Use original image dimensions.  Model will throw an error if image dimensions are not within range of acceptable input sizes.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull original;)
-+ (StyleOutputDimensions * _Nonnull)original SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull lowResolution;)
-+ (StyleOutputDimensions * _Nonnull)lowResolution SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull mediumResolution;)
-+ (StyleOutputDimensions * _Nonnull)mediumResolution SWIFT_WARN_UNUSED_RESULT;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) StyleOutputDimensions * _Nonnull highResolution;)
-+ (StyleOutputDimensions * _Nonnull)highResolution SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
