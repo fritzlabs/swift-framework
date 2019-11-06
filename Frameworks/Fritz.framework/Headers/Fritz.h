@@ -45,6 +45,11 @@ import the headers individually."
 @import FritzVisionStyleModelPaintings;
 #endif
 
+
+#if __has_include(<FritzVisionStyleModelPaintings/FritzVisionStyleModelPatterns.h>)
+@import FritzVisionStyleModelPatterns;
+#endif
+
 #if __has_include(<FritzVisionPeopleSegmentationModelFast/FritzVisionPeopleSegmentationModelFast.h>)
 @import FritzVisionPeopleSegmentationModelFast;
 #endif

@@ -240,8 +240,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionS
 + (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "allPaintingModels");
 /// A list of all Style Models.
 + (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPaintingModels SWIFT_WARN_UNUSED_RESULT;
-/// A list of all Style Models.
-+ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPatternModels SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -263,31 +261,6 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPaintingStyle, "Style", closed) {
   FritzVisionPaintingStyleStarryNight = 8,
   FritzVisionPaintingStyleTheScream = 9,
   FritzVisionPaintingStyleTheTrial = 10,
-};
-
-
-/// Enumeration of all available styles.
-SWIFT_CLASS_NAMED("PatternStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface PatternStyleModel : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-/// Available styles.
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", closed) {
-  FritzVisionPatternStyleBlueArrow = 0,
-  FritzVisionPatternStyleChristmasLights = 1,
-  FritzVisionPatternStyleComic = 2,
-  FritzVisionPatternStyleFilament = 3,
-  FritzVisionPatternStyleLampPost = 4,
-  FritzVisionPatternStyleMosaic = 5,
-  FritzVisionPatternStyleNotreDame = 6,
-  FritzVisionPatternStyleShades = 7,
-  FritzVisionPatternStyleSketch = 8,
-  FritzVisionPatternStyleSnowflake = 9,
-  FritzVisionPatternStyleSprinkles = 10,
-  FritzVisionPatternStyleSwirl = 11,
-  FritzVisionPatternStyleTile = 12,
-  FritzVisionPatternStyleVector = 13,
 };
 
 #if __has_attribute(external_source_symbol)
@@ -535,8 +508,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionS
 + (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "allPaintingModels");
 /// A list of all Style Models.
 + (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPaintingModels SWIFT_WARN_UNUSED_RESULT;
-/// A list of all Style Models.
-+ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPatternModels SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -558,31 +529,6 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPaintingStyle, "Style", closed) {
   FritzVisionPaintingStyleStarryNight = 8,
   FritzVisionPaintingStyleTheScream = 9,
   FritzVisionPaintingStyleTheTrial = 10,
-};
-
-
-/// Enumeration of all available styles.
-SWIFT_CLASS_NAMED("PatternStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface PatternStyleModel : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-/// Available styles.
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", closed) {
-  FritzVisionPatternStyleBlueArrow = 0,
-  FritzVisionPatternStyleChristmasLights = 1,
-  FritzVisionPatternStyleComic = 2,
-  FritzVisionPatternStyleFilament = 3,
-  FritzVisionPatternStyleLampPost = 4,
-  FritzVisionPatternStyleMosaic = 5,
-  FritzVisionPatternStyleNotreDame = 6,
-  FritzVisionPatternStyleShades = 7,
-  FritzVisionPatternStyleSketch = 8,
-  FritzVisionPatternStyleSnowflake = 9,
-  FritzVisionPatternStyleSprinkles = 10,
-  FritzVisionPatternStyleSwirl = 11,
-  FritzVisionPatternStyleTile = 12,
-  FritzVisionPatternStyleVector = 13,
 };
 
 #if __has_attribute(external_source_symbol)
@@ -833,8 +779,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionS
 + (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "allPaintingModels");
 /// A list of all Style Models.
 + (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPaintingModels SWIFT_WARN_UNUSED_RESULT;
-/// A list of all Style Models.
-+ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPatternModels SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -856,31 +800,6 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPaintingStyle, "Style", closed) {
   FritzVisionPaintingStyleStarryNight = 8,
   FritzVisionPaintingStyleTheScream = 9,
   FritzVisionPaintingStyleTheTrial = 10,
-};
-
-
-/// Enumeration of all available styles.
-SWIFT_CLASS_NAMED("PatternStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface PatternStyleModel : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-/// Available styles.
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", closed) {
-  FritzVisionPatternStyleBlueArrow = 0,
-  FritzVisionPatternStyleChristmasLights = 1,
-  FritzVisionPatternStyleComic = 2,
-  FritzVisionPatternStyleFilament = 3,
-  FritzVisionPatternStyleLampPost = 4,
-  FritzVisionPatternStyleMosaic = 5,
-  FritzVisionPatternStyleNotreDame = 6,
-  FritzVisionPatternStyleShades = 7,
-  FritzVisionPatternStyleSketch = 8,
-  FritzVisionPatternStyleSnowflake = 9,
-  FritzVisionPatternStyleSprinkles = 10,
-  FritzVisionPatternStyleSwirl = 11,
-  FritzVisionPatternStyleTile = 12,
-  FritzVisionPatternStyleVector = 13,
 };
 
 #if __has_attribute(external_source_symbol)
@@ -1128,8 +1047,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionS
 + (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "allPaintingModels");
 /// A list of all Style Models.
 + (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPaintingModels SWIFT_WARN_UNUSED_RESULT;
-/// A list of all Style Models.
-+ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPatternModels SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -1151,31 +1068,6 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPaintingStyle, "Style", closed) {
   FritzVisionPaintingStyleStarryNight = 8,
   FritzVisionPaintingStyleTheScream = 9,
   FritzVisionPaintingStyleTheTrial = 10,
-};
-
-
-/// Enumeration of all available styles.
-SWIFT_CLASS_NAMED("PatternStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface PatternStyleModel : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-/// Available styles.
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", closed) {
-  FritzVisionPatternStyleBlueArrow = 0,
-  FritzVisionPatternStyleChristmasLights = 1,
-  FritzVisionPatternStyleComic = 2,
-  FritzVisionPatternStyleFilament = 3,
-  FritzVisionPatternStyleLampPost = 4,
-  FritzVisionPatternStyleMosaic = 5,
-  FritzVisionPatternStyleNotreDame = 6,
-  FritzVisionPatternStyleShades = 7,
-  FritzVisionPatternStyleSketch = 8,
-  FritzVisionPatternStyleSnowflake = 9,
-  FritzVisionPatternStyleSprinkles = 10,
-  FritzVisionPatternStyleSwirl = 11,
-  FritzVisionPatternStyleTile = 12,
-  FritzVisionPatternStyleVector = 13,
 };
 
 #if __has_attribute(external_source_symbol)

@@ -1,0 +1,11 @@
+framework module FritzVisionStyleModelPatterns {
+  umbrella header "FritzVisionStyleModelPatterns.h"
+
+  export *
+  module * { export * }
+}
+
+module FritzVisionStyleModelPatterns.Swift {
+    header "FritzVisionStyleModelPatterns-Swift.h"
+    requires objc
+}

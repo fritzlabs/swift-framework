@@ -5,6 +5,10 @@ Change Log
 
 ---
 
+## [4.4.0](https://github.com/fritzlabs/swift-framework/releases/tag/4.4.0)
+
+1. Separating out Pattern Style Transfer Models into their own subspec.
+
 ## [4.3.0](https://github.com/fritzlabs/swift-framework/releases/tag/4.3.0)
 
 1. Releasing 4.3.0
