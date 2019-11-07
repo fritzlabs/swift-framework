@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage = 'https://www.fritz.ai'
   s.license = { :type => 'Apache 2.0', :file => 'LICENSE.md' }
   s.author = { 'Chris Kelly' => 'engineering@fritz.ai' }
-  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/4.4.0/FritzVisionStyleModelPaintings.zip' }
+  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/4.4.0/FritzVisionStyleModelPatterns.zip' }
 
   s.requires_arc = true
 
