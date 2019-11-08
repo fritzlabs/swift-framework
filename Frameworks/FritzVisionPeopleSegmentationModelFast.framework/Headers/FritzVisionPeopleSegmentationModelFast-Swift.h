@@ -185,6 +185,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -203,17 +204,13 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationModel (SWIFT_EXTENSION(FritzVisionPeopleSegmentationModelFast))
-- (nonnull instancetype)init;
-+ (nonnull instancetype)new;
-@end
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationModelFast (SWIFT_EXTENSION(FritzVisionPeopleSegmentationModelFast))
-- (nonnull instancetype)init;
-+ (nonnull instancetype)new;
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModelFastObjc") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationModelFastObjc : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionPeopleSegmentationModelFast * _Nonnull model;)
++ (FritzVisionPeopleSegmentationModelFast * _Nonnull)model SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -406,6 +403,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -424,17 +422,13 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationModel (SWIFT_EXTENSION(FritzVisionPeopleSegmentationModelFast))
-- (nonnull instancetype)init;
-+ (nonnull instancetype)new;
-@end
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationModelFast (SWIFT_EXTENSION(FritzVisionPeopleSegmentationModelFast))
-- (nonnull instancetype)init;
-+ (nonnull instancetype)new;
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModelFastObjc") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationModelFastObjc : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionPeopleSegmentationModelFast * _Nonnull model;)
++ (FritzVisionPeopleSegmentationModelFast * _Nonnull)model SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -630,6 +624,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -648,17 +643,13 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationModel (SWIFT_EXTENSION(FritzVisionPeopleSegmentationModelFast))
-- (nonnull instancetype)init;
-+ (nonnull instancetype)new;
-@end
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationModelFast (SWIFT_EXTENSION(FritzVisionPeopleSegmentationModelFast))
-- (nonnull instancetype)init;
-+ (nonnull instancetype)new;
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModelFastObjc") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationModelFastObjc : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionPeopleSegmentationModelFast * _Nonnull model;)
++ (FritzVisionPeopleSegmentationModelFast * _Nonnull)model SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -851,6 +842,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -869,17 +861,13 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationModel (SWIFT_EXTENSION(FritzVisionPeopleSegmentationModelFast))
-- (nonnull instancetype)init;
-+ (nonnull instancetype)new;
-@end
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationModelFast (SWIFT_EXTENSION(FritzVisionPeopleSegmentationModelFast))
-- (nonnull instancetype)init;
-+ (nonnull instancetype)new;
+SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationModelFastObjc") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPeopleSegmentationModelFastObjc : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionPeopleSegmentationModelFast * _Nonnull model;)
++ (FritzVisionPeopleSegmentationModelFast * _Nonnull)model SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #if __has_attribute(external_source_symbol)

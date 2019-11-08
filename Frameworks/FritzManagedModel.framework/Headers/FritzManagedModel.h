@@ -10,7 +10,5 @@
 
 @import FritzCore;
 
-#import <FritzManagedModel/RNCryptor.h>
-
 FOUNDATION_EXPORT double FritzVersionNumber;
 FOUNDATION_EXPORT const unsigned char FritzVersionString[];

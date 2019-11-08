@@ -1,0 +1,172 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-module-flags: -target i386-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name CoreMLHelpers
+import Accelerate
+import CoreGraphics
+import CoreImage
+import CoreML
+@_exported import CoreMLHelpers
+import Foundation
+import Swift
+import UIKit
+import VideoToolbox
+import Vision
+@available(iOS 11.0, *)
+extension MLFeatureProvider {
+  public var first: CoreML.MLFeatureValue? {
+    get
+  }
+}
+public func top(_ k: Swift.Int, _ prob: [Swift.String : Swift.Double]) -> [(Swift.String, Swift.Double)]
+@available(iOS 11.0, *)
+public func top(_ k: Swift.Int, _ observations: [Vision.VNClassificationObservation]) -> [(Swift.String, Swift.Double)]
+extension Array where Element : Swift.Comparable {
+  public func argmax() -> (Swift.Int, Element)
+  public func argsort(by areInIncreasingOrder: (Element, Element) -> Swift.Bool) -> [Swift.Array<Element>.Index]
+  public func gather(indices: [Swift.Array<Element>.Index]) -> [Element]
+}
+extension CGImage {
+  @nonobjc public func toByteArrayRGBA() -> [Swift.UInt8]
+  @nonobjc public class func fromByteArrayRGBA(_ bytes: [Swift.UInt8], width: Swift.Int, height: Swift.Int) -> CoreGraphics.CGImage?
+  @nonobjc public class func fromByteArrayGray(_ bytes: [Swift.UInt8], width: Swift.Int, height: Swift.Int) -> CoreGraphics.CGImage?
+}
+@available(iOS 11.0, *)
+extension MLMultiArray {
+  public func image<T>(offset: T, scale: T) -> UIKit.UIImage? where T : CoreMLHelpers.MultiArrayType
+}
+extension UIImage {
+  @nonobjc public func toByteArrayRGBA() -> [Swift.UInt8]?
+  @nonobjc public class func fromByteArrayRGBA(_ bytes: [Swift.UInt8], width: Swift.Int, height: Swift.Int, scale: CoreGraphics.CGFloat = 0, orientation: UIKit.UIImage.Orientation = .up) -> UIKit.UIImage?
+  @nonobjc public class func fromByteArrayGray(_ bytes: [Swift.UInt8], width: Swift.Int, height: Swift.Int, scale: CoreGraphics.CGFloat = 0, orientation: UIKit.UIImage.Orientation = .up) -> UIKit.UIImage?
+}
+extension UIImage {
+  @available(iOS 10.0, *)
+  @nonobjc public func resized(to newSize: CoreGraphics.CGSize, atRect rect: CoreGraphics.CGRect?, scale: CoreGraphics.CGFloat = 1) -> UIKit.UIImage
+}
+public func IOU(_ a: CoreGraphics.CGRect, _ b: CoreGraphics.CGRect) -> Swift.Float
+public typealias NMSPrediction = (classIndex: Swift.Int, score: Swift.Float, rect: CoreGraphics.CGRect)
+public func nonMaxSuppression(predictions: [CoreMLHelpers.NMSPrediction], iouThreshold: Swift.Float, maxBoxes: Swift.Int) -> [Swift.Int]
+public func nonMaxSuppression(predictions: [CoreMLHelpers.NMSPrediction], indices: [Swift.Int], iouThreshold: Swift.Float, maxBoxes: Swift.Int) -> [Swift.Int]
+public func nonMaxSuppressionMultiClass(numClasses: Swift.Int, predictions: [CoreMLHelpers.NMSPrediction], scoreThreshold: Swift.Float, iouThreshold: Swift.Float, maxPerClass: Swift.Int, maxTotal: Swift.Int) -> [Swift.Int]
+public func clamp<T>(_ x: T, min: T, max: T) -> T where T : Swift.Comparable
+extension CGImage {
+  public func pixelBuffer(width: Swift.Int, height: Swift.Int, orientation: ImageIO.CGImagePropertyOrientation) -> CoreVideo.CVPixelBuffer?
+  public func pixelBufferGray(width: Swift.Int, height: Swift.Int, orientation: ImageIO.CGImagePropertyOrientation) -> CoreVideo.CVPixelBuffer?
+}
+extension CGImage {
+  public static func create(pixelBuffer: CoreVideo.CVPixelBuffer) -> CoreGraphics.CGImage?
+  public static func create(pixelBuffer: CoreVideo.CVPixelBuffer, context: CoreImage.CIContext) -> CoreGraphics.CGImage?
+}
+@available(iOS 11.0, *)
+public protocol MultiArrayType : Swift.Comparable {
+  static var multiArrayDataType: CoreML.MLMultiArrayDataType { get }
+  static func + (lhs: Self, rhs: Self) -> Self
+  static func * (lhs: Self, rhs: Self) -> Self
+  init(_: Swift.Int)
+  var toUInt8: Swift.UInt8 { get }
+}
+@available(iOS 11.0, *)
+extension Double : CoreMLHelpers.MultiArrayType {
+  public static var multiArrayDataType: CoreML.MLMultiArrayDataType {
+    get
+  }
+  public var toUInt8: Swift.UInt8 {
+    get
+  }
+}
+@available(iOS 11.0, *)
+extension Float : CoreMLHelpers.MultiArrayType {
+  public static var multiArrayDataType: CoreML.MLMultiArrayDataType {
+    get
+  }
+  public var toUInt8: Swift.UInt8 {
+    get
+  }
+}
+@available(iOS 11.0, *)
+extension Int32 : CoreMLHelpers.MultiArrayType {
+  public static var multiArrayDataType: CoreML.MLMultiArrayDataType {
+    get
+  }
+  public var toUInt8: Swift.UInt8 {
+    get
+  }
+}
+@available(iOS 11.0, *)
+public struct MultiArray<T> where T : CoreMLHelpers.MultiArrayType {
+  public let array: CoreML.MLMultiArray
+  public let pointer: Swift.UnsafeMutablePointer<T>
+  public var strides: [Swift.Int] {
+    get
+    }
+  public var shape: [Swift.Int] {
+    get
+    }
+  public init(shape: [Swift.Int])
+  public init(shape: [Swift.Int], initial: T)
+  public init(_ array: CoreML.MLMultiArray)
+  public var count: Swift.Int {
+    get
+  }
+  public subscript(a: Swift.Int) -> T {
+    get
+    set
+  }
+  public subscript(a: Swift.Int, b: Swift.Int) -> T {
+    get
+    set
+  }
+  public subscript(a: Swift.Int, b: Swift.Int, c: Swift.Int) -> T {
+    get
+    set
+  }
+  public subscript(a: Swift.Int, b: Swift.Int, c: Swift.Int, d: Swift.Int) -> T {
+    get
+    set
+  }
+  public subscript(a: Swift.Int, b: Swift.Int, c: Swift.Int, d: Swift.Int, e: Swift.Int) -> T {
+    get
+    set
+  }
+  public subscript(indices: [Swift.Int]) -> T {
+    get
+    set
+  }
+  public func transposed(_ order: [Swift.Int]) -> CoreMLHelpers.MultiArray<T>
+  public func reshaped(_ dimensions: [Swift.Int]) -> CoreMLHelpers.MultiArray<T>
+}
+@available(iOS 11.0, *)
+extension MultiArray : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+@available(iOS 11.0, *)
+extension MultiArray {
+  public func image(offset: T, scale: T) -> UIKit.UIImage?
+  public func toRawBytesRGBA(offset: T, scale: T) -> (bytes: [Swift.UInt8], width: Swift.Int, height: Swift.Int)?
+  public func toRawBytesGray(offset: T, scale: T) -> (bytes: [Swift.UInt8], width: Swift.Int, height: Swift.Int)?
+  public func image(channel: Swift.Int, offset: T, scale: T) -> UIKit.UIImage?
+}
+public func createPixelBuffer(width: Swift.Int, height: Swift.Int) -> CoreVideo.CVPixelBuffer?
+public func resizePixelBuffer(_ srcPixelBuffer: CoreVideo.CVPixelBuffer, cropX: Swift.Int, cropY: Swift.Int, cropWidth: Swift.Int, cropHeight: Swift.Int, scaleWidth: Swift.Int, scaleHeight: Swift.Int) -> CoreVideo.CVPixelBuffer?
+public func resizePixelBuffer(_ pixelBuffer: CoreVideo.CVPixelBuffer, width: Swift.Int, height: Swift.Int) -> CoreVideo.CVPixelBuffer?
+public func buildPixelBuffer(from image: CoreGraphics.CGImage, in size: CoreGraphics.CGSize? = nil) -> CoreVideo.CVPixelBuffer?
+public func resizePixelBuffer(_ pixelBuffer: CoreVideo.CVPixelBuffer, width: Swift.Int, height: Swift.Int, output: CoreVideo.CVPixelBuffer, context: CoreImage.CIContext)
+public func rotate90PixelBuffer(_ srcPixelBuffer: CoreVideo.CVPixelBuffer, factor: Swift.UInt8) -> CoreVideo.CVPixelBuffer?
+extension CGImagePropertyOrientation {
+  public init(_ orientation: UIKit.UIImage.Orientation)
+  public init(_ orientation: UIKit.UIDeviceOrientation)
+}
+extension UIImage.Orientation {
+  public init(_ cgOrientation: ImageIO.CGImagePropertyOrientation)
+}
+extension UIImage {
+  public func pixelBuffer() -> CoreVideo.CVPixelBuffer?
+  public func pixelBuffer(width: Swift.Int, height: Swift.Int) -> CoreVideo.CVPixelBuffer?
+  public func pixelBufferGray(width: Swift.Int, height: Swift.Int) -> CoreVideo.CVPixelBuffer?
+}
+extension UIImage {
+  convenience public init?(pixelBuffer: CoreVideo.CVPixelBuffer)
+  convenience public init?(pixelBuffer: CoreVideo.CVPixelBuffer, context: CoreImage.CIContext)
+}

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'Fritz'
 
-  s.version = '4.4.0'
+  s.version = '5.0.0-beta.1'
 
   s.summary = 'Official Fritz SDK for Swift 5.1 and Objective-C'
 
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.author = { 'Chris Kelly' => 'engineering@fritz.ai' }
 
-  s.source = { :http => 'https://github.com/fritzlabs/swift-framework/releases/download/4.4.0/FritzBase.zip' }
+  s.source = { :http => 'https://fritz-swift-sdk-release-production.s3.amazonaws.com/Fritz/5.0.0-beta.1/FritzBase.zip' }
 
   s.requires_arc = true
 
@@ -25,144 +25,144 @@ Pod::Spec.new do |s|
   s.default_subspec = 'Vision'
 
   s.subspec 'Vision' do |vision|
-    vision.dependency 'FritzBase/Vision', '4.4.0'
+    vision.dependency 'FritzBase/Vision', '5.0.0-beta.1'
     end
 
   s.subspec 'VisionLabelModel' do |vision|
     vision.subspec 'Fast' do |sub|
-      sub.dependency 'FritzVisionLabelModelFast', '~> 4.4.0'
+      sub.dependency 'FritzVisionLabelModelFast', '5.0.0-beta.1'
     end
   end
 
   s.subspec 'VisionObjectModel' do |vision|
     vision.subspec 'Fast' do |sub|
-      sub.dependency 'FritzVisionObjectModelFast', '~> 4.4.0'
+      sub.dependency 'FritzVisionObjectModelFast', '5.0.0-beta.1'
     end
   end
 
   s.subspec 'VisionPoseModel' do |vision|
     vision.subspec 'Human' do |pose|
       pose.subspec 'Accurate' do |sub|
-        sub.dependency 'FritzVisionHumanPoseModelAccurate', '~> 4.4.0'
+        sub.dependency 'FritzVisionHumanPoseModelAccurate', '5.0.0-beta.1'
       end
       pose.subspec 'Fast' do |sub|
-        sub.dependency 'FritzVisionHumanPoseModelFast', '~> 4.4.0'
+        sub.dependency 'FritzVisionHumanPoseModelFast', '5.0.0-beta.1'
       end
       pose.subspec 'Small' do |sub|
-        sub.dependency 'FritzVisionHumanPoseModelSmall', '~> 4.4.0'
+        sub.dependency 'FritzVisionHumanPoseModelSmall', '5.0.0-beta.1'
       end
     end
   end
 
   s.subspec 'VisionRigidPose' do |vision|
-    vision.dependency 'FritzVisionRigidPose', '~> 4.4.0'
+    vision.dependency 'FritzVisionRigidPose', '5.0.0-beta.1'
   end
 
   s.subspec 'VisionMultiPoseModel' do |vision|
-    vision.dependency 'FritzVisionMultiPoseModel', '~> 4.4.0'
+    vision.dependency 'FritzVisionMultiPoseModel', '5.0.0-beta.1'
   end
 
   s.subspec 'VisionDepthModel' do |vision|
-    vision.dependency 'FritzVisionDepthModel', '~> 4.4.0'
+    vision.dependency 'FritzVisionDepthModel', '5.0.0-beta.1'
   end
 
   s.subspec 'VisionStyleModel' do |style|
     style.subspec 'Paintings' do |paintings|
-      paintings.dependency 'FritzVisionStyleModelPaintings', '~> 4.4.0'
+      paintings.dependency 'FritzVisionStyleModelPaintings', '5.0.0-beta.1'
     end
     style.subspec 'Patterns' do |patterns|
-      patterns.dependency 'FritzVisionStyleModelPatterns', '~> 4.4.0'
+      patterns.dependency 'FritzVisionStyleModelPatterns', '5.0.0-beta.1'
     end
   end
 
   s.subspec 'VisionSegmentationModel' do |vision|
     vision.subspec 'People' do |seg|
       seg.subspec 'Accurate' do |sub|
-        sub.dependency 'FritzVisionPeopleSegmentationModelAccurate', '~> 4.4.0'
+        sub.dependency 'FritzVisionPeopleSegmentationModelAccurate', '5.0.0-beta.1'
       end
       seg.subspec 'Fast' do |sub|
-        sub.dependency 'FritzVisionPeopleSegmentationModelFast', '~> 4.4.0'
+        sub.dependency 'FritzVisionPeopleSegmentationModelFast', '5.0.0-beta.1'
       end
       seg.subspec 'Small' do |sub|
-        sub.dependency 'FritzVisionPeopleSegmentationModelSmall', '~> 4.4.0'
+        sub.dependency 'FritzVisionPeopleSegmentationModelSmall', '5.0.0-beta.1'
       end
     end
 
     vision.subspec 'People' do |seg|
       seg.subspec 'Accurate' do |sub|
-        sub.dependency 'FritzVisionPeopleSegmentationModelAccurate', '~> 4.4.0'
+        sub.dependency 'FritzVisionPeopleSegmentationModelAccurate', '5.0.0-beta.1'
       end
       seg.subspec 'Fast' do |sub|
-        sub.dependency 'FritzVisionPeopleSegmentationModelFast', '~> 4.4.0'
+        sub.dependency 'FritzVisionPeopleSegmentationModelFast', '5.0.0-beta.1'
       end
       seg.subspec 'Small' do |sub|
-        sub.dependency 'FritzVisionPeopleSegmentationModelSmall', '~> 4.4.0'
+        sub.dependency 'FritzVisionPeopleSegmentationModelSmall', '5.0.0-beta.1'
       end
     end
 
     vision.subspec 'LivingRoom' do |seg|
       seg.subspec 'Accurate' do |sub|
-        sub.dependency 'FritzVisionLivingRoomSegmentationModelAccurate', '~> 4.4.0'
+        sub.dependency 'FritzVisionLivingRoomSegmentationModelAccurate', '5.0.0-beta.1'
       end
       seg.subspec 'Fast' do |sub|
-        sub.dependency 'FritzVisionLivingRoomSegmentationModelFast', '~> 4.4.0'
+        sub.dependency 'FritzVisionLivingRoomSegmentationModelFast', '5.0.0-beta.1'
       end
       seg.subspec 'Small' do |sub|
-        sub.dependency 'FritzVisionLivingRoomSegmentationModelSmall', '~> 4.4.0'
+        sub.dependency 'FritzVisionLivingRoomSegmentationModelSmall', '5.0.0-beta.1'
       end
     end
 
     vision.subspec 'Outdoor' do |seg|
       seg.subspec 'Accurate' do |sub|
-        sub.dependency 'FritzVisionOutdoorSegmentationModelAccurate', '~> 4.4.0'
+        sub.dependency 'FritzVisionOutdoorSegmentationModelAccurate', '5.0.0-beta.1'
       end
       seg.subspec 'Fast' do |sub|
-        sub.dependency 'FritzVisionOutdoorSegmentationModelFast', '~> 4.4.0'
+        sub.dependency 'FritzVisionOutdoorSegmentationModelFast', '5.0.0-beta.1'
       end
       seg.subspec 'Small' do |sub|
-        sub.dependency 'FritzVisionOutdoorSegmentationModelSmall', '~> 4.4.0'
+        sub.dependency 'FritzVisionOutdoorSegmentationModelSmall', '5.0.0-beta.1'
       end
     end
 
     vision.subspec 'Hair' do |seg|
       seg.subspec 'Accurate' do |sub|
-        sub.dependency 'FritzVisionHairSegmentationModelAccurate', '~> 4.4.0'
+        sub.dependency 'FritzVisionHairSegmentationModelAccurate', '5.0.0-beta.1'
       end
       seg.subspec 'Fast' do |sub|
-        sub.dependency 'FritzVisionHairSegmentationModelFast', '~> 4.4.0'
+        sub.dependency 'FritzVisionHairSegmentationModelFast', '5.0.0-beta.1'
       end
       seg.subspec 'Small' do |sub|
-        sub.dependency 'FritzVisionHairSegmentationModelSmall', '~> 4.4.0'
+        sub.dependency 'FritzVisionHairSegmentationModelSmall', '5.0.0-beta.1'
       end
     end
 
     vision.subspec 'Sky' do |seg|
       seg.subspec 'Accurate' do |sub|
-        sub.dependency 'FritzVisionSkySegmentationModelAccurate', '~> 4.4.0'
+        sub.dependency 'FritzVisionSkySegmentationModelAccurate', '5.0.0-beta.1'
       end
       seg.subspec 'Fast' do |sub|
-        sub.dependency 'FritzVisionSkySegmentationModelFast', '~> 4.4.0'
+        sub.dependency 'FritzVisionSkySegmentationModelFast', '5.0.0-beta.1'
       end
       seg.subspec 'Small' do |sub|
-        sub.dependency 'FritzVisionSkySegmentationModelSmall', '~> 4.4.0'
+        sub.dependency 'FritzVisionSkySegmentationModelSmall', '5.0.0-beta.1'
       end
     end
 
     vision.subspec 'Pet' do |seg|
       seg.subspec 'Accurate' do |sub|
-        sub.dependency 'FritzVisionPetSegmentationModelAccurate', '~> 4.4.0'
+        sub.dependency 'FritzVisionPetSegmentationModelAccurate', '5.0.0-beta.1'
       end
       seg.subspec 'Fast' do |sub|
-        sub.dependency 'FritzVisionPetSegmentationModelFast', '~> 4.4.0'
+        sub.dependency 'FritzVisionPetSegmentationModelFast', '5.0.0-beta.1'
       end
       seg.subspec 'Small' do |sub|
-        sub.dependency 'FritzVisionPetSegmentationModelSmall', '~> 4.4.0'
+        sub.dependency 'FritzVisionPetSegmentationModelSmall', '5.0.0-beta.1'
       end
     end
 
     vision.subspec 'PeopleAndPet' do |seg|
       seg.subspec 'Accurate' do |sub|
-        sub.dependency 'FritzVisionPeopleAndPetSegmentationModelAccurate', '~> 4.4.0'
+        sub.dependency 'FritzVisionPeopleAndPetSegmentationModelAccurate', '5.0.0-beta.1'
       end
     end
   end

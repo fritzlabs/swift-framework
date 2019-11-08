@@ -1,0 +1,390 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FritzCore
+import Foundation
+@_exported import FritzCore
+import Swift
+import zlib
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+@objc(FritzSession) final public class Session : ObjectiveC.NSObject {
+  public struct Info : Swift.Decodable {
+    public let apiKey: Swift.String
+    public let apiUrl: Swift.String
+    public let namespace: Swift.String
+    public init(from decoder: Swift.Decoder) throws
+  }
+  @objc(defaultSession) public static let `default`: FritzCore.Session
+  final public let apiKey: Swift.String
+  final public let apiUrl: Swift.String
+  final public let namespace: Swift.String
+  final public var settings: FritzCore.SessionSettings {
+    get
+  }
+  @objc(initWithAppToken:apiUrl:namespace:) public init(apiKey: Swift.String, apiUrl: Swift.String, namespace: Swift.String)
+  @objc(initWithAppToken:) convenience public init(apiKey: Swift.String)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+public struct SessionEvent {
+  public enum EventType : Swift.String {
+    case applicationDidEnterBackground
+    case applicationWillEnterForeground
+    case applicationDidBecomeActive
+    case applicationWillResignActive
+    case modelInstalled
+    case modelDownloadCompleted
+    case modelDownloadFailed
+    case modelCompileCompleted
+    case modelCompileFailed
+    case modelDecryptionCompleted
+    case modelDecryptionFailed
+    case prediction
+    case inputOutputSample
+    public typealias RawValue = Swift.String
+    public init?(rawValue: Swift.String)
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public let type: FritzCore.SessionEvent.EventType
+  public let data: FritzCore.RequestOptions
+  public let sessionIdentifier: Swift.String
+  public let timestamp: Foundation.TimeInterval
+  public init(type: FritzCore.SessionEvent.EventType, data: FritzCore.RequestOptions)
+}
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+@objc(FritzConfiguration) public class Configuration : ObjectiveC.NSObject {
+  public static let `default`: FritzCore.Configuration
+  @objc final public let session: FritzCore.Session
+  @objc final public let sessionManager: FritzCore.SessionManager
+  @objc(initWithSession:) public init(session: FritzCore.Session)
+  @objc override dynamic public init()
+  @objc deinit
+}
+public let kDefaultMaxRetries: Swift.UInt
+public let kDefaultRetryStatusCodes: Swift.Set<Swift.Int>
+public let kDefaultRetryErrorCodes: Swift.Set<Swift.Int>
+public let kDefaultExponentialMultiplier: Swift.UInt32
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+final public class BatchedRequestQueue<Element> {
+  public typealias FlushHandler = ([Element], @escaping FritzCore.RequestCompletionHandler) -> Swift.Void
+  public typealias HealthcheckHandler = (@escaping (Swift.Bool) -> Swift.Void) -> Swift.Void
+  final public var batchThreshold: Swift.UInt {
+    get
+  }
+  final public var flushInterval: Foundation.TimeInterval {
+    get
+  }
+  final public let flushQueue: Dispatch.DispatchQueue
+  final public let maxRetries: Swift.UInt
+  final public let retryStatusCodes: Swift.Set<Swift.Int>
+  final public let retryErrorCodes: Swift.Set<Swift.Int>
+  final public let exponentialMultiplier: Swift.UInt32
+  final public var onFlush: FritzCore.BatchedRequestQueue<Element>.FlushHandler?
+  final public var apiHealthcheck: FritzCore.BatchedRequestQueue<Element>.HealthcheckHandler?
+  final public var items: [Element] {
+    get
+    }
+  final public var isApiHealthy: Swift.Bool {
+    get
+    }
+  public init(session: FritzCore.Session, flushQueue: Dispatch.DispatchQueue, maxRetries: Swift.UInt = kDefaultMaxRetries, retryStatusCodes: Swift.Set<Swift.Int> = kDefaultRetryStatusCodes, retryErrorCodes: Swift.Set<Swift.Int> = kDefaultRetryErrorCodes, exponentialMultiplier: Swift.UInt32 = kDefaultExponentialMultiplier)
+  @objc deinit
+  final public func add(_ item: Element)
+  final public func flush(force: Swift.Bool = false)
+  final public func clear()
+}
+extension NSNotification {
+  @objc(FritzErrorNotificationKey) public static let errorNotificationKey: Swift.String
+  @objc(FritzModelUpdatedNotificationKey) public static let modelUpdatedNotificationKey: Swift.String
+  @objc(FritzModelActiveModelChangedNotificationKey) public static let activeModelChangedNotificationKey: Swift.String
+}
+extension NSNotification.Name {
+  public static let fritzError: Foundation.Notification.Name
+  public static let modelUpdated: Foundation.Notification.Name
+  public static let activeModelChanged: Foundation.Notification.Name
+}
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+@objc(FritzCore) public class FritzCore : ObjectiveC.NSObject {
+  @objc(configuration) public static var configuration: FritzCore.Configuration {
+    @objc get
+  }
+  @objc(orientationManager) public static var orientationManager: FritzCore.DeviceOrientationManager {
+    @objc get
+  }
+  @objc(configure) public static func configure()
+  @objc(configureWith:) public static func configure(with configuration: FritzCore.Configuration)
+  @objc(setLogLevel:) public static func setLogLevel(_ level: FritzCore.LogLevel)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+extension FritzCore {
+  public static let instanceIdentifier: Swift.String
+}
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+extension FritzCore {
+  public static var sessionIdentifier: Swift.String {
+    get
+  }
+  public static func extendSessionIdentifier()
+  @discardableResult
+  public static func resetSessionIdentifierIfNeeded() -> Swift.String
+}
+extension Date {
+  public func elapsed() -> Swift.Double
+}
+public enum RetryResult {
+  case success
+  case error
+  public static func == (a: FritzCore.RetryResult, b: FritzCore.RetryResult) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public struct OperationRetryHandler {
+  public let retryQueue: Dispatch.DispatchQueue
+  public let retry: (@escaping (FritzCore.RetryResult) -> Swift.Void) -> Swift.Void
+  public let onSuccess: () -> Swift.Void
+  public let onFailure: (Swift.UInt) -> Swift.Void
+}
+final public class OperationRetrier {
+  final public let handler: FritzCore.OperationRetryHandler
+  final public let maxRetries: Swift.UInt
+  final public let exponentialMultiplier: Swift.UInt32
+  final public var isPaused: Swift.Bool {
+    get
+    }
+  final public var attemptedRetries: Swift.UInt {
+    get
+    }
+  public init(handler: FritzCore.OperationRetryHandler, maxRetries: Swift.UInt, exponentialMultiplier: Swift.UInt32)
+  final public func start()
+  final public func stop()
+  @objc deinit
+}
+public enum Response {
+  case success(data: Foundation.Data)
+  case error(error: Swift.Error, response: Foundation.HTTPURLResponse?, data: Foundation.Data?)
+}
+public enum RequestError : Swift.Error {
+  case invalidData
+  case invalidResponse
+  case invalidURL
+  case statusCode
+  public static func == (a: FritzCore.RequestError, b: FritzCore.RequestError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public typealias RequestCompletionHandler = (FritzCore.Response) -> Swift.Void
+public typealias RequestOptions = [Swift.String : Any]
+public typealias RequestHeaders = [FritzCore.HTTPHeader : Swift.String]
+public enum HTTPMethod : Swift.String {
+  case get
+  case post
+  case put
+  case delete
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum HTTPHeader : Swift.String {
+  case appToken
+  case contentType
+  case instanceIdentifier
+  case sessionIdentifier
+  case userAgent
+  case contentEncoding
+  case contentLength
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+final public class APIClient {
+  final public let session: FritzCore.Session
+  required public init(session: FritzCore.Session)
+  @objc deinit
+}
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+extension APIClient {
+  @discardableResult
+  final public func dataTask(_ request: Foundation.URLRequest, completionHandler: FritzCore.RequestCompletionHandler? = nil) -> Foundation.URLSessionDataTask
+  @discardableResult
+  final public func get(path: Swift.String, options: FritzCore.RequestOptions? = nil, headers: FritzCore.RequestHeaders? = nil, completionHandler: FritzCore.RequestCompletionHandler? = nil) -> Foundation.URLRequest
+  @discardableResult
+  final public func post(path: Swift.String, options: FritzCore.RequestOptions? = nil, headers: FritzCore.RequestHeaders? = nil, completionHandler: FritzCore.RequestCompletionHandler? = nil) -> Foundation.URLRequest
+  @discardableResult
+  final public func put(path: Swift.String, options: FritzCore.RequestOptions? = nil, headers: FritzCore.RequestHeaders? = nil, completionHandler: FritzCore.RequestCompletionHandler? = nil) -> Foundation.URLRequest
+  @discardableResult
+  final public func delete(path: Swift.String, options: FritzCore.RequestOptions? = nil, headers: FritzCore.RequestHeaders? = nil, completionHandler: FritzCore.RequestCompletionHandler? = nil) -> Foundation.URLRequest
+}
+@objc public enum LogLevel : Swift.Int {
+  case debug = 0
+  case info
+  case warn
+  case error
+  case none
+  public static var shared: FritzCore.LogLevel
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public struct Logger {
+  public let level: FritzCore.LogLevel
+  public let name: Swift.String
+  public init(name: Swift.String, level: FritzCore.LogLevel = .shared)
+  public func debug(_ items: Any...)
+  public func info(_ items: Any...)
+  public func warn(_ items: Any...)
+  public func error(_ items: Any...)
+  public func log(_ items: Any...)
+}
+public struct CompressionLevel : Swift.RawRepresentable {
+  public let rawValue: Swift.Int32
+  public static let noCompression: FritzCore.CompressionLevel
+  public static let bestSpeed: FritzCore.CompressionLevel
+  public static let bestCompression: FritzCore.CompressionLevel
+  public static let defaultCompression: FritzCore.CompressionLevel
+  public init(rawValue: Swift.Int32)
+  public init(_ rawValue: Swift.Int32)
+  public typealias RawValue = Swift.Int32
+}
+public struct GzipError : Swift.Error {
+  public enum Kind : Swift.Equatable {
+    case stream
+    case data
+    case memory
+    case buffer
+    case version
+    case unknown(code: Swift.Int)
+    public static func == (a: FritzCore.GzipError.Kind, b: FritzCore.GzipError.Kind) -> Swift.Bool
+  }
+  public let kind: FritzCore.GzipError.Kind
+  public let message: Swift.String
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
+extension Data {
+  public var isGzipped: Swift.Bool {
+    get
+  }
+  public func gzipped(level: FritzCore.CompressionLevel = .defaultCompression) throws -> Foundation.Data
+  public func gunzipped() throws -> Foundation.Data
+}
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+public struct SessionSettings : Swift.Codable {
+  public let apiRequestsEnabled: Swift.Bool
+  public let settingsRefreshInterval: Foundation.TimeInterval
+  public let modelInputOutputSamplingRatio: Swift.Float
+  public let trackRequestBatchSize: Swift.Int
+  public let gzipTrackEvents: Swift.Bool
+  public let batchFlushInterval: Swift.Double
+  public let eventBlacklist: Swift.Set<Swift.String>
+  public let activeModelRefreshInterval: Foundation.TimeInterval
+  public init(apiRequestsEnabled: Swift.Bool = true, settingsRefreshInterval: Foundation.TimeInterval = 30 * 60, modelInputOutputSamplingRatio: Swift.Float = 0, gzipTrackEvents: Swift.Bool = false, trackRequestBatchSize: Swift.Int = 100, batchFlushInterval: Swift.Double = 60.0, eventBlacklist: Swift.Set<Swift.String> = [], activeModelRefreshInterval: Foundation.TimeInterval = 15 * 60)
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+extension SessionSettings {
+  public static func settings(for session: FritzCore.Session) -> FritzCore.SessionSettings
+  public static func setSettings(_ settings: FritzCore.SessionSettings, for session: FritzCore.Session)
+}
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+extension SessionSettings {
+  public func shouldSampleInputOutput() -> Swift.Bool
+}
+@objc(FritzErrorCode) public enum ErrorCode : Swift.Int {
+  case modelCompilation
+  case modelDecryption
+  case modelDownload
+  case sessionDisabled
+  case modelInitialization
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+@objc(FritzError) final public class FritzError : Foundation.NSError {
+  final public let session: FritzCore.Session
+  final public let modelIdentifier: Swift.String
+  final public let error: Swift.Error
+  public static func post(session: FritzCore.Session, modelIdentifier: Swift.String, code: FritzCore.ErrorCode, error: Swift.Error)
+  public init(session: FritzCore.Session, modelIdentifier: Swift.String, code: FritzCore.ErrorCode, error: Swift.Error)
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic public init(domain: Swift.String, code: Swift.Int, userInfo dict: [Swift.String : Any]? = nil)
+  @objc deinit
+}
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+extension Error {
+  public func toJSON() -> [Swift.String : Any]
+}
+@objc(DeviceOrientationManager) public class DeviceOrientationManager : ObjectiveC.NSObject {
+  public var orientation: UIKit.UIDeviceOrientation {
+    get
+    }
+  @objc override dynamic public init()
+  @objc deinit
+}
+public enum SessionManagerError : Swift.Error {
+  case disabled
+  public static func == (a: FritzCore.SessionManagerError, b: FritzCore.SessionManagerError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@objc @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+final public class SessionManager : ObjectiveC.NSObject {
+  final public let session: FritzCore.Session
+  final public let apiClient: FritzCore.APIClient
+  final public let trackRequestQueue: FritzCore.BatchedRequestQueue<FritzCore.SessionEvent>
+  final public let fileManager: Foundation.FileManager
+  final public let logger: FritzCore.Logger
+  public init(session: FritzCore.Session)
+  final public func trackEvent(_ event: FritzCore.SessionEvent)
+  @objc deinit
+  @objc override dynamic public init()
+}
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+extension SessionManager {
+  final public func loadSessionSettings()
+}
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+extension FritzCore.SessionEvent.EventType : Swift.Equatable {}
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+extension FritzCore.SessionEvent.EventType : Swift.Hashable {}
+@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+extension FritzCore.SessionEvent.EventType : Swift.RawRepresentable {}
+extension FritzCore.RetryResult : Swift.Equatable {}
+extension FritzCore.RetryResult : Swift.Hashable {}
+extension FritzCore.RequestError : Swift.Equatable {}
+extension FritzCore.RequestError : Swift.Hashable {}
+extension FritzCore.HTTPMethod : Swift.Equatable {}
+extension FritzCore.HTTPMethod : Swift.Hashable {}
+extension FritzCore.HTTPMethod : Swift.RawRepresentable {}
+extension FritzCore.HTTPHeader : Swift.Equatable {}
+extension FritzCore.HTTPHeader : Swift.Hashable {}
+extension FritzCore.HTTPHeader : Swift.RawRepresentable {}
+extension FritzCore.LogLevel : Swift.Equatable {}
+extension FritzCore.LogLevel : Swift.Hashable {}
+extension FritzCore.LogLevel : Swift.RawRepresentable {}
+extension FritzCore.ErrorCode : Swift.Equatable {}
+extension FritzCore.ErrorCode : Swift.Hashable {}
+extension FritzCore.ErrorCode : Swift.RawRepresentable {}
+extension FritzCore.SessionManagerError : Swift.Equatable {}
+extension FritzCore.SessionManagerError : Swift.Hashable {}

@@ -5,6 +5,40 @@ Change Log
 
 ---
 
+## [5.0.0-beta.1](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.0-beta.1)
+
+1. Enabling `BUILD_LIBRARY_FOR_DISTRIBUTION` flag. With this flag set, Fritz frameworks will
+   not break on new Xcode version releases.
+
+   Doing so forced some changes in how Objective-C model frameworks are packaged.
+   You can no longer initialize packaged models with the `initWithOptionalModel` constructor.
+
+   ```diff
+   - FritzVisionPeopleSegmentationModelFast* model = [[FritzVisionPeopleSegmentationModelFast alloc] initWithOptionalModel:nil];
+   + FritzVisionPeopleSegmentationModelFast* model = [FritzVisionPeopleSegmentationModelFastObjc model];
+   ```
+2. Removing deprecated model variants.
+3. Adding model initialization with `SwiftIdentifiedModel`. Easier to instantiate an object conforming to `FritzMLModelInitializable`
+   if you are using a model conforming to `SwiftIdentifiedModel`.
+4. Moved style models from ``FritzVisionStylePredictor`` to painting and pattern style classes.
+
+   ```diff
+   - FritzVisionStylePredictor.allPaintingModels()
+   + PaintingStyleModel.allModels()
+
+   - FritzVisionStylePredictor.allPatternModels()
+   + PatternStyleModel.allModels()
+   ```
+5. Moved Kaleidoscope and Pink Blue Rhombus models from painting to pattern style pack.
+
+  ```diff
+  - PaintingStyleModel.Style.kaleidoscope
+  + PatternStyleModel.Style.kaleidoscope
+
+  - PaintingStyleModel.Style.pinkBlueRhombus
+  + PatternStyleModel.Style.pinkBlueRhombus
+  ```
+
 ## [4.4.0](https://github.com/fritzlabs/swift-framework/releases/tag/4.4.0)
 
 1. Separating out Pattern Style Transfer Models into their own subspec.

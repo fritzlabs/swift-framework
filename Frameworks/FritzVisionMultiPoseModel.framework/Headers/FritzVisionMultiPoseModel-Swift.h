@@ -185,6 +185,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -202,32 +203,16 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class FritzMLModel;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseLiftingModel (SWIFT_EXTENSION(FritzVisionMultiPoseModel))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
-@end
 
-@class FritzModelConfiguration;
-@class FritzManagedModel;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseLiftingModel (SWIFT_EXTENSION(FritzVisionMultiPoseModel))
-/// Model Configuration for pose model in Fritz.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) FritzModelConfiguration * _Nonnull modelConfig;)
-+ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
-+ (void)setModelConfig:(FritzModelConfiguration * _Nonnull)value;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
-+ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
-/// Is WiFi required to download pose model over the air.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
-+ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
-+ (void)setWifiRequiredForModelDownload:(BOOL)value;
-/// Fetch model. Downloads model if model has not been downloaded before.
-/// \param completionHandler CompletionHandler called after fetchModel request finishes.
-///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPoseLiftingModel * _Nullable, NSError * _Nullable))completionHandler;
+
+
+SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModelObjc") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseLiftingModelObjc : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionPoseLiftingModel * _Nonnull model;)
++ (FritzVisionPoseLiftingModel * _Nonnull)model SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -420,6 +405,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -437,32 +423,16 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class FritzMLModel;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseLiftingModel (SWIFT_EXTENSION(FritzVisionMultiPoseModel))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
-@end
 
-@class FritzModelConfiguration;
-@class FritzManagedModel;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseLiftingModel (SWIFT_EXTENSION(FritzVisionMultiPoseModel))
-/// Model Configuration for pose model in Fritz.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) FritzModelConfiguration * _Nonnull modelConfig;)
-+ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
-+ (void)setModelConfig:(FritzModelConfiguration * _Nonnull)value;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
-+ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
-/// Is WiFi required to download pose model over the air.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
-+ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
-+ (void)setWifiRequiredForModelDownload:(BOOL)value;
-/// Fetch model. Downloads model if model has not been downloaded before.
-/// \param completionHandler CompletionHandler called after fetchModel request finishes.
-///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPoseLiftingModel * _Nullable, NSError * _Nullable))completionHandler;
+
+
+SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModelObjc") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseLiftingModelObjc : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionPoseLiftingModel * _Nonnull model;)
++ (FritzVisionPoseLiftingModel * _Nonnull)model SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -658,6 +628,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -675,32 +646,16 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class FritzMLModel;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseLiftingModel (SWIFT_EXTENSION(FritzVisionMultiPoseModel))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
-@end
 
-@class FritzModelConfiguration;
-@class FritzManagedModel;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseLiftingModel (SWIFT_EXTENSION(FritzVisionMultiPoseModel))
-/// Model Configuration for pose model in Fritz.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) FritzModelConfiguration * _Nonnull modelConfig;)
-+ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
-+ (void)setModelConfig:(FritzModelConfiguration * _Nonnull)value;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
-+ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
-/// Is WiFi required to download pose model over the air.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
-+ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
-+ (void)setWifiRequiredForModelDownload:(BOOL)value;
-/// Fetch model. Downloads model if model has not been downloaded before.
-/// \param completionHandler CompletionHandler called after fetchModel request finishes.
-///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPoseLiftingModel * _Nullable, NSError * _Nullable))completionHandler;
+
+
+SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModelObjc") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseLiftingModelObjc : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionPoseLiftingModel * _Nonnull model;)
++ (FritzVisionPoseLiftingModel * _Nonnull)model SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -893,6 +848,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -910,32 +866,16 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class FritzMLModel;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseLiftingModel (SWIFT_EXTENSION(FritzVisionMultiPoseModel))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
-@end
 
-@class FritzModelConfiguration;
-@class FritzManagedModel;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPoseLiftingModel (SWIFT_EXTENSION(FritzVisionMultiPoseModel))
-/// Model Configuration for pose model in Fritz.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) FritzModelConfiguration * _Nonnull modelConfig;)
-+ (FritzModelConfiguration * _Nonnull)modelConfig SWIFT_WARN_UNUSED_RESULT;
-+ (void)setModelConfig:(FritzModelConfiguration * _Nonnull)value;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzManagedModel * _Nonnull managedModel;)
-+ (FritzManagedModel * _Nonnull)managedModel SWIFT_WARN_UNUSED_RESULT;
-/// Is WiFi required to download pose model over the air.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownload;)
-+ (BOOL)wifiRequiredForModelDownload SWIFT_WARN_UNUSED_RESULT;
-+ (void)setWifiRequiredForModelDownload:(BOOL)value;
-/// Fetch model. Downloads model if model has not been downloaded before.
-/// \param completionHandler CompletionHandler called after fetchModel request finishes.
-///
-+ (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPoseLiftingModel * _Nullable, NSError * _Nullable))completionHandler;
+
+
+SWIFT_CLASS_NAMED("FritzVisionPoseLiftingModelObjc") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionPoseLiftingModelObjc : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionPoseLiftingModel * _Nonnull model;)
++ (FritzVisionPoseLiftingModel * _Nonnull)model SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #if __has_attribute(external_source_symbol)

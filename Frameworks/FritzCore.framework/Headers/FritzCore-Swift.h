@@ -224,7 +224,7 @@ SWIFT_CLASS_NAMED("DeviceOrientationManager")
 @end
 
 /// The type of error encountered
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzErrorCode, "ErrorCode", closed) {
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzErrorCode, "ErrorCode", open) {
   FritzErrorCodeModelCompilation = 0,
   FritzErrorCodeModelDecryption = 1,
   FritzErrorCodeModelDownload = 2,
@@ -296,7 +296,7 @@ SWIFT_CLASS_NAMED("FritzError") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT
 ///     none: disable logging
 ///   </li>
 /// </ul>
-typedef SWIFT_ENUM(NSInteger, LogLevel, closed) {
+typedef SWIFT_ENUM(NSInteger, LogLevel, open) {
   LogLevelDebug = 0,
   LogLevelInfo = 1,
   LogLevelWarn = 2,
@@ -578,7 +578,7 @@ SWIFT_CLASS_NAMED("DeviceOrientationManager")
 @end
 
 /// The type of error encountered
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzErrorCode, "ErrorCode", closed) {
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzErrorCode, "ErrorCode", open) {
   FritzErrorCodeModelCompilation = 0,
   FritzErrorCodeModelDecryption = 1,
   FritzErrorCodeModelDownload = 2,
@@ -650,7 +650,7 @@ SWIFT_CLASS_NAMED("FritzError") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT
 ///     none: disable logging
 ///   </li>
 /// </ul>
-typedef SWIFT_ENUM(NSInteger, LogLevel, closed) {
+typedef SWIFT_ENUM(NSInteger, LogLevel, open) {
   LogLevelDebug = 0,
   LogLevelInfo = 1,
   LogLevelWarn = 2,
@@ -935,7 +935,7 @@ SWIFT_CLASS_NAMED("DeviceOrientationManager")
 @end
 
 /// The type of error encountered
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzErrorCode, "ErrorCode", closed) {
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzErrorCode, "ErrorCode", open) {
   FritzErrorCodeModelCompilation = 0,
   FritzErrorCodeModelDecryption = 1,
   FritzErrorCodeModelDownload = 2,
@@ -1007,7 +1007,7 @@ SWIFT_CLASS_NAMED("FritzError") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT
 ///     none: disable logging
 ///   </li>
 /// </ul>
-typedef SWIFT_ENUM(NSInteger, LogLevel, closed) {
+typedef SWIFT_ENUM(NSInteger, LogLevel, open) {
   LogLevelDebug = 0,
   LogLevelInfo = 1,
   LogLevelWarn = 2,
@@ -1289,7 +1289,7 @@ SWIFT_CLASS_NAMED("DeviceOrientationManager")
 @end
 
 /// The type of error encountered
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzErrorCode, "ErrorCode", closed) {
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzErrorCode, "ErrorCode", open) {
   FritzErrorCodeModelCompilation = 0,
   FritzErrorCodeModelDecryption = 1,
   FritzErrorCodeModelDownload = 2,
@@ -1361,7 +1361,7 @@ SWIFT_CLASS_NAMED("FritzError") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT
 ///     none: disable logging
 ///   </li>
 /// </ul>
-typedef SWIFT_ENUM(NSInteger, LogLevel, closed) {
+typedef SWIFT_ENUM(NSInteger, LogLevel, open) {
   LogLevelDebug = 0,
   LogLevelInfo = 1,
   LogLevelWarn = 2,

@@ -185,6 +185,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -202,17 +203,14 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class FritzMLModel;
-
-SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface FritzVisionObjectModel (SWIFT_EXTENSION(FritzVisionObjectModelFast))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
-@end
 
 
-SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface FritzVisionObjectModelFast (SWIFT_EXTENSION(FritzVisionObjectModelFast))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
+
+SWIFT_CLASS_NAMED("FritzVisionObjectModelFastObjc") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionObjectModelFastObjc : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionObjectModelFast * _Nonnull model;)
++ (FritzVisionObjectModelFast * _Nonnull)model SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -405,6 +403,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -422,17 +421,14 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class FritzMLModel;
-
-SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface FritzVisionObjectModel (SWIFT_EXTENSION(FritzVisionObjectModelFast))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
-@end
 
 
-SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface FritzVisionObjectModelFast (SWIFT_EXTENSION(FritzVisionObjectModelFast))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
+
+SWIFT_CLASS_NAMED("FritzVisionObjectModelFastObjc") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionObjectModelFastObjc : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionObjectModelFast * _Nonnull model;)
++ (FritzVisionObjectModelFast * _Nonnull)model SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -628,6 +624,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -645,17 +642,14 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class FritzMLModel;
-
-SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface FritzVisionObjectModel (SWIFT_EXTENSION(FritzVisionObjectModelFast))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
-@end
 
 
-SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface FritzVisionObjectModelFast (SWIFT_EXTENSION(FritzVisionObjectModelFast))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
+
+SWIFT_CLASS_NAMED("FritzVisionObjectModelFastObjc") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionObjectModelFastObjc : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionObjectModelFast * _Nonnull model;)
++ (FritzVisionObjectModelFast * _Nonnull)model SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -848,6 +842,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -865,17 +860,14 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class FritzMLModel;
-
-SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface FritzVisionObjectModel (SWIFT_EXTENSION(FritzVisionObjectModelFast))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
-@end
 
 
-SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface FritzVisionObjectModelFast (SWIFT_EXTENSION(FritzVisionObjectModelFast))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
+
+SWIFT_CLASS_NAMED("FritzVisionObjectModelFastObjc") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionObjectModelFastObjc : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionObjectModelFast * _Nonnull model;)
++ (FritzVisionObjectModelFast * _Nonnull)model SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #if __has_attribute(external_source_symbol)

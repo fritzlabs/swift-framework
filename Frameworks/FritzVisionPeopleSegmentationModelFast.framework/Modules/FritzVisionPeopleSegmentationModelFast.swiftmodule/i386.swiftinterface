@@ -1,0 +1,20 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-module-flags: -target i386-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FritzVisionPeopleSegmentationModelFast
+import CoreML
+import Foundation
+@_exported import FritzVisionPeopleSegmentationModelFast
+import Swift
+@available(iOS 11.0, *)
+extension FritzVisionPeopleSegmentationModelFast : FritzVision.PackagedModelType {
+  convenience public init()
+}
+@available(iOS 11.0, *)
+@available(swift, obsoleted: 1.0)
+@objc(FritzVisionPeopleSegmentationModelFastObjc) public class FritzVisionPeopleSegmentationModelFastObjc : ObjectiveC.NSObject {
+  @objc public static var model: FritzVision.FritzVisionPeopleSegmentationModelFast {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}

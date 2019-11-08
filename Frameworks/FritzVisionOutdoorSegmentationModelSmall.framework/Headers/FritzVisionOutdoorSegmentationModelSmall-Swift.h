@@ -202,12 +202,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class FritzMLModel;
 
-SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface FritzVisionOutdoorSegmentationModelSmall (SWIFT_EXTENSION(FritzVisionOutdoorSegmentationModelSmall))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
-@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
@@ -416,12 +411,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class FritzMLModel;
 
-SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface FritzVisionOutdoorSegmentationModelSmall (SWIFT_EXTENSION(FritzVisionOutdoorSegmentationModelSmall))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
-@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
@@ -633,12 +623,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class FritzMLModel;
 
-SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface FritzVisionOutdoorSegmentationModelSmall (SWIFT_EXTENSION(FritzVisionOutdoorSegmentationModelSmall))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
-@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
@@ -847,12 +832,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class FritzMLModel;
 
-SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface FritzVisionOutdoorSegmentationModelSmall (SWIFT_EXTENSION(FritzVisionOutdoorSegmentationModelSmall))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
-@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop

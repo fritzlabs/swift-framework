@@ -1,0 +1,19 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FritzVisionPetSegmentationModelSmall
+import CoreML
+@_exported import FritzVisionPetSegmentationModelSmall
+import Swift
+@available(iOS 12.0, *)
+extension FritzVisionPetSegmentationModelSmall : FritzVision.PackagedModelType {
+  convenience public init()
+}
+@available(iOS 12.0, *)
+@available(swift, obsoleted: 1.0)
+@objc(FritzVisionPetSegmentationModelSmallObjc) public class FritzVisionPetSegmentationModelSmallObjc : ObjectiveC.NSObject {
+  @objc public static var model: FritzVision.FritzVisionPetSegmentationModelSmall {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}

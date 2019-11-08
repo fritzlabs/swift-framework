@@ -1,0 +1,51 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-module-flags: -target armv7-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FritzVisionRigidPose
+import ARKit
+import Foundation
+import FritzVision
+@_exported import FritzVisionRigidPose
+import SceneKit
+import Swift
+public struct FritzSCNPose {
+  public let scenekitCameraTransform: SceneKit.SCNMatrix4
+  public let rotationVector: SceneKit.SCNVector4
+  public let translationVector: SceneKit.SCNVector3
+  public init(scenekitCameraTransform: SceneKit.SCNMatrix4, rotationVector: SceneKit.SCNVector4, translationVector: SceneKit.SCNVector3)
+}
+public class FritzVisionRigidBodyPoseLiftingOptions {
+  public var modelOptions: FritzVision.FritzVisionPoseModelOptions
+  public var requiredKeypointsMeetingThreshold: Swift.Int
+  public var keypointThreshold: Swift.Double
+  public var excludedKeypointIndices: [Swift.Int]
+  public var smoothingOptions: FritzVision.PoseSmoothingOptions?
+  public var orientationFlipAngleThreshold: Swift.Double?
+  public init()
+  @objc deinit
+}
+@available(iOS 11.0, *)
+public class FritzVisionRigidBodyPoseLifting<Skeleton> where Skeleton : FritzVision.SkeletonType {
+  final public let poseModel: FritzVision.FritzVisionPosePredictor<Skeleton>
+  public var orientationManager: FritzVisionRigidPose.RigidBodyPoseOrientationManager<Skeleton>? {
+    get
+    }
+  public init(model: FritzVision.FritzVisionPosePredictor<Skeleton>, modelPoints: [SceneKit.SCNVector3])
+  public func run2DPrediction(_ image: FritzVision.FritzVisionImage, options: FritzVisionRigidPose.FritzVisionRigidBodyPoseLiftingOptions = FritzVisionRigidBodyPoseLiftingOptions()) -> (pose: FritzVision.Pose<Skeleton>, result: FritzVision.FritzVisionPoseResult<Skeleton>)?
+  public func infer3DPose(_ pose: FritzVision.Pose<Skeleton>, image: FritzVision.FritzVisionImage, frame: ARKit.ARFrame, options: FritzVisionRigidPose.FritzVisionRigidBodyPoseLiftingOptions) -> FritzVisionRigidPose.FritzSCNPose?
+  @objc deinit
+}
+@available(iOS 11.0, *)
+public class RigidBodyPoseOrientationManager<Skeleton> where Skeleton : FritzVision.SkeletonType {
+  public var flipOrientationDegrees: Swift.Double {
+    get
+    }
+  public var previousPoseFlipped: Swift.Bool {
+    get
+    }
+  public var previousPose: FritzVision.Pose<Skeleton>? {
+    get
+    }
+  public init(flipOrientationDegrees: Swift.Double)
+  public func orientPose(_ pose: FritzVision.Pose<Skeleton>) -> FritzVision.Pose<Skeleton>
+  @objc deinit
+}

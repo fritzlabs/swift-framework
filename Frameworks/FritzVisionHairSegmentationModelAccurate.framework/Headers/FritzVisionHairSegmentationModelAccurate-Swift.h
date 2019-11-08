@@ -185,6 +185,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -202,11 +203,12 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class FritzMLModel;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionHairSegmentationModelAccurate (SWIFT_EXTENSION(FritzVisionHairSegmentationModelAccurate))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
+
+
+SWIFT_CLASS_NAMED("FritzVisionHairSegmentationModelAccurateObjc") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionHairSegmentationModelAccurateObjc : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -399,6 +401,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -416,11 +419,12 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class FritzMLModel;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionHairSegmentationModelAccurate (SWIFT_EXTENSION(FritzVisionHairSegmentationModelAccurate))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
+
+
+SWIFT_CLASS_NAMED("FritzVisionHairSegmentationModelAccurateObjc") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionHairSegmentationModelAccurateObjc : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -616,6 +620,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -633,11 +638,12 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class FritzMLModel;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionHairSegmentationModelAccurate (SWIFT_EXTENSION(FritzVisionHairSegmentationModelAccurate))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
+
+
+SWIFT_CLASS_NAMED("FritzVisionHairSegmentationModelAccurateObjc") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionHairSegmentationModelAccurateObjc : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -830,6 +836,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -847,11 +854,12 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class FritzMLModel;
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionHairSegmentationModelAccurate (SWIFT_EXTENSION(FritzVisionHairSegmentationModelAccurate))
-- (nonnull instancetype)initWithOptionalModel:(FritzMLModel * _Nullable)model;
+
+
+SWIFT_CLASS_NAMED("FritzVisionHairSegmentationModelAccurateObjc") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionHairSegmentationModelAccurateObjc : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #if __has_attribute(external_source_symbol)

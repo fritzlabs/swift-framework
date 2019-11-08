@@ -184,7 +184,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
-@import FritzVision;
 @import ObjectiveC;
 #endif
 
@@ -203,25 +202,21 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-
-SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface FritzVisionStylePredictor (SWIFT_EXTENSION(FritzVisionStyleModelPatterns))
-/// A list of all Style Models.
-+ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPatternModels SWIFT_WARN_UNUSED_RESULT;
-@end
-
 enum FritzVisionPatternStyle : NSInteger;
+@class FritzVisionStylePredictor;
 
 /// Enumeration of all available styles.
 SWIFT_CLASS_NAMED("PatternStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface PatternStyleModel : NSObject
 /// Build FritzVisionStylePredictor from style. Useful when using Objective-C.
 + (FritzVisionStylePredictor * _Nonnull)buildForPattern:(enum FritzVisionPatternStyle)style SWIFT_WARN_UNUSED_RESULT;
+/// Returns a list of all initialized style predictors.
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 /// Available styles.
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", closed) {
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", open) {
   FritzVisionPatternStyleBlueArrow = 0,
   FritzVisionPatternStyleChristmasLights = 1,
   FritzVisionPatternStyleComic = 2,
@@ -236,6 +231,8 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", closed) {
   FritzVisionPatternStyleSwirl = 11,
   FritzVisionPatternStyleTile = 12,
   FritzVisionPatternStyleVector = 13,
+  FritzVisionPatternStyleKaleidoscope = 14,
+  FritzVisionPatternStylePinkBlueRhombus = 15,
 };
 
 #if __has_attribute(external_source_symbol)
@@ -427,7 +424,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
-@import FritzVision;
 @import ObjectiveC;
 #endif
 
@@ -446,25 +442,21 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-
-SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface FritzVisionStylePredictor (SWIFT_EXTENSION(FritzVisionStyleModelPatterns))
-/// A list of all Style Models.
-+ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPatternModels SWIFT_WARN_UNUSED_RESULT;
-@end
-
 enum FritzVisionPatternStyle : NSInteger;
+@class FritzVisionStylePredictor;
 
 /// Enumeration of all available styles.
 SWIFT_CLASS_NAMED("PatternStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface PatternStyleModel : NSObject
 /// Build FritzVisionStylePredictor from style. Useful when using Objective-C.
 + (FritzVisionStylePredictor * _Nonnull)buildForPattern:(enum FritzVisionPatternStyle)style SWIFT_WARN_UNUSED_RESULT;
+/// Returns a list of all initialized style predictors.
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 /// Available styles.
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", closed) {
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", open) {
   FritzVisionPatternStyleBlueArrow = 0,
   FritzVisionPatternStyleChristmasLights = 1,
   FritzVisionPatternStyleComic = 2,
@@ -479,6 +471,8 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", closed) {
   FritzVisionPatternStyleSwirl = 11,
   FritzVisionPatternStyleTile = 12,
   FritzVisionPatternStyleVector = 13,
+  FritzVisionPatternStyleKaleidoscope = 14,
+  FritzVisionPatternStylePinkBlueRhombus = 15,
 };
 
 #if __has_attribute(external_source_symbol)
@@ -673,7 +667,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
-@import FritzVision;
 @import ObjectiveC;
 #endif
 
@@ -692,25 +685,21 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-
-SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface FritzVisionStylePredictor (SWIFT_EXTENSION(FritzVisionStyleModelPatterns))
-/// A list of all Style Models.
-+ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPatternModels SWIFT_WARN_UNUSED_RESULT;
-@end
-
 enum FritzVisionPatternStyle : NSInteger;
+@class FritzVisionStylePredictor;
 
 /// Enumeration of all available styles.
 SWIFT_CLASS_NAMED("PatternStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface PatternStyleModel : NSObject
 /// Build FritzVisionStylePredictor from style. Useful when using Objective-C.
 + (FritzVisionStylePredictor * _Nonnull)buildForPattern:(enum FritzVisionPatternStyle)style SWIFT_WARN_UNUSED_RESULT;
+/// Returns a list of all initialized style predictors.
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 /// Available styles.
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", closed) {
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", open) {
   FritzVisionPatternStyleBlueArrow = 0,
   FritzVisionPatternStyleChristmasLights = 1,
   FritzVisionPatternStyleComic = 2,
@@ -725,6 +714,8 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", closed) {
   FritzVisionPatternStyleSwirl = 11,
   FritzVisionPatternStyleTile = 12,
   FritzVisionPatternStyleVector = 13,
+  FritzVisionPatternStyleKaleidoscope = 14,
+  FritzVisionPatternStylePinkBlueRhombus = 15,
 };
 
 #if __has_attribute(external_source_symbol)
@@ -916,7 +907,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
-@import FritzVision;
 @import ObjectiveC;
 #endif
 
@@ -935,25 +925,21 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-
-SWIFT_AVAILABILITY(ios,introduced=12.0)
-@interface FritzVisionStylePredictor (SWIFT_EXTENSION(FritzVisionStyleModelPatterns))
-/// A list of all Style Models.
-+ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allPatternModels SWIFT_WARN_UNUSED_RESULT;
-@end
-
 enum FritzVisionPatternStyle : NSInteger;
+@class FritzVisionStylePredictor;
 
 /// Enumeration of all available styles.
 SWIFT_CLASS_NAMED("PatternStyleModel") SWIFT_AVAILABILITY(ios,introduced=12.0)
 @interface PatternStyleModel : NSObject
 /// Build FritzVisionStylePredictor from style. Useful when using Objective-C.
 + (FritzVisionStylePredictor * _Nonnull)buildForPattern:(enum FritzVisionPatternStyle)style SWIFT_WARN_UNUSED_RESULT;
+/// Returns a list of all initialized style predictors.
++ (NSArray<FritzVisionStylePredictor *> * _Nonnull)allModels SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 /// Available styles.
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", closed) {
+typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", open) {
   FritzVisionPatternStyleBlueArrow = 0,
   FritzVisionPatternStyleChristmasLights = 1,
   FritzVisionPatternStyleComic = 2,
@@ -968,6 +954,8 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FritzVisionPatternStyle, "Style", closed) {
   FritzVisionPatternStyleSwirl = 11,
   FritzVisionPatternStyleTile = 12,
   FritzVisionPatternStyleVector = 13,
+  FritzVisionPatternStyleKaleidoscope = 14,
+  FritzVisionPatternStylePinkBlueRhombus = 15,
 };
 
 #if __has_attribute(external_source_symbol)
