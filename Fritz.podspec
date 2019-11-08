@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.author = { 'Chris Kelly' => 'engineering@fritz.ai' }
 
-  s.source = { :http => 'https://fritz-swift-sdk-release-production.s3.amazonaws.com/Fritz/5.0.0-beta.1/FritzBase.zip' }
+  s.source = { :http => 'https://fritz-swift-sdk-release-production.s3.amazonaws.com/FritzBase/5.0.0-beta.1/FritzBase.zip' }
 
   s.requires_arc = true
 

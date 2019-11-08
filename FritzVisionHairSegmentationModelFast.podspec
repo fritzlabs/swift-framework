@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage = 'https://www.fritz.ai'
   s.license = { :type => 'Commercial', :file => 'LICENSE.md' }
   s.author = { 'Chris Kelly' => 'chris@fritz.ai' }
-  s.source = { :http => 'https://fritz-swift-sdk-release-production.s3.amazonaws.com/eFritzVisionHairSegmentationModelFast/5.0.0-beta.1/FritzVisionHairSegmentationModelFast.zip' }
+  s.source = { :http => 'https://fritz-swift-sdk-release-production.s3.amazonaws.com/FritzVisionHairSegmentationModelFast/5.0.0-beta.1/FritzVisionHairSegmentationModelFast.zip' }
   s.requires_arc = true
 
   s.ios.deployment_target = '10.0'
