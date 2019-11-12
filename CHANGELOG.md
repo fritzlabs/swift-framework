@@ -5,6 +5,14 @@ Change Log
 
 ---
 
+## [5.0.0-beta.3](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.0-beta.3)
+
+1. Fix style models not properly loading from FritzManagedModels.
+
+## [5.0.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.0-beta.2)
+
+1. Fix Style Model Patterns.
+
 ## [5.0.0-beta.1](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.0-beta.1)
 
 1. Enabling `BUILD_LIBRARY_FOR_DISTRIBUTION` flag. With this flag set, Fritz frameworks will

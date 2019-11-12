@@ -46,7 +46,7 @@ import the headers individually."
 #endif
 
 
-#if __has_include(<FritzVisionStyleModelPaintings/FritzVisionStyleModelPatterns.h>)
+#if __has_include(<FritzVisionStyleModelPatterns/FritzVisionStyleModelPatterns.h>)
 @import FritzVisionStyleModelPatterns;
 #endif
 
