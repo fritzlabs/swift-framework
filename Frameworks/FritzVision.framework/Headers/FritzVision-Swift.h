@@ -1418,6 +1418,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// \param resize If true (default) mask will be scaled to the size of the input image.
 ///
+/// \param blurRadius The radius to blur the edges of the mask.
+///
 ///
 /// returns:
 /// Image
@@ -1438,7 +1440,9 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// \param resize If true, resizes mask to input image size.
 ///
-/// \param color the color of mask.
+/// \param color The color of mask.
+///
+/// \param blurRadius The radius to blur the edges of the mask.
 ///
 ///
 /// returns:
@@ -3112,6 +3116,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// \param resize If true (default) mask will be scaled to the size of the input image.
 ///
+/// \param blurRadius The radius to blur the edges of the mask.
+///
 ///
 /// returns:
 /// Image
@@ -3132,7 +3138,9 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// \param resize If true, resizes mask to input image size.
 ///
-/// \param color the color of mask.
+/// \param color The color of mask.
+///
+/// \param blurRadius The radius to blur the edges of the mask.
 ///
 ///
 /// returns:
@@ -4809,6 +4817,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// \param resize If true (default) mask will be scaled to the size of the input image.
 ///
+/// \param blurRadius The radius to blur the edges of the mask.
+///
 ///
 /// returns:
 /// Image
@@ -4829,7 +4839,9 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// \param resize If true, resizes mask to input image size.
 ///
-/// \param color the color of mask.
+/// \param color The color of mask.
+///
+/// \param blurRadius The radius to blur the edges of the mask.
 ///
 ///
 /// returns:
@@ -6503,6 +6515,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// \param resize If true (default) mask will be scaled to the size of the input image.
 ///
+/// \param blurRadius The radius to blur the edges of the mask.
+///
 ///
 /// returns:
 /// Image
@@ -6523,7 +6537,9 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 ///
 /// \param resize If true, resizes mask to input image size.
 ///
-/// \param color the color of mask.
+/// \param color The color of mask.
+///
+/// \param blurRadius The radius to blur the edges of the mask.
 ///
 ///
 /// returns:

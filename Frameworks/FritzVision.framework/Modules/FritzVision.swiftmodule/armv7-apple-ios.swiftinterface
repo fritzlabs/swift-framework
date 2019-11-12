@@ -251,9 +251,7 @@ public class FritzVisionHairBlendFilter : FritzVision.FritzVisionSegmentationFil
 @objc @available(iOS 11.0, *)
 public class FritzVisionHairSegmentationFilterOptions : FritzVision.FritzVisionSegmentationFilterOptions {
   public var opacity: CoreGraphics.CGFloat
-  public var blendKernel: CoreImage.CIBlendKernel {
-    get
-  }
+  public var blendKernel: CoreImage.CIBlendKernel
   @objc override dynamic public init()
   @objc deinit
 }
@@ -906,7 +904,9 @@ public protocol FritzVisionSegmentationFilter : FritzVision.FritzVisionImageFilt
 public class FritzVisionSegmentationFilterOptions : ObjectiveC.NSObject {
   public var clippingScoresAbove: Swift.Double
   public var zeroingScoresBelow: Swift.Double
+  public var maxAlpha: Swift.UInt8
   public var maskColor: UIKit.UIColor
+  public var blurRadius: CoreGraphics.CGFloat
   @objc override dynamic public init()
   @objc deinit
 }

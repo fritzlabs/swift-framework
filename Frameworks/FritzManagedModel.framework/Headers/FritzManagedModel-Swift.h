@@ -265,7 +265,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL fritzWifiRequir
 SWIFT_CLASS_NAMED("FritzMLModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzMLModel : MLModel
 @property (nonatomic, readonly, strong) FritzModelConfiguration * _Nonnull activeModelConfig;
-/// Initialize model with an model type
+/// Initialize model with an model type.
+/// Listens for active model updates and reloads model if active version different than existing.
 - (nonnull instancetype)initWithIdentifiedModel:(MLModel * _Nonnull)model config:(FritzModelConfiguration * _Nonnull)activeModelConfig sessionManager:(SessionManager * _Nonnull)sessionManager OBJC_DESIGNATED_INITIALIZER;
 /// Proxy model description
 @property (nonatomic, readonly, strong) MLModelDescription * _Nonnull modelDescription;
@@ -282,7 +283,10 @@ SWIFT_CLASS_NAMED("FritzMLModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWI
 SWIFT_CLASS("_TtC17FritzManagedModel17FritzManagedModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzManagedModel : NSObject
 /// Currenly active model configuration.
-@property (nonatomic, strong) FritzModelConfiguration * _Nonnull activeModelConfig;
+/// Note this this is a globally active config for a model.  If you have multiple FritzManagedModel
+/// instances and a new version is downloaded, all instances will be updated with the latest
+/// configuration..
+@property (nonatomic, readonly, strong) FritzModelConfiguration * _Nonnull activeModelConfig;
 /// Model Identifier of active model.
 @property (nonatomic, readonly, copy) NSString * _Nonnull id;
 /// Model Version number of active model.
@@ -766,7 +770,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL fritzWifiRequir
 SWIFT_CLASS_NAMED("FritzMLModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzMLModel : MLModel
 @property (nonatomic, readonly, strong) FritzModelConfiguration * _Nonnull activeModelConfig;
-/// Initialize model with an model type
+/// Initialize model with an model type.
+/// Listens for active model updates and reloads model if active version different than existing.
 - (nonnull instancetype)initWithIdentifiedModel:(MLModel * _Nonnull)model config:(FritzModelConfiguration * _Nonnull)activeModelConfig sessionManager:(SessionManager * _Nonnull)sessionManager OBJC_DESIGNATED_INITIALIZER;
 /// Proxy model description
 @property (nonatomic, readonly, strong) MLModelDescription * _Nonnull modelDescription;
@@ -783,7 +788,10 @@ SWIFT_CLASS_NAMED("FritzMLModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWI
 SWIFT_CLASS("_TtC17FritzManagedModel17FritzManagedModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzManagedModel : NSObject
 /// Currenly active model configuration.
-@property (nonatomic, strong) FritzModelConfiguration * _Nonnull activeModelConfig;
+/// Note this this is a globally active config for a model.  If you have multiple FritzManagedModel
+/// instances and a new version is downloaded, all instances will be updated with the latest
+/// configuration..
+@property (nonatomic, readonly, strong) FritzModelConfiguration * _Nonnull activeModelConfig;
 /// Model Identifier of active model.
 @property (nonatomic, readonly, copy) NSString * _Nonnull id;
 /// Model Version number of active model.
@@ -1270,7 +1278,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL fritzWifiRequir
 SWIFT_CLASS_NAMED("FritzMLModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzMLModel : MLModel
 @property (nonatomic, readonly, strong) FritzModelConfiguration * _Nonnull activeModelConfig;
-/// Initialize model with an model type
+/// Initialize model with an model type.
+/// Listens for active model updates and reloads model if active version different than existing.
 - (nonnull instancetype)initWithIdentifiedModel:(MLModel * _Nonnull)model config:(FritzModelConfiguration * _Nonnull)activeModelConfig sessionManager:(SessionManager * _Nonnull)sessionManager OBJC_DESIGNATED_INITIALIZER;
 /// Proxy model description
 @property (nonatomic, readonly, strong) MLModelDescription * _Nonnull modelDescription;
@@ -1287,7 +1296,10 @@ SWIFT_CLASS_NAMED("FritzMLModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWI
 SWIFT_CLASS("_TtC17FritzManagedModel17FritzManagedModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzManagedModel : NSObject
 /// Currenly active model configuration.
-@property (nonatomic, strong) FritzModelConfiguration * _Nonnull activeModelConfig;
+/// Note this this is a globally active config for a model.  If you have multiple FritzManagedModel
+/// instances and a new version is downloaded, all instances will be updated with the latest
+/// configuration..
+@property (nonatomic, readonly, strong) FritzModelConfiguration * _Nonnull activeModelConfig;
 /// Model Identifier of active model.
 @property (nonatomic, readonly, copy) NSString * _Nonnull id;
 /// Model Version number of active model.
@@ -1771,7 +1783,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL fritzWifiRequir
 SWIFT_CLASS_NAMED("FritzMLModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzMLModel : MLModel
 @property (nonatomic, readonly, strong) FritzModelConfiguration * _Nonnull activeModelConfig;
-/// Initialize model with an model type
+/// Initialize model with an model type.
+/// Listens for active model updates and reloads model if active version different than existing.
 - (nonnull instancetype)initWithIdentifiedModel:(MLModel * _Nonnull)model config:(FritzModelConfiguration * _Nonnull)activeModelConfig sessionManager:(SessionManager * _Nonnull)sessionManager OBJC_DESIGNATED_INITIALIZER;
 /// Proxy model description
 @property (nonatomic, readonly, strong) MLModelDescription * _Nonnull modelDescription;
@@ -1788,7 +1801,10 @@ SWIFT_CLASS_NAMED("FritzMLModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWI
 SWIFT_CLASS("_TtC17FritzManagedModel17FritzManagedModel") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface FritzManagedModel : NSObject
 /// Currenly active model configuration.
-@property (nonatomic, strong) FritzModelConfiguration * _Nonnull activeModelConfig;
+/// Note this this is a globally active config for a model.  If you have multiple FritzManagedModel
+/// instances and a new version is downloaded, all instances will be updated with the latest
+/// configuration..
+@property (nonatomic, readonly, strong) FritzModelConfiguration * _Nonnull activeModelConfig;
 /// Model Identifier of active model.
 @property (nonatomic, readonly, copy) NSString * _Nonnull id;
 /// Model Version number of active model.

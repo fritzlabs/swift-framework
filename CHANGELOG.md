@@ -5,6 +5,12 @@ Change Log
 
 ---
 
+## [5.0.0-beta.4](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.0-beta.4)
+
+1. Propagate `FritzManagedModel.activeModelConfig` updates to all `FritzManagedModel` instances, ensuring that the latest model is being loaded. Fixes bug where the latest model was not being loaded in predictors.
+2. Added alpha and blur to `FritzVisionSegmentationFilterOptions` and as parameters when building a mask in relevant filters.
+3. Using the context provided by `CIImagePipeline` when finishing a filter request to prevent stalled requests when building filters.
+
 ## [5.0.0-beta.3](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.0-beta.3)
 
 1. Fix style models not properly loading from FritzManagedModels.
