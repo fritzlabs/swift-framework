@@ -1,9 +1,12 @@
-Change Log
-==========
+# Change Log
 
 `Fritz` follows [Semantic Versioning](http://semver.org/)
 
 ---
+
+## [5.0.0](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.0)
+
+1. Release new major version.
 
 ## [5.0.0-beta.4](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.0-beta.4)
 
@@ -31,10 +34,11 @@ Change Log
    - FritzVisionPeopleSegmentationModelFast* model = [[FritzVisionPeopleSegmentationModelFast alloc] initWithOptionalModel:nil];
    + FritzVisionPeopleSegmentationModelFast* model = [FritzVisionPeopleSegmentationModelFastObjc model];
    ```
+
 2. Removing deprecated model variants.
 3. Adding model initialization with `SwiftIdentifiedModel`. Easier to instantiate an object conforming to `FritzMLModelInitializable`
    if you are using a model conforming to `SwiftIdentifiedModel`.
-4. Moved style models from ``FritzVisionStylePredictor`` to painting and pattern style classes.
+4. Moved style models from `FritzVisionStylePredictor` to painting and pattern style classes.
 
    ```diff
    - FritzVisionStylePredictor.allPaintingModels()
@@ -43,15 +47,16 @@ Change Log
    - FritzVisionStylePredictor.allPatternModels()
    + PatternStyleModel.allModels()
    ```
+
 5. Moved Kaleidoscope and Pink Blue Rhombus models from painting to pattern style pack.
 
-  ```diff
-  - PaintingStyleModel.Style.kaleidoscope
-  + PatternStyleModel.Style.kaleidoscope
+```diff
+- PaintingStyleModel.Style.kaleidoscope
++ PatternStyleModel.Style.kaleidoscope
 
-  - PaintingStyleModel.Style.pinkBlueRhombus
-  + PatternStyleModel.Style.pinkBlueRhombus
-  ```
+- PaintingStyleModel.Style.pinkBlueRhombus
++ PatternStyleModel.Style.pinkBlueRhombus
+```
 
 ## [4.4.0](https://github.com/fritzlabs/swift-framework/releases/tag/4.4.0)
 
@@ -133,19 +138,18 @@ Change Log
 
 ## [4.0.0](https://github.com/fritzlabs/swift-framework/releases/tag/4.0.0)
 
-
-Breaking changes
-----------------
+## Breaking changes
 
 ## Renamed models
 
 ### People Segmentation Models:
 
 Introducing models optimized for different use cases:
- * Fast models are optimized for runtime performance with an accuracy tradeoff. This should be used in cases where model predictions need to happen quickly (e.g video processing, live preview, etc). This comes with a tradeoff in accuracy.
- * Accurate models are optimized to display the best model prediction with a speed tradeoff. This should be used in cases where you're dealing with still images (i.e photo editing)
- * Small models are optimized for model size at the cost of accuracy. This should be used in cases where developers are cautious of bloating their apps with models.
-Models now have their own versioning system separate from the SDK and follow semantic versioning.
+
+- Fast models are optimized for runtime performance with an accuracy tradeoff. This should be used in cases where model predictions need to happen quickly (e.g video processing, live preview, etc). This comes with a tradeoff in accuracy.
+- Accurate models are optimized to display the best model prediction with a speed tradeoff. This should be used in cases where you're dealing with still images (i.e photo editing)
+- Small models are optimized for model size at the cost of accuracy. This should be used in cases where developers are cautious of bloating their apps with models.
+  Models now have their own versioning system separate from the SDK and follow semantic versioning.
 
 ```diff
 -  pod 'Fritz/VisionSegmentationModel/People'
@@ -166,7 +170,6 @@ Models now have their own versioning system separate from the SDK and follow sem
 -  FritzVisionPeopleSegmentationMediumModel()
 +  FritzVisionPeopleSegmentationModelAccurate()
 ```
-
 
 ## FritzVisionImage API
 
@@ -239,8 +242,7 @@ Image blending:
 +  )
 ```
 
-
-All usages of ``Point`` have been replaced with ``CGPoint``.
+All usages of `Point` have been replaced with `CGPoint`.
 
 ## [4.0.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/4.0.0-beta.2)
 
@@ -395,12 +397,11 @@ All usages of ``Point`` have been replaced with ``CGPoint``.
 
 ## [3.2.3-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.3-beta.2)
 
-1. Updating release process.  All frameworks are now zipped in release.
+1. Updating release process. All frameworks are now zipped in release.
 
 ## [3.2.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.2)
 
 1. Add pose smoothing.
-
 
 ## [3.2.0-beta.2](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.0-beta.2)
 
@@ -415,7 +416,6 @@ let model = FritzVisionPoseModel()
 
 let result = try model.predict(image)
 ```
-
 
 ## [3.2.0-beta.1](https://github.com/fritzlabs/swift-framework/releases/tag/3.2.0-beta.1)
 
@@ -465,8 +465,7 @@ let result = try model.predict(image)
 
 ## [3.0.0](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0)
 
-Highlights ✨
--------------
+## Highlights ✨
 
 - Added pose estimation feature. You can use the `FritzVisionPoseModel` to detect human figures in images and video ([Documentation](https://docs.fritz.ai/develop/vision/pose-estimation/ios.html)).
 - Added ability to download `FritzVision` models over the air ([Documentation](https://docs.fritz.ai/develop/vision/pose-estimation/ios.html#download-the-model-over-the-air)).
@@ -476,10 +475,9 @@ Highlights ✨
 - Simplified dependencies. All feature models are now included in the `FritzVision` target.
 - Fixed many broken Objective-C interfaces.
 
-Breaking changes
-----------------
+## Breaking changes
 
-- All `VisionModelOptions` objects no longer can be configured during initialization.  You can configure model options after creating an options object:
+- All `VisionModelOptions` objects no longer can be configured during initialization. You can configure model options after creating an options object:
 
 ```diff
 -  let modelOptions = FritzVisionLabelModelOptions(threshold: 0.5, numResults: 10)
@@ -488,7 +486,7 @@ Breaking changes
 +  modelOptions.numResults = 10
 ```
 
-- All models now run with a default `imageCropAndScaleOption` of `.scaleFit`.  You will have to make the following changes to keep the same behavior:
+- All models now run with a default `imageCropAndScaleOption` of `.scaleFit`. You will have to make the following changes to keep the same behavior:
 
 ```diff
 -  let modelOptions = FritzVisionLabelModelOptions()
@@ -497,6 +495,7 @@ Breaking changes
 ```
 
 This is especially important for the object detection model as the crop and scale option affects the placement of the bounding boxes.
+
 ```diff
 -  let modelOptions = FritzVisionObjectModelOptions()
 +  let modelOptions = FritzVisionObjectModelOptions()
@@ -511,8 +510,6 @@ This is especially important for the object detection model as the crop and scal
 + visionObject.label
 + visionObject.confidence
 ```
-
-
 
 ## [3.0.0-beta.7](https://github.com/fritzlabs/swift-framework/releases/tag/3.0.0-beta.7)
 
@@ -569,7 +566,7 @@ This is especially important for the object detection model as the crop and scal
 
 ## [2.3.0](https://github.com/fritzlabs/swift-framework/releases/tag/2.3.0)
 
-1. Updated image segmentation processing.  Existing models should now be faster!
+1. Updated image segmentation processing. Existing models should now be faster!
 2. Added a higher quality People Segmentation Model.
 3. Added ability to download models over the air without needing to include it in the application bundle.
 
@@ -627,7 +624,7 @@ This is especially important for the object detection model as the crop and scal
 
 1. We're now out of Beta! To add machine learning features to your app [create an account](https://app.fritz.ai/register).
 1. Updating API Client to be more configurable from server.
-2. Update FritzImageOrientation class to better communicate image orientation options.
+1. Update FritzImageOrientation class to better communicate image orientation options.
 
 ## [1.0.0-beta.22](https://github.com/fritzlabs/swift-framework/releases/tag/1.0.0-beta.22)
 
