@@ -403,9 +403,10 @@ typedef SWIFT_ENUM(int32_t, FritzImageOrientation, open) {
 
 SWIFT_CLASS("_TtC11FritzVision14FritzVideoView") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVideoView : UIView
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+/// Initialize as an empty view.
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 
 
@@ -2101,9 +2102,10 @@ typedef SWIFT_ENUM(int32_t, FritzImageOrientation, open) {
 
 SWIFT_CLASS("_TtC11FritzVision14FritzVideoView") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVideoView : UIView
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+/// Initialize as an empty view.
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 
 
@@ -3802,9 +3804,10 @@ typedef SWIFT_ENUM(int32_t, FritzImageOrientation, open) {
 
 SWIFT_CLASS("_TtC11FritzVision14FritzVideoView") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVideoView : UIView
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+/// Initialize as an empty view.
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 
 
@@ -5500,9 +5503,10 @@ typedef SWIFT_ENUM(int32_t, FritzImageOrientation, open) {
 
 SWIFT_CLASS("_TtC11FritzVision14FritzVideoView") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVideoView : UIView
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+/// Initialize as an empty view.
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 
 
