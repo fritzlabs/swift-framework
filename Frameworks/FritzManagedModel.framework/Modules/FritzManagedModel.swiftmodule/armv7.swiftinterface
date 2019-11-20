@@ -7,6 +7,18 @@ import Foundation
 import FritzCore
 @_exported import FritzManagedModel
 import Swift
+@available(iOS 11.0, *)
+public protocol AnnotationRepresentable {
+  associatedtype Source
+  associatedtype Annotation : FritzManagedModel.AnnotationType
+  func annotations(for input: Self.Source) -> [Self.Annotation]
+}
+@available(iOS 11.0, *)
+extension Array : FritzManagedModel.AnnotationRepresentable where Element : FritzManagedModel.AnnotationRepresentable {
+  public func annotations(for input: Element.Source) -> [Element.Annotation]
+  public typealias Source = Element.Source
+  public typealias Annotation = Element.Annotation
+}
 @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
 @objc(FritzReadModelProvider) public protocol ReadModelProvider {
   @objc var model: CoreML.MLModel { get }
@@ -200,6 +212,40 @@ extension FritzManagedModel {
 extension FritzManagedModel {
   @objc dynamic public func updateModelIfNeeded(skipCache: Swift.Bool = false, completionHandler: @escaping (Swift.Bool, Swift.Error?) -> Swift.Void)
 }
+@available(iOS 11.0, *)
+public class DataAnnotationRecording<AnnotationRepresentation> where AnnotationRepresentation : FritzManagedModel.AnnotationRepresentable, AnnotationRepresentation.Source : FritzManagedModel.Base64StringEncodable {
+  public init(input: AnnotationRepresentation.Source, modelConfig: FritzManagedModel.FritzModelConfiguration, predicted predictionRepresentation: AnnotationRepresentation, modified modifiedRepresentation: AnnotationRepresentation? = nil)
+  public func event() throws -> FritzCore.SessionEvent
+  @objc deinit
+}
+public struct CocoImageAnnotation : Swift.Codable, FritzManagedModel.AnnotationType {
+  public enum KeypointVisibility : Swift.Int, Swift.Codable {
+    case notLabeled
+    case labeledByNotVisible
+    case labeledAndVisible
+    public typealias RawValue = Swift.Int
+    public init?(rawValue: Swift.Int)
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  public struct BoundingBox : Swift.Codable {
+    public init(xmin: CoreGraphics.CGFloat, ymin: CoreGraphics.CGFloat, width: CoreGraphics.CGFloat, height: CoreGraphics.CGFloat)
+    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: Swift.Encoder) throws
+  }
+  public struct Keypoint : Swift.Codable {
+    public init(x: CoreGraphics.CGFloat, y: CoreGraphics.CGFloat, visibility: FritzManagedModel.CocoImageAnnotation.KeypointVisibility)
+    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: Swift.Encoder) throws
+  }
+  public let bbox: FritzManagedModel.CocoImageAnnotation.BoundingBox
+  public let keypoints: [FritzManagedModel.CocoImageAnnotation.Keypoint?]
+  public let format: FritzManagedModel.AnnotationFormat
+  public init(bbox: FritzManagedModel.CocoImageAnnotation.BoundingBox, keypoints: [FritzManagedModel.CocoImageAnnotation.Keypoint?])
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
 public protocol RNCryptorType {
   init(password: Swift.String)
   func update(withData data: Foundation.Data) throws -> Foundation.Data
@@ -275,9 +321,39 @@ public struct ModelDebugOutput<T> where T : Swift.RawRepresentable, T.RawValue =
   public func write()
   public func toData() -> Foundation.Data?
 }
+public protocol AnnotationType {
+  var format: FritzManagedModel.AnnotationFormat { get }
+}
+public enum AnnotationFormat : Swift.String, Swift.RawRepresentable, Swift.Codable {
+  case coco
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum EncodedFormat : Swift.String, Swift.RawRepresentable {
+  case image
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+}
+public protocol Base64StringEncodable {
+  func encode() throws -> Swift.String
+  var encodedFormat: FritzManagedModel.EncodedFormat { get }
+}
 extension FritzManagedModel.FritzManagedModelError : Swift.Equatable {}
 extension FritzManagedModel.FritzManagedModelError : Swift.Hashable {}
+extension FritzManagedModel.CocoImageAnnotation.KeypointVisibility : Swift.Equatable {}
+extension FritzManagedModel.CocoImageAnnotation.KeypointVisibility : Swift.Hashable {}
+extension FritzManagedModel.CocoImageAnnotation.KeypointVisibility : Swift.RawRepresentable {}
 extension FritzManagedModel.RNCryptor.Error : Swift.Equatable {}
 extension FritzManagedModel.RNCryptor.Error : Swift.Hashable {}
 extension FritzManagedModel.RNCryptor.Error : Swift.RawRepresentable {}
 extension FritzManagedModel.RNCryptor.DecryptorV3 : FritzManagedModel.RNCryptorType {}
+extension FritzManagedModel.AnnotationFormat : Swift.Equatable {}
+extension FritzManagedModel.AnnotationFormat : Swift.Hashable {}
+extension FritzManagedModel.EncodedFormat : Swift.Equatable {}
+extension FritzManagedModel.EncodedFormat : Swift.Hashable {}

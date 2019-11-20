@@ -240,19 +240,13 @@ extension Point3D : FritzVision.ArrayInitializable {
   @objc override dynamic public init()
   @objc deinit
 }
-@available(iOS 12.0, *)
-public class FritzVisionHairBlendFilter : FritzVision.FritzVisionSegmentationFilter {
+@available(iOS 11.0, *)
+public class FritzVisionBlendHairCompoundFilter : FritzVision.FritzVisionSegmentationFilter {
+  final public let compositionMode: FritzVision.FilterCompositionMode
   final public let model: FritzVision.FritzVisionSegmentationModel
-  final public let options: FritzVision.FritzVisionHairSegmentationFilterOptions
-  public init(model: FritzVision.FritzVisionHairSegmentationPredictor, options: FritzVision.FritzVisionHairSegmentationFilterOptions = .init())
-  public func process(_ image: FritzVision.FritzVisionImage) -> FritzVision.FritzVisionHairBlendFilter.FritzVisionFilterResult
-  @objc deinit
-}
-@objc @available(iOS 11.0, *)
-public class FritzVisionHairSegmentationFilterOptions : FritzVision.FritzVisionSegmentationFilterOptions {
-  public var opacity: CoreGraphics.CGFloat
-  public var blendKernel: CoreImage.CIBlendKernel
-  @objc override dynamic public init()
+  final public let options: FritzVision.FritzVisionSegmentationMaskOptions
+  public init(model: FritzVision.FritzVisionHairSegmentationPredictor, options: FritzVision.FritzVisionSegmentationMaskOptions = .init())
+  public func process(_ image: FritzVision.FritzVisionImage) -> FritzVision.FritzVisionBlendHairCompoundFilter.FritzVisionFilterResult
   @objc deinit
 }
 @available(*, deprecated, renamed: "FlexibleModelDimensions")
@@ -325,12 +319,13 @@ extension FritzVisionStylePredictor {
 extension FritzVisionStylePredictor {
   @objc(fetchStyleModelsForTags:wifiRequiredForModelDownload:withCompletionHandler:) public static func fetchStyleModelsForTags(tags: [Swift.String], wifiRequiredForModelDownload: Swift.Bool = false, completionHandler: @escaping ([FritzVision.FritzVisionStylePredictor]?, Swift.Error?) -> Swift.Void)
 }
-@available(iOS 12.0, *)
-public class FritzVisionHairMaskFilter : FritzVision.FritzVisionSegmentationFilter {
+@available(iOS 11.0, *)
+public class FritzVisionMaskHairOverlayFilter : FritzVision.FritzVisionSegmentationFilter {
+  final public let compositionMode: FritzVision.FilterCompositionMode
   final public let model: FritzVision.FritzVisionSegmentationModel
-  final public let options: FritzVision.FritzVisionHairSegmentationFilterOptions
-  public init(model: FritzVision.FritzVisionHairSegmentationPredictor, options: FritzVision.FritzVisionHairSegmentationFilterOptions = .init())
-  public func process(_ image: FritzVision.FritzVisionImage) -> FritzVision.FritzVisionHairMaskFilter.FritzVisionFilterResult
+  final public let options: FritzVision.FritzVisionSegmentationMaskOptions
+  public init(model: FritzVision.FritzVisionHairSegmentationPredictor, options: FritzVision.FritzVisionSegmentationMaskOptions = .init())
+  public func process(_ image: FritzVision.FritzVisionImage) -> FritzVision.FritzVisionMaskHairOverlayFilter.FritzVisionFilterResult
   @objc deinit
 }
 @available(iOS 11.0, *)
@@ -400,6 +395,7 @@ public class Pose<Skeleton> : ObjectiveC.NSObject where Skeleton : FritzVision.S
     get
   }
   public func scaled(to targetDimensions: CoreGraphics.CGSize) -> FritzVision.Pose<Skeleton>
+  public func getKeypoint(for part: Skeleton) -> FritzVision.Keypoint<Skeleton>?
   public func to3D() -> FritzVision.Pose3D<Skeleton>
   @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
   @objc override dynamic public init()
@@ -536,11 +532,12 @@ public struct Anchor {
   }
 }
 @available(iOS 12.0, *)
-public class FritzVisionObjectDetectionFilter : FritzVision.FritzVisionImageFilter {
+public class FritzVisionDrawBoxesCompoundFilter : FritzVision.FritzVisionImageFilter {
+  final public let compositionMode: FritzVision.FilterCompositionMode
   final public let model: FritzVision.FritzVisionObjectPredictor
   final public let options: FritzVision.FritzVisionObjectModelOptions
   public init(model: FritzVision.FritzVisionObjectPredictor, options: FritzVision.FritzVisionObjectModelOptions = .init())
-  public func process(_ image: FritzVision.FritzVisionImage) -> FritzVision.FritzVisionObjectDetectionFilter.FritzVisionFilterResult
+  public func process(_ image: FritzVision.FritzVisionImage) -> FritzVision.FritzVisionDrawBoxesCompoundFilter.FritzVisionFilterResult
   @objc deinit
 }
 @available(iOS 12.0, *)
@@ -744,21 +741,21 @@ public protocol PointFilterable {
   init(options: Self.SmoothingOptionsType)
   func filter(_ point: Self.T) -> Self.T
 }
-@objc @available(iOS 11.0, *)
-public class FritzVisionVideoOptions : ObjectiveC.NSObject {
-  public var frameRateScale: Swift.Float
-  public var filters: [FritzVision.FritzVisionImageFilter]
-  public var overlayFilters: Swift.Bool
-  public var loop: Swift.Bool
-  @objc override dynamic public init()
-  @objc deinit
-}
 @available(iOS 11.0, *)
 public class FritzVisionVideo {
+  final public let filters: [FritzVision.FritzVisionImageFilter]
   final public let player: AVFoundation.AVPlayer
-  public init(player: AVFoundation.AVPlayer, options: FritzVision.FritzVisionVideoOptions = .init())
-  public init(url: Foundation.URL, options: FritzVision.FritzVisionVideoOptions = .init())
-  convenience public init(path: Swift.String, options: FritzVision.FritzVisionVideoOptions = .init())
+  public var frameRateScale: Swift.Float
+  public var loop: Swift.Bool
+  public var duration: Foundation.TimeInterval {
+    get
+  }
+  public init(player: AVFoundation.AVPlayer, applyingFilters filters: [FritzVision.FritzVisionImageFilter] = [])
+  convenience public init(player: AVFoundation.AVPlayer, withFilter filter: FritzVision.FritzVisionImageFilter)
+  convenience public init(url: Foundation.URL, applyingFilters filters: [FritzVision.FritzVisionImageFilter] = [])
+  convenience public init(url: Foundation.URL, withFilter filter: FritzVision.FritzVisionImageFilter)
+  convenience public init(path: Swift.String, applyingFilters filters: [FritzVision.FritzVisionImageFilter] = [])
+  convenience public init(path: Swift.String, withFilter filter: FritzVision.FritzVisionImageFilter)
   public func stitch(with asset: AVFoundation.AVAsset) throws
   @objc deinit
 }
@@ -773,9 +770,6 @@ extension FritzVisionVideo {
   public typealias FrameExtractionCompletionHandler = (Swift.Result<FritzVision.FritzVisionImage, FritzVision.FritzVisionVideoError>) -> Swift.Void
   public func frame(at time: Foundation.TimeInterval, processed: Swift.Bool = true) -> FritzVision.FritzVisionImage?
   public func frames(at times: [Foundation.TimeInterval], processed: Swift.Bool = true, onExtractionComplete: @escaping FritzVision.FritzVisionVideo.FrameExtractionCompletionHandler)
-  public var duration: Foundation.TimeInterval {
-    get
-  }
 }
 public enum FritzVisionVideoError : Swift.Error {
   case invalidVideo
@@ -794,7 +788,6 @@ public enum FritzVisionVideoError : Swift.Error {
 }
 @available(iOS 11.0, *)
 extension Pose where Skeleton == FritzVision.HumanSkeleton {
-  public func getKeypoint(for part: Skeleton) -> FritzVision.Keypoint<Skeleton>?
   public func getHipCenter() -> CoreGraphics.CGPoint?
   public func translate() -> [CoreGraphics.CGPoint]?
   public func translateKeypoint() -> [FritzVision.Keypoint<Skeleton>]?
@@ -805,17 +798,6 @@ extension AVAsynchronousCIImageFilteringRequest {
   public var fritzImage: FritzVision.FritzVisionImage {
     get
   }
-}
-extension AVPlayer {
-  public var loop: Swift.Bool {
-    get
-    set
-  }
-  public var frameRateScale: Swift.Float {
-    get
-    set
-  }
-  public func preview()
 }
 @available(iOS 11.0, *)
 public class FritzVisionPoseResult<Skeleton> : FritzVision.FritzPredictionResult where Skeleton : FritzVision.SkeletonType {
@@ -846,6 +828,15 @@ extension FritzVisionPoseResult {
   @objc deinit
 }
 @available(iOS 11.0, *)
+public class FritzVisionCutOutPeopleOverlayFilter : FritzVision.FritzVisionSegmentationFilter {
+  final public let compositionMode: FritzVision.FilterCompositionMode
+  final public let model: FritzVision.FritzVisionSegmentationModel
+  final public let options: FritzVision.FritzVisionSegmentationMaskOptions
+  public init(model: FritzVision.FritzVisionPeopleSegmentationPredictor, options: FritzVision.FritzVisionSegmentationMaskOptions = .init())
+  public func process(_ image: FritzVision.FritzVisionImage) -> FritzVision.FritzVisionCutOutPeopleOverlayFilter.FritzVisionFilterResult
+  @objc deinit
+}
+@available(iOS 11.0, *)
 public class Pose3D<Skeleton> where Skeleton : FritzVision.SkeletonType {
   final public let keypoints: [FritzVision.Keypoint3D<Skeleton>]
   final public let score: Swift.Double
@@ -859,12 +850,22 @@ public func == <Skeleton>(lhs: FritzVision.Pose3D<Skeleton>, rhs: FritzVision.Po
 @available(iOS 11.0, *)
 public protocol FritzVisionImageFilter {
   typealias FritzVisionFilterResult = Swift.Result<FritzVision.FritzVisionImage, Swift.Error>
+  var compositionMode: FritzVision.FilterCompositionMode { get }
   func process(_ image: FritzVision.FritzVisionImage) -> Self.FritzVisionFilterResult
+}
+public enum FilterCompositionMode {
+  case compoundWithPreviousOutput
+  case overlayOnOriginalImage
+  public static func == (a: FritzVision.FilterCompositionMode, b: FritzVision.FilterCompositionMode) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
 }
 @available(iOS 11.0, *)
 extension CIImagePipeline {
-  public func apply(_ filter: FritzVision.FritzVisionImageFilter) throws
-  public func layer(_ filter: FritzVision.FritzVisionImageFilter, using base: CoreImage.CIImage) throws
+  public func compound(_ filter: FritzVision.FritzVisionImageFilter) throws
+  public func overlay(_ filter: FritzVision.FritzVisionImageFilter, using base: CoreImage.CIImage) throws
 }
 public protocol PoseType : AnyObject {
   associatedtype Skeleton : FritzVision.SkeletonType
@@ -891,17 +892,8 @@ extension PoseType {
   @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
   @objc deinit
 }
-@available(iOS 11.0, *)
-extension FritzVisionSegmentationResult {
-  @objc(buildMultiClassMaskWithMinAcceptedScore:maxAlpha:resize:blurRadius:) dynamic public func buildMultiClassMask(withMinimumAcceptedScore minScore: Swift.Double = 0.0, maxAlpha: Swift.UInt8 = 255, resize: Swift.Bool = true, blurRadius: CoreGraphics.CGFloat = 0) -> UIKit.UIImage?
-  @objc(buildSingleClassMask:clippingScoresAbove:zeroingScoresBelow:maxAlpha:resize:color:blurRadius:) dynamic public func buildSingleClassMask(forClass segmentClass: FritzVision.ModelSegmentationClass, clippingScoresAbove clippingThreshold: Swift.Double = 0.5, zeroingScoresBelow zeroingThreshold: Swift.Double = 0.5, maxAlpha: Swift.UInt8 = 255, resize: Swift.Bool = true, color: UIKit.UIColor? = nil, blurRadius: CoreGraphics.CGFloat = 0) -> UIKit.UIImage?
-}
-@available(iOS 11.0, *)
-public protocol FritzVisionSegmentationFilter : FritzVision.FritzVisionImageFilter {
-  var model: FritzVision.FritzVisionSegmentationModel { get }
-}
 @objc @available(iOS 11.0, *)
-public class FritzVisionSegmentationFilterOptions : ObjectiveC.NSObject {
+public class FritzVisionSegmentationMaskOptions : ObjectiveC.NSObject {
   public var clippingScoresAbove: Swift.Double
   public var zeroingScoresBelow: Swift.Double
   public var maxAlpha: Swift.UInt8
@@ -909,6 +901,16 @@ public class FritzVisionSegmentationFilterOptions : ObjectiveC.NSObject {
   public var blurRadius: CoreGraphics.CGFloat
   @objc override dynamic public init()
   @objc deinit
+}
+@available(iOS 11.0, *)
+extension FritzVisionSegmentationResult {
+  @objc(buildMultiClassMaskWithMinAcceptedScore:maxAlpha:resize:blurRadius:) dynamic public func buildMultiClassMask(withMinimumAcceptedScore minScore: Swift.Double = 0.0, maxAlpha: Swift.UInt8 = 255, resize: Swift.Bool = true, blurRadius: CoreGraphics.CGFloat = 0) -> UIKit.UIImage?
+  @objc(buildSingleClassMask:clippingScoresAbove:zeroingScoresBelow:maxAlpha:resize:color:blurRadius:) dynamic public func buildSingleClassMask(forClass segmentClass: FritzVision.ModelSegmentationClass, clippingScoresAbove clippingThreshold: Swift.Double = 0.5, zeroingScoresBelow zeroingThreshold: Swift.Double = 0.5, maxAlpha: Swift.UInt8 = 255, resize: Swift.Bool = true, color: UIKit.UIColor? = nil, blurRadius: CoreGraphics.CGFloat = 0) -> UIKit.UIImage?
+  @objc(buildSingleClassMask:options:resize:) dynamic public func buildSingleClassMask(forClass segmentClass: FritzVision.ModelSegmentationClass, options: FritzVision.FritzVisionSegmentationMaskOptions, resize: Swift.Bool = true) -> UIKit.UIImage?
+}
+@available(iOS 11.0, *)
+public protocol FritzVisionSegmentationFilter : FritzVision.FritzVisionImageFilter {
+  var model: FritzVision.FritzVisionSegmentationModel { get }
 }
 @available(iOS 12.0, *)
 @objc(FritzVisionSkySegmentationModelSmall) final public class FritzVisionSkySegmentationModelSmall : FritzVision.FritzVisionSkySegmentationPredictor, FritzVision.DownloadableModel {
@@ -923,12 +925,13 @@ public class FritzVisionSegmentationFilterOptions : ObjectiveC.NSObject {
   @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
   @objc deinit
 }
-@available(iOS 12.0, *)
-public class FritzVisionStylizeImageFilter : FritzVision.FritzVisionImageFilter {
+@available(iOS 11.0, *)
+public class FritzVisionStylizeImageCompoundFilter : FritzVision.FritzVisionImageFilter {
+  final public let compositionMode: FritzVision.FilterCompositionMode
   final public let model: FritzVision.FritzVisionStylePredictor
   final public let options: FritzVision.FritzVisionStyleModelOptions
   public init(model: FritzVision.FritzVisionStylePredictor, options: FritzVision.FritzVisionStyleModelOptions = .init())
-  public func process(_ image: FritzVision.FritzVisionImage) -> FritzVision.FritzVisionStylizeImageFilter.FritzVisionFilterResult
+  public func process(_ image: FritzVision.FritzVisionImage) -> FritzVision.FritzVisionStylizeImageCompoundFilter.FritzVisionFilterResult
   @objc deinit
 }
 @objc(FritzVisionCropAndScale) public enum FritzVisionCropAndScale : Swift.Int {
@@ -965,8 +968,8 @@ public class FritzVisionStylizeImageFilter : FritzVision.FritzVisionImageFilter 
 }
 @available(iOS 11.0, *)
 extension FritzVisionImage {
-  public var size: CoreGraphics.CGSize {
-    get
+  @objc dynamic public var size: CoreGraphics.CGSize {
+    @objc get
   }
   public var originalSize: CoreGraphics.CGSize {
     get
@@ -983,7 +986,10 @@ extension FritzVisionImage {
 @available(iOS 11.0, *)
 extension FritzVisionImage {
   public func prepare(size: CoreGraphics.CGSize, scaleCropOption: FritzVision.FritzVisionCropAndScale = .scaleFit) -> CoreVideo.CVPixelBuffer?
+  @available(*, deprecated, renamed: "rotated()")
   @objc(rotate) dynamic public func rotate() -> CoreVideo.CVPixelBuffer?
+  @objc(rotated) dynamic public func rotated() -> UIKit.UIImage?
+  @objc(resizedToSize:) dynamic public func resized(to size: CoreGraphics.CGSize) -> UIKit.UIImage?
 }
 public enum FritzVisionImageError : Swift.Error {
   case invalidCIImage
@@ -995,6 +1001,10 @@ public enum FritzVisionImageError : Swift.Error {
     get
   }
   public func hash(into hasher: inout Swift.Hasher)
+}
+@available(iOS 11.0, *)
+extension FritzVisionImage {
+  public func resized(withMaxDimensionLessThan length: CoreGraphics.CGFloat) -> FritzVision.FritzVisionImage?
 }
 @available(iOS 11.0, *)
 @objc(FritzVisionPetSegmentationModelAccurate) final public class FritzVisionPetSegmentationModelAccurate : FritzVision.FritzVisionPetSegmentationPredictor, FritzVision.DownloadableModel {
@@ -1023,12 +1033,13 @@ public enum FritzVisionImageError : Swift.Error {
   @objc override public init(identifiedModel: FritzManagedModel.SwiftIdentifiedModel, classNames: [Swift.String])
   @objc deinit
 }
-@available(iOS 12.0, *)
-public class FritzVisionPeopleMaskFilter : FritzVision.FritzVisionSegmentationFilter {
+@available(iOS 11.0, *)
+public class FritzVisionMaskPeopleOverlayFilter : FritzVision.FritzVisionSegmentationFilter {
+  final public let compositionMode: FritzVision.FilterCompositionMode
   final public let model: FritzVision.FritzVisionSegmentationModel
-  final public let options: FritzVision.FritzVisionSegmentationFilterOptions
-  public init(model: FritzVision.FritzVisionPeopleSegmentationPredictor, options: FritzVision.FritzVisionSegmentationFilterOptions = .init())
-  public func process(_ image: FritzVision.FritzVisionImage) -> FritzVision.FritzVisionPeopleMaskFilter.FritzVisionFilterResult
+  final public let options: FritzVision.FritzVisionSegmentationMaskOptions
+  public init(model: FritzVision.FritzVisionPeopleSegmentationPredictor, options: FritzVision.FritzVisionSegmentationMaskOptions = .init())
+  public func process(_ image: FritzVision.FritzVisionImage) -> FritzVision.FritzVisionMaskPeopleOverlayFilter.FritzVisionFilterResult
   @objc deinit
 }
 @available(iOS 11.0, *)
@@ -1232,6 +1243,7 @@ extension FritzVisionPoseLiftingModel {
 }
 @objc @available(iOS 11.0, *)
 open class BasePredictor : ObjectiveC.NSObject, FritzVision.FritzManagedModelType {
+  final public let model: FritzManagedModel.FritzMLModel
   @objc final public let managedModel: FritzManagedModel.FritzManagedModel
   @objc(initWithModel:) public init(model: FritzManagedModel.FritzMLModel)
   @objc(initWithModel:managedModel:) public init(model: FritzManagedModel.FritzMLModel, managedModel: FritzManagedModel.FritzManagedModel)
@@ -1245,12 +1257,13 @@ open class BasePredictor : ObjectiveC.NSObject, FritzVision.FritzManagedModelTyp
   @objc override dynamic public init()
   @objc deinit
 }
-@available(iOS 12.0, *)
-public class FritzVisionHumanPoseFilter : FritzVision.FritzVisionImageFilter {
+@available(iOS 11.0, *)
+public class FritzVisionDrawSkeletonCompoundFilter : FritzVision.FritzVisionImageFilter {
+  final public let compositionMode: FritzVision.FilterCompositionMode
   final public let model: FritzVision.FritzVisionHumanPosePredictor
   final public let options: FritzVision.FritzVisionPoseModelOptions
   public init(model: FritzVision.FritzVisionHumanPosePredictor, options: FritzVision.FritzVisionPoseModelOptions = .init())
-  public func process(_ image: FritzVision.FritzVisionImage) -> FritzVision.FritzVisionHumanPoseFilter.FritzVisionFilterResult
+  public func process(_ image: FritzVision.FritzVisionImage) -> FritzVision.FritzVisionDrawSkeletonCompoundFilter.FritzVisionFilterResult
   @objc deinit
 }
 @available(iOS 11, *)
@@ -1299,6 +1312,13 @@ public class Pose3DSmoother<Filter, Skeleton> where Filter : FritzVision.PointFi
   @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
   @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
   @objc deinit
+}
+@available(iOS 11.0, *)
+extension FritzVisionImage : FritzManagedModel.Base64StringEncodable {
+  public func encode() throws -> Swift.String
+  public var encodedFormat: FritzManagedModel.EncodedFormat {
+    get
+  }
 }
 @available(iOS 11.0, *)
 @objc(FritzVisionLivingRoomSegmentationModelAccurate) final public class FritzVisionLivingRoomSegmentationModelAccurate : FritzVision.FritzVisionLivingRoomSegmentationPredictor, FritzVision.DownloadableModel {
@@ -1364,6 +1384,20 @@ public func == (lhs: FritzVision.Point3D, rhs: FritzVision.Point3D) -> Swift.Boo
   public func scaledBy(_ size: CoreGraphics.CGSize) -> CoreGraphics.CGRect
   @objc override dynamic public init()
   @objc deinit
+}
+@available(iOS 11.0, *)
+extension CocoImageAnnotation {
+  public init<Skeleton>(pose: FritzVision.Pose<Skeleton>) where Skeleton : FritzVision.SkeletonType
+}
+@available(iOS 11.0, *)
+extension Pose : FritzManagedModel.AnnotationRepresentable {
+  public func annotations(for input: FritzVision.FritzVisionImage) -> [FritzManagedModel.CocoImageAnnotation]
+  public typealias Source = FritzVision.FritzVisionImage
+  public typealias Annotation = FritzManagedModel.CocoImageAnnotation
+}
+@available(iOS 11.0, *)
+extension FritzVisionPosePredictor : FritzVision.PredictionImageRecordable {
+  public typealias AnnotationRepresentation = [FritzVision.Pose<Skeleton>]
 }
 @objc(FritzVisionOutdoorClass) public class FritzVisionOutdoorClass : ObjectiveC.NSObject {
   @objc public static let none: FritzVision.ModelSegmentationClass
@@ -1497,7 +1531,7 @@ open class FritzVideoView : UIKit.UIView {
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @objc deinit
 }
-public protocol FritzPredictionInput {
+public protocol FritzPredictionInput : AnyObject {
 }
 @available(iOS 11.0, *)
 extension FritzVisionImage : FritzVision.FritzPredictionInput {
@@ -1593,6 +1627,26 @@ public class OneEuroPointFilter : FritzVision.OneEuroFilterPointable<CoreGraphic
 }
 public typealias rgbaValue = (r: Swift.UInt8, g: Swift.UInt8, b: Swift.UInt8, a: Swift.UInt8)
 @available(iOS 11.0, *)
+public protocol PredictionRecordable : FritzVision.FritzPredictable where Self.PredictionInput : FritzManagedModel.Base64StringEncodable {
+  associatedtype AnnotationRepresentation : FritzManagedModel.AnnotationRepresentable where Self.PredictionInput == Self.AnnotationRepresentation.Source
+  var model: FritzManagedModel.FritzMLModel { get }
+  func record(_ input: Self.PredictionInput, predicted predictedRepresentation: Self.AnnotationRepresentation, modified modifiedRepresentation: Self.AnnotationRepresentation?) -> FritzCore.SessionEvent?
+}
+@available(iOS 11.0, *)
+extension PredictionRecordable {
+  @discardableResult
+  public func record(_ input: Self.PredictionInput, predicted predictedRepresentation: Self.AnnotationRepresentation, modified modifiedRepresentation: Self.AnnotationRepresentation? = nil) -> FritzCore.SessionEvent?
+}
+@available(iOS 11.0, *)
+public protocol PredictionImageRecordable : FritzVision.PredictionRecordable where Self.PredictionInput == FritzVision.FritzVisionImage {
+  associatedtype PredictionInput = FritzVision.FritzVisionImage
+}
+@available(iOS 11.0, *)
+extension PredictionImageRecordable {
+  @discardableResult
+  public func record(_ input: FritzVision.FritzVisionImage, predicted predictedRepresentation: Self.AnnotationRepresentation, modified modifiedRepresentation: Self.AnnotationRepresentation? = nil) -> FritzCore.SessionEvent?
+}
+@available(iOS 11.0, *)
 @objc(FritzVisionSkySegmentationModelAccurate) final public class FritzVisionSkySegmentationModelAccurate : FritzVision.FritzVisionSkySegmentationPredictor, FritzVision.DownloadableModel {
   @objc public static let modelConfig: FritzManagedModel.FritzModelConfiguration
   @objc public static var managedModel: FritzManagedModel.FritzManagedModel {
@@ -1678,6 +1732,7 @@ extension CIImagePipeline {
 @objc public enum FritzVisionError : Swift.Int, Swift.Error {
   case invalidImageBuffer
   case errorProcessingImage
+  case imageNotEncodable
   public typealias RawValue = Swift.Int
   public static var _nsErrorDomain: Swift.String {
     get
@@ -1709,10 +1764,10 @@ extension FritzVision.FritzVisionDepthModel : FritzVision.FritzVisionImagePredic
 extension FritzVision.FritzVisionDepthModel : FritzVision.FritzPredictable {}
 @available(iOS 11.0, *)
 extension FritzVision.FritzVisionPosePredictor : FritzVision.FritzVisionImagePredictable {}
-@available(iOS 11.0, *)
-extension FritzVision.FritzVisionPosePredictor : FritzVision.FritzPredictable {}
 extension FritzVision.FritzVisionVideoError : Swift.Equatable {}
 extension FritzVision.FritzVisionVideoError : Swift.Hashable {}
+extension FritzVision.FilterCompositionMode : Swift.Equatable {}
+extension FritzVision.FilterCompositionMode : Swift.Hashable {}
 extension FritzVision.FritzVisionCropAndScale : Swift.Hashable {}
 extension FritzVision.FritzVisionCropAndScale : Swift.RawRepresentable {}
 extension FritzVision.FritzVisionImageError : Swift.Equatable {}

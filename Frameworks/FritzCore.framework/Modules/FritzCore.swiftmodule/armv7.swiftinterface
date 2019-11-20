@@ -41,6 +41,7 @@ public struct SessionEvent {
     case modelDecryptionFailed
     case prediction
     case inputOutputSample
+    case predictionAnnotation
     public typealias RawValue = Swift.String
     public init?(rawValue: Swift.String)
     public var rawValue: Swift.String {
@@ -62,17 +63,15 @@ public struct SessionEvent {
   @objc override dynamic public init()
   @objc deinit
 }
-public let kDefaultMaxRetries: Swift.UInt
-public let kDefaultRetryStatusCodes: Swift.Set<Swift.Int>
-public let kDefaultRetryErrorCodes: Swift.Set<Swift.Int>
-public let kDefaultExponentialMultiplier: Swift.UInt32
+public let defaultMaxRetries: Swift.UInt
+public let defaultRetryStatusCodes: Swift.Set<Swift.Int>
+public let defaultRetryErrorCodes: Swift.Set<Swift.Int>
+public let defaultExponentialMultiplier: Swift.UInt32
 @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
 final public class BatchedRequestQueue<Element> {
   public typealias FlushHandler = ([Element], @escaping FritzCore.RequestCompletionHandler) -> Swift.Void
   public typealias HealthcheckHandler = (@escaping (Swift.Bool) -> Swift.Void) -> Swift.Void
-  final public var batchThreshold: Swift.UInt {
-    get
-  }
+  final public var batchThreshold: () -> Swift.UInt
   final public var flushInterval: Foundation.TimeInterval {
     get
   }
@@ -89,7 +88,9 @@ final public class BatchedRequestQueue<Element> {
   final public var isApiHealthy: Swift.Bool {
     get
     }
-  public init(session: FritzCore.Session, flushQueue: Dispatch.DispatchQueue, maxRetries: Swift.UInt = kDefaultMaxRetries, retryStatusCodes: Swift.Set<Swift.Int> = kDefaultRetryStatusCodes, retryErrorCodes: Swift.Set<Swift.Int> = kDefaultRetryErrorCodes, exponentialMultiplier: Swift.UInt32 = kDefaultExponentialMultiplier)
+  public init(session: FritzCore.Session, flushQueue: Dispatch.DispatchQueue, getBatchThreshold: @escaping (FritzCore.Session) -> Swift.UInt = { (session: Session) in
+        return UInt(SessionSettings.settings(for: session).trackRequestBatchSize)
+    }, maxRetries: Swift.UInt = defaultMaxRetries, retryStatusCodes: Swift.Set<Swift.Int> = defaultRetryStatusCodes, retryErrorCodes: Swift.Set<Swift.Int> = defaultRetryErrorCodes, exponentialMultiplier: Swift.UInt32 = defaultExponentialMultiplier)
   @objc deinit
   final public func add(_ item: Element)
   final public func flush(force: Swift.Bool = false)
@@ -293,7 +294,9 @@ public struct SessionSettings : Swift.Codable {
   public let batchFlushInterval: Swift.Double
   public let eventBlacklist: Swift.Set<Swift.String>
   public let activeModelRefreshInterval: Foundation.TimeInterval
-  public init(apiRequestsEnabled: Swift.Bool = true, settingsRefreshInterval: Foundation.TimeInterval = 30 * 60, modelInputOutputSamplingRatio: Swift.Float = 0, gzipTrackEvents: Swift.Bool = false, trackRequestBatchSize: Swift.Int = 100, batchFlushInterval: Swift.Double = 60.0, eventBlacklist: Swift.Set<Swift.String> = [], activeModelRefreshInterval: Foundation.TimeInterval = 15 * 60)
+  public let recordAnnotationsEnabled: Swift.Bool
+  public let annotationRequestBatchSize: Swift.Int
+  public init(apiRequestsEnabled: Swift.Bool = true, settingsRefreshInterval: Foundation.TimeInterval = 30 * 60, modelInputOutputSamplingRatio: Swift.Float = 0, gzipTrackEvents: Swift.Bool = false, trackRequestBatchSize: Swift.Int = 100, batchFlushInterval: Swift.Double = 60.0, eventBlacklist: Swift.Set<Swift.String> = [], activeModelRefreshInterval: Foundation.TimeInterval = 15 * 60, recordAnnotationsEnabled: Swift.Bool = false, annotationRequestBatchSize: Swift.Int = 10)
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
@@ -353,16 +356,18 @@ final public class SessionManager : ObjectiveC.NSObject {
   final public let session: FritzCore.Session
   final public let apiClient: FritzCore.APIClient
   final public let trackRequestQueue: FritzCore.BatchedRequestQueue<FritzCore.SessionEvent>
+  final public let annotationsRequestQueue: FritzCore.BatchedRequestQueue<FritzCore.SessionEvent>
   final public let fileManager: Foundation.FileManager
   final public let logger: FritzCore.Logger
   public init(session: FritzCore.Session)
   final public func trackEvent(_ event: FritzCore.SessionEvent)
+  final public func trackAnnotation(_ event: FritzCore.SessionEvent)
   @objc deinit
   @objc override dynamic public init()
 }
 @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
 extension SessionManager {
-  final public func loadSessionSettings()
+  final public func loadSessionSettings(completionHandler: FritzCore.RequestCompletionHandler? = nil)
 }
 @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
 extension FritzCore.SessionEvent.EventType : Swift.Equatable {}

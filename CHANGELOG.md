@@ -4,6 +4,11 @@
 
 ---
 
+## [5.0.2](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.2)
+
+1. Updating `FritzVisionVideo` API.
+2. Adding functionality to collect results from pose predictions.
+
 ## [5.0.1](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.1)
 
 1. Fix `FritzVisionStyleModelPatterns` to not include embedded frameworks.  Fixes issue where app cannot be uploaded to App Store.

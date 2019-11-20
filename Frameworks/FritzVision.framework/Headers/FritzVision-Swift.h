@@ -217,8 +217,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 
-
-
 @class FritzManagedModel;
 @class FritzMLModel;
 @protocol FritzSwiftIdentifiedModel;
@@ -464,6 +462,7 @@ SWIFT_CLASS_NAMED("FritzVisionDepthModelOptions")
 typedef SWIFT_ENUM(NSInteger, FritzVisionError, open) {
   FritzVisionErrorInvalidImageBuffer = 0,
   FritzVisionErrorErrorProcessingImage = 1,
+  FritzVisionErrorImageNotEncodable = 2,
 };
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
@@ -519,18 +518,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegment
 + (ModelSegmentationClass * _Nonnull)hair SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
 + (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC11FritzVision36FritzVisionSegmentationFilterOptions") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionSegmentationFilterOptions : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC11FritzVision40FritzVisionHairSegmentationFilterOptions") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionHairSegmentationFilterOptions : FritzVisionSegmentationFilterOptions
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -653,25 +640,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
-/// \param alphaMask Alpha Mask with a single class.
-///
-/// \param segmentationRegion Region of alpha mask to remove.
-///
-/// \param samplingMethod Resizing sampling method to use.
-///
-/// \param context Optional Core Image context to use.  Defaults to
-/// <code>FritzVisionImage.sharedContext</code>
-///
-///
-/// returns:
-/// Masked image.
-- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Blends mask with current image.
 /// Rotates source image to <code>up</code> orientation before blending.
 /// \param mask Overlaying image
@@ -689,14 +657,44 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @end
 
 
+
+
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
+/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
+/// \param alphaMask Alpha Mask with a single class.
+///
+/// \param segmentationRegion Region of alpha mask to remove.
+///
+/// \param samplingMethod Resizing sampling method to use.
+///
+/// \param context Optional Core Image context to use.  Defaults to
+/// <code>FritzVisionImage.sharedContext</code>
+///
+///
+/// returns:
+/// Masked image.
+- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
 
 
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "rotated");
+/// Returns image applying rotation from <code>metatadata</code>.
+- (UIImage * _Nullable)rotated SWIFT_WARN_UNUSED_RESULT;
+/// Returns image applying rotation from <code>metatadata</code>.
+- (UIImage * _Nullable)resizedToSize:(CGSize)size SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+/// Dimensions of FritzVisionImage, after rotation
+@property (nonatomic, readonly) CGSize size;
+@end
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -704,6 +702,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
 
 
 
@@ -1367,6 +1367,11 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 @end
 
 
+SWIFT_CLASS("_TtC11FritzVision34FritzVisionSegmentationMaskOptions") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSegmentationMaskOptions : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
@@ -1449,6 +1454,19 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Mask for class.
 - (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass clippingScoresAbove:(double)clippingThreshold zeroingScoresBelow:(double)zeroingThreshold maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize color:(UIColor * _Nullable)color blurRadius:(CGFloat)blurRadius SWIFT_WARN_UNUSED_RESULT;
+/// Generate UIImage mask for given class.
+/// The generated image size will fit the original image passed into prediction, applying rotation.
+/// If the image was center cropped, will return an image that covers the cropped image.
+/// \param segmentClass Class for the mask.
+///
+/// \param options Options for the mask.
+///
+/// \param resize If true, resizes mask to input image size.
+///
+///
+/// returns:
+/// Mask for class.
+- (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass options:(FritzVisionSegmentationMaskOptions * _Nonnull)options resize:(BOOL)resize SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -1590,12 +1608,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
 /// Model tags set in webapp.
 @property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
-@end
-
-
-SWIFT_CLASS("_TtC11FritzVision23FritzVisionVideoOptions") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionVideoOptions : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 typedef SWIFT_ENUM_NAMED(NSInteger, FritzHumanSkeleton, "HumanSkeleton", open) {
@@ -1916,8 +1928,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 
-
-
 @class FritzManagedModel;
 @class FritzMLModel;
 @protocol FritzSwiftIdentifiedModel;
@@ -2163,6 +2173,7 @@ SWIFT_CLASS_NAMED("FritzVisionDepthModelOptions")
 typedef SWIFT_ENUM(NSInteger, FritzVisionError, open) {
   FritzVisionErrorInvalidImageBuffer = 0,
   FritzVisionErrorErrorProcessingImage = 1,
+  FritzVisionErrorImageNotEncodable = 2,
 };
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
@@ -2218,18 +2229,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegment
 + (ModelSegmentationClass * _Nonnull)hair SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
 + (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC11FritzVision36FritzVisionSegmentationFilterOptions") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionSegmentationFilterOptions : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC11FritzVision40FritzVisionHairSegmentationFilterOptions") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionHairSegmentationFilterOptions : FritzVisionSegmentationFilterOptions
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -2352,25 +2351,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
-/// \param alphaMask Alpha Mask with a single class.
-///
-/// \param segmentationRegion Region of alpha mask to remove.
-///
-/// \param samplingMethod Resizing sampling method to use.
-///
-/// \param context Optional Core Image context to use.  Defaults to
-/// <code>FritzVisionImage.sharedContext</code>
-///
-///
-/// returns:
-/// Masked image.
-- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Blends mask with current image.
 /// Rotates source image to <code>up</code> orientation before blending.
 /// \param mask Overlaying image
@@ -2388,14 +2368,44 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @end
 
 
+
+
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
+/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
+/// \param alphaMask Alpha Mask with a single class.
+///
+/// \param segmentationRegion Region of alpha mask to remove.
+///
+/// \param samplingMethod Resizing sampling method to use.
+///
+/// \param context Optional Core Image context to use.  Defaults to
+/// <code>FritzVisionImage.sharedContext</code>
+///
+///
+/// returns:
+/// Masked image.
+- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
 
 
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "rotated");
+/// Returns image applying rotation from <code>metatadata</code>.
+- (UIImage * _Nullable)rotated SWIFT_WARN_UNUSED_RESULT;
+/// Returns image applying rotation from <code>metatadata</code>.
+- (UIImage * _Nullable)resizedToSize:(CGSize)size SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+/// Dimensions of FritzVisionImage, after rotation
+@property (nonatomic, readonly) CGSize size;
+@end
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -2403,6 +2413,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
 
 
 
@@ -3066,6 +3078,11 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 @end
 
 
+SWIFT_CLASS("_TtC11FritzVision34FritzVisionSegmentationMaskOptions") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSegmentationMaskOptions : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
@@ -3148,6 +3165,19 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Mask for class.
 - (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass clippingScoresAbove:(double)clippingThreshold zeroingScoresBelow:(double)zeroingThreshold maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize color:(UIColor * _Nullable)color blurRadius:(CGFloat)blurRadius SWIFT_WARN_UNUSED_RESULT;
+/// Generate UIImage mask for given class.
+/// The generated image size will fit the original image passed into prediction, applying rotation.
+/// If the image was center cropped, will return an image that covers the cropped image.
+/// \param segmentClass Class for the mask.
+///
+/// \param options Options for the mask.
+///
+/// \param resize If true, resizes mask to input image size.
+///
+///
+/// returns:
+/// Mask for class.
+- (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass options:(FritzVisionSegmentationMaskOptions * _Nonnull)options resize:(BOOL)resize SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -3289,12 +3319,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
 /// Model tags set in webapp.
 @property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
-@end
-
-
-SWIFT_CLASS("_TtC11FritzVision23FritzVisionVideoOptions") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionVideoOptions : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 typedef SWIFT_ENUM_NAMED(NSInteger, FritzHumanSkeleton, "HumanSkeleton", open) {
@@ -3618,8 +3642,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 
-
-
 @class FritzManagedModel;
 @class FritzMLModel;
 @protocol FritzSwiftIdentifiedModel;
@@ -3865,6 +3887,7 @@ SWIFT_CLASS_NAMED("FritzVisionDepthModelOptions")
 typedef SWIFT_ENUM(NSInteger, FritzVisionError, open) {
   FritzVisionErrorInvalidImageBuffer = 0,
   FritzVisionErrorErrorProcessingImage = 1,
+  FritzVisionErrorImageNotEncodable = 2,
 };
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
@@ -3920,18 +3943,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegment
 + (ModelSegmentationClass * _Nonnull)hair SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
 + (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC11FritzVision36FritzVisionSegmentationFilterOptions") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionSegmentationFilterOptions : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC11FritzVision40FritzVisionHairSegmentationFilterOptions") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionHairSegmentationFilterOptions : FritzVisionSegmentationFilterOptions
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -4054,25 +4065,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
-/// \param alphaMask Alpha Mask with a single class.
-///
-/// \param segmentationRegion Region of alpha mask to remove.
-///
-/// \param samplingMethod Resizing sampling method to use.
-///
-/// \param context Optional Core Image context to use.  Defaults to
-/// <code>FritzVisionImage.sharedContext</code>
-///
-///
-/// returns:
-/// Masked image.
-- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Blends mask with current image.
 /// Rotates source image to <code>up</code> orientation before blending.
 /// \param mask Overlaying image
@@ -4090,14 +4082,44 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @end
 
 
+
+
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
+/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
+/// \param alphaMask Alpha Mask with a single class.
+///
+/// \param segmentationRegion Region of alpha mask to remove.
+///
+/// \param samplingMethod Resizing sampling method to use.
+///
+/// \param context Optional Core Image context to use.  Defaults to
+/// <code>FritzVisionImage.sharedContext</code>
+///
+///
+/// returns:
+/// Masked image.
+- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
 
 
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "rotated");
+/// Returns image applying rotation from <code>metatadata</code>.
+- (UIImage * _Nullable)rotated SWIFT_WARN_UNUSED_RESULT;
+/// Returns image applying rotation from <code>metatadata</code>.
+- (UIImage * _Nullable)resizedToSize:(CGSize)size SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+/// Dimensions of FritzVisionImage, after rotation
+@property (nonatomic, readonly) CGSize size;
+@end
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -4105,6 +4127,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
 
 
 
@@ -4768,6 +4792,11 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 @end
 
 
+SWIFT_CLASS("_TtC11FritzVision34FritzVisionSegmentationMaskOptions") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSegmentationMaskOptions : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
@@ -4850,6 +4879,19 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Mask for class.
 - (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass clippingScoresAbove:(double)clippingThreshold zeroingScoresBelow:(double)zeroingThreshold maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize color:(UIColor * _Nullable)color blurRadius:(CGFloat)blurRadius SWIFT_WARN_UNUSED_RESULT;
+/// Generate UIImage mask for given class.
+/// The generated image size will fit the original image passed into prediction, applying rotation.
+/// If the image was center cropped, will return an image that covers the cropped image.
+/// \param segmentClass Class for the mask.
+///
+/// \param options Options for the mask.
+///
+/// \param resize If true, resizes mask to input image size.
+///
+///
+/// returns:
+/// Mask for class.
+- (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass options:(FritzVisionSegmentationMaskOptions * _Nonnull)options resize:(BOOL)resize SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -4991,12 +5033,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
 /// Model tags set in webapp.
 @property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
-@end
-
-
-SWIFT_CLASS("_TtC11FritzVision23FritzVisionVideoOptions") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionVideoOptions : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 typedef SWIFT_ENUM_NAMED(NSInteger, FritzHumanSkeleton, "HumanSkeleton", open) {
@@ -5317,8 +5353,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 
-
-
 @class FritzManagedModel;
 @class FritzMLModel;
 @protocol FritzSwiftIdentifiedModel;
@@ -5564,6 +5598,7 @@ SWIFT_CLASS_NAMED("FritzVisionDepthModelOptions")
 typedef SWIFT_ENUM(NSInteger, FritzVisionError, open) {
   FritzVisionErrorInvalidImageBuffer = 0,
   FritzVisionErrorErrorProcessingImage = 1,
+  FritzVisionErrorImageNotEncodable = 2,
 };
 static NSString * _Nonnull const FritzVisionErrorDomain = @"FritzVision.FritzVisionError";
 
@@ -5619,18 +5654,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ModelSegment
 + (ModelSegmentationClass * _Nonnull)hair SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull allClasses;)
 + (NSArray<ModelSegmentationClass *> * _Nonnull)allClasses SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC11FritzVision36FritzVisionSegmentationFilterOptions") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionSegmentationFilterOptions : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC11FritzVision40FritzVisionHairSegmentationFilterOptions") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionHairSegmentationFilterOptions : FritzVisionSegmentationFilterOptions
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -5753,25 +5776,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
-/// \param alphaMask Alpha Mask with a single class.
-///
-/// \param segmentationRegion Region of alpha mask to remove.
-///
-/// \param samplingMethod Resizing sampling method to use.
-///
-/// \param context Optional Core Image context to use.  Defaults to
-/// <code>FritzVisionImage.sharedContext</code>
-///
-///
-/// returns:
-/// Masked image.
-- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Blends mask with current image.
 /// Rotates source image to <code>up</code> orientation before blending.
 /// \param mask Overlaying image
@@ -5789,14 +5793,44 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @end
 
 
+
+
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT;
+/// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
+/// \param alphaMask Alpha Mask with a single class.
+///
+/// \param segmentationRegion Region of alpha mask to remove.
+///
+/// \param samplingMethod Resizing sampling method to use.
+///
+/// \param context Optional Core Image context to use.  Defaults to
+/// <code>FritzVisionImage.sharedContext</code>
+///
+///
+/// returns:
+/// Masked image.
+- (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
 
 
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "rotated");
+/// Returns image applying rotation from <code>metatadata</code>.
+- (UIImage * _Nullable)rotated SWIFT_WARN_UNUSED_RESULT;
+/// Returns image applying rotation from <code>metatadata</code>.
+- (UIImage * _Nullable)resizedToSize:(CGSize)size SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+/// Dimensions of FritzVisionImage, after rotation
+@property (nonatomic, readonly) CGSize size;
+@end
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -5804,6 +5838,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (UIImage * _Nullable)toImage SWIFT_WARN_UNUSED_RESULT;
 - (CVPixelBufferRef _Nullable)toPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
 
 
 
@@ -6467,6 +6503,11 @@ SWIFT_CLASS_NAMED("FritzVisionPoseModelOptions")
 @end
 
 
+SWIFT_CLASS("_TtC11FritzVision34FritzVisionSegmentationMaskOptions") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSegmentationMaskOptions : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
@@ -6549,6 +6590,19 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Mask for class.
 - (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass clippingScoresAbove:(double)clippingThreshold zeroingScoresBelow:(double)zeroingThreshold maxAlpha:(uint8_t)maxAlpha resize:(BOOL)resize color:(UIColor * _Nullable)color blurRadius:(CGFloat)blurRadius SWIFT_WARN_UNUSED_RESULT;
+/// Generate UIImage mask for given class.
+/// The generated image size will fit the original image passed into prediction, applying rotation.
+/// If the image was center cropped, will return an image that covers the cropped image.
+/// \param segmentClass Class for the mask.
+///
+/// \param options Options for the mask.
+///
+/// \param resize If true, resizes mask to input image size.
+///
+///
+/// returns:
+/// Mask for class.
+- (UIImage * _Nullable)buildSingleClassMask:(ModelSegmentationClass * _Nonnull)segmentClass options:(FritzVisionSegmentationMaskOptions * _Nonnull)options resize:(BOOL)resize SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -6690,12 +6744,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable metadata;
 /// Model tags set in webapp.
 @property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable tags;
-@end
-
-
-SWIFT_CLASS("_TtC11FritzVision23FritzVisionVideoOptions") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionVideoOptions : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 typedef SWIFT_ENUM_NAMED(NSInteger, FritzHumanSkeleton, "HumanSkeleton", open) {

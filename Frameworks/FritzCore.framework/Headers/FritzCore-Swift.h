@@ -335,6 +335,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzSession
 @end
 
 
+/// Manages session data.
 SWIFT_CLASS("_TtC9FritzCore14SessionManager") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface SessionManager : NSObject
 /// Internal testing queue for objective c to peek into the items queue.
@@ -689,6 +690,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzSession
 @end
 
 
+/// Manages session data.
 SWIFT_CLASS("_TtC9FritzCore14SessionManager") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface SessionManager : NSObject
 /// Internal testing queue for objective c to peek into the items queue.
@@ -1046,6 +1048,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzSession
 @end
 
 
+/// Manages session data.
 SWIFT_CLASS("_TtC9FritzCore14SessionManager") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface SessionManager : NSObject
 /// Internal testing queue for objective c to peek into the items queue.
@@ -1400,6 +1403,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzSession
 @end
 
 
+/// Manages session data.
 SWIFT_CLASS("_TtC9FritzCore14SessionManager") SWIFT_AVAILABILITY(watchos,introduced=4.0) SWIFT_AVAILABILITY(tvos,introduced=11.0) SWIFT_AVAILABILITY(ios,introduced=11.0) SWIFT_AVAILABILITY(macos,introduced=10.13)
 @interface SessionManager : NSObject
 /// Internal testing queue for objective c to peek into the items queue.
