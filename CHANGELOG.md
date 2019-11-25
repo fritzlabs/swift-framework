@@ -4,6 +4,10 @@
 
 ---
 
+## [5.0.3](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.3)
+
+1. Expose the OutdoorSegmentationSmall and SkySegmentationSmall model in objc
+
 ## [5.0.2](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.2)
 
 1. Updating `FritzVisionVideo` API.

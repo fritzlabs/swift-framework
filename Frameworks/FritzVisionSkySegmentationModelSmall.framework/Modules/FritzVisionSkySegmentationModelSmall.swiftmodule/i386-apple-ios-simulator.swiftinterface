@@ -5,7 +5,15 @@ import CoreML
 @_exported import FritzVisionSkySegmentationModelSmall
 import Swift
 @available(iOS 12.0, *)
-@available(swift, obsoleted: 1.0)
 extension FritzVisionSkySegmentationModelSmall : FritzVision.PackagedModelType {
   convenience public init()
+}
+@available(iOS 12.0, *)
+@available(swift, obsoleted: 1.0)
+@objc(FritzVisionSkySegmentationModelSmallObjc) public class FritzVisionSkySegmentationModelSmallObjc : ObjectiveC.NSObject {
+  @objc public static var model: FritzVision.FritzVisionSkySegmentationModelSmall {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
 }

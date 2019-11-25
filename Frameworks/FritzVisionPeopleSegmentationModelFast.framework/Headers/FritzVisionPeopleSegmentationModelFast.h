@@ -13,5 +13,3 @@ FOUNDATION_EXPORT double FritzVisionPeopleSegmentationModelFastVersionNumber;
 
 //! Project version string for FritzVisionPeopleSegmentationModelFast.
 FOUNDATION_EXPORT const unsigned char FritzVisionPeopleSegmentationModelFastVersionString[];
-
-

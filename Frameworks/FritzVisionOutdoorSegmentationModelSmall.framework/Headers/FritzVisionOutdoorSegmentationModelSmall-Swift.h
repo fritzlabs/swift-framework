@@ -185,6 +185,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -203,6 +204,14 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
+
+
+SWIFT_CLASS_NAMED("FritzVisionOutdoorSegmentationModelSmallObjc") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionOutdoorSegmentationModelSmallObjc : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionOutdoorSegmentationModelSmall * _Nonnull model;)
++ (FritzVisionOutdoorSegmentationModelSmall * _Nonnull)model SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
@@ -394,6 +403,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -412,6 +422,14 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
+
+
+SWIFT_CLASS_NAMED("FritzVisionOutdoorSegmentationModelSmallObjc") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionOutdoorSegmentationModelSmallObjc : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionOutdoorSegmentationModelSmall * _Nonnull model;)
++ (FritzVisionOutdoorSegmentationModelSmall * _Nonnull)model SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
@@ -606,6 +624,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -624,6 +643,14 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
+
+
+SWIFT_CLASS_NAMED("FritzVisionOutdoorSegmentationModelSmallObjc") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionOutdoorSegmentationModelSmallObjc : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionOutdoorSegmentationModelSmall * _Nonnull model;)
++ (FritzVisionOutdoorSegmentationModelSmall * _Nonnull)model SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
@@ -815,6 +842,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import FritzVision;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -833,6 +861,14 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
+
+
+SWIFT_CLASS_NAMED("FritzVisionOutdoorSegmentationModelSmallObjc") SWIFT_AVAILABILITY(ios,introduced=12.0)
+@interface FritzVisionOutdoorSegmentationModelSmallObjc : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FritzVisionOutdoorSegmentationModelSmall * _Nonnull model;)
++ (FritzVisionOutdoorSegmentationModelSmall * _Nonnull)model SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
