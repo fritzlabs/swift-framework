@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'Fritz'
 
-  s.version = '5.0.3'
+  s.version = '5.0.4'
 
   s.summary = 'Official Fritz SDK for Swift 5.1 and Objective-C'
 
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.author = { 'Chris Kelly' => 'engineering@fritz.ai' }
 
-  s.source = { :http => 'https://fritz-swift-sdk-release-production.s3.amazonaws.com/FritzBase/5.0.3/FritzBase.zip' }
+  s.source = { :http => 'https://fritz-swift-sdk-release-production.s3.amazonaws.com/FritzBase/5.0.4/FritzBase.zip' }
 
   s.requires_arc = true
 
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   s.default_subspec = 'Vision'
 
   s.subspec 'Vision' do |vision|
-    vision.dependency 'FritzBase/Vision', '5.0.3'
+    vision.dependency 'FritzBase/Vision', '5.0.4'
     end
 
   s.subspec 'VisionLabelModel' do |vision|

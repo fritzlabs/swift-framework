@@ -4,6 +4,12 @@
 
 ---
 
+## [5.0.4](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.4)
+
+1. Adding in improvements to recordings to set the keypoint location
+
+1. Fixing annotation serialization.
+
 ## [5.0.3](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.3)
 
 1. Expose the OutdoorSegmentationSmall and SkySegmentationSmall model in objc
@@ -15,10 +21,9 @@
 
 ## [5.0.1](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.1)
 
-1. Fix `FritzVisionStyleModelPatterns` to not include embedded frameworks.  Fixes issue where app cannot be uploaded to App Store.
+1. Fix `FritzVisionStyleModelPatterns` to not include embedded frameworks. Fixes issue where app cannot be uploaded to App Store.
 2. Fixed bug in `FritzVideoView` where assigning `FritzVisionVideo` would cause a reference loss. Added methods to `FritzVideoView` to give users better control over the View lifecycle.
 3. Changed timescales when querying video times to a standard 600 in order to improve precision.
-
 
 ## [5.0.0](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.0)
 

@@ -1316,6 +1316,7 @@ public class Pose3DSmoother<Filter, Skeleton> where Filter : FritzVision.PointFi
 @available(iOS 11.0, *)
 extension FritzVisionImage : FritzManagedModel.Base64StringEncodable {
   public func encode() throws -> Swift.String
+  public func encodedImageDimensions() throws -> CoreGraphics.CGSize
   public var encodedFormat: FritzManagedModel.EncodedFormat {
     get
   }
