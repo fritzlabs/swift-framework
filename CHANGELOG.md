@@ -4,6 +4,10 @@
 
 ---
 
+## [5.0.5](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.5)
+
+1. Filter out poses with NaNs
+
 ## [5.0.4](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.4)
 
 1. Adding in improvements to recordings to set the keypoint location
