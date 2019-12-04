@@ -18,7 +18,10 @@ public class FritzVisionRigidBodyPoseLiftingOptions {
   public var requiredKeypointsMeetingThreshold: Swift.Int
   public var keypointThreshold: Swift.Double
   public var excludedKeypointIndices: [Swift.Int]
-  public var smoothingOptions: FritzVision.PoseSmoothingOptions?
+  public var smoothingOptions: FritzVision.OneEuroFilterPointable<CoreGraphics.CGPoint>.Options? {
+    get
+    set
+  }
   public var orientationFlipAngleThreshold: Swift.Double?
   public init()
   @objc deinit
@@ -30,7 +33,8 @@ public class FritzVisionRigidBodyPoseLifting<Skeleton> where Skeleton : FritzVis
     get
     }
   public init(model: FritzVision.FritzVisionPosePredictor<Skeleton>, modelPoints: [SceneKit.SCNVector3])
-  public func run2DPrediction(_ image: FritzVision.FritzVisionImage, options: FritzVisionRigidPose.FritzVisionRigidBodyPoseLiftingOptions = FritzVisionRigidBodyPoseLiftingOptions()) -> (pose: FritzVision.Pose<Skeleton>, result: FritzVision.FritzVisionPoseResult<Skeleton>)?
+  public func run2DPrediction(_ image: FritzVision.FritzVisionImage, options: FritzVisionRigidPose.FritzVisionRigidBodyPoseLiftingOptions = .init()) -> (pose: FritzVision.Pose<Skeleton>, result: FritzVision.FritzVisionPoseResult<Skeleton>)?
+  public func process2DResult(_ poseResult: FritzVision.FritzVisionPoseResult<Skeleton>, options: FritzVisionRigidPose.FritzVisionRigidBodyPoseLiftingOptions) -> FritzVision.Pose<Skeleton>?
   public func infer3DPose(_ pose: FritzVision.Pose<Skeleton>, image: FritzVision.FritzVisionImage, frame: ARKit.ARFrame, options: FritzVisionRigidPose.FritzVisionRigidBodyPoseLiftingOptions) -> FritzVisionRigidPose.FritzSCNPose?
   @objc deinit
 }

@@ -4,6 +4,21 @@
 
 ---
 
+## [5.0.6](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.6)
+
+1. 
+
+1. Skip active version cache if pinned version does not match cached model version.
+2. Remove double smoothing in `FritzVisionRigidBodyPoseLifting`.
+3. Change type of `FritzVisionRigidBodyPoseLiftingOptions.smoothingOptions`:
+
+  ```diff
+
+  - var smoothingOptions: PoseSmoothingOptions
+  + var smoothingOptions: OneEuroPointFilter.Options
+
+  ```
+
 ## [5.0.5](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.5)
 
 1. Filter out poses with NaNs
