@@ -5,13 +5,13 @@ Fritz SDK for Swift and Objective-C
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Fritz.svg)](https://img.shields.io/cocoapods/v/Fritz.svg)
 [![Twitter](https://img.shields.io/badge/twitter-@fritzlabs-blue.svg?style=flat)](http://twitter.com/fritzlabs)
 
-This repository contains all the iOS Frameworks that comprise the Fritz iOS SDK which can also be installed using Cocoapods. See [releases](https://github.com/fritzlabs/swift-framework/releases) for the latest updates. 
+This repository contains all the iOS Frameworks that comprise the Fritz iOS SDK which can also be installed using Cocoapods. See [releases](https://github.com/fritzlabs/swift-framework/releases) for the latest updates.
 
 ## Fritz AI
 
 Fritz AI helps you teach your applications how to see, hear, feel, think, and sense. Create ML-powered features in your mobile apps for both Android and iOS. Start with our ready-to-use feature APIs or connect and deploy your own custom models.
 
-[Sign up](https://app.fritz.ai/register?utm_source=github&utm_campaign=swift-framework) for an account on Fritz AI in order to get started with machine learning in your apps.
+[Sign up](https://www.fritz.ai/pricing/?utm_source=github&utm_campaign=swift-framework) for an account on Fritz AI in order to get started with machine learning in your apps.
 
 ## Installation
 
