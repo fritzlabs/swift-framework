@@ -4,9 +4,14 @@
 
 ---
 
-## [5.0.6](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.6)
+## [5.1.0](https://github.com/fritzlabs/swift-framework/releases/tag/5.1.0)
 
 1. 
+1. Added `objectName` to `SkeletonType`. `objectName` is used to identify objects when recording predictions.
+
+  If you are using a custom pose model, you will have to add this field to the your skeleton.
+
+## [5.0.6](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.6)
 
 1. Skip active version cache if pinned version does not match cached model version.
 2. Remove double smoothing in `FritzVisionRigidBodyPoseLifting`.

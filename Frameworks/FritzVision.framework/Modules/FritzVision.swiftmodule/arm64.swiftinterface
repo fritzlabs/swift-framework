@@ -172,6 +172,7 @@ public typealias ConnectedPart<Skeleton> = (Skeleton, Skeleton) where Skeleton :
 public protocol SkeletonType : Swift.CaseIterable, Swift.Equatable, Swift.RawRepresentable {
   init?(rawValue: Swift.Int)
   var rawValue: Swift.Int { get }
+  static var objectName: Swift.String { get }
   static var connectedParts: [FritzVision.ConnectedPart<Self>] { get }
   static var poseChain: [FritzVision.ConnectedPart<Self>] { get }
 }
@@ -596,6 +597,7 @@ extension FritzVisionImage {
   @objc deinit
 }
 @objc(FritzHumanSkeleton) public enum HumanSkeleton : Swift.Int, FritzVision.SkeletonType {
+  public static let objectName: Swift.String
   case nose
   case leftEye
   case rightEye
