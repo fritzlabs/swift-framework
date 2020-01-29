@@ -23,8 +23,13 @@ Fritz AI helps you teach your applications how to see, hear, feel, think, and se
 
 [iOS SDK Reference Docs](https://docs.fritz.ai/iOS/latest/index.html?utm_source=github&utm_campaign=swift-framework)
 
+## Stay in touch with Fritz AI
+
+To keep tabs on what we’re up to, and for an inside look at the opportunities, challenges, and tools for mobile machine learning, subscribe to the [Fritz AI Newsletter](https://www.fritz.ai/newsletter?utm_campaign=swift-framework&utm_source=github).
+
 ## Join the community
-[Heartbeat](https://heartbeat.fritz.ai/?utm_source=github&utm_campaign=swift-framework) is a community of developers interested in the intersection of mobile and machine learning. [Chat with us in Slack](https://www.fritz.ai/slack?utm_source=github&utm_campaign=swift-framework) and stay up to date on the latest mobile ML news with our [Newsletter](https://mobileml.us16.list-manage.com/subscribe?u=de53bead690affb8e9a21de8f&id=68acb5c0fd).
+
+[Heartbeat](https://heartbeat.fritz.ai/?utm_source=github&utm_campaign=swift-framework) is a community of developers interested in the intersection of mobile and machine learning. [Chat with us in Slack](https://fritz.ai/slack?utm_source=github&utm_campaign=swift-framework), and stay up to date on industry news, trends, and more by subscribing to [Deep Learning Weekly](https://www.deeplearningweekly.com/?utm_campaign=swift-framework&utm_source=github).
 
 ## Help
 For any questions or issues, you can:
