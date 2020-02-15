@@ -4,6 +4,10 @@
 
 ---
 
+## [5.1.1](https://github.com/fritzlabs/swift-framework/releases/tag/5.1.1)
+
+1. Fixed Object Detection post processing.
+
 ## [5.1.0](https://github.com/fritzlabs/swift-framework/releases/tag/5.1.0)
 
 1. 
