@@ -221,6 +221,7 @@ public class DataAnnotationRecording<AnnotationRepresentation> where AnnotationR
 public struct CocoImageAnnotation : Swift.Codable, FritzManagedModel.AnnotationType {
   public struct BoundingBox : Swift.Codable {
     public init(xmin: CoreGraphics.CGFloat, ymin: CoreGraphics.CGFloat, width: CoreGraphics.CGFloat, height: CoreGraphics.CGFloat)
+    public init(rect: CoreGraphics.CGRect)
     public init(from decoder: Swift.Decoder) throws
     public func encode(to encoder: Swift.Encoder) throws
   }

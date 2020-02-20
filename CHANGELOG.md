@@ -4,13 +4,18 @@
 
 ---
 
+## [5.1.2](https://github.com/fritzlabs/swift-framework/releases/tag/5.1.2)
+
+1. Add Object Detection prediction recording.
+2. Adding `bounds` to `FritzVisionObject`. All `FritzVisionObject`s should be instantiated with bounds that represent the range of the coordinate space of the prediction.
+
 ## [5.1.1](https://github.com/fritzlabs/swift-framework/releases/tag/5.1.1)
 
 1. Fixed Object Detection post processing.
 
 ## [5.1.0](https://github.com/fritzlabs/swift-framework/releases/tag/5.1.0)
 
-1. 
+1.
 1. Added `objectName` to `SkeletonType`. `objectName` is used to identify objects when recording predictions.
 
   If you are using a custom pose model, you will have to add this field to the your skeleton.

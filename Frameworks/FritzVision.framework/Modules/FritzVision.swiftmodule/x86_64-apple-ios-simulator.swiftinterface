@@ -330,6 +330,21 @@ public class FritzVisionMaskHairOverlayFilter : FritzVision.FritzVisionSegmentat
   @objc deinit
 }
 @available(iOS 11.0, *)
+extension CocoImageAnnotation {
+  public init(object: FritzVision.FritzVisionObject)
+}
+@available(iOS 11.0, *)
+extension FritzVisionObject : FritzManagedModel.AnnotationRepresentable {
+  public func annotations(for input: FritzVision.FritzVisionImage) -> [FritzManagedModel.CocoImageAnnotation]
+  public typealias Source = FritzVision.FritzVisionImage
+  public typealias Annotation = FritzManagedModel.CocoImageAnnotation
+}
+@available(iOS 12.0, *)
+extension FritzVisionObjectPredictor : FritzVision.PredictionImageRecordable {
+  public typealias AnnotationRepresentation = [FritzVision.FritzVisionObject]
+  public typealias PredictionInput = FritzVision.FritzVisionImage
+}
+@available(iOS 11.0, *)
 public class MultiPoseSmoother<Filter, Skeleton> where Filter : FritzVision.PointFilterable, Skeleton : FritzVision.SkeletonType, Filter.T == CoreGraphics.CGPoint {
   public init(numKeypoints: Swift.Int, options: Filter.SmoothingOptionsType)
   public func smoothe(_ poses: [FritzVision.Pose<Skeleton>]) -> [FritzVision.Pose<Skeleton>]
@@ -1048,6 +1063,7 @@ public class FritzVisionMaskPeopleOverlayFilter : FritzVision.FritzVisionSegment
 @objc(FritzVisionObject) public class FritzVisionObject : ObjectiveC.NSObject, FritzVision.FritzPredictionResult {
   @objc final public let detectedLabel: FritzVision.FritzVisionLabel
   @objc final public let boundingBox: FritzVision.BoundingBox
+  final public let bounds: CoreGraphics.CGSize
   @objc public var label: Swift.String {
     @objc get
   }
@@ -1057,7 +1073,8 @@ public class FritzVisionMaskPeopleOverlayFilter : FritzVision.FritzVisionSegment
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc(initWithLabel:boundingBox:) public init(label: FritzVision.FritzVisionLabel, boundingBox: FritzVision.BoundingBox)
+  @objc(initWithLabel:boundingBox:bounds:) public init(label: FritzVision.FritzVisionLabel, boundingBox: FritzVision.BoundingBox, bounds: CoreGraphics.CGSize)
+  public func scaled(to dimensions: CoreGraphics.CGSize) -> FritzVision.FritzVisionObject
   @objc override dynamic public init()
   @objc deinit
 }
@@ -1382,6 +1399,9 @@ public func == (lhs: FritzVision.Point3D, rhs: FritzVision.Point3D) -> Swift.Boo
   @objc(initWithYMin:xMin:yMax:xMax:) public init(yMin: Swift.Double, xMin: Swift.Double, yMax: Swift.Double, xMax: Swift.Double)
   public init(fromAnchor anchor: FritzVision.Anchor)
   public init(from rect: CoreGraphics.CGRect)
+  public var cgRect: CoreGraphics.CGRect {
+    get
+  }
   @objc(imgHeight:imgWidth:) public func toCGRect(imgHeight: Swift.Double, imgWidth: Swift.Double) -> CoreGraphics.CGRect
   @objc(imgHeight:imgWidth:xOffset:yOffset:) public func toCGRect(imgHeight: Swift.Double, imgWidth: Swift.Double, xOffset: Swift.Double, yOffset: Swift.Double) -> CoreGraphics.CGRect
   public func scaledBy(_ size: CoreGraphics.CGSize) -> CoreGraphics.CGRect
@@ -1591,10 +1611,9 @@ public class OneEuroPointFilter : FritzVision.OneEuroFilterPointable<CoreGraphic
   @objc(initWithIdentifiedModel:) override public init(model: FritzManagedModel.SwiftIdentifiedModel)
   @objc(initWithIdentifiedModel:processedLabels:) public init(identifiedModel: FritzManagedModel.SwiftIdentifiedModel, classNames: [Swift.String])
   @objc(predict:options:completion:) public func predict(_ input: FritzVision.FritzVisionImage, options: FritzVision.FritzVisionObjectModelOptions = .init(), completion: ([FritzVision.FritzVisionObject]?, Swift.Error?) -> Swift.Void)
-  public typealias PredictionInput = FritzVision.FritzVisionImage
+  @objc deinit
   public typealias ModelOptions = FritzVision.FritzVisionObjectModelOptions
   public typealias PredictionResult = Swift.Array<FritzVision.FritzVisionObject>
-  @objc deinit
 }
 @objc(FritzVisionSegmentationModelOptions) final public class FritzVisionSegmentationModelOptions : ObjectiveC.NSObject, FritzVision.FritzImageOptions {
   public static var defaults: FritzVision.FritzImageOptions
@@ -1758,6 +1777,8 @@ extension FritzVision.SegmentationRegion : Swift.RawRepresentable {}
 extension FritzVision.FritzVisionStylePredictor : FritzVision.FritzVisionImagePredictable {}
 @available(iOS 11.0, *)
 extension FritzVision.FritzVisionStylePredictor : FritzVision.FritzPredictable {}
+@available(iOS 12.0, *)
+extension FritzVision.FritzVisionObjectPredictor : FritzVision.FritzVisionImagePredictable {}
 extension FritzVision.OffsetType : Swift.Equatable {}
 extension FritzVision.OffsetType : Swift.Hashable {}
 extension FritzVision.HumanSkeleton : Swift.Hashable {}
@@ -1786,10 +1807,6 @@ extension FritzVision.PoseLiftingDebugKey : Swift.Equatable {}
 extension FritzVision.PoseLiftingDebugKey : Swift.Hashable {}
 @available(iOS 11.0, *)
 extension FritzVision.FritzVisionPoseLiftingModel : FritzVision.FritzPredictable {}
-@available(iOS 12.0, *)
-extension FritzVision.FritzVisionObjectPredictor : FritzVision.FritzPredictable {}
-@available(iOS 12.0, *)
-extension FritzVision.FritzVisionObjectPredictor : FritzVision.FritzVisionImagePredictable {}
 @available(iOS 11.0, *)
 extension FritzVision.FritzVisionSegmentationModel : FritzVision.FritzVisionImagePredictable {}
 @available(iOS 11.0, *)

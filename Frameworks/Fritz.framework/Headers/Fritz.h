@@ -128,9 +128,10 @@ import the headers individually."
 #if __has_include(<FritzVisionHumanPoseModelFast/FritzVisionHumanPoseModelFast.h>)
 @import FritzVisionHumanPoseModelFast;
 #endif
-#if __has_include(<FritzVisionHumanPoseModelSmall/FritzVisionHumanPoseModelSmall.h>)
+#if __has_include(<FritzVisionHumanPoseModelAccurate/FritzVisionHumanPoseModelAccurate.h>)
 @import FritzVisionHumanPoseModelAccurate;
 #endif
+
 #if __has_include(<FritzVisionHumanPoseModelSmall/FritzVisionHumanPoseModelSmall.h>)
 @import FritzVisionHumanPoseModelSmall;
 #endif

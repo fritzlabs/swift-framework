@@ -638,25 +638,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Blends mask with current image.
-/// Rotates source image to <code>up</code> orientation before blending.
-/// \param mask Overlaying image
-///
-/// \param blendKernel Blend mode used to blend images.
-///
-/// \param samplingMethod Method used to sample images when resizing images.
-///
-/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
-///
-///
-/// returns:
-/// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -675,6 +656,25 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Masked image.
 - (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+/// Blends mask with current image.
+/// Rotates source image to <code>up</code> orientation before blending.
+/// \param mask Overlaying image
+///
+/// \param blendKernel Blend mode used to blend images.
+///
+/// \param samplingMethod Method used to sample images when resizing images.
+///
+/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
+///
+///
+/// returns:
+/// Blended image
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -903,10 +903,19 @@ SWIFT_CLASS_NAMED("FritzVisionObject") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @property (nonatomic, readonly, copy) NSString * _Nonnull label;
 @property (nonatomic, readonly) double confidence;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (nonnull instancetype)initWithLabel:(FritzVisionLabel * _Nonnull)label boundingBox:(BoundingBox * _Nonnull)boundingBox OBJC_DESIGNATED_INITIALIZER;
+/// Initialize detected object.
+/// \param label Label
+///
+/// \param boundingBox Bounding box of object
+///
+/// \param bounds Range of prediction coordinates
+///
+- (nonnull instancetype)initWithLabel:(FritzVisionLabel * _Nonnull)label boundingBox:(BoundingBox * _Nonnull)boundingBox bounds:(CGSize)bounds OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 @class FritzVisionObjectModelOptions;
 
@@ -979,6 +988,8 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModelOptions")
 @property (nonatomic) BOOL forceVisionPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
 
 
 
@@ -2349,25 +2360,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Blends mask with current image.
-/// Rotates source image to <code>up</code> orientation before blending.
-/// \param mask Overlaying image
-///
-/// \param blendKernel Blend mode used to blend images.
-///
-/// \param samplingMethod Method used to sample images when resizing images.
-///
-/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
-///
-///
-/// returns:
-/// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -2386,6 +2378,25 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Masked image.
 - (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+/// Blends mask with current image.
+/// Rotates source image to <code>up</code> orientation before blending.
+/// \param mask Overlaying image
+///
+/// \param blendKernel Blend mode used to blend images.
+///
+/// \param samplingMethod Method used to sample images when resizing images.
+///
+/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
+///
+///
+/// returns:
+/// Blended image
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -2614,10 +2625,19 @@ SWIFT_CLASS_NAMED("FritzVisionObject") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @property (nonatomic, readonly, copy) NSString * _Nonnull label;
 @property (nonatomic, readonly) double confidence;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (nonnull instancetype)initWithLabel:(FritzVisionLabel * _Nonnull)label boundingBox:(BoundingBox * _Nonnull)boundingBox OBJC_DESIGNATED_INITIALIZER;
+/// Initialize detected object.
+/// \param label Label
+///
+/// \param boundingBox Bounding box of object
+///
+/// \param bounds Range of prediction coordinates
+///
+- (nonnull instancetype)initWithLabel:(FritzVisionLabel * _Nonnull)label boundingBox:(BoundingBox * _Nonnull)boundingBox bounds:(CGSize)bounds OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 @class FritzVisionObjectModelOptions;
 
@@ -2690,6 +2710,8 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModelOptions")
 @property (nonatomic) BOOL forceVisionPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
 
 
 
@@ -4063,25 +4085,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Blends mask with current image.
-/// Rotates source image to <code>up</code> orientation before blending.
-/// \param mask Overlaying image
-///
-/// \param blendKernel Blend mode used to blend images.
-///
-/// \param samplingMethod Method used to sample images when resizing images.
-///
-/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
-///
-///
-/// returns:
-/// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -4100,6 +4103,25 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Masked image.
 - (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+/// Blends mask with current image.
+/// Rotates source image to <code>up</code> orientation before blending.
+/// \param mask Overlaying image
+///
+/// \param blendKernel Blend mode used to blend images.
+///
+/// \param samplingMethod Method used to sample images when resizing images.
+///
+/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
+///
+///
+/// returns:
+/// Blended image
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -4328,10 +4350,19 @@ SWIFT_CLASS_NAMED("FritzVisionObject") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @property (nonatomic, readonly, copy) NSString * _Nonnull label;
 @property (nonatomic, readonly) double confidence;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (nonnull instancetype)initWithLabel:(FritzVisionLabel * _Nonnull)label boundingBox:(BoundingBox * _Nonnull)boundingBox OBJC_DESIGNATED_INITIALIZER;
+/// Initialize detected object.
+/// \param label Label
+///
+/// \param boundingBox Bounding box of object
+///
+/// \param bounds Range of prediction coordinates
+///
+- (nonnull instancetype)initWithLabel:(FritzVisionLabel * _Nonnull)label boundingBox:(BoundingBox * _Nonnull)boundingBox bounds:(CGSize)bounds OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 @class FritzVisionObjectModelOptions;
 
@@ -4404,6 +4435,8 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModelOptions")
 @property (nonatomic) BOOL forceVisionPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
 
 
 
@@ -5774,25 +5807,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 
 
-SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Blends mask with current image.
-/// Rotates source image to <code>up</code> orientation before blending.
-/// \param mask Overlaying image
-///
-/// \param blendKernel Blend mode used to blend images.
-///
-/// \param samplingMethod Method used to sample images when resizing images.
-///
-/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
-///
-///
-/// returns:
-/// Blended image
-- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -5811,6 +5825,25 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// returns:
 /// Masked image.
 - (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
+/// Blends mask with current image.
+/// Rotates source image to <code>up</code> orientation before blending.
+/// \param mask Overlaying image
+///
+/// \param blendKernel Blend mode used to blend images.
+///
+/// \param samplingMethod Method used to sample images when resizing images.
+///
+/// \param opacity Opacity of mask [0.0 - 1.0] overlayed on source image.
+///
+///
+/// returns:
+/// Blended image
+- (UIImage * _Nullable)blendWithMask:(UIImage * _Nonnull)mask blendMode:(CIBlendKernel * _Nonnull)blendKernel samplingMethod:(enum ResizeSamplingMethod)samplingMethod opacity:(CGFloat)opacity SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -6039,10 +6072,19 @@ SWIFT_CLASS_NAMED("FritzVisionObject") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @property (nonatomic, readonly, copy) NSString * _Nonnull label;
 @property (nonatomic, readonly) double confidence;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (nonnull instancetype)initWithLabel:(FritzVisionLabel * _Nonnull)label boundingBox:(BoundingBox * _Nonnull)boundingBox OBJC_DESIGNATED_INITIALIZER;
+/// Initialize detected object.
+/// \param label Label
+///
+/// \param boundingBox Bounding box of object
+///
+/// \param bounds Range of prediction coordinates
+///
+- (nonnull instancetype)initWithLabel:(FritzVisionLabel * _Nonnull)label boundingBox:(BoundingBox * _Nonnull)boundingBox bounds:(CGSize)bounds OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 @class FritzVisionObjectModelOptions;
 
@@ -6115,6 +6157,8 @@ SWIFT_CLASS_NAMED("FritzVisionObjectModelOptions")
 @property (nonatomic) BOOL forceVisionPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
 
 
 
