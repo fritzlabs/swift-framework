@@ -3,10 +3,14 @@
 `Fritz` follows [Semantic Versioning](http://semver.org/)
 
 ---
+
+## [5.2.1](https://github.com/fritzlabs/swift-framework/releases/tag/5.2.1)
+
+1. Fix pod dependency.
+
 ## [5.2.0](https://github.com/fritzlabs/swift-framework/releases/tag/5.2.0)
 
 1. Rebuild on latest Xcode.
-
 
 ## [5.1.2](https://github.com/fritzlabs/swift-framework/releases/tag/5.1.2)
 
