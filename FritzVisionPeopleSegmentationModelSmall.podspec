@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name = 'FritzVisionPeopleSegmentationModelSmall'
-  s.version = '5.1.0'
+  s.version = '5.2.0'
   s.summary = 'Official Fritz SDK for Swift 5.1 and Objective-C'
   s.homepage = 'https://www.fritz.ai'
   s.license = { :type => 'Commercial', :file => 'LICENSE.md' }
   s.author = { 'Chris Kelly' => 'chris@fritz.ai' }
-  s.source = { :http => 'https://fritz-swift-sdk-release-production.s3.amazonaws.com/FritzVisionPeopleSegmentationModelSmall/5.1.0/FritzVisionPeopleSegmentationModelSmall.zip' }
+  s.source = { :http => 'https://fritz-swift-sdk-release-production.s3.amazonaws.com/FritzVisionPeopleSegmentationModelSmall/5.2.0/FritzVisionPeopleSegmentationModelSmall.zip' }
   s.requires_arc = true
 
   s.ios.deployment_target = '10.0'
