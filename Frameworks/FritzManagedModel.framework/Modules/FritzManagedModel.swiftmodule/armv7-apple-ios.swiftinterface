@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-compiler-version: Apple Swift version 5.2 (swiftlang-1103.0.30 clang-1103.0.30)
 // swift-module-flags: -target armv7-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FritzManagedModel
 import CommonCrypto
 import CoreML
@@ -123,8 +123,8 @@ public typealias ModelMetadata = [Swift.String : Swift.String]
     @objc get
   }
   @objc override dynamic public init()
-  @objc deinit
   required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
 }
 @available(iOS 11.0, *)
@@ -137,8 +137,8 @@ extension FritzModelConfiguration {
   @objc(initWithTags:sessionManager:) public init(tags: [Swift.String], sessionManager: FritzCore.SessionManager? = nil)
   @objc(getModelsForTagsWithWifiRequired:) public func getManagedModelsForTags(wifiRequiredForModelDownload: Swift.Bool = false) -> [FritzManagedModel.FritzManagedModel]
   @objc(fetchModelsForTagsWithWifiRequired:completionHandler:) public func fetchManagedModelsForTags(wifiRequiredForModelDownload: Swift.Bool = false, completionHandler: @escaping ([FritzManagedModel.FritzManagedModel]?, Swift.Error?) -> Swift.Void)
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
 extension SessionManager {
@@ -148,7 +148,7 @@ extension SessionManager {
 @objc(FritzMLModel) final public class FritzMLModel : CoreML.MLModel {
   @objc final public var activeModelConfig: FritzManagedModel.FritzModelConfiguration {
     get
-    }
+  }
   final public var id: Swift.String {
     get
   }
@@ -158,7 +158,7 @@ extension SessionManager {
   unowned final public let sessionManager: FritzCore.SessionManager
   final public var model: CoreML.MLModel {
     get
-    }
+  }
   @objc(initWithIdentifiedModel:config:sessionManager:) public init(model: CoreML.MLModel, activeModelConfig: FritzManagedModel.FritzModelConfiguration, sessionManager: FritzCore.SessionManager)
   @objc deinit
   @objc override final public var modelDescription: CoreML.MLModelDescription {
@@ -180,7 +180,7 @@ public enum FritzManagedModelError : Swift.Error {
 @objcMembers public class FritzManagedModel : ObjectiveC.NSObject {
   @objc public var activeModelConfig: FritzManagedModel.FritzModelConfiguration {
     get
-    }
+  }
   @objc public var id: Swift.String {
     @objc get
   }
@@ -288,13 +288,13 @@ public enum RNCryptor {
   }
 }
 extension RNCryptor {
-  final public class FormatV3 {
+  @_hasMissingDesignatedInitializers final public class FormatV3 {
     public static let keySize: Swift.Int
     public static let saltSize: Swift.Int
     public static func makeKey(forPassword password: Swift.String, withSalt salt: Foundation.Data) -> Foundation.Data
     @objc deinit
   }
-  final public class EncryptorV3 : FritzManagedModel.RNCryptorType {
+  @_hasMissingDesignatedInitializers final public class EncryptorV3 : FritzManagedModel.RNCryptorType {
     convenience public init(password: Swift.String)
     convenience public init(encryptionKey: Foundation.Data, hmacKey: Foundation.Data)
     final public func encrypt(data: Foundation.Data) -> Foundation.Data

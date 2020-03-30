@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-compiler-version: Apple Swift version 5.2 (swiftlang-1103.0.30 clang-1103.0.30)
 // swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FritzVisionStyleModelPaintings
 import CoreML
 import Foundation
@@ -7,7 +7,7 @@ import FritzManagedModel
 import FritzVision
 @_exported import FritzVisionStyleModelPaintings
 import Swift
-@available(iOS 12.0, *)
+@_inheritsConvenienceInitializers @available(iOS 12.0, *)
 @objc(PaintingStyleModel) public class PaintingStyleModel : ObjectiveC.NSObject {
   @objc(FritzVisionPaintingStyle) public enum Style : Swift.Int, Swift.CaseIterable {
     case bicentennialPrint
@@ -35,8 +35,8 @@ import Swift
     }
   }
   @objc(allModels) public static func allModels() -> [FritzVision.FritzVisionStylePredictor]
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 @available(iOS 12.0, *)
 extension FritzVisionStyleModelPaintings.PaintingStyleModel.Style : Swift.Equatable {}

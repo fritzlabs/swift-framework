@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-compiler-version: Apple Swift version 5.2 (swiftlang-1103.0.30 clang-1103.0.30)
 // swift-module-flags: -target x86_64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FritzCore
 import Foundation
 @_exported import FritzCore
@@ -22,8 +22,8 @@ import zlib
   }
   @objc(initWithAppToken:apiUrl:namespace:) public init(apiKey: Swift.String, apiUrl: Swift.String, namespace: Swift.String)
   @objc(initWithAppToken:) convenience public init(apiKey: Swift.String)
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
 public struct SessionEvent {
@@ -60,8 +60,8 @@ public struct SessionEvent {
   @objc final public let session: FritzCore.Session
   @objc final public let sessionManager: FritzCore.SessionManager
   @objc(initWithSession:) public init(session: FritzCore.Session)
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 public let defaultMaxRetries: Swift.UInt
 public let defaultRetryStatusCodes: Swift.Set<Swift.Int>
@@ -84,10 +84,10 @@ final public class BatchedRequestQueue<Element> {
   final public var apiHealthcheck: FritzCore.BatchedRequestQueue<Element>.HealthcheckHandler?
   final public var items: [Element] {
     get
-    }
+  }
   final public var isApiHealthy: Swift.Bool {
     get
-    }
+  }
   public init(session: FritzCore.Session, flushQueue: Dispatch.DispatchQueue, getBatchThreshold: @escaping (FritzCore.Session) -> Swift.UInt = { (session: Session) in
         return UInt(SessionSettings.settings(for: session).trackRequestBatchSize)
     }, maxRetries: Swift.UInt = defaultMaxRetries, retryStatusCodes: Swift.Set<Swift.Int> = defaultRetryStatusCodes, retryErrorCodes: Swift.Set<Swift.Int> = defaultRetryErrorCodes, exponentialMultiplier: Swift.UInt32 = defaultExponentialMultiplier)
@@ -106,7 +106,7 @@ extension NSNotification.Name {
   public static let modelUpdated: Foundation.Notification.Name
   public static let activeModelChanged: Foundation.Notification.Name
 }
-@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+@_inheritsConvenienceInitializers @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
 @objc(FritzCore) public class FritzCore : ObjectiveC.NSObject {
   @objc(configuration) public static var configuration: FritzCore.Configuration {
     @objc get
@@ -117,8 +117,8 @@ extension NSNotification.Name {
   @objc(configure) public static func configure()
   @objc(configureWith:) public static func configure(with configuration: FritzCore.Configuration)
   @objc(setLogLevel:) public static func setLogLevel(_ level: FritzCore.LogLevel)
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
 extension FritzCore {
@@ -157,10 +157,10 @@ final public class OperationRetrier {
   final public let exponentialMultiplier: Swift.UInt32
   final public var isPaused: Swift.Bool {
     get
-    }
+  }
   final public var attemptedRetries: Swift.UInt {
     get
-    }
+  }
   public init(handler: FritzCore.OperationRetryHandler, maxRetries: Swift.UInt, exponentialMultiplier: Swift.UInt32)
   final public func start()
   final public func stop()
@@ -329,17 +329,17 @@ extension SessionSettings {
   public static func post(session: FritzCore.Session, modelIdentifier: Swift.String, code: FritzCore.ErrorCode, error: Swift.Error)
   public init(session: FritzCore.Session, modelIdentifier: Swift.String, code: FritzCore.ErrorCode, error: Swift.Error)
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @objc override dynamic public init(domain: Swift.String, code: Swift.Int, userInfo dict: [Swift.String : Any]? = nil)
   @objc deinit
+  @objc override dynamic public init(domain: Swift.String, code: Swift.Int, userInfo dict: [Swift.String : Any]? = nil)
 }
 @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
 extension Error {
   public func toJSON() -> [Swift.String : Any]
 }
-@objc(DeviceOrientationManager) public class DeviceOrientationManager : ObjectiveC.NSObject {
+@_inheritsConvenienceInitializers @objc(DeviceOrientationManager) public class DeviceOrientationManager : ObjectiveC.NSObject {
   public var orientation: UIKit.UIDeviceOrientation {
     get
-    }
+  }
   @objc override dynamic public init()
   @objc deinit
 }

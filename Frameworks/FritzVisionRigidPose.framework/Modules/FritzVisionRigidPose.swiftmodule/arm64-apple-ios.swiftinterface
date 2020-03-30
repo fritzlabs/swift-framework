@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-compiler-version: Apple Swift version 5.2 (swiftlang-1103.0.30 clang-1103.0.30)
 // swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FritzVisionRigidPose
 import ARKit
 import Foundation
@@ -31,7 +31,7 @@ public class FritzVisionRigidBodyPoseLifting<Skeleton> where Skeleton : FritzVis
   final public let poseModel: FritzVision.FritzVisionPosePredictor<Skeleton>
   public var orientationManager: FritzVisionRigidPose.RigidBodyPoseOrientationManager<Skeleton>? {
     get
-    }
+  }
   public init(model: FritzVision.FritzVisionPosePredictor<Skeleton>, modelPoints: [SceneKit.SCNVector3])
   public func run2DPrediction(_ image: FritzVision.FritzVisionImage, options: FritzVisionRigidPose.FritzVisionRigidBodyPoseLiftingOptions = .init()) -> (pose: FritzVision.Pose<Skeleton>, result: FritzVision.FritzVisionPoseResult<Skeleton>)?
   public func process2DResult(_ poseResult: FritzVision.FritzVisionPoseResult<Skeleton>, options: FritzVisionRigidPose.FritzVisionRigidBodyPoseLiftingOptions) -> FritzVision.Pose<Skeleton>?
@@ -42,13 +42,13 @@ public class FritzVisionRigidBodyPoseLifting<Skeleton> where Skeleton : FritzVis
 public class RigidBodyPoseOrientationManager<Skeleton> where Skeleton : FritzVision.SkeletonType {
   public var flipOrientationDegrees: Swift.Double {
     get
-    }
+  }
   public var previousPoseFlipped: Swift.Bool {
     get
-    }
+  }
   public var previousPose: FritzVision.Pose<Skeleton>? {
     get
-    }
+  }
   public init(flipOrientationDegrees: Swift.Double)
   public func orientPose(_ pose: FritzVision.Pose<Skeleton>) -> FritzVision.Pose<Skeleton>
   @objc deinit

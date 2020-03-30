@@ -813,10 +813,11 @@
     {
       "bottom" : "conv_pw_13_relu_output",
       "scaling_factor_y" : 2,
+      "align_corners" : 0,
+      "mode" : 0,
       "weights" : {
 
       },
-      "mode" : 0,
       "top" : "decoder_upsample_1_output",
       "scaling_factor_x" : 2,
       "type" : "upsample",
@@ -921,10 +922,11 @@
     {
       "bottom" : "decoder_conv_dw_relu_1_output",
       "scaling_factor_y" : 2,
+      "align_corners" : 0,
+      "mode" : 0,
       "weights" : {
 
       },
-      "mode" : 0,
       "top" : "decoder_upsample_2_output",
       "scaling_factor_x" : 2,
       "type" : "upsample",
@@ -1029,10 +1031,11 @@
     {
       "bottom" : "decoder_conv_dw_relu_2_output",
       "scaling_factor_y" : 2,
+      "align_corners" : 0,
+      "mode" : 0,
       "weights" : {
 
       },
-      "mode" : 0,
       "top" : "decoder_upsample_3_output",
       "scaling_factor_x" : 2,
       "type" : "upsample",
@@ -1137,10 +1140,11 @@
     {
       "bottom" : "decoder_conv_dw_relu_3_output",
       "scaling_factor_y" : 2,
+      "align_corners" : 0,
+      "mode" : 0,
       "weights" : {
 
       },
-      "mode" : 0,
       "top" : "decoder_upsample_4_output",
       "scaling_factor_x" : 2,
       "type" : "upsample",
@@ -1217,10 +1221,11 @@
     {
       "bottom" : "decoder_conv_dw_relu_4_output",
       "scaling_factor_y" : 2,
+      "align_corners" : 0,
+      "mode" : 0,
       "weights" : {
 
       },
-      "mode" : 0,
       "top" : "decoder_upsample_5_output",
       "scaling_factor_x" : 2,
       "type" : "upsample",

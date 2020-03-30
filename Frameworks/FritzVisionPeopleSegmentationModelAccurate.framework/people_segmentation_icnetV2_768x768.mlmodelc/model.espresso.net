@@ -2462,10 +2462,11 @@
     {
       "bottom" : "sub4_conv5_3_pool1_output",
       "scaling_factor_y" : 24,
+      "align_corners" : 0,
+      "mode" : 1,
       "weights" : {
 
       },
-      "mode" : 1,
       "top" : "sub4_conv5_3_pool1_interp_output",
       "scaling_factor_x" : 24,
       "type" : "upsample",
@@ -2474,10 +2475,11 @@
     {
       "bottom" : "sub4_conv5_3_pool2_output",
       "scaling_factor_y" : 12,
+      "align_corners" : 0,
+      "mode" : 1,
       "weights" : {
 
       },
-      "mode" : 1,
       "top" : "sub4_conv5_3_pool2_interp_output",
       "scaling_factor_x" : 12,
       "type" : "upsample",
@@ -2486,10 +2488,11 @@
     {
       "bottom" : "sub4_conv5_3_pool3_output",
       "scaling_factor_y" : 8,
+      "align_corners" : 0,
+      "mode" : 1,
       "weights" : {
 
       },
-      "mode" : 1,
       "top" : "sub4_conv5_3_pool3_interp_output",
       "scaling_factor_x" : 8,
       "type" : "upsample",
@@ -2498,10 +2501,11 @@
     {
       "bottom" : "sub4_conv5_3_pool4_output",
       "scaling_factor_y" : 6,
+      "align_corners" : 0,
+      "mode" : 1,
       "weights" : {
 
       },
-      "mode" : 1,
       "top" : "sub4_conv5_3_pool6_interp_output",
       "scaling_factor_x" : 6,
       "type" : "upsample",
@@ -2600,10 +2604,11 @@
     {
       "bottom" : "sub4_conv5_4_k1_bn_output",
       "scaling_factor_y" : 2,
+      "align_corners" : 0,
+      "mode" : 1,
       "weights" : {
 
       },
-      "mode" : 1,
       "top" : "sub24_cff_interp_output",
       "scaling_factor_x" : 2,
       "type" : "upsample",
@@ -2773,10 +2778,11 @@
     {
       "bottom" : "sub24_cff_sum_relu_output",
       "scaling_factor_y" : 2,
+      "align_corners" : 0,
+      "mode" : 1,
       "weights" : {
 
       },
-      "mode" : 1,
       "top" : "sub12_cff_interp_output",
       "scaling_factor_x" : 2,
       "type" : "upsample",
@@ -2906,10 +2912,11 @@
     {
       "bottom" : "sub12_cff_sum_relu_output",
       "scaling_factor_y" : 2,
+      "align_corners" : 0,
+      "mode" : 1,
       "weights" : {
 
       },
-      "mode" : 1,
       "top" : "sub12_sum_interp_output",
       "scaling_factor_x" : 2,
       "type" : "upsample",
@@ -2956,10 +2963,11 @@
     {
       "bottom" : "conv6_cls__activation___output",
       "scaling_factor_y" : 4,
+      "align_corners" : 0,
+      "mode" : 1,
       "weights" : {
 
       },
-      "mode" : 1,
       "top" : "output",
       "scaling_factor_x" : 4,
       "type" : "upsample",

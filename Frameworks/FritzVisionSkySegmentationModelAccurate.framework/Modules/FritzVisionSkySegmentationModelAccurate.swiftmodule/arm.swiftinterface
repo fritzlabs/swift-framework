@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-compiler-version: Apple Swift version 5.2 (swiftlang-1103.0.30 clang-1103.0.30)
 // swift-module-flags: -target armv7-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FritzVisionSkySegmentationModelAccurate
 import CoreML
 @_exported import FritzVisionSkySegmentationModelAccurate
@@ -8,12 +8,12 @@ import Swift
 extension FritzVisionSkySegmentationModelAccurate : FritzVision.PackagedModelType {
   convenience public init()
 }
-@available(iOS 11.0, *)
+@_inheritsConvenienceInitializers @available(iOS 11.0, *)
 @available(swift, obsoleted: 1.0)
 @objc(FritzVisionSkySegmentationModelAccurateObjc) public class FritzVisionSkySegmentationModelAccurateObjc : ObjectiveC.NSObject {
   @objc public static var model: FritzVision.FritzVisionSkySegmentationModelAccurate {
     @objc get
   }
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }

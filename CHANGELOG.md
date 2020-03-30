@@ -4,6 +4,10 @@
 
 ---
 
+## [5.3.0](https://github.com/fritzlabs/swift-framework/releases/tag/5.3.0)
+
+1. Properly build with Xcode 11.4.
+
 ## [5.2.1](https://github.com/fritzlabs/swift-framework/releases/tag/5.2.1)
 
 1. Fix pod dependency.

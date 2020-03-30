@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name = 'FritzBase'
-  s.version = '5.2.1'
+  s.version = '5.3.0'
   s.summary = 'Official Fritz SDK for Swift 5.1 and Objective-C'
   s.homepage = 'https://www.fritz.ai'
   s.license = { :type => 'Apache 2.0', :file => 'LICENSE.md' }
   s.author = { 'Chris Kelly' => 'engineering@fritz.ai' }
-  s.source = { :http => 'https://fritz-swift-sdk-release-production.s3.amazonaws.com/FritzBase/5.2.1/FritzBase.zip' }
+  s.source = { :http => 'https://fritz-swift-sdk-release-production.s3.amazonaws.com/FritzBase/5.3.0/FritzBase.zip' }
 
   s.requires_arc = true
 
@@ -23,19 +23,19 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'ManagedModel' do |analytics|
-    analytics.dependency 'FritzBase/Core', '5.2.1'
+    analytics.dependency 'FritzBase/Core', '5.3.0'
     analytics.vendored_framework = 'Frameworks/FritzManagedModel.framework'
     analytics.preserve_path = 'Frameworks/FritzManagedModel.framework/build-encrypted-model.sh'
   end
 
   s.subspec 'CoreMLHelpers' do |helpers|
-    helpers.vendored_framework = 'Frameworks/CoreMLHelpers.framework', '5.2.1'
+    helpers.vendored_framework = 'Frameworks/CoreMLHelpers.framework', '5.3.0'
   end
 
   s.subspec 'Vision' do |helpers|
-    helpers.dependency 'FritzBase/Core', '5.2.1'
-    helpers.dependency 'FritzBase/CoreMLHelpers', '5.2.1'
-    helpers.dependency 'FritzBase/ManagedModel', '5.2.1'
+    helpers.dependency 'FritzBase/Core', '5.3.0'
+    helpers.dependency 'FritzBase/CoreMLHelpers', '5.3.0'
+    helpers.dependency 'FritzBase/ManagedModel', '5.3.0'
     helpers.vendored_framework = 'Frameworks/FritzVision.framework'
   end
 end

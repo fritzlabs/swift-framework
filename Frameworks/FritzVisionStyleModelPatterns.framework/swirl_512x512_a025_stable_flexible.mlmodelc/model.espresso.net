@@ -714,10 +714,11 @@
     {
       "bottom" : "add_5_output",
       "scaling_factor_y" : 2,
+      "align_corners" : 0,
+      "mode" : 0,
       "weights" : {
 
       },
-      "mode" : 0,
       "top" : "up_sampling2d_1_output",
       "scaling_factor_x" : 2,
       "type" : "upsample",
@@ -778,10 +779,11 @@
     {
       "bottom" : "activation_9_output",
       "scaling_factor_y" : 2,
+      "align_corners" : 0,
+      "mode" : 0,
       "weights" : {
 
       },
-      "mode" : 0,
       "top" : "up_sampling2d_2_output",
       "scaling_factor_x" : 2,
       "type" : "upsample",

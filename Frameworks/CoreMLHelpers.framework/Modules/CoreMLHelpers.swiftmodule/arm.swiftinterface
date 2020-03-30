@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-compiler-version: Apple Swift version 5.2 (swiftlang-1103.0.30 clang-1103.0.30)
 // swift-module-flags: -target armv7-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name CoreMLHelpers
 import Accelerate
 import CoreGraphics
@@ -98,10 +98,10 @@ public struct MultiArray<T> where T : CoreMLHelpers.MultiArrayType {
   public let pointer: Swift.UnsafeMutablePointer<T>
   public var strides: [Swift.Int] {
     get
-    }
+  }
   public var shape: [Swift.Int] {
     get
-    }
+  }
   public init(shape: [Swift.Int])
   public init(shape: [Swift.Int], initial: T)
   public init(_ array: CoreML.MLMultiArray)
