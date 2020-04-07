@@ -3,6 +3,9 @@
 `Fritz` follows [Semantic Versioning](http://semver.org/)
 
 ---
+## [5.3.1](https://github.com/fritzlabs/swift-framework/releases/tag/5.3.1)
+
+1. Fix bug for object detection predictions with 0.0 confidence.
 
 ## [5.3.0](https://github.com/fritzlabs/swift-framework/releases/tag/5.3.0)
 
