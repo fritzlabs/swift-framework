@@ -3,37 +3,65 @@
 `Fritz` follows [Semantic Versioning](http://semver.org/)
 
 ---
+
 ## [5.3.1](https://github.com/fritzlabs/swift-framework/releases/tag/5.3.1)
+
+Requirements:
+
+- Xcode Version: 11.4
 
 1. Fix bug for object detection predictions with 0.0 confidence.
 
 ## [5.3.0](https://github.com/fritzlabs/swift-framework/releases/tag/5.3.0)
 
+Requirements:
+
+- Xcode Version: 11.4
+
 1. Properly build with Xcode 11.4.
 
 ## [5.2.1](https://github.com/fritzlabs/swift-framework/releases/tag/5.2.1)
+
+Requirements:
+
+- Xcode Version: 11.4
 
 1. Fix pod dependency.
 
 ## [5.2.0](https://github.com/fritzlabs/swift-framework/releases/tag/5.2.0)
 
+Requirements:
+
+- Xcode Version: 11.4
+
 1. Rebuild on latest Xcode.
 
 ## [5.1.2](https://github.com/fritzlabs/swift-framework/releases/tag/5.1.2)
+
+Requirements:
+
+- Xcode Version: 11.3.1
 
 1. Add Object Detection prediction recording.
 2. Adding `bounds` to `FritzVisionObject`. All `FritzVisionObject`s should be instantiated with bounds that represent the range of the coordinate space of the prediction.
 
 ## [5.1.1](https://github.com/fritzlabs/swift-framework/releases/tag/5.1.1)
 
+Requirements:
+
+- Xcode Version: 11.3.1
+
 1. Fixed Object Detection post processing.
 
 ## [5.1.0](https://github.com/fritzlabs/swift-framework/releases/tag/5.1.0)
 
-1.
+Requirements:
+
+- Xcode Version: 11.3.1
+
 1. Added `objectName` to `SkeletonType`. `objectName` is used to identify objects when recording predictions.
 
-  If you are using a custom pose model, you will have to add this field to the your skeleton.
+If you are using a custom pose model, you will have to add this field to the your skeleton.
 
 ## [5.0.6](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.6)
 
@@ -41,12 +69,12 @@
 2. Remove double smoothing in `FritzVisionRigidBodyPoseLifting`.
 3. Change type of `FritzVisionRigidBodyPoseLiftingOptions.smoothingOptions`:
 
-  ```diff
+```diff
 
-  - var smoothingOptions: PoseSmoothingOptions
-  + var smoothingOptions: OneEuroPointFilter.Options
+- var smoothingOptions: PoseSmoothingOptions
++ var smoothingOptions: OneEuroPointFilter.Options
 
-  ```
+```
 
 ## [5.0.5](https://github.com/fritzlabs/swift-framework/releases/tag/5.0.5)
 
