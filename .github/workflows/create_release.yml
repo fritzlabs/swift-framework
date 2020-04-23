@@ -23,4 +23,4 @@ jobs:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           repository: ${{ secrets.REPO_NAME }}
           event-type: sdk-release
-          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
+          # client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
