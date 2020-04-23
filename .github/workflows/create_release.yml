@@ -1,10 +1,7 @@
 name: Create Release
-on: [push]
-
-env:
-  fritz_deploy_repo: swift-framework
-  tag: 5.3.1
-  DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
+on:
+  tags:
+    - *
 
 jobs:
   create-release:
@@ -13,14 +10,20 @@ jobs:
     steps:
       - name: Checkout Swift Framework
         uses: actions/checkout@v2
-
-      # - name: Create Release
-
-
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
       - name: Trigger release
         uses: peter-evans/repository-dispatch@v1
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           repository: ${{ secrets.REPO_NAME }}
           event-type: sdk-release
-          # client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
