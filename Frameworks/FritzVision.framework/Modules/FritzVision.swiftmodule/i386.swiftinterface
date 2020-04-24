@@ -929,6 +929,20 @@ extension FritzVisionSegmentationResult {
 public protocol FritzVisionSegmentationFilter : FritzVision.FritzVisionImageFilter {
   var model: FritzVision.FritzVisionSegmentationModel { get }
 }
+@available(iOS 11.0, *)
+extension CocoImageAnnotation {
+  public init(label: FritzVision.FritzVisionLabel)
+}
+@available(iOS 11.0, *)
+extension FritzVisionLabel : FritzManagedModel.AnnotationRepresentable {
+  public func annotations(for input: FritzVision.FritzVisionImage) -> [FritzManagedModel.CocoImageAnnotation]
+  public typealias Source = FritzVision.FritzVisionImage
+  public typealias Annotation = FritzManagedModel.CocoImageAnnotation
+}
+@available(iOS 12.0, *)
+extension FritzVisionLabelPredictor : FritzVision.PredictionImageRecordable {
+  public typealias AnnotationRepresentation = [FritzVision.FritzVisionLabel]
+}
 @_inheritsConvenienceInitializers @available(iOS 12.0, *)
 @objc(FritzVisionSkySegmentationModelSmall) final public class FritzVisionSkySegmentationModelSmall : FritzVision.FritzVisionSkySegmentationPredictor, FritzVision.DownloadableModel {
   @objc public static let modelConfig: FritzManagedModel.FritzModelConfiguration
@@ -1792,6 +1806,8 @@ extension FritzVision.FritzVisionVideoError : Swift.Equatable {}
 extension FritzVision.FritzVisionVideoError : Swift.Hashable {}
 extension FritzVision.FilterCompositionMode : Swift.Equatable {}
 extension FritzVision.FilterCompositionMode : Swift.Hashable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionLabelPredictor : FritzVision.FritzVisionImagePredictable {}
 extension FritzVision.FritzVisionCropAndScale : Swift.Equatable {}
 extension FritzVision.FritzVisionCropAndScale : Swift.Hashable {}
 extension FritzVision.FritzVisionCropAndScale : Swift.RawRepresentable {}
@@ -1800,10 +1816,6 @@ extension FritzVision.FritzVisionImageError : Swift.Hashable {}
 extension FritzVision.FritzVisionLabelError : Swift.Equatable {}
 extension FritzVision.FritzVisionLabelError : Swift.Hashable {}
 extension FritzVision.FritzVisionLabelError : Swift.RawRepresentable {}
-@available(iOS 11.0, *)
-extension FritzVision.FritzVisionLabelPredictor : FritzVision.FritzVisionImagePredictable {}
-@available(iOS 11.0, *)
-extension FritzVision.FritzVisionLabelPredictor : FritzVision.FritzPredictable {}
 extension FritzVision.PoseLiftingDebugKey : Swift.Equatable {}
 extension FritzVision.PoseLiftingDebugKey : Swift.Hashable {}
 @available(iOS 11.0, *)

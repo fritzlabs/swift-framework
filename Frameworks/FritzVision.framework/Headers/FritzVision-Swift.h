@@ -687,18 +687,18 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "rotated");
-/// Returns image applying rotation from <code>metatadata</code>.
-- (UIImage * _Nullable)rotated SWIFT_WARN_UNUSED_RESULT;
-/// Returns image applying rotation from <code>metatadata</code>.
-- (UIImage * _Nullable)resizedToSize:(CGSize)size SWIFT_WARN_UNUSED_RESULT;
+/// Dimensions of FritzVisionImage, after rotation
+@property (nonatomic, readonly) CGSize size;
 @end
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Dimensions of FritzVisionImage, after rotation
-@property (nonatomic, readonly) CGSize size;
+- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "rotated");
+/// Returns image applying rotation from <code>metatadata</code>.
+- (UIImage * _Nullable)rotated SWIFT_WARN_UNUSED_RESULT;
+/// Returns image applying rotation from <code>metatadata</code>.
+- (UIImage * _Nullable)resizedToSize:(CGSize)size SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -734,6 +734,8 @@ SWIFT_CLASS_NAMED("FritzVisionLabel") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 typedef SWIFT_ENUM(NSInteger, FritzVisionLabelError, open) {
   FritzVisionLabelErrorNoVisionModel = 0,
@@ -794,6 +796,8 @@ SWIFT_CLASS_NAMED("FritzVisionLabelModelOptions")
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
 
 
 
@@ -2414,18 +2418,18 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "rotated");
-/// Returns image applying rotation from <code>metatadata</code>.
-- (UIImage * _Nullable)rotated SWIFT_WARN_UNUSED_RESULT;
-/// Returns image applying rotation from <code>metatadata</code>.
-- (UIImage * _Nullable)resizedToSize:(CGSize)size SWIFT_WARN_UNUSED_RESULT;
+/// Dimensions of FritzVisionImage, after rotation
+@property (nonatomic, readonly) CGSize size;
 @end
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Dimensions of FritzVisionImage, after rotation
-@property (nonatomic, readonly) CGSize size;
+- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "rotated");
+/// Returns image applying rotation from <code>metatadata</code>.
+- (UIImage * _Nullable)rotated SWIFT_WARN_UNUSED_RESULT;
+/// Returns image applying rotation from <code>metatadata</code>.
+- (UIImage * _Nullable)resizedToSize:(CGSize)size SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -2461,6 +2465,8 @@ SWIFT_CLASS_NAMED("FritzVisionLabel") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 typedef SWIFT_ENUM(NSInteger, FritzVisionLabelError, open) {
   FritzVisionLabelErrorNoVisionModel = 0,
@@ -2521,6 +2527,8 @@ SWIFT_CLASS_NAMED("FritzVisionLabelModelOptions")
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
 
 
 
@@ -4144,18 +4152,18 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "rotated");
-/// Returns image applying rotation from <code>metatadata</code>.
-- (UIImage * _Nullable)rotated SWIFT_WARN_UNUSED_RESULT;
-/// Returns image applying rotation from <code>metatadata</code>.
-- (UIImage * _Nullable)resizedToSize:(CGSize)size SWIFT_WARN_UNUSED_RESULT;
+/// Dimensions of FritzVisionImage, after rotation
+@property (nonatomic, readonly) CGSize size;
 @end
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Dimensions of FritzVisionImage, after rotation
-@property (nonatomic, readonly) CGSize size;
+- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "rotated");
+/// Returns image applying rotation from <code>metatadata</code>.
+- (UIImage * _Nullable)rotated SWIFT_WARN_UNUSED_RESULT;
+/// Returns image applying rotation from <code>metatadata</code>.
+- (UIImage * _Nullable)resizedToSize:(CGSize)size SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -4191,6 +4199,8 @@ SWIFT_CLASS_NAMED("FritzVisionLabel") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 typedef SWIFT_ENUM(NSInteger, FritzVisionLabelError, open) {
   FritzVisionLabelErrorNoVisionModel = 0,
@@ -4251,6 +4261,8 @@ SWIFT_CLASS_NAMED("FritzVisionLabelModelOptions")
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
 
 
 
@@ -5871,18 +5883,18 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "rotated");
-/// Returns image applying rotation from <code>metatadata</code>.
-- (UIImage * _Nullable)rotated SWIFT_WARN_UNUSED_RESULT;
-/// Returns image applying rotation from <code>metatadata</code>.
-- (UIImage * _Nullable)resizedToSize:(CGSize)size SWIFT_WARN_UNUSED_RESULT;
+/// Dimensions of FritzVisionImage, after rotation
+@property (nonatomic, readonly) CGSize size;
 @end
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
-/// Dimensions of FritzVisionImage, after rotation
-@property (nonatomic, readonly) CGSize size;
+- (CVPixelBufferRef _Nullable)rotate SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("", "rotated");
+/// Returns image applying rotation from <code>metatadata</code>.
+- (UIImage * _Nullable)rotated SWIFT_WARN_UNUSED_RESULT;
+/// Returns image applying rotation from <code>metatadata</code>.
+- (UIImage * _Nullable)resizedToSize:(CGSize)size SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -5918,6 +5930,8 @@ SWIFT_CLASS_NAMED("FritzVisionLabel") SWIFT_AVAILABILITY(watchos,introduced=4.0)
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 typedef SWIFT_ENUM(NSInteger, FritzVisionLabelError, open) {
   FritzVisionLabelErrorNoVisionModel = 0,
@@ -5978,6 +5992,8 @@ SWIFT_CLASS_NAMED("FritzVisionLabelModelOptions")
 @property (nonatomic) enum FritzVisionCropAndScale imageCropAndScaleOption;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
 
 
 

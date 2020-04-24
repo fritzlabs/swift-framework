@@ -240,11 +240,12 @@ public struct CocoImageAnnotation : Swift.Codable, FritzManagedModel.AnnotationT
     public init(from decoder: Swift.Decoder) throws
     public func encode(to encoder: Swift.Encoder) throws
   }
-  public let bbox: FritzManagedModel.CocoImageAnnotation.BoundingBox
-  public let keypoints: [FritzManagedModel.CocoImageAnnotation.Keypoint]
+  public let bbox: FritzManagedModel.CocoImageAnnotation.BoundingBox?
+  public let keypoints: [FritzManagedModel.CocoImageAnnotation.Keypoint]?
   public let label: Swift.String
+  public let isImageLabel: Swift.Bool
   public let format: Swift.String
-  public init(bbox: FritzManagedModel.CocoImageAnnotation.BoundingBox, keypoints: [FritzManagedModel.CocoImageAnnotation.Keypoint], label: Swift.String)
+  public init(bbox: FritzManagedModel.CocoImageAnnotation.BoundingBox?, keypoints: [FritzManagedModel.CocoImageAnnotation.Keypoint]?, label: Swift.String, isImageLabel: Swift.Bool = false)
   public var requestOptions: FritzCore.RequestOptions {
     get
   }
