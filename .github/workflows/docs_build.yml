@@ -1,0 +1,19 @@
+name: Build Jazzy docs
+
+on: [pull_request]
+
+jobs:
+  ios-docs-build-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Build docker image
+        run: |
+          docker build . -t jazzy -f deploy/JazzyDockerfile
+
+      - name: Run build
+        run: |
+          mkdir /tmp/build
+          docker run \
+            --volume /tmp/build:/build \
+            jazzy deploy/build.sh

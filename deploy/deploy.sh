@@ -1,12 +1,15 @@
 #!/bin/bash
+set -eo pipefail
 
+BUILD_DIR=$1
+TAG=$2
 S3_BUCKET=fritz-docs
 
-echo Pushing docs folder $CI_BRANCH
-aws s3 cp /build/ s3://${S3_BUCKET}/iOS/${CI_BRANCH}/ --recursive --only-show-errors
+echo Pushing docs folder $BUILD_DIR $TAG
+aws s3 cp $BUILD_DIR/ s3://${S3_BUCKET}/iOS/${TAG}/ --recursive --only-show-errors
 
 # # write the redirects to this version
 echo Pushing redirect
-sed -e "s/CI_BRANCH/$CI_BRANCH/g" deploy/redirect.html > /tmp/index.html
+sed "s/CI_BRANCH/$TAG/g" deploy/redirect.html > /tmp/index.html
 aws s3 cp /tmp/index.html s3://${S3_BUCKET}/iOS/index.html --only-show-errors
 aws s3 cp /tmp/index.html s3://${S3_BUCKET}/iOS/latest/index.html --only-show-errors
