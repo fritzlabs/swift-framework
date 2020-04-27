@@ -611,7 +611,7 @@ extension FritzVisionImage {
   @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
   @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
 }
-@objc(FritzHumanSkeleton) public enum HumanSkeleton : Swift.Int, FritzVision.SkeletonType {
+public enum HumanSkeleton : Swift.Int, FritzVision.SkeletonType {
   public static let objectName: Swift.String
   case nose
   case leftEye

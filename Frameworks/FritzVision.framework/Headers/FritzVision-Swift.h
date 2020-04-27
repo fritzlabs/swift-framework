@@ -1630,26 +1630,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 
 
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzHumanSkeleton, "HumanSkeleton", open) {
-  FritzHumanSkeletonNose = 0,
-  FritzHumanSkeletonLeftEye = 1,
-  FritzHumanSkeletonRightEye = 2,
-  FritzHumanSkeletonLeftEar = 3,
-  FritzHumanSkeletonRightEar = 4,
-  FritzHumanSkeletonLeftShoulder = 5,
-  FritzHumanSkeletonRightShoulder = 6,
-  FritzHumanSkeletonLeftElbow = 7,
-  FritzHumanSkeletonRightElbow = 8,
-  FritzHumanSkeletonLeftWrist = 9,
-  FritzHumanSkeletonRightWrist = 10,
-  FritzHumanSkeletonLeftHip = 11,
-  FritzHumanSkeletonRightHip = 12,
-  FritzHumanSkeletonLeftKnee = 13,
-  FritzHumanSkeletonRightKnee = 14,
-  FritzHumanSkeletonLeftAnkle = 15,
-  FritzHumanSkeletonRightAnkle = 16,
-};
-
 
 
 
@@ -3360,26 +3340,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @end
 
 
-
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzHumanSkeleton, "HumanSkeleton", open) {
-  FritzHumanSkeletonNose = 0,
-  FritzHumanSkeletonLeftEye = 1,
-  FritzHumanSkeletonRightEye = 2,
-  FritzHumanSkeletonLeftEar = 3,
-  FritzHumanSkeletonRightEar = 4,
-  FritzHumanSkeletonLeftShoulder = 5,
-  FritzHumanSkeletonRightShoulder = 6,
-  FritzHumanSkeletonLeftElbow = 7,
-  FritzHumanSkeletonRightElbow = 8,
-  FritzHumanSkeletonLeftWrist = 9,
-  FritzHumanSkeletonRightWrist = 10,
-  FritzHumanSkeletonLeftHip = 11,
-  FritzHumanSkeletonRightHip = 12,
-  FritzHumanSkeletonLeftKnee = 13,
-  FritzHumanSkeletonRightKnee = 14,
-  FritzHumanSkeletonLeftAnkle = 15,
-  FritzHumanSkeletonRightAnkle = 16,
-};
 
 
 
@@ -5095,26 +5055,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 
 
 
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzHumanSkeleton, "HumanSkeleton", open) {
-  FritzHumanSkeletonNose = 0,
-  FritzHumanSkeletonLeftEye = 1,
-  FritzHumanSkeletonRightEye = 2,
-  FritzHumanSkeletonLeftEar = 3,
-  FritzHumanSkeletonRightEar = 4,
-  FritzHumanSkeletonLeftShoulder = 5,
-  FritzHumanSkeletonRightShoulder = 6,
-  FritzHumanSkeletonLeftElbow = 7,
-  FritzHumanSkeletonRightElbow = 8,
-  FritzHumanSkeletonLeftWrist = 9,
-  FritzHumanSkeletonRightWrist = 10,
-  FritzHumanSkeletonLeftHip = 11,
-  FritzHumanSkeletonRightHip = 12,
-  FritzHumanSkeletonLeftKnee = 13,
-  FritzHumanSkeletonRightKnee = 14,
-  FritzHumanSkeletonLeftAnkle = 15,
-  FritzHumanSkeletonRightAnkle = 16,
-};
-
 
 
 
@@ -6825,26 +6765,6 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 @end
 
 
-
-typedef SWIFT_ENUM_NAMED(NSInteger, FritzHumanSkeleton, "HumanSkeleton", open) {
-  FritzHumanSkeletonNose = 0,
-  FritzHumanSkeletonLeftEye = 1,
-  FritzHumanSkeletonRightEye = 2,
-  FritzHumanSkeletonLeftEar = 3,
-  FritzHumanSkeletonRightEar = 4,
-  FritzHumanSkeletonLeftShoulder = 5,
-  FritzHumanSkeletonRightShoulder = 6,
-  FritzHumanSkeletonLeftElbow = 7,
-  FritzHumanSkeletonRightElbow = 8,
-  FritzHumanSkeletonLeftWrist = 9,
-  FritzHumanSkeletonRightWrist = 10,
-  FritzHumanSkeletonLeftHip = 11,
-  FritzHumanSkeletonRightHip = 12,
-  FritzHumanSkeletonLeftKnee = 13,
-  FritzHumanSkeletonRightKnee = 14,
-  FritzHumanSkeletonLeftAnkle = 15,
-  FritzHumanSkeletonRightAnkle = 16,
-};
 
 
 
