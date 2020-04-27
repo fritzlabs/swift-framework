@@ -4,6 +4,10 @@
 
 ---
 
+## [5.3.4](https://github.com/fritzlabs/swift-framework/releases/tag/5.3.4)
+
+1. Removing bounding box annotation from pose recording.
+
 ## [5.3.3](https://github.com/fritzlabs/swift-framework/releases/tag/5.3.2)
 
 - Xcode Version: 11.4.X
