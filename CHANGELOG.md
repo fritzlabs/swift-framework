@@ -6,9 +6,17 @@
 
 ## [5.3.5](https://github.com/fritzlabs/swift-framework/releases/tag/5.3.5)
 
-1. Xcode Version: 11.4.X
-2. Adds support for image segmentation to the Dataset Collection System
-3. Change name of `FritzVisionSegmentationModel` to `FritzVisionSegmentationPredictor` for consistency with other FritzVision features.
+- Xcode Version: 11.4.X
+
+1. Adds support for image segmentation to the Dataset Collection System
+2. Change name of `FritzVisionSegmentationModel` to `FritzVisionSegmentationPredictor` for consistency with other FritzVision features.
+
+```diff
+
+- FritzVisionSegmentationModel
++ FritzVisionSegmentationPredictor
+
+```
 
 ## [5.3.4](https://github.com/fritzlabs/swift-framework/releases/tag/5.3.4)
 
