@@ -1,6 +1,6 @@
 //
 //  threshold.h
-//  FritzVisionSegmentationModel
+//  FritzVisionSegmentationPredictor
 //
 //  Created by Christopher Kelly on 11/15/18.
 //  Copyright © 2018 Fritz Labs Incorporated. All rights reserved.

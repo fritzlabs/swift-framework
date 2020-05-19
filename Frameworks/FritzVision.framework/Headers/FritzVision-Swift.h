@@ -529,8 +529,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 @class FritzVisionSegmentationModelOptions;
 @class FritzVisionSegmentationResult;
 
-SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionSegmentationModel : BasePredictor
+SWIFT_CLASS_NAMED("FritzVisionSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSegmentationPredictor : BasePredictor
 @property (nonatomic, readonly, copy) NSString * _Nonnull name;
 @property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
@@ -552,7 +552,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(ios,introdu
 
 /// Predictor that takes predicts pixels that are Hair
 SWIFT_CLASS_NAMED("FritzVisionHairSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionHairSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionHairSegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -643,8 +643,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 
 
-
-
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
@@ -662,6 +660,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// Masked image.
 - (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -833,7 +833,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect common outdoor objects.
 SWIFT_CLASS_NAMED("FritzVisionLivingRoomSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionLivingRoomSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionLivingRoomSegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
@@ -1054,7 +1054,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect common outdoor objects.
 SWIFT_CLASS_NAMED("FritzVisionOutdoorSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionOutdoorSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionOutdoorSegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -1140,7 +1140,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect people and pets.
 SWIFT_CLASS_NAMED("FritzVisionPeopleAndPetSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleAndPetSegmentationMediumModel : FritzVisionSegmentationModel
+@interface FritzVisionPeopleAndPetSegmentationMediumModel : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -1186,7 +1186,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Predictor that takes predicts pixels that are people
 SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionPeopleSegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -1271,7 +1271,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect pets.
 SWIFT_CLASS_NAMED("FritzVisionPetSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPetSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionPetSegmentationPredictor : FritzVisionSegmentationPredictor
 /// Build Pet Segmentation Model with provided model.
 /// \param model Model to use
 ///
@@ -1393,6 +1393,13 @@ SWIFT_CLASS("_TtC11FritzVision34FritzVisionSegmentationMaskOptions") SWIFT_AVAIL
 @end
 
 
+SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_DEPRECATED_MSG("", "FritzVisionSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSegmentationModel : FritzVisionSegmentationPredictor
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 @interface FritzVisionSegmentationModelOptions : NSObject
@@ -1410,6 +1417,9 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 @property (nonatomic) BOOL forceVisionPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
+
 
 @class MLMultiArray;
 
@@ -1504,7 +1514,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect the sky.
 SWIFT_CLASS_NAMED("FritzVisionSkySegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionSkySegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionSkySegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -1676,6 +1686,17 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingP
 @property (nonatomic) BOOL useCPUOnly;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
+SWIFT_CLASS_NAMED("Segmentation")
+@interface Segmentation : NSObject
+- (nonnull instancetype)initWithMask:(NSArray<NSArray<NSNumber *> *> * _Nonnull)mask label:(NSString * _Nonnull)label OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, copy) NSArray<NSArray<NSNumber *> *> * _Nonnull intMask;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 
 typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion", open) {
 /// Foreground is the region of the image where the alpha value of a mask is greater than 0.
@@ -2240,8 +2261,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 @class FritzVisionSegmentationModelOptions;
 @class FritzVisionSegmentationResult;
 
-SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionSegmentationModel : BasePredictor
+SWIFT_CLASS_NAMED("FritzVisionSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSegmentationPredictor : BasePredictor
 @property (nonatomic, readonly, copy) NSString * _Nonnull name;
 @property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
@@ -2263,7 +2284,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(ios,introdu
 
 /// Predictor that takes predicts pixels that are Hair
 SWIFT_CLASS_NAMED("FritzVisionHairSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionHairSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionHairSegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -2354,8 +2375,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 
 
-
-
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
@@ -2373,6 +2392,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// Masked image.
 - (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -2544,7 +2565,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect common outdoor objects.
 SWIFT_CLASS_NAMED("FritzVisionLivingRoomSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionLivingRoomSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionLivingRoomSegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
@@ -2765,7 +2786,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect common outdoor objects.
 SWIFT_CLASS_NAMED("FritzVisionOutdoorSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionOutdoorSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionOutdoorSegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -2851,7 +2872,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect people and pets.
 SWIFT_CLASS_NAMED("FritzVisionPeopleAndPetSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleAndPetSegmentationMediumModel : FritzVisionSegmentationModel
+@interface FritzVisionPeopleAndPetSegmentationMediumModel : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -2897,7 +2918,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Predictor that takes predicts pixels that are people
 SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionPeopleSegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -2982,7 +3003,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect pets.
 SWIFT_CLASS_NAMED("FritzVisionPetSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPetSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionPetSegmentationPredictor : FritzVisionSegmentationPredictor
 /// Build Pet Segmentation Model with provided model.
 /// \param model Model to use
 ///
@@ -3104,6 +3125,13 @@ SWIFT_CLASS("_TtC11FritzVision34FritzVisionSegmentationMaskOptions") SWIFT_AVAIL
 @end
 
 
+SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_DEPRECATED_MSG("", "FritzVisionSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSegmentationModel : FritzVisionSegmentationPredictor
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 @interface FritzVisionSegmentationModelOptions : NSObject
@@ -3121,6 +3149,9 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 @property (nonatomic) BOOL forceVisionPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
+
 
 @class MLMultiArray;
 
@@ -3215,7 +3246,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect the sky.
 SWIFT_CLASS_NAMED("FritzVisionSkySegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionSkySegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionSkySegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -3387,6 +3418,17 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingP
 @property (nonatomic) BOOL useCPUOnly;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
+SWIFT_CLASS_NAMED("Segmentation")
+@interface Segmentation : NSObject
+- (nonnull instancetype)initWithMask:(NSArray<NSArray<NSNumber *> *> * _Nonnull)mask label:(NSString * _Nonnull)label OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, copy) NSArray<NSArray<NSNumber *> *> * _Nonnull intMask;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 
 typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion", open) {
 /// Foreground is the region of the image where the alpha value of a mask is greater than 0.
@@ -3954,8 +3996,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 @class FritzVisionSegmentationModelOptions;
 @class FritzVisionSegmentationResult;
 
-SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionSegmentationModel : BasePredictor
+SWIFT_CLASS_NAMED("FritzVisionSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSegmentationPredictor : BasePredictor
 @property (nonatomic, readonly, copy) NSString * _Nonnull name;
 @property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
@@ -3977,7 +4019,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(ios,introdu
 
 /// Predictor that takes predicts pixels that are Hair
 SWIFT_CLASS_NAMED("FritzVisionHairSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionHairSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionHairSegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -4068,8 +4110,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 
 
-
-
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
@@ -4087,6 +4127,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// Masked image.
 - (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -4258,7 +4300,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect common outdoor objects.
 SWIFT_CLASS_NAMED("FritzVisionLivingRoomSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionLivingRoomSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionLivingRoomSegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
@@ -4479,7 +4521,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect common outdoor objects.
 SWIFT_CLASS_NAMED("FritzVisionOutdoorSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionOutdoorSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionOutdoorSegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -4565,7 +4607,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect people and pets.
 SWIFT_CLASS_NAMED("FritzVisionPeopleAndPetSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleAndPetSegmentationMediumModel : FritzVisionSegmentationModel
+@interface FritzVisionPeopleAndPetSegmentationMediumModel : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -4611,7 +4653,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Predictor that takes predicts pixels that are people
 SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionPeopleSegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -4696,7 +4738,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect pets.
 SWIFT_CLASS_NAMED("FritzVisionPetSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPetSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionPetSegmentationPredictor : FritzVisionSegmentationPredictor
 /// Build Pet Segmentation Model with provided model.
 /// \param model Model to use
 ///
@@ -4818,6 +4860,13 @@ SWIFT_CLASS("_TtC11FritzVision34FritzVisionSegmentationMaskOptions") SWIFT_AVAIL
 @end
 
 
+SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_DEPRECATED_MSG("", "FritzVisionSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSegmentationModel : FritzVisionSegmentationPredictor
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 @interface FritzVisionSegmentationModelOptions : NSObject
@@ -4835,6 +4884,9 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 @property (nonatomic) BOOL forceVisionPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
+
 
 @class MLMultiArray;
 
@@ -4929,7 +4981,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect the sky.
 SWIFT_CLASS_NAMED("FritzVisionSkySegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionSkySegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionSkySegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -5101,6 +5153,17 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingP
 @property (nonatomic) BOOL useCPUOnly;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
+SWIFT_CLASS_NAMED("Segmentation")
+@interface Segmentation : NSObject
+- (nonnull instancetype)initWithMask:(NSArray<NSArray<NSNumber *> *> * _Nonnull)mask label:(NSString * _Nonnull)label OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, copy) NSArray<NSArray<NSNumber *> *> * _Nonnull intMask;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 
 typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion", open) {
 /// Foreground is the region of the image where the alpha value of a mask is greater than 0.
@@ -5665,8 +5728,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 @class FritzVisionSegmentationModelOptions;
 @class FritzVisionSegmentationResult;
 
-SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionSegmentationModel : BasePredictor
+SWIFT_CLASS_NAMED("FritzVisionSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSegmentationPredictor : BasePredictor
 @property (nonatomic, readonly, copy) NSString * _Nonnull name;
 @property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
@@ -5688,7 +5751,7 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_AVAILABILITY(ios,introdu
 
 /// Predictor that takes predicts pixels that are Hair
 SWIFT_CLASS_NAMED("FritzVisionHairSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionHairSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionHairSegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -5779,8 +5842,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) CIContext * 
 
 
 
-
-
 SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionImage (SWIFT_EXTENSION(FritzVision))
 /// Uses an alpha mask to cutout maked regions, specifying with area of mask to keep.
@@ -5798,6 +5859,8 @@ SWIFT_AVAILABILITY(ios,introduced=11.0)
 /// Masked image.
 - (UIImage * _Nullable)maskWithImage:(UIImage * _Nonnull)alphaMask removingPixelsIn:(enum FritzSegmentationRegion)segmentationRegion samplingMethod:(enum ResizeSamplingMethod)samplingMethod context:(CIContext * _Nullable)context SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
 
 
 SWIFT_AVAILABILITY(ios,introduced=11.0)
@@ -5969,7 +6032,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect common outdoor objects.
 SWIFT_CLASS_NAMED("FritzVisionLivingRoomSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionLivingRoomSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionLivingRoomSegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
@@ -6190,7 +6253,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect common outdoor objects.
 SWIFT_CLASS_NAMED("FritzVisionOutdoorSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionOutdoorSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionOutdoorSegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -6276,7 +6339,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect people and pets.
 SWIFT_CLASS_NAMED("FritzVisionPeopleAndPetSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleAndPetSegmentationMediumModel : FritzVisionSegmentationModel
+@interface FritzVisionPeopleAndPetSegmentationMediumModel : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -6322,7 +6385,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Predictor that takes predicts pixels that are people
 SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPeopleSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionPeopleSegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -6407,7 +6470,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect pets.
 SWIFT_CLASS_NAMED("FritzVisionPetSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionPetSegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionPetSegmentationPredictor : FritzVisionSegmentationPredictor
 /// Build Pet Segmentation Model with provided model.
 /// \param model Model to use
 ///
@@ -6529,6 +6592,13 @@ SWIFT_CLASS("_TtC11FritzVision34FritzVisionSegmentationMaskOptions") SWIFT_AVAIL
 @end
 
 
+SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_DEPRECATED_MSG("", "FritzVisionSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
+@interface FritzVisionSegmentationModel : FritzVisionSegmentationPredictor
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 @interface FritzVisionSegmentationModelOptions : NSObject
@@ -6546,6 +6616,9 @@ SWIFT_CLASS_NAMED("FritzVisionSegmentationModelOptions")
 @property (nonatomic) BOOL forceVisionPrediction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
+
 
 @class MLMultiArray;
 
@@ -6640,7 +6713,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 /// Image segmentation model to detect the sky.
 SWIFT_CLASS_NAMED("FritzVisionSkySegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
-@interface FritzVisionSkySegmentationPredictor : FritzVisionSegmentationModel
+@interface FritzVisionSkySegmentationPredictor : FritzVisionSegmentationPredictor
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
@@ -6812,6 +6885,17 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingP
 @property (nonatomic) BOOL useCPUOnly;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
+SWIFT_CLASS_NAMED("Segmentation")
+@interface Segmentation : NSObject
+- (nonnull instancetype)initWithMask:(NSArray<NSArray<NSNumber *> *> * _Nonnull)mask label:(NSString * _Nonnull)label OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, copy) NSArray<NSArray<NSNumber *> *> * _Nonnull intMask;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 
 typedef SWIFT_ENUM_NAMED(NSInteger, FritzSegmentationRegion, "SegmentationRegion", open) {
 /// Foreground is the region of the image where the alpha value of a mask is greater than 0.
