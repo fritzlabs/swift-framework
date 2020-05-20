@@ -28,15 +28,13 @@ extension FritzVisionSegmentationPredictor : FritzVision.PredictionImageRecordab
   public typealias AnnotationRepresentation = [FritzVision.Segmentation]
   public typealias PredictionInput = FritzVision.FritzVisionImage
 }
-@objc public class Segmentation : ObjectiveC.NSObject {
-  final public let mask: [[Swift.Float]]
-  final public let label: Swift.String
+public struct Segmentation {
+  public let mask: [[Swift.Float]]
+  public let label: Swift.String
   public init(mask: [[Swift.Float]], label: Swift.String)
   public var intMask: [[Swift.Int8]] {
     get
   }
-  @objc deinit
-  @objc override dynamic public init()
 }
 public enum ArrayError : Swift.Error {
   case invalidSize
