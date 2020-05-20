@@ -4,6 +4,12 @@
 
 ---
 
+## [5.3.6](https://github.com/fritzlabs/swift-framework/releases/tag/5.3.6)
+
+- Xcode Version: 11.4.X
+
+1. Fix Segmentation bug causing build errors.
+
 ## [5.3.5](https://github.com/fritzlabs/swift-framework/releases/tag/5.3.5)
 
 - Xcode Version: 11.4.X

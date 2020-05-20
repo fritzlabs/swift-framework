@@ -28,12 +28,12 @@ extension FritzVisionSegmentationPredictor : FritzVision.PredictionImageRecordab
   public typealias AnnotationRepresentation = [FritzVision.Segmentation]
   public typealias PredictionInput = FritzVision.FritzVisionImage
 }
-@objc(Segmentation) public class Segmentation : ObjectiveC.NSObject {
+@objc public class Segmentation : ObjectiveC.NSObject {
   final public let mask: [[Swift.Float]]
   final public let label: Swift.String
-  @objc(initWithMask:label:) public init(mask: [[Swift.Float]], label: Swift.String)
-  @objc(intMask) public var intMask: [[Swift.Int8]] {
-    @objc get
+  public init(mask: [[Swift.Float]], label: Swift.String)
+  public var intMask: [[Swift.Int8]] {
+    get
   }
   @objc deinit
   @objc override dynamic public init()

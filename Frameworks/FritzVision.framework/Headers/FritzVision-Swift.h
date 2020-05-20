@@ -1688,10 +1688,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingP
 @end
 
 
-SWIFT_CLASS_NAMED("Segmentation")
+SWIFT_CLASS("_TtC11FritzVision12Segmentation")
 @interface Segmentation : NSObject
-- (nonnull instancetype)initWithMask:(NSArray<NSArray<NSNumber *> *> * _Nonnull)mask label:(NSString * _Nonnull)label OBJC_DESIGNATED_INITIALIZER;
-@property (nonatomic, readonly, copy) NSArray<NSArray<NSNumber *> *> * _Nonnull intMask;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -3420,10 +3418,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingP
 @end
 
 
-SWIFT_CLASS_NAMED("Segmentation")
+SWIFT_CLASS("_TtC11FritzVision12Segmentation")
 @interface Segmentation : NSObject
-- (nonnull instancetype)initWithMask:(NSArray<NSArray<NSNumber *> *> * _Nonnull)mask label:(NSString * _Nonnull)label OBJC_DESIGNATED_INITIALIZER;
-@property (nonatomic, readonly, copy) NSArray<NSArray<NSNumber *> *> * _Nonnull intMask;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -5155,10 +5151,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingP
 @end
 
 
-SWIFT_CLASS_NAMED("Segmentation")
+SWIFT_CLASS("_TtC11FritzVision12Segmentation")
 @interface Segmentation : NSObject
-- (nonnull instancetype)initWithMask:(NSArray<NSArray<NSNumber *> *> * _Nonnull)mask label:(NSString * _Nonnull)label OBJC_DESIGNATED_INITIALIZER;
-@property (nonatomic, readonly, copy) NSArray<NSArray<NSNumber *> *> * _Nonnull intMask;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -6887,10 +6881,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PoseLiftingP
 @end
 
 
-SWIFT_CLASS_NAMED("Segmentation")
+SWIFT_CLASS("_TtC11FritzVision12Segmentation")
 @interface Segmentation : NSObject
-- (nonnull instancetype)initWithMask:(NSArray<NSArray<NSNumber *> *> * _Nonnull)mask label:(NSString * _Nonnull)label OBJC_DESIGNATED_INITIALIZER;
-@property (nonatomic, readonly, copy) NSArray<NSArray<NSNumber *> *> * _Nonnull intMask;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
