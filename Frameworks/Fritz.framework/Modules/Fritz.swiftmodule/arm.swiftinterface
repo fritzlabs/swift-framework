@@ -4,6 +4,8 @@
 import Foundation
 @_exported import Fritz
 import Swift
+public struct SegmentationModelSpec {
+}
 public struct Segmentation {
   public let mask: [[Swift.Float]]
   public let label: Swift.String

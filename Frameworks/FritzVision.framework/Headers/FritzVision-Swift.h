@@ -531,11 +531,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionSegmentationPredictor : BasePredictor
-@property (nonatomic, readonly, copy) NSString * _Nonnull name;
 @property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 /// Run image segmentation on a FritzVisionImage.
 /// \param input Image or buffer to run model on.
 ///
@@ -556,9 +555,9 @@ SWIFT_CLASS_NAMED("FritzVisionHairSegmentationPredictor") SWIFT_AVAILABILITY(ios
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class FritzModelConfiguration;
@@ -576,9 +575,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionHairSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -595,9 +594,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionHairSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -614,9 +613,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionHairSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -837,9 +836,9 @@ SWIFT_CLASS_NAMED("FritzVisionLivingRoomSegmentationPredictor") SWIFT_AVAILABILI
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes SWIFT_UNAVAILABLE;
 @end
 
 
@@ -1058,9 +1057,9 @@ SWIFT_CLASS_NAMED("FritzVisionOutdoorSegmentationPredictor") SWIFT_AVAILABILITY(
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1078,9 +1077,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionOutdoorSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1098,9 +1097,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionOutdoorSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1118,9 +1117,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionOutdoorSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1144,9 +1143,9 @@ SWIFT_CLASS_NAMED("FritzVisionPeopleAndPetSegmentationPredictor") SWIFT_AVAILABI
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1164,9 +1163,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleAndPetSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1190,9 +1189,9 @@ SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationPredictor") SWIFT_AVAILABILITY(i
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1210,9 +1209,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1230,9 +1229,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1250,9 +1249,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1281,9 +1280,9 @@ SWIFT_CLASS_NAMED("FritzVisionPetSegmentationPredictor") SWIFT_AVAILABILITY(ios,
 ///
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1301,9 +1300,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPetSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1321,9 +1320,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPetSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1341,9 +1340,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPetSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1395,9 +1394,9 @@ SWIFT_CLASS("_TtC11FritzVision34FritzVisionSegmentationMaskOptions") SWIFT_AVAIL
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_DEPRECATED_MSG("", "FritzVisionSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionSegmentationModel : FritzVisionSegmentationPredictor
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1518,9 +1517,9 @@ SWIFT_CLASS_NAMED("FritzVisionSkySegmentationPredictor") SWIFT_AVAILABILITY(ios,
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1538,9 +1537,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionSkySegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1558,9 +1557,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionSkySegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1578,9 +1577,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionSkySegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2252,11 +2251,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionSegmentationPredictor : BasePredictor
-@property (nonatomic, readonly, copy) NSString * _Nonnull name;
 @property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 /// Run image segmentation on a FritzVisionImage.
 /// \param input Image or buffer to run model on.
 ///
@@ -2277,9 +2275,9 @@ SWIFT_CLASS_NAMED("FritzVisionHairSegmentationPredictor") SWIFT_AVAILABILITY(ios
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class FritzModelConfiguration;
@@ -2297,9 +2295,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionHairSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2316,9 +2314,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionHairSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2335,9 +2333,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionHairSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2558,9 +2556,9 @@ SWIFT_CLASS_NAMED("FritzVisionLivingRoomSegmentationPredictor") SWIFT_AVAILABILI
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes SWIFT_UNAVAILABLE;
 @end
 
 
@@ -2779,9 +2777,9 @@ SWIFT_CLASS_NAMED("FritzVisionOutdoorSegmentationPredictor") SWIFT_AVAILABILITY(
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2799,9 +2797,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionOutdoorSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2819,9 +2817,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionOutdoorSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2839,9 +2837,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionOutdoorSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2865,9 +2863,9 @@ SWIFT_CLASS_NAMED("FritzVisionPeopleAndPetSegmentationPredictor") SWIFT_AVAILABI
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2885,9 +2883,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleAndPetSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2911,9 +2909,9 @@ SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationPredictor") SWIFT_AVAILABILITY(i
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2931,9 +2929,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2951,9 +2949,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -2971,9 +2969,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -3002,9 +3000,9 @@ SWIFT_CLASS_NAMED("FritzVisionPetSegmentationPredictor") SWIFT_AVAILABILITY(ios,
 ///
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -3022,9 +3020,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPetSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -3042,9 +3040,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPetSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -3062,9 +3060,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPetSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -3116,9 +3114,9 @@ SWIFT_CLASS("_TtC11FritzVision34FritzVisionSegmentationMaskOptions") SWIFT_AVAIL
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_DEPRECATED_MSG("", "FritzVisionSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionSegmentationModel : FritzVisionSegmentationPredictor
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -3239,9 +3237,9 @@ SWIFT_CLASS_NAMED("FritzVisionSkySegmentationPredictor") SWIFT_AVAILABILITY(ios,
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -3259,9 +3257,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionSkySegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -3279,9 +3277,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionSkySegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -3299,9 +3297,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionSkySegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -3976,11 +3974,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionSegmentationPredictor : BasePredictor
-@property (nonatomic, readonly, copy) NSString * _Nonnull name;
 @property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 /// Run image segmentation on a FritzVisionImage.
 /// \param input Image or buffer to run model on.
 ///
@@ -4001,9 +3998,9 @@ SWIFT_CLASS_NAMED("FritzVisionHairSegmentationPredictor") SWIFT_AVAILABILITY(ios
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class FritzModelConfiguration;
@@ -4021,9 +4018,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionHairSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4040,9 +4037,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionHairSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4059,9 +4056,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionHairSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4282,9 +4279,9 @@ SWIFT_CLASS_NAMED("FritzVisionLivingRoomSegmentationPredictor") SWIFT_AVAILABILI
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes SWIFT_UNAVAILABLE;
 @end
 
 
@@ -4503,9 +4500,9 @@ SWIFT_CLASS_NAMED("FritzVisionOutdoorSegmentationPredictor") SWIFT_AVAILABILITY(
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4523,9 +4520,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionOutdoorSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4543,9 +4540,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionOutdoorSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4563,9 +4560,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionOutdoorSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4589,9 +4586,9 @@ SWIFT_CLASS_NAMED("FritzVisionPeopleAndPetSegmentationPredictor") SWIFT_AVAILABI
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4609,9 +4606,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleAndPetSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4635,9 +4632,9 @@ SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationPredictor") SWIFT_AVAILABILITY(i
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4655,9 +4652,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4675,9 +4672,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4695,9 +4692,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4726,9 +4723,9 @@ SWIFT_CLASS_NAMED("FritzVisionPetSegmentationPredictor") SWIFT_AVAILABILITY(ios,
 ///
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4746,9 +4743,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPetSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4766,9 +4763,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPetSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4786,9 +4783,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPetSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4840,9 +4837,9 @@ SWIFT_CLASS("_TtC11FritzVision34FritzVisionSegmentationMaskOptions") SWIFT_AVAIL
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_DEPRECATED_MSG("", "FritzVisionSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionSegmentationModel : FritzVisionSegmentationPredictor
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4963,9 +4960,9 @@ SWIFT_CLASS_NAMED("FritzVisionSkySegmentationPredictor") SWIFT_AVAILABILITY(ios,
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -4983,9 +4980,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionSkySegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -5003,9 +5000,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionSkySegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -5023,9 +5020,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionSkySegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -5697,11 +5694,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<ModelS
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionSegmentationPredictor : BasePredictor
-@property (nonatomic, readonly, copy) NSString * _Nonnull name;
 @property (nonatomic, readonly, copy) NSArray<ModelSegmentationClass *> * _Nonnull classes;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 /// Run image segmentation on a FritzVisionImage.
 /// \param input Image or buffer to run model on.
 ///
@@ -5722,9 +5718,9 @@ SWIFT_CLASS_NAMED("FritzVisionHairSegmentationPredictor") SWIFT_AVAILABILITY(ios
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class FritzModelConfiguration;
@@ -5742,9 +5738,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionHairSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -5761,9 +5757,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionHairSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -5780,9 +5776,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionHairSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6003,9 +5999,9 @@ SWIFT_CLASS_NAMED("FritzVisionLivingRoomSegmentationPredictor") SWIFT_AVAILABILI
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes SWIFT_UNAVAILABLE;
 @end
 
 
@@ -6224,9 +6220,9 @@ SWIFT_CLASS_NAMED("FritzVisionOutdoorSegmentationPredictor") SWIFT_AVAILABILITY(
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6244,9 +6240,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionOutdoorSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6264,9 +6260,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionOutdoorSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6284,9 +6280,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionOutdoorSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6310,9 +6306,9 @@ SWIFT_CLASS_NAMED("FritzVisionPeopleAndPetSegmentationPredictor") SWIFT_AVAILABI
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6330,9 +6326,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleAndPetSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6356,9 +6352,9 @@ SWIFT_CLASS_NAMED("FritzVisionPeopleSegmentationPredictor") SWIFT_AVAILABILITY(i
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6376,9 +6372,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6396,9 +6392,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6416,9 +6412,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPeopleSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6447,9 +6443,9 @@ SWIFT_CLASS_NAMED("FritzVisionPetSegmentationPredictor") SWIFT_AVAILABILITY(ios,
 ///
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6467,9 +6463,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPetSegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6487,9 +6483,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPetSegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6507,9 +6503,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionPetSegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6561,9 +6557,9 @@ SWIFT_CLASS("_TtC11FritzVision34FritzVisionSegmentationMaskOptions") SWIFT_AVAIL
 
 SWIFT_CLASS_NAMED("FritzVisionSegmentationModel") SWIFT_DEPRECATED_MSG("", "FritzVisionSegmentationPredictor") SWIFT_AVAILABILITY(ios,introduced=11.0)
 @interface FritzVisionSegmentationModel : FritzVisionSegmentationPredictor
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6684,9 +6680,9 @@ SWIFT_CLASS_NAMED("FritzVisionSkySegmentationPredictor") SWIFT_AVAILABILITY(ios,
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model;
 - (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model;
 - (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model managedModel:(FritzManagedModel * _Nonnull)managedModel;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6704,9 +6700,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionSkySegmentationModelAccurate * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6724,9 +6720,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionSkySegmentationModelFast * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -6744,9 +6740,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL wifiRequiredForModelDownl
 /// \param completionHandler CompletionHandler called after fetchModel request finishes.
 ///
 + (void)fetchModelWithCompletionHandler:(void (^ _Nonnull)(FritzVisionSkySegmentationModelSmall * _Nullable, NSError * _Nullable))completionHandler;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model name:(NSString * _Nonnull)name classes:(NSArray<ModelSegmentationClass *> * _Nonnull)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithModel:(FritzMLModel * _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes managedModel:(FritzManagedModel * _Nonnull)managedModel OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifiedModel:(id <FritzSwiftIdentifiedModel> _Nonnull)model classes:(NSArray<ModelSegmentationClass *> * _Nullable)classes OBJC_DESIGNATED_INITIALIZER;
 @end
 
 

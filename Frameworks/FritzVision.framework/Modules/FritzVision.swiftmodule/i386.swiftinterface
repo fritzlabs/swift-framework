@@ -13,6 +13,8 @@ import Photos
 import Swift
 import UIKit
 import Vision
+public struct SegmentationModelSpec {
+}
 @available(iOS 11.0, *)
 extension CocoImageAnnotation {
   public init(mask: [[Swift.Int8]], label: Swift.String)
@@ -73,9 +75,9 @@ public protocol FritzVisionImagePredictable : FritzVision.FritzPredictable where
   @objc public static var wifiRequiredForModelDownload: Swift.Bool
   @objc(fetchModelWithCompletionHandler:) public static func fetchModel(completionHandler: @escaping (FritzVision.FritzVisionPeopleSegmentationModelSmall?, Swift.Error?) -> Swift.Void)
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 @_inheritsConvenienceInitializers @available(iOS 11.0, *)
 @objc(FritzVisionImageMetadata) public class FritzVisionImageMetadata : ObjectiveC.NSObject {
@@ -463,9 +465,9 @@ public class Pose<Skeleton> : ObjectiveC.NSObject where Skeleton : FritzVision.S
   @objc public static var wifiRequiredForModelDownload: Swift.Bool
   @objc(fetchModelWithCompletionHandler:) public static func fetchModel(completionHandler: @escaping (FritzVision.FritzVisionPetSegmentationModelFast?, Swift.Error?) -> Swift.Void)
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 @_inheritsConvenienceInitializers @available(iOS 11.0, *)
 @objc(FritzVisionHumanPosePredictor) @_objcRuntimeName(FritzVisionHumanPosePredictor) public class FritzVisionHumanPosePredictor : FritzVision.FritzVisionPosePredictor<FritzVision.HumanSkeleton> {
@@ -619,9 +621,9 @@ public class FritzVisionDrawBoxesCompoundFilter : FritzVision.FritzVisionImageFi
   @objc(initWithIdentifiedModel:) convenience public init(model: FritzManagedModel.SwiftIdentifiedModel)
   @objc(initWithModel:managedModel:) convenience public init(model: FritzManagedModel.FritzMLModel, managedModel: FritzManagedModel.FritzManagedModel)
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 @_hasMissingDesignatedInitializers @available(iOS 11.0, *)
 public class DecodePoseWithDisplacements<Skeleton> where Skeleton : FritzVision.SkeletonType {
@@ -644,9 +646,9 @@ extension FritzVisionImage {
   @objc public static var wifiRequiredForModelDownload: Swift.Bool
   @objc(fetchModelWithCompletionHandler:) public static func fetchModel(completionHandler: @escaping (FritzVision.FritzVisionPeopleAndPetSegmentationModelAccurate?, Swift.Error?) -> Swift.Void)
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 public enum HumanSkeleton : Swift.Int, FritzVision.SkeletonType {
   public static let objectName: Swift.String
@@ -709,6 +711,7 @@ extension AVDepthData : FritzVision.FritzPredictionResult {
   public typealias ModelOptions = FritzVision.FritzVisionDepthModelOptions
   public typealias PredictionResult = AVFoundation.AVDepthData
 }
+public typealias rgbaValue = (r: Swift.UInt8, g: Swift.UInt8, b: Swift.UInt8, a: Swift.UInt8)
 @_inheritsConvenienceInitializers @available(iOS 11.0, *)
 @objc(FritzVisionOutdoorSegmentationModelFast) final public class FritzVisionOutdoorSegmentationModelFast : FritzVision.FritzVisionOutdoorSegmentationPredictor, FritzVision.DownloadableModel {
   @objc public static let modelConfig: FritzManagedModel.FritzModelConfiguration
@@ -718,9 +721,9 @@ extension AVDepthData : FritzVision.FritzPredictionResult {
   @objc public static var wifiRequiredForModelDownload: Swift.Bool
   @objc(fetchModelWithCompletionHandler:) public static func fetchModel(completionHandler: @escaping (FritzVision.FritzVisionOutdoorSegmentationModelFast?, Swift.Error?) -> Swift.Void)
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 public struct Heap<T> {
   public init(sort: @escaping (T, T) -> Swift.Bool)
@@ -876,9 +879,9 @@ extension FritzVisionPoseResult {
   @objc(initWithModel:) convenience public init(model: FritzManagedModel.FritzMLModel)
   @objc(initWithIdentifiedModel:) convenience public init(model: FritzManagedModel.SwiftIdentifiedModel)
   @objc(initWithModel:managedModel:) convenience public init(model: FritzManagedModel.FritzMLModel, managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
   @objc deinit
 }
 @available(iOS 11.0, *)
@@ -942,9 +945,9 @@ extension PoseType {
   @objc public static var wifiRequiredForModelDownload: Swift.Bool
   @objc(fetchModelWithCompletionHandler:) public static func fetchModel(completionHandler: @escaping (FritzVision.FritzVisionPetSegmentationModelSmall?, Swift.Error?) -> Swift.Void)
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 @objc @_inheritsConvenienceInitializers @available(iOS 11.0, *)
 public class FritzVisionSegmentationMaskOptions : ObjectiveC.NSObject {
@@ -989,9 +992,9 @@ extension FritzVisionLabelPredictor : FritzVision.PredictionImageRecordable {
   @objc public static var wifiRequiredForModelDownload: Swift.Bool
   @objc(fetchModelWithCompletionHandler:) public static func fetchModel(completionHandler: @escaping (FritzVision.FritzVisionSkySegmentationModelSmall?, Swift.Error?) -> Swift.Void)
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 @available(iOS 11.0, *)
 public class FritzVisionStylizeImageCompoundFilter : FritzVision.FritzVisionImageFilter {
@@ -1083,9 +1086,9 @@ extension FritzVisionImage {
   @objc public static var wifiRequiredForModelDownload: Swift.Bool
   @objc(fetchModelWithCompletionHandler:) public static func fetchModel(completionHandler: @escaping (FritzVision.FritzVisionPetSegmentationModelAccurate?, Swift.Error?) -> Swift.Void)
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 @_inheritsConvenienceInitializers @available(iOS 12.0, *)
 @objc(FritzVisionObjectModelFast) final public class FritzVisionObjectModelFast : FritzVision.FritzVisionObjectPredictor, FritzVision.DownloadableModel {
@@ -1182,9 +1185,9 @@ extension Pose {
   @objc public static var wifiRequiredForModelDownload: Swift.Bool
   @objc(fetchModelWithCompletionHandler:) public static func fetchModel(completionHandler: @escaping (FritzVision.FritzVisionHairSegmentationModelFast?, Swift.Error?) -> Swift.Void)
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 @_inheritsConvenienceInitializers @available(iOS 11.0, *)
 @objc(FritzVisionSkySegmentationModelFast) final public class FritzVisionSkySegmentationModelFast : FritzVision.FritzVisionSkySegmentationPredictor, FritzVision.DownloadableModel {
@@ -1195,9 +1198,9 @@ extension Pose {
   @objc public static var wifiRequiredForModelDownload: Swift.Bool
   @objc(fetchModelWithCompletionHandler:) public static func fetchModel(completionHandler: @escaping (FritzVision.FritzVisionSkySegmentationModelFast?, Swift.Error?) -> Swift.Void)
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 @_inheritsConvenienceInitializers @available(iOS 11.0, *)
 @objc(FritzVisionPeopleSegmentationModelFast) final public class FritzVisionPeopleSegmentationModelFast : FritzVision.FritzVisionPeopleSegmentationPredictor, FritzVision.DownloadableModel {
@@ -1208,9 +1211,9 @@ extension Pose {
   @objc public static var wifiRequiredForModelDownload: Swift.Bool
   @objc(fetchModelWithCompletionHandler:) public static func fetchModel(completionHandler: @escaping (FritzVision.FritzVisionPeopleSegmentationModelFast?, Swift.Error?) -> Swift.Void)
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 public enum PoseLiftingDebugKey : Swift.String, Swift.RawRepresentable {
   case pose2DOutput
@@ -1245,9 +1248,9 @@ public enum PoseLiftingDebugKey : Swift.String, Swift.RawRepresentable {
   @objc(initWithModel:) required public init(model: FritzManagedModel.FritzMLModel)
   @objc(initWithIdentifiedModel:) required public init(model: FritzManagedModel.SwiftIdentifiedModel)
   @objc(initWithModel:managedModel:) required public init(model: FritzManagedModel.FritzMLModel, managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
   @objc deinit
 }
 public protocol FritzPredictorOptionType {
@@ -1294,9 +1297,9 @@ extension FritzVisionPoseLiftingModel {
   @objc public static var wifiRequiredForModelDownload: Swift.Bool
   @objc(fetchModelWithCompletionHandler:) public static func fetchModel(completionHandler: @escaping (FritzVision.FritzVisionHairSegmentationModelSmall?, Swift.Error?) -> Swift.Void)
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 @_inheritsConvenienceInitializers @available(iOS 11.0, *)
 @objc(FritzVisionHairSegmentationModelAccurate) final public class FritzVisionHairSegmentationModelAccurate : FritzVision.FritzVisionHairSegmentationPredictor, FritzVision.DownloadableModel {
@@ -1307,9 +1310,9 @@ extension FritzVisionPoseLiftingModel {
   @objc public static var wifiRequiredForModelDownload: Swift.Bool
   @objc(fetchModelWithCompletionHandler:) public static func fetchModel(completionHandler: @escaping (FritzVision.FritzVisionHairSegmentationModelAccurate?, Swift.Error?) -> Swift.Void)
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 @objc @available(iOS 11.0, *)
 open class BasePredictor : ObjectiveC.NSObject, FritzVision.FritzManagedModelType {
@@ -1354,9 +1357,9 @@ extension FritzVisionImage {
   @objc public static var wifiRequiredForModelDownload: Swift.Bool
   @objc(fetchModelWithCompletionHandler:) public static func fetchModel(completionHandler: @escaping (FritzVision.FritzVisionOutdoorSegmentationModelSmall?, Swift.Error?) -> Swift.Void)
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 @available(iOS 11.0, *)
 public class PoseSmoother<Filter, Skeleton> where Filter : FritzVision.PointFilterable, Skeleton : FritzVision.SkeletonType, Filter.T == CoreGraphics.CGPoint {
@@ -1379,9 +1382,9 @@ public class Pose3DSmoother<Filter, Skeleton> where Filter : FritzVision.PointFi
   @objc public static var wifiRequiredForModelDownload: Swift.Bool
   @objc(fetchModelWithCompletionHandler:) public static func fetchModel(completionHandler: @escaping (FritzVision.FritzVisionPeopleSegmentationModelAccurate?, Swift.Error?) -> Swift.Void)
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 @available(iOS 11.0, *)
 extension FritzVisionImage : FritzManagedModel.Base64StringEncodable {
@@ -1437,9 +1440,9 @@ public func == (lhs: FritzVision.Point3D, rhs: FritzVision.Point3D) -> Swift.Boo
   @objc(initWithModel:) convenience public init(model: FritzManagedModel.FritzMLModel)
   @objc(initWithIdentifiedModel:) convenience public init(model: FritzManagedModel.SwiftIdentifiedModel)
   @objc(initWithModel:managedModel:) convenience public init(model: FritzManagedModel.FritzMLModel, managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
   @objc deinit
 }
 @objc(BoundingBox) public class BoundingBox : ObjectiveC.NSObject {
@@ -1504,9 +1507,9 @@ extension FritzVisionPosePredictor : FritzVision.PredictionImageRecordable {
   @objc(initWithModel:) convenience public init(model: FritzManagedModel.FritzMLModel)
   @objc(initWithIdentifiedModel:) convenience public init(model: FritzManagedModel.SwiftIdentifiedModel)
   @objc(initWithModel:managedModel:) convenience public init(model: FritzManagedModel.FritzMLModel, managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
   @objc deinit
 }
 extension CGPoint {
@@ -1550,9 +1553,9 @@ public func == <Skeleton>(lhs: FritzVision.Keypoint<Skeleton>, rhs: FritzVision.
   @objc(initWithModel:) convenience public init(model: FritzManagedModel.FritzMLModel)
   @objc(initWithIdentifiedModel:) convenience public init(model: FritzManagedModel.SwiftIdentifiedModel)
   @objc(initWithModel:managedModel:) convenience public init(model: FritzManagedModel.FritzMLModel, managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
   @objc deinit
 }
 extension CGPoint : FritzVision.PointType {
@@ -1686,17 +1689,16 @@ extension CGPoint : FritzVision.SmoothingPointable {
 @available(*, deprecated, renamed: "FritzVisionSegmentationPredictor")
 @objc(FritzVisionSegmentationModel) open class FritzVisionSegmentationModel : FritzVision.FritzVisionSegmentationPredictor {
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 @available(iOS 11.0, *)
 @objc(FritzVisionSegmentationPredictor) open class FritzVisionSegmentationPredictor : FritzVision.BasePredictor {
-  @objc final public let name: Swift.String
   @objc final public let classes: [FritzVision.ModelSegmentationClass]
-  @objc(initWithModel:name:classes:) public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc(initWithModel:name:classes:managedModel:) public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc(initWithIdentifiedModel:name:classes:) public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc(initWithModel:classes:) public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = nil)
+  @objc(initWithModel:classes:managedModel:) public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = nil, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc(initWithIdentifiedModel:classes:) public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = nil)
   @objc(predict:options:completion:) public func predict(_ input: FritzVision.FritzVisionImage, options: FritzVision.FritzVisionSegmentationModelOptions = .init(), completion: (FritzVision.FritzVisionSegmentationResult?, Swift.Error?) -> Swift.Void)
   @objc override public init(model: FritzManagedModel.FritzMLModel)
   @objc override public init(model: FritzManagedModel.FritzMLModel, managedModel: FritzManagedModel.FritzManagedModel)
@@ -1705,7 +1707,6 @@ extension CGPoint : FritzVision.SmoothingPointable {
   public typealias PredictionResult = FritzVision.FritzVisionSegmentationResult
   @objc deinit
 }
-public typealias rgbaValue = (r: Swift.UInt8, g: Swift.UInt8, b: Swift.UInt8, a: Swift.UInt8)
 @available(iOS 11.0, *)
 public protocol PredictionRecordable : FritzVision.FritzPredictable where Self.PredictionInput : FritzManagedModel.Base64StringEncodable {
   associatedtype AnnotationRepresentation : FritzManagedModel.AnnotationRepresentable where Self.PredictionInput == Self.AnnotationRepresentation.Source
@@ -1735,9 +1736,9 @@ extension PredictionImageRecordable {
   @objc public static var wifiRequiredForModelDownload: Swift.Bool
   @objc(fetchModelWithCompletionHandler:) public static func fetchModel(completionHandler: @escaping (FritzVision.FritzVisionSkySegmentationModelAccurate?, Swift.Error?) -> Swift.Void)
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 @_inheritsConvenienceInitializers @objc(FritzVisionPeopleClass) public class FritzVisionPeopleClass : ObjectiveC.NSObject {
   @objc public static let none: FritzVision.ModelSegmentationClass
@@ -1751,9 +1752,9 @@ extension PredictionImageRecordable {
   @objc(initWithModel:) convenience public init(model: FritzManagedModel.FritzMLModel)
   @objc(initWithIdentifiedModel:) convenience public init(model: FritzManagedModel.SwiftIdentifiedModel)
   @objc(initWithModel:managedModel:) convenience public init(model: FritzManagedModel.FritzMLModel, managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
   @objc deinit
 }
 @_inheritsConvenienceInitializers @available(iOS 11.0, *)
@@ -1778,9 +1779,9 @@ extension PredictionImageRecordable {
   @objc public static var wifiRequiredForModelDownload: Swift.Bool
   @objc(fetchModelWithCompletionHandler:) public static func fetchModel(completionHandler: @escaping (FritzVision.FritzVisionOutdoorSegmentationModelAccurate?, Swift.Error?) -> Swift.Void)
   @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
-  @objc override public init(model: FritzManagedModel.FritzMLModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass], managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, name: Swift.String, classes: [FritzVision.ModelSegmentationClass])
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super)
+  @objc override public init(model: FritzManagedModel.FritzMLModel, classes: [FritzVision.ModelSegmentationClass]? = super, managedModel: FritzManagedModel.FritzManagedModel)
+  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel, classes: [FritzVision.ModelSegmentationClass]? = super)
 }
 @objc @available(iOS 11.0, *)
 @objcMembers public class CIImagePipeline : ObjectiveC.NSObject {
