@@ -24,7 +24,7 @@ jobs:
       - name: Trigger release
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          token: ${{ secrets.REPO_ACCESS_TOKEN_TEST }}
           repository: ${{ secrets.REPO_NAME }}
           event-type: sdk-release
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
