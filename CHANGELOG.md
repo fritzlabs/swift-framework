@@ -8,6 +8,13 @@
 
 1. Updated FritzVisionSegmentationModelPredictor initialization
 
+```diff
+
+- FritzVisionSegmentationPredictor(mode: model, name: "people", classes: classes)
++ FritzVisionSegmentationPredictor(model: model)
+
+```
+
 ## [5.3.6](https://github.com/fritzlabs/swift-framework/releases/tag/5.3.7)
 
 - Xcode Version: 11.4.X
