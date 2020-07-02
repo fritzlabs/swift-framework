@@ -4,6 +4,10 @@
 
 ---
 
+## [5.4.1](https://github.com/fritzlabs/swift-framework/releases/tag/5.4.1)
+
+1. Fixed a bug
+
 ## [5.4.0](https://github.com/fritzlabs/swift-framework/releases/tag/5.4.0)
 
 1. Updated FritzVisionSegmentationModelPredictor initialization
