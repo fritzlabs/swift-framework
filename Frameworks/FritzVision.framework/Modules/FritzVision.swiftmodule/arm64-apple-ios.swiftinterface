@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)
-// swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FritzVision
+// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.16.9 clang-1200.0.22.5)
+// swift-module-flags: -target arm64-apple-ios12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FritzVision
 import AVFoundation
 import Accelerate
 import CoreGraphics
@@ -122,7 +122,7 @@ public protocol PointType {
   static func / (lhs: Self, rhs: Swift.Double) -> Self
   static func * (lhs: Self, rhs: Self) -> Self
 }
-@available(iOS 11.0, *)
+@available(iOS 12.0, *)
 public protocol PackagedModelType {
   init()
 }
@@ -1828,6 +1828,12 @@ extension FritzVision.FritzVisionSegmentationPredictor : FritzVision.FritzVision
 extension FritzVision.ArrayError : Swift.Equatable {}
 extension FritzVision.ArrayError : Swift.Hashable {}
 @available(iOS 11.0, *)
+extension FritzVision.FritzVisionPeopleSegmentationModelSmall : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionLivingRoomSegmentationModelFast : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionLabelModelFast : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
 extension FritzVision.FritzImageOrientation : Swift.Equatable {}
 @available(iOS 11.0, *)
 extension FritzVision.FritzImageOrientation : Swift.Hashable {}
@@ -1837,38 +1843,106 @@ extension FritzVision.SegmentationRegion : Swift.Equatable {}
 extension FritzVision.SegmentationRegion : Swift.Hashable {}
 extension FritzVision.SegmentationRegion : Swift.RawRepresentable {}
 @available(iOS 11.0, *)
+extension FritzVision.FritzVisionFlexibleStyleModel : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionFlexibleStyleModel : FritzVision.FritzPredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionStyleModel : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionStyleModel : FritzVision.FritzPredictable {}
+@available(iOS 11.0, *)
 extension FritzVision.FritzVisionStylePredictor : FritzVision.FritzVisionImagePredictable {}
 @available(iOS 11.0, *)
 extension FritzVision.FritzVisionStylePredictor : FritzVision.FritzPredictable {}
 @available(iOS 12.0, *)
 extension FritzVision.FritzVisionObjectPredictor : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionPetSegmentationModelFast : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionHumanPosePredictor : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionHumanPoseModelSmall : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionHumanPoseModelAccurate : FritzVision.FritzVisionImagePredictable {}
 extension FritzVision.OffsetType : Swift.Equatable {}
 extension FritzVision.OffsetType : Swift.Hashable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionLivingRoomSegmentationModelSmall : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionHairSegmentationPredictor : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionPeopleAndPetSegmentationModelAccurate : FritzVision.FritzVisionImagePredictable {}
 extension FritzVision.HumanSkeleton : Swift.Hashable {}
 @available(iOS 11.0, *)
 extension FritzVision.FritzVisionDepthModel : FritzVision.FritzVisionImagePredictable {}
 @available(iOS 11.0, *)
 extension FritzVision.FritzVisionDepthModel : FritzVision.FritzPredictable {}
 @available(iOS 11.0, *)
+extension FritzVision.FritzVisionOutdoorSegmentationModelFast : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
 extension FritzVision.FritzVisionPosePredictor : FritzVision.FritzVisionImagePredictable {}
 extension FritzVision.FritzVisionVideoError : Swift.Equatable {}
 extension FritzVision.FritzVisionVideoError : Swift.Hashable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionPeopleAndPetSegmentationPredictor : FritzVision.FritzVisionImagePredictable {}
 extension FritzVision.FilterCompositionMode : Swift.Equatable {}
 extension FritzVision.FilterCompositionMode : Swift.Hashable {}
 @available(iOS 11.0, *)
+extension FritzVision.FritzVisionPetSegmentationModelSmall : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
 extension FritzVision.FritzVisionLabelPredictor : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionSkySegmentationModelSmall : FritzVision.FritzVisionImagePredictable {}
 extension FritzVision.FritzVisionCropAndScale : Swift.Equatable {}
 extension FritzVision.FritzVisionCropAndScale : Swift.Hashable {}
 extension FritzVision.FritzVisionCropAndScale : Swift.RawRepresentable {}
 extension FritzVision.FritzVisionImageError : Swift.Equatable {}
 extension FritzVision.FritzVisionImageError : Swift.Hashable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionPetSegmentationModelAccurate : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 12.0, *)
+extension FritzVision.FritzVisionObjectModelFast : FritzVision.FritzVisionImagePredictable {}
 extension FritzVision.FritzVisionLabelError : Swift.Equatable {}
 extension FritzVision.FritzVisionLabelError : Swift.Hashable {}
 extension FritzVision.FritzVisionLabelError : Swift.RawRepresentable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionHairSegmentationModelFast : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionSkySegmentationModelFast : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionPeopleSegmentationModelFast : FritzVision.FritzVisionImagePredictable {}
 extension FritzVision.PoseLiftingDebugKey : Swift.Equatable {}
 extension FritzVision.PoseLiftingDebugKey : Swift.Hashable {}
 @available(iOS 11.0, *)
+extension FritzVision.FritzVisionLivingRoomSegmentationPredictor : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
 extension FritzVision.FritzVisionPoseLiftingModel : FritzVision.FritzPredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionHairSegmentationModelSmall : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionHairSegmentationModelAccurate : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionOutdoorSegmentationModelSmall : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionPeopleSegmentationModelAccurate : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionLivingRoomSegmentationModelAccurate : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionPetSegmentationPredictor : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionOutdoorSegmentationPredictor : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionSkySegmentationPredictor : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionSegmentationModel : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionSkySegmentationModelAccurate : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionPeopleSegmentationPredictor : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionHumanPoseModelFast : FritzVision.FritzVisionImagePredictable {}
+@available(iOS 11.0, *)
+extension FritzVision.FritzVisionOutdoorSegmentationModelAccurate : FritzVision.FritzVisionImagePredictable {}
 @available(iOS 11.0, *)
 extension FritzVision.CIImagePipeline.ResizeSamplingMethod : Swift.Equatable {}
 @available(iOS 11.0, *)

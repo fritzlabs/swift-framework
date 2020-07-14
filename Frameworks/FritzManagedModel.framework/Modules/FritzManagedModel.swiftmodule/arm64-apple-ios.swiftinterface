@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)
-// swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FritzManagedModel
+// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.16.9 clang-1200.0.22.5)
+// swift-module-flags: -target arm64-apple-ios12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FritzManagedModel
 import CommonCrypto
 import CoreML
 import Foundation
@@ -23,10 +23,6 @@ extension Array : FritzManagedModel.AnnotationRepresentable where Element : Frit
 @objc(FritzReadModelProvider) public protocol ReadModelProvider {
   @objc var model: CoreML.MLModel { get }
   @objc(urlOfModelInThisBundle) optional static var urlOfModelInThisBundle: Foundation.URL { get }
-}
-@available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
-@objc(FritzReadWriteModelProvider) public protocol ReadWriteModelProvider : FritzManagedModel.ReadModelProvider {
-  @objc var model: CoreML.MLModel { get set }
 }
 @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
 @objc(FritzBaseIdentifiedModel) public protocol BaseIdentifiedModel : AnyObject, FritzManagedModel.ReadModelProvider {
@@ -59,11 +55,13 @@ extension BaseIdentifiedModel {
   }
 }
 @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
-@objc(FritzSwiftIdentifiedModel) public protocol SwiftIdentifiedModel : FritzManagedModel.BaseIdentifiedModel, FritzManagedModel.ReadWriteModelProvider {
+@objc(FritzSwiftIdentifiedModel) public protocol SwiftIdentifiedModel : FritzManagedModel.BaseIdentifiedModel {
 }
 @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
 extension SwiftIdentifiedModel {
+  @available(*, deprecated, message: "See fritzModel().")
   public func fritz() -> Self
+  public func fritzModel() -> FritzManagedModel.FritzMLModel
   public func updateIfNeeded(completionHandler: @escaping (Swift.Bool, Swift.Error?) -> Swift.Void)
   public static func updateIfNeeded(completionHandler: @escaping (Swift.Bool, Swift.Error?) -> Swift.Void)
 }

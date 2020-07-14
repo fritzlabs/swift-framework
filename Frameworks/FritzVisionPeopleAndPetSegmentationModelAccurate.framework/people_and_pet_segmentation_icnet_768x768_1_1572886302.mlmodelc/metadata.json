@@ -1,0 +1,66 @@
+[
+  {
+    "shortDescription" : "",
+    "metadataOutputVersion" : "3.0",
+    "outputSchema" : [
+      {
+        "hasShapeFlexibility" : "0",
+        "isOptional" : "0",
+        "dataType" : "Double",
+        "formattedType" : "MultiArray (Double 2 x 768 x 768)",
+        "shortDescription" : "",
+        "shape" : "[2, 768, 768]",
+        "name" : "output",
+        "type" : "MultiArray"
+      }
+    ],
+    "version" : "",
+    "modelParameters" : [
+
+    ],
+    "author" : "",
+    "specificationVersion" : 1,
+    "license" : "",
+    "isUpdatable" : "0",
+    "availability" : {
+      "macOS" : "10.13",
+      "tvOS" : "11.0",
+      "watchOS" : "4.0",
+      "iOS" : "11.0",
+      "macCatalyst" : "11.0"
+    },
+    "modelType" : {
+      "name" : "MLModelType_neuralNetwork"
+    },
+    "inputSchema" : [
+      {
+        "height" : "768",
+        "colorspace" : "RGB",
+        "isOptional" : "0",
+        "width" : "768",
+        "isColor" : "1",
+        "formattedType" : "Image (Color 768 x 768)",
+        "hasSizeFlexibility" : "0",
+        "type" : "Image",
+        "shortDescription" : "",
+        "name" : "image"
+      }
+    ],
+    "userDefinedMetadata" : {
+      "classes" : ""
+    },
+    "generatedClassName" : "people_and_pet_segmentation_icnet_768x768_1_1572886302",
+    "neuralNetworkLayerTypeHistogram" : {
+      "ActivationReLU" : 57,
+      "Softmax" : 1,
+      "UpsampleBiLinear" : 8,
+      "Add" : 19,
+      "PoolingAverage" : 6,
+      "BatchNorm" : 63,
+      "Convolution" : 64,
+      "PaddingConstant" : 18,
+      "PoolingMax" : 1
+    },
+    "method" : "predict"
+  }
+]

@@ -1,0 +1,70 @@
+[
+  {
+    "shortDescription" : "",
+    "metadataOutputVersion" : "3.0",
+    "outputSchema" : [
+      {
+        "formattedType" : "Image (Color 720 x 1280)",
+        "hasSizeFlexibility" : "1",
+        "shortDescription" : "",
+        "sizeRange" : "[[100, 1920], [100, 1920]]",
+        "width" : "720",
+        "type" : "Image",
+        "isColor" : "1",
+        "height" : "1280",
+        "sizeFlexibility" : "100...1920 x 100...1920",
+        "colorspace" : "RGB",
+        "name" : "stylizedImage",
+        "isOptional" : "0"
+      }
+    ],
+    "version" : "",
+    "modelParameters" : [
+
+    ],
+    "author" : "",
+    "specificationVersion" : 3,
+    "license" : "",
+    "isUpdatable" : "0",
+    "availability" : {
+      "macOS" : "10.14",
+      "tvOS" : "12.0",
+      "watchOS" : "5.0",
+      "iOS" : "12.0",
+      "macCatalyst" : "12.0"
+    },
+    "modelType" : {
+      "name" : "MLModelType_neuralNetwork"
+    },
+    "inputSchema" : [
+      {
+        "formattedType" : "Image (Color 720 x 1280)",
+        "hasSizeFlexibility" : "1",
+        "shortDescription" : "",
+        "sizeRange" : "[[100, 1920], [100, 1920]]",
+        "width" : "720",
+        "type" : "Image",
+        "isColor" : "1",
+        "height" : "1280",
+        "sizeFlexibility" : "100...1920 x 100...1920",
+        "colorspace" : "RGB",
+        "name" : "image",
+        "isOptional" : "0"
+      }
+    ],
+    "userDefinedMetadata" : {
+
+    },
+    "generatedClassName" : "femmes_512x512_a025_stable_flexible",
+    "neuralNetworkLayerTypeHistogram" : {
+      "ActivationReLU" : 10,
+      "Scale" : 1,
+      "Add" : 5,
+      "ActivationTanh" : 1,
+      "Convolution" : 16,
+      "UpsampleNearestNeighbor" : 2,
+      "InstanceBatchNorm" : 16
+    },
+    "method" : "predict"
+  }
+]

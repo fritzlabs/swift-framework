@@ -13,13 +13,17 @@
   "properties" : {
 
   },
-  "storage" : "model.espresso.weights",
+  "analyses" : {
+
+  },
   "format_version" : 200,
+  "storage" : "model.espresso.weights",
   "layers" : [
     {
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv1",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -50,6 +54,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_dw_1",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -68,8 +73,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -78,6 +83,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_pw_1",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -96,8 +102,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -106,6 +112,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_dw_2",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -136,6 +143,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_pw_2",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -154,8 +162,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -164,6 +172,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_dw_3",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -182,8 +191,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -192,6 +201,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_pw_3",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -210,8 +220,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -220,6 +230,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_dw_4",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -250,6 +261,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_pw_4",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -268,8 +280,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -278,6 +290,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_dw_5",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -296,8 +309,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -306,6 +319,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_pw_5",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -324,8 +338,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -334,6 +348,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_dw_6",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -364,6 +379,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_pw_6",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -382,8 +398,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -392,6 +408,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_dw_7",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -410,8 +427,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -420,6 +437,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_pw_7",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -438,8 +456,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -448,6 +466,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_dw_8",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -466,8 +485,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -476,6 +495,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_pw_8",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -494,8 +514,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -504,6 +524,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_dw_9",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -522,8 +543,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -532,6 +553,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_pw_9",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -550,8 +572,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -560,6 +582,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_dw_10",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -578,8 +601,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -588,6 +611,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_pw_10",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -606,8 +630,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -616,6 +640,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_dw_11",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -634,8 +659,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -644,6 +669,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_pw_11",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -662,8 +688,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -672,6 +698,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_dw_12",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -702,6 +729,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_pw_12",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -720,8 +748,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -730,6 +758,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_dw_13",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -748,8 +777,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -758,6 +787,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "conv_pw_13",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -776,29 +806,35 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "bottom" : "conv_pw_13_relu_output",
-      "scaling_factor_y" : 2,
-      "align_corners" : 0,
-      "mode" : 0,
+      "top" : "decoder_upsample_1_output",
+      "use_fractional_scale_factors" : false,
       "weights" : {
 
       },
-      "top" : "decoder_upsample_1_output",
-      "scaling_factor_x" : 2,
+      "fractional_scaling_factor_y" : 1,
       "type" : "upsample",
-      "name" : "decoder_upsample_1"
+      "scaling_factor_x" : 2,
+      "mode" : 0,
+      "align_corners" : 0,
+      "bottom" : "conv_pw_13_relu_output",
+      "debug_info" : "decoder_upsample_1",
+      "fractional_scaling_factor_x" : 1,
+      "is_legacy_mode" : 1,
+      "name" : "decoder_upsample_1",
+      "scaling_factor_y" : 2
     },
     {
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "decoder_conv_pw_1",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -817,20 +853,21 @@
       "weights" : {
 
       },
-      "pad_mode" : 0,
       "Nx" : 1,
+      "pad_mode" : 0,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "alpha" : 1,
       "bottom" : "decoder_upsample_1_output,decoder_conv_pw_1_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "add_1",
       "top" : "add_1_output",
       "type" : "elementwise",
       "name" : "add_1",
@@ -840,6 +877,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "decoder_conv_dw_1_step_1",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -857,8 +895,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -867,6 +905,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "decoder_conv_dw_1_step_2",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -885,29 +924,35 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "bottom" : "decoder_conv_dw_relu_1_output",
-      "scaling_factor_y" : 2,
-      "align_corners" : 0,
-      "mode" : 0,
+      "top" : "decoder_upsample_2_output",
+      "use_fractional_scale_factors" : false,
       "weights" : {
 
       },
-      "top" : "decoder_upsample_2_output",
-      "scaling_factor_x" : 2,
+      "fractional_scaling_factor_y" : 1,
       "type" : "upsample",
-      "name" : "decoder_upsample_2"
+      "scaling_factor_x" : 2,
+      "mode" : 0,
+      "align_corners" : 0,
+      "bottom" : "decoder_conv_dw_relu_1_output",
+      "debug_info" : "decoder_upsample_2",
+      "fractional_scaling_factor_x" : 1,
+      "is_legacy_mode" : 1,
+      "name" : "decoder_upsample_2",
+      "scaling_factor_y" : 2
     },
     {
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "decoder_conv_pw_2",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -926,20 +971,21 @@
       "weights" : {
 
       },
-      "pad_mode" : 0,
       "Nx" : 1,
+      "pad_mode" : 0,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "alpha" : 1,
       "bottom" : "decoder_upsample_2_output,decoder_conv_pw_2_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "add_2",
       "top" : "add_2_output",
       "type" : "elementwise",
       "name" : "add_2",
@@ -949,6 +995,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "decoder_conv_dw_2_step_1",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -966,8 +1013,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -976,6 +1023,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "decoder_conv_dw_2_step_2",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -994,29 +1042,35 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "bottom" : "decoder_conv_dw_relu_2_output",
-      "scaling_factor_y" : 2,
-      "align_corners" : 0,
-      "mode" : 0,
+      "top" : "decoder_upsample_3_output",
+      "use_fractional_scale_factors" : false,
       "weights" : {
 
       },
-      "top" : "decoder_upsample_3_output",
-      "scaling_factor_x" : 2,
+      "fractional_scaling_factor_y" : 1,
       "type" : "upsample",
-      "name" : "decoder_upsample_3"
+      "scaling_factor_x" : 2,
+      "mode" : 0,
+      "align_corners" : 0,
+      "bottom" : "decoder_conv_dw_relu_2_output",
+      "debug_info" : "decoder_upsample_3",
+      "fractional_scaling_factor_x" : 1,
+      "is_legacy_mode" : 1,
+      "name" : "decoder_upsample_3",
+      "scaling_factor_y" : 2
     },
     {
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "decoder_conv_pw_3",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1035,20 +1089,21 @@
       "weights" : {
 
       },
-      "pad_mode" : 0,
       "Nx" : 1,
+      "pad_mode" : 0,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "alpha" : 1,
       "bottom" : "decoder_upsample_3_output,decoder_conv_pw_3_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "add_3",
       "top" : "add_3_output",
       "type" : "elementwise",
       "name" : "add_3",
@@ -1058,6 +1113,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "decoder_conv_dw_3_step_1",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1075,8 +1131,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -1085,6 +1141,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "decoder_conv_dw_3_step_2",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1103,29 +1160,35 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "bottom" : "decoder_conv_dw_relu_3_output",
-      "scaling_factor_y" : 2,
-      "align_corners" : 0,
-      "mode" : 0,
+      "top" : "decoder_upsample_4_output",
+      "use_fractional_scale_factors" : false,
       "weights" : {
 
       },
-      "top" : "decoder_upsample_4_output",
-      "scaling_factor_x" : 2,
+      "fractional_scaling_factor_y" : 1,
       "type" : "upsample",
-      "name" : "decoder_upsample_4"
+      "scaling_factor_x" : 2,
+      "mode" : 0,
+      "align_corners" : 0,
+      "bottom" : "decoder_conv_dw_relu_3_output",
+      "debug_info" : "decoder_upsample_4",
+      "fractional_scaling_factor_x" : 1,
+      "is_legacy_mode" : 1,
+      "name" : "decoder_upsample_4",
+      "scaling_factor_y" : 2
     },
     {
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "decoder_conv_pw_4",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1144,20 +1207,21 @@
       "weights" : {
 
       },
-      "pad_mode" : 0,
       "Nx" : 1,
+      "pad_mode" : 0,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "alpha" : 1,
       "bottom" : "decoder_upsample_4_output,decoder_conv_pw_4_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "add_4",
       "top" : "add_4_output",
       "type" : "elementwise",
       "name" : "add_4",
@@ -1167,6 +1231,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "decoder_conv_dw_4_step_1",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1184,8 +1249,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -1194,6 +1259,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "decoder_conv_dw_4_step_2",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1212,29 +1278,35 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "bottom" : "decoder_conv_dw_relu_4_output",
-      "scaling_factor_y" : 2,
-      "align_corners" : 0,
-      "mode" : 0,
+      "top" : "decoder_upsample_5_output",
+      "use_fractional_scale_factors" : false,
       "weights" : {
 
       },
-      "top" : "decoder_upsample_5_output",
-      "scaling_factor_x" : 2,
+      "fractional_scaling_factor_y" : 1,
       "type" : "upsample",
-      "name" : "decoder_upsample_5"
+      "scaling_factor_x" : 2,
+      "mode" : 0,
+      "align_corners" : 0,
+      "bottom" : "decoder_conv_dw_relu_4_output",
+      "debug_info" : "decoder_upsample_5",
+      "fractional_scaling_factor_x" : 1,
+      "is_legacy_mode" : 1,
+      "name" : "decoder_upsample_5",
+      "scaling_factor_y" : 2
     },
     {
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "decoder_conv_dw_5_step_1",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1252,8 +1324,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -1262,6 +1334,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "decoder_conv_dw_5_step_2",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1280,8 +1353,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -1290,6 +1363,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "decoder_conv2d_1",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1308,11 +1382,14 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
-      "n_parallel" : 1
+      "n_parallel" : 1,
+      "attributes" : {
+        "is_output" : 1
+      }
     }
   ]
 }

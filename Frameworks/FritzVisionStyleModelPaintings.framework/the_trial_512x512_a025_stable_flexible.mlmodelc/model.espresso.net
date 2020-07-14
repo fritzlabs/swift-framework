@@ -13,13 +13,17 @@
   "properties" : {
 
   },
-  "storage" : "model.espresso.weights",
+  "analyses" : {
+
+  },
   "format_version" : 200,
+  "storage" : "model.espresso.weights",
   "layers" : [
     {
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "conv2d_1",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -37,41 +41,44 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 9,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 9,
       "n_parallel" : 1
     },
     {
-      "bottom" : "conv2d_1_output",
-      "training_instancenorm" : 1,
+      "name" : "instance_normalization_1",
       "training_momentum" : 0.89999997615814209,
+      "training_eps" : 0.0010000000474974513,
+      "C" : 8,
       "training" : 1,
+      "training_instancenorm" : 1,
+      "type" : "batchnorm",
       "blob_batchnorm_params" : 3,
+      "bottom" : "conv2d_1_output",
+      "debug_info" : "instance_normalization_1",
       "weights" : {
 
       },
-      "training_eps" : 0.0010000000474974513,
-      "top" : "instance_normalization_1_output",
-      "C" : 8,
-      "type" : "batchnorm",
-      "name" : "instance_normalization_1"
+      "top" : "instance_normalization_1_output"
     },
     {
-      "mode" : 0,
+      "bottom" : "instance_normalization_1_output",
       "weights" : {
 
       },
+      "mode" : 0,
+      "debug_info" : "activation_1",
       "top" : "activation_1_output",
       "type" : "activation",
-      "name" : "activation_1",
-      "bottom" : "instance_normalization_1_output"
+      "name" : "activation_1"
     },
     {
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "conv2d_2",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -98,34 +105,37 @@
       "n_parallel" : 1
     },
     {
-      "bottom" : "conv2d_2_output",
-      "training_instancenorm" : 1,
+      "name" : "instance_normalization_2",
       "training_momentum" : 0.89999997615814209,
+      "training_eps" : 0.0010000000474974513,
+      "C" : 16,
       "training" : 1,
+      "training_instancenorm" : 1,
+      "type" : "batchnorm",
       "blob_batchnorm_params" : 7,
+      "bottom" : "conv2d_2_output",
+      "debug_info" : "instance_normalization_2",
       "weights" : {
 
       },
-      "training_eps" : 0.0010000000474974513,
-      "top" : "instance_normalization_2_output",
-      "C" : 16,
-      "type" : "batchnorm",
-      "name" : "instance_normalization_2"
+      "top" : "instance_normalization_2_output"
     },
     {
-      "mode" : 0,
+      "bottom" : "instance_normalization_2_output",
       "weights" : {
 
       },
+      "mode" : 0,
+      "debug_info" : "activation_2",
       "top" : "activation_2_output",
       "type" : "activation",
-      "name" : "activation_2",
-      "bottom" : "instance_normalization_2_output"
+      "name" : "activation_2"
     },
     {
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "conv2d_3",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -152,34 +162,37 @@
       "n_parallel" : 1
     },
     {
-      "bottom" : "conv2d_3_output",
-      "training_instancenorm" : 1,
+      "name" : "instance_normalization_3",
       "training_momentum" : 0.89999997615814209,
+      "training_eps" : 0.0010000000474974513,
+      "C" : 32,
       "training" : 1,
+      "training_instancenorm" : 1,
+      "type" : "batchnorm",
       "blob_batchnorm_params" : 11,
+      "bottom" : "conv2d_3_output",
+      "debug_info" : "instance_normalization_3",
       "weights" : {
 
       },
-      "training_eps" : 0.0010000000474974513,
-      "top" : "instance_normalization_3_output",
-      "C" : 32,
-      "type" : "batchnorm",
-      "name" : "instance_normalization_3"
+      "top" : "instance_normalization_3_output"
     },
     {
-      "mode" : 0,
+      "bottom" : "instance_normalization_3_output",
       "weights" : {
 
       },
+      "mode" : 0,
+      "debug_info" : "activation_3",
       "top" : "activation_3_output",
       "type" : "activation",
-      "name" : "activation_3",
-      "bottom" : "instance_normalization_3_output"
+      "name" : "activation_3"
     },
     {
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "conv2d_4",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -197,41 +210,44 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
     },
     {
-      "bottom" : "conv2d_4_output",
-      "training_instancenorm" : 1,
+      "name" : "instance_normalization_4",
       "training_momentum" : 0.89999997615814209,
+      "training_eps" : 0.0010000000474974513,
+      "C" : 32,
       "training" : 1,
+      "training_instancenorm" : 1,
+      "type" : "batchnorm",
       "blob_batchnorm_params" : 15,
+      "bottom" : "conv2d_4_output",
+      "debug_info" : "instance_normalization_4",
       "weights" : {
 
       },
-      "training_eps" : 0.0010000000474974513,
-      "top" : "instance_normalization_4_output",
-      "C" : 32,
-      "type" : "batchnorm",
-      "name" : "instance_normalization_4"
+      "top" : "instance_normalization_4_output"
     },
     {
-      "mode" : 0,
+      "bottom" : "instance_normalization_4_output",
       "weights" : {
 
       },
+      "mode" : 0,
+      "debug_info" : "activation_4",
       "top" : "activation_4_output",
       "type" : "activation",
-      "name" : "activation_4",
-      "bottom" : "instance_normalization_4_output"
+      "name" : "activation_4"
     },
     {
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "conv2d_5",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -249,35 +265,37 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
     },
     {
-      "bottom" : "conv2d_5_output",
-      "training_instancenorm" : 1,
+      "name" : "instance_normalization_5",
       "training_momentum" : 0.89999997615814209,
+      "training_eps" : 0.0010000000474974513,
+      "C" : 32,
       "training" : 1,
+      "training_instancenorm" : 1,
+      "type" : "batchnorm",
       "blob_batchnorm_params" : 19,
+      "bottom" : "conv2d_5_output",
+      "debug_info" : "instance_normalization_5",
       "weights" : {
 
       },
-      "training_eps" : 0.0010000000474974513,
-      "top" : "instance_normalization_5_output",
-      "C" : 32,
-      "type" : "batchnorm",
-      "name" : "instance_normalization_5"
+      "top" : "instance_normalization_5_output"
     },
     {
-      "alpha" : 1,
       "bottom" : "instance_normalization_5_output,activation_3_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "add_1",
       "top" : "add_1_output",
       "type" : "elementwise",
       "name" : "add_1",
@@ -287,6 +305,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "conv2d_6",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -304,41 +323,44 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
     },
     {
-      "bottom" : "conv2d_6_output",
-      "training_instancenorm" : 1,
+      "name" : "instance_normalization_6",
       "training_momentum" : 0.89999997615814209,
+      "training_eps" : 0.0010000000474974513,
+      "C" : 32,
       "training" : 1,
+      "training_instancenorm" : 1,
+      "type" : "batchnorm",
       "blob_batchnorm_params" : 23,
+      "bottom" : "conv2d_6_output",
+      "debug_info" : "instance_normalization_6",
       "weights" : {
 
       },
-      "training_eps" : 0.0010000000474974513,
-      "top" : "instance_normalization_6_output",
-      "C" : 32,
-      "type" : "batchnorm",
-      "name" : "instance_normalization_6"
+      "top" : "instance_normalization_6_output"
     },
     {
-      "mode" : 0,
+      "bottom" : "instance_normalization_6_output",
       "weights" : {
 
       },
+      "mode" : 0,
+      "debug_info" : "activation_5",
       "top" : "activation_5_output",
       "type" : "activation",
-      "name" : "activation_5",
-      "bottom" : "instance_normalization_6_output"
+      "name" : "activation_5"
     },
     {
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "conv2d_7",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -356,35 +378,37 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
     },
     {
-      "bottom" : "conv2d_7_output",
-      "training_instancenorm" : 1,
+      "name" : "instance_normalization_7",
       "training_momentum" : 0.89999997615814209,
+      "training_eps" : 0.0010000000474974513,
+      "C" : 32,
       "training" : 1,
+      "training_instancenorm" : 1,
+      "type" : "batchnorm",
       "blob_batchnorm_params" : 27,
+      "bottom" : "conv2d_7_output",
+      "debug_info" : "instance_normalization_7",
       "weights" : {
 
       },
-      "training_eps" : 0.0010000000474974513,
-      "top" : "instance_normalization_7_output",
-      "C" : 32,
-      "type" : "batchnorm",
-      "name" : "instance_normalization_7"
+      "top" : "instance_normalization_7_output"
     },
     {
-      "alpha" : 1,
       "bottom" : "instance_normalization_7_output,add_1_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "add_2",
       "top" : "add_2_output",
       "type" : "elementwise",
       "name" : "add_2",
@@ -394,6 +418,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "conv2d_8",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -411,41 +436,44 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
     },
     {
-      "bottom" : "conv2d_8_output",
-      "training_instancenorm" : 1,
+      "name" : "instance_normalization_8",
       "training_momentum" : 0.89999997615814209,
+      "training_eps" : 0.0010000000474974513,
+      "C" : 32,
       "training" : 1,
+      "training_instancenorm" : 1,
+      "type" : "batchnorm",
       "blob_batchnorm_params" : 31,
+      "bottom" : "conv2d_8_output",
+      "debug_info" : "instance_normalization_8",
       "weights" : {
 
       },
-      "training_eps" : 0.0010000000474974513,
-      "top" : "instance_normalization_8_output",
-      "C" : 32,
-      "type" : "batchnorm",
-      "name" : "instance_normalization_8"
+      "top" : "instance_normalization_8_output"
     },
     {
-      "mode" : 0,
+      "bottom" : "instance_normalization_8_output",
       "weights" : {
 
       },
+      "mode" : 0,
+      "debug_info" : "activation_6",
       "top" : "activation_6_output",
       "type" : "activation",
-      "name" : "activation_6",
-      "bottom" : "instance_normalization_8_output"
+      "name" : "activation_6"
     },
     {
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "conv2d_9",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -463,35 +491,37 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
     },
     {
-      "bottom" : "conv2d_9_output",
-      "training_instancenorm" : 1,
+      "name" : "instance_normalization_9",
       "training_momentum" : 0.89999997615814209,
+      "training_eps" : 0.0010000000474974513,
+      "C" : 32,
       "training" : 1,
+      "training_instancenorm" : 1,
+      "type" : "batchnorm",
       "blob_batchnorm_params" : 35,
+      "bottom" : "conv2d_9_output",
+      "debug_info" : "instance_normalization_9",
       "weights" : {
 
       },
-      "training_eps" : 0.0010000000474974513,
-      "top" : "instance_normalization_9_output",
-      "C" : 32,
-      "type" : "batchnorm",
-      "name" : "instance_normalization_9"
+      "top" : "instance_normalization_9_output"
     },
     {
-      "alpha" : 1,
       "bottom" : "instance_normalization_9_output,add_2_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "add_3",
       "top" : "add_3_output",
       "type" : "elementwise",
       "name" : "add_3",
@@ -501,6 +531,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "conv2d_10",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -518,41 +549,44 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
     },
     {
-      "bottom" : "conv2d_10_output",
-      "training_instancenorm" : 1,
+      "name" : "instance_normalization_10",
       "training_momentum" : 0.89999997615814209,
+      "training_eps" : 0.0010000000474974513,
+      "C" : 32,
       "training" : 1,
+      "training_instancenorm" : 1,
+      "type" : "batchnorm",
       "blob_batchnorm_params" : 39,
+      "bottom" : "conv2d_10_output",
+      "debug_info" : "instance_normalization_10",
       "weights" : {
 
       },
-      "training_eps" : 0.0010000000474974513,
-      "top" : "instance_normalization_10_output",
-      "C" : 32,
-      "type" : "batchnorm",
-      "name" : "instance_normalization_10"
+      "top" : "instance_normalization_10_output"
     },
     {
-      "mode" : 0,
+      "bottom" : "instance_normalization_10_output",
       "weights" : {
 
       },
+      "mode" : 0,
+      "debug_info" : "activation_7",
       "top" : "activation_7_output",
       "type" : "activation",
-      "name" : "activation_7",
-      "bottom" : "instance_normalization_10_output"
+      "name" : "activation_7"
     },
     {
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "conv2d_11",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -570,35 +604,37 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
     },
     {
-      "bottom" : "conv2d_11_output",
-      "training_instancenorm" : 1,
+      "name" : "instance_normalization_11",
       "training_momentum" : 0.89999997615814209,
+      "training_eps" : 0.0010000000474974513,
+      "C" : 32,
       "training" : 1,
+      "training_instancenorm" : 1,
+      "type" : "batchnorm",
       "blob_batchnorm_params" : 43,
+      "bottom" : "conv2d_11_output",
+      "debug_info" : "instance_normalization_11",
       "weights" : {
 
       },
-      "training_eps" : 0.0010000000474974513,
-      "top" : "instance_normalization_11_output",
-      "C" : 32,
-      "type" : "batchnorm",
-      "name" : "instance_normalization_11"
+      "top" : "instance_normalization_11_output"
     },
     {
-      "alpha" : 1,
       "bottom" : "instance_normalization_11_output,add_3_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "add_4",
       "top" : "add_4_output",
       "type" : "elementwise",
       "name" : "add_4",
@@ -608,6 +644,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "conv2d_12",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -625,41 +662,44 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
     },
     {
-      "bottom" : "conv2d_12_output",
-      "training_instancenorm" : 1,
+      "name" : "instance_normalization_12",
       "training_momentum" : 0.89999997615814209,
+      "training_eps" : 0.0010000000474974513,
+      "C" : 32,
       "training" : 1,
+      "training_instancenorm" : 1,
+      "type" : "batchnorm",
       "blob_batchnorm_params" : 47,
+      "bottom" : "conv2d_12_output",
+      "debug_info" : "instance_normalization_12",
       "weights" : {
 
       },
-      "training_eps" : 0.0010000000474974513,
-      "top" : "instance_normalization_12_output",
-      "C" : 32,
-      "type" : "batchnorm",
-      "name" : "instance_normalization_12"
+      "top" : "instance_normalization_12_output"
     },
     {
-      "mode" : 0,
+      "bottom" : "instance_normalization_12_output",
       "weights" : {
 
       },
+      "mode" : 0,
+      "debug_info" : "activation_8",
       "top" : "activation_8_output",
       "type" : "activation",
-      "name" : "activation_8",
-      "bottom" : "instance_normalization_12_output"
+      "name" : "activation_8"
     },
     {
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "conv2d_13",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -677,57 +717,65 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
     },
     {
-      "bottom" : "conv2d_13_output",
-      "training_instancenorm" : 1,
+      "name" : "instance_normalization_13",
       "training_momentum" : 0.89999997615814209,
+      "training_eps" : 0.0010000000474974513,
+      "C" : 32,
       "training" : 1,
+      "training_instancenorm" : 1,
+      "type" : "batchnorm",
       "blob_batchnorm_params" : 51,
+      "bottom" : "conv2d_13_output",
+      "debug_info" : "instance_normalization_13",
       "weights" : {
 
       },
-      "training_eps" : 0.0010000000474974513,
-      "top" : "instance_normalization_13_output",
-      "C" : 32,
-      "type" : "batchnorm",
-      "name" : "instance_normalization_13"
+      "top" : "instance_normalization_13_output"
     },
     {
-      "alpha" : 1,
       "bottom" : "instance_normalization_13_output,add_4_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "add_5",
       "top" : "add_5_output",
       "type" : "elementwise",
       "name" : "add_5",
       "beta" : 0
     },
     {
-      "bottom" : "add_5_output",
-      "scaling_factor_y" : 2,
-      "align_corners" : 0,
-      "mode" : 0,
+      "top" : "up_sampling2d_1_output",
+      "use_fractional_scale_factors" : false,
       "weights" : {
 
       },
-      "top" : "up_sampling2d_1_output",
-      "scaling_factor_x" : 2,
+      "fractional_scaling_factor_y" : 1,
       "type" : "upsample",
-      "name" : "up_sampling2d_1"
+      "scaling_factor_x" : 2,
+      "mode" : 0,
+      "align_corners" : 0,
+      "bottom" : "add_5_output",
+      "debug_info" : "up_sampling2d_1",
+      "fractional_scaling_factor_x" : 1,
+      "is_legacy_mode" : 1,
+      "name" : "up_sampling2d_1",
+      "scaling_factor_y" : 2
     },
     {
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "conv2d_14",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -745,54 +793,62 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
     },
     {
-      "bottom" : "conv2d_14_output",
-      "training_instancenorm" : 1,
+      "name" : "instance_normalization_14",
       "training_momentum" : 0.89999997615814209,
+      "training_eps" : 0.0010000000474974513,
+      "C" : 16,
       "training" : 1,
+      "training_instancenorm" : 1,
+      "type" : "batchnorm",
       "blob_batchnorm_params" : 55,
+      "bottom" : "conv2d_14_output",
+      "debug_info" : "instance_normalization_14",
       "weights" : {
 
       },
-      "training_eps" : 0.0010000000474974513,
-      "top" : "instance_normalization_14_output",
-      "C" : 16,
-      "type" : "batchnorm",
-      "name" : "instance_normalization_14"
+      "top" : "instance_normalization_14_output"
     },
     {
-      "mode" : 0,
+      "bottom" : "instance_normalization_14_output",
       "weights" : {
 
       },
+      "mode" : 0,
+      "debug_info" : "activation_9",
       "top" : "activation_9_output",
       "type" : "activation",
-      "name" : "activation_9",
-      "bottom" : "instance_normalization_14_output"
+      "name" : "activation_9"
     },
     {
-      "bottom" : "activation_9_output",
-      "scaling_factor_y" : 2,
-      "align_corners" : 0,
-      "mode" : 0,
+      "top" : "up_sampling2d_2_output",
+      "use_fractional_scale_factors" : false,
       "weights" : {
 
       },
-      "top" : "up_sampling2d_2_output",
-      "scaling_factor_x" : 2,
+      "fractional_scaling_factor_y" : 1,
       "type" : "upsample",
-      "name" : "up_sampling2d_2"
+      "scaling_factor_x" : 2,
+      "mode" : 0,
+      "align_corners" : 0,
+      "bottom" : "activation_9_output",
+      "debug_info" : "up_sampling2d_2",
+      "fractional_scaling_factor_x" : 1,
+      "is_legacy_mode" : 1,
+      "name" : "up_sampling2d_2",
+      "scaling_factor_y" : 2
     },
     {
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "conv2d_15",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -810,41 +866,44 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
     },
     {
-      "bottom" : "conv2d_15_output",
-      "training_instancenorm" : 1,
+      "name" : "instance_normalization_15",
       "training_momentum" : 0.89999997615814209,
+      "training_eps" : 0.0010000000474974513,
+      "C" : 8,
       "training" : 1,
+      "training_instancenorm" : 1,
+      "type" : "batchnorm",
       "blob_batchnorm_params" : 59,
+      "bottom" : "conv2d_15_output",
+      "debug_info" : "instance_normalization_15",
       "weights" : {
 
       },
-      "training_eps" : 0.0010000000474974513,
-      "top" : "instance_normalization_15_output",
-      "C" : 8,
-      "type" : "batchnorm",
-      "name" : "instance_normalization_15"
+      "top" : "instance_normalization_15_output"
     },
     {
-      "mode" : 0,
+      "bottom" : "instance_normalization_15_output",
       "weights" : {
 
       },
+      "mode" : 0,
+      "debug_info" : "activation_10",
       "top" : "activation_10_output",
       "type" : "activation",
-      "name" : "activation_10",
-      "bottom" : "instance_normalization_15_output"
+      "name" : "activation_10"
     },
     {
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "conv2d_16",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -862,45 +921,48 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 9,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 9,
       "n_parallel" : 1
     },
     {
-      "bottom" : "conv2d_16_output",
-      "training_instancenorm" : 1,
+      "name" : "instance_normalization_16",
       "training_momentum" : 0.89999997615814209,
+      "training_eps" : 0.0010000000474974513,
+      "C" : 3,
       "training" : 1,
+      "training_instancenorm" : 1,
+      "type" : "batchnorm",
       "blob_batchnorm_params" : 63,
+      "bottom" : "conv2d_16_output",
+      "debug_info" : "instance_normalization_16",
       "weights" : {
 
       },
-      "training_eps" : 0.0010000000474974513,
-      "top" : "instance_normalization_16_output",
-      "C" : 3,
-      "type" : "batchnorm",
-      "name" : "instance_normalization_16"
+      "top" : "instance_normalization_16_output"
     },
     {
-      "mode" : 1,
+      "bottom" : "instance_normalization_16_output",
       "weights" : {
 
       },
+      "mode" : 1,
+      "debug_info" : "activation_11",
       "top" : "activation_11_output",
       "type" : "activation",
-      "name" : "activation_11",
-      "bottom" : "instance_normalization_16_output"
+      "name" : "activation_11"
     },
     {
-      "k" : 3,
       "bottom" : "",
+      "k" : 3,
       "n" : 1,
       "weights" : {
 
       },
       "h" : 1,
+      "debug_info" : "deprocess_stylized_image_1",
       "constant_blob" : 65,
       "top" : "deprocess_stylized_image_1_constant_in_scale",
       "w" : 1,
@@ -908,13 +970,14 @@
       "name" : "deprocess_stylized_image_1_constant_in_scale"
     },
     {
-      "k" : 3,
       "bottom" : "",
+      "k" : 3,
       "n" : 1,
       "weights" : {
 
       },
       "h" : 1,
+      "debug_info" : "deprocess_stylized_image_1",
       "constant_blob" : 67,
       "top" : "deprocess_stylized_image_1_constant_in_bias",
       "w" : 1,
@@ -922,30 +985,35 @@
       "name" : "deprocess_stylized_image_1_constant_in_bias"
     },
     {
-      "alpha" : 1,
       "bottom" : "activation_11_output,deprocess_stylized_image_1_constant_in_scale",
+      "alpha" : 1,
       "operation" : 1,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "deprocess_stylized_image_1",
       "top" : "deprocess_stylized_image_1_mul_out",
       "type" : "elementwise",
       "name" : "deprocess_stylized_image_1_mul_out",
       "beta" : 0
     },
     {
-      "alpha" : 1,
       "bottom" : "deprocess_stylized_image_1_mul_out,deprocess_stylized_image_1_constant_in_bias",
+      "alpha" : 1,
       "operation" : 0,
+      "beta" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "deprocess_stylized_image_1",
       "top" : "stylizedImage",
       "type" : "elementwise",
       "name" : "deprocess_stylized_image_1",
-      "beta" : 0
+      "attributes" : {
+        "is_output" : 1
+      }
     }
   ]
 }

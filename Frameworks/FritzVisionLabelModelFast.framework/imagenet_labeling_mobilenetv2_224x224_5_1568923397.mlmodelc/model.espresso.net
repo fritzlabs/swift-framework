@@ -13,13 +13,17 @@
   "properties" : {
 
   },
-  "storage" : "model.espresso.weights",
+  "analyses" : {
+
+  },
   "format_version" : 200,
+  "storage" : "model.espresso.weights",
   "layers" : [
     {
       "pad_r" : 1,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "Conv1",
       "pad_fill_mode" : 0,
       "pad_b" : 1,
       "pad_l" : 0,
@@ -53,19 +57,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "Conv1_relu__neg__",
       "top" : "Conv1_relu_output_relu_neg",
       "type" : "activation",
       "name" : "Conv1_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "Conv1_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "Conv1_relu__clip__",
       "top" : "Conv1_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "Conv1_relu__clip__",
@@ -78,6 +84,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "Conv1_relu_neg2",
       "top" : "Conv1_relu_output",
       "type" : "activation",
       "name" : "Conv1_relu_neg2",
@@ -87,6 +94,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "expanded_conv_depthwise",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -105,8 +113,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -118,19 +126,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "expanded_conv_depthwise_relu__neg__",
       "top" : "expanded_conv_depthwise_relu_output_relu_neg",
       "type" : "activation",
       "name" : "expanded_conv_depthwise_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "expanded_conv_depthwise_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "expanded_conv_depthwise_relu__clip__",
       "top" : "expanded_conv_depthwise_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "expanded_conv_depthwise_relu__clip__",
@@ -143,6 +153,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "expanded_conv_depthwise_relu_neg2",
       "top" : "expanded_conv_depthwise_relu_output",
       "type" : "activation",
       "name" : "expanded_conv_depthwise_relu_neg2",
@@ -152,6 +163,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "expanded_conv_project",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -170,8 +182,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -180,6 +192,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_1_expand",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -198,8 +211,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -211,19 +224,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_1_expand_relu__neg__",
       "top" : "block_1_expand_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_1_expand_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_1_expand_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_1_expand_relu__clip__",
       "top" : "block_1_expand_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_1_expand_relu__clip__",
@@ -236,6 +251,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_1_expand_relu_neg2",
       "top" : "block_1_expand_relu_output",
       "type" : "activation",
       "name" : "block_1_expand_relu_neg2",
@@ -245,6 +261,7 @@
       "pad_r" : 1,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_1_depthwise",
       "pad_fill_mode" : 0,
       "pad_b" : 1,
       "pad_l" : 0,
@@ -278,19 +295,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_1_depthwise_relu__neg__",
       "top" : "block_1_depthwise_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_1_depthwise_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_1_depthwise_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_1_depthwise_relu__clip__",
       "top" : "block_1_depthwise_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_1_depthwise_relu__clip__",
@@ -303,6 +322,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_1_depthwise_relu_neg2",
       "top" : "block_1_depthwise_relu_output",
       "type" : "activation",
       "name" : "block_1_depthwise_relu_neg2",
@@ -312,6 +332,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "block_1_project",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -330,8 +351,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -340,6 +361,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_2_expand",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -358,8 +380,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -371,19 +393,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_2_expand_relu__neg__",
       "top" : "block_2_expand_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_2_expand_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_2_expand_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_2_expand_relu__clip__",
       "top" : "block_2_expand_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_2_expand_relu__clip__",
@@ -396,6 +420,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_2_expand_relu_neg2",
       "top" : "block_2_expand_relu_output",
       "type" : "activation",
       "name" : "block_2_expand_relu_neg2",
@@ -405,6 +430,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_2_depthwise",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -423,8 +449,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -436,19 +462,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_2_depthwise_relu__neg__",
       "top" : "block_2_depthwise_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_2_depthwise_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_2_depthwise_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_2_depthwise_relu__clip__",
       "top" : "block_2_depthwise_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_2_depthwise_relu__clip__",
@@ -461,6 +489,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_2_depthwise_relu_neg2",
       "top" : "block_2_depthwise_relu_output",
       "type" : "activation",
       "name" : "block_2_depthwise_relu_neg2",
@@ -470,6 +499,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "block_2_project",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -488,20 +518,21 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "alpha" : 1,
       "bottom" : "block_1_project_BN_output,block_2_project_BN_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_2_add",
       "top" : "block_2_add_output",
       "type" : "elementwise",
       "name" : "block_2_add",
@@ -511,6 +542,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_3_expand",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -529,8 +561,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -542,19 +574,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_3_expand_relu__neg__",
       "top" : "block_3_expand_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_3_expand_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_3_expand_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_3_expand_relu__clip__",
       "top" : "block_3_expand_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_3_expand_relu__clip__",
@@ -567,6 +601,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_3_expand_relu_neg2",
       "top" : "block_3_expand_relu_output",
       "type" : "activation",
       "name" : "block_3_expand_relu_neg2",
@@ -576,6 +611,7 @@
       "pad_r" : 1,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_3_depthwise",
       "pad_fill_mode" : 0,
       "pad_b" : 1,
       "pad_l" : 0,
@@ -609,19 +645,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_3_depthwise_relu__neg__",
       "top" : "block_3_depthwise_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_3_depthwise_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_3_depthwise_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_3_depthwise_relu__clip__",
       "top" : "block_3_depthwise_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_3_depthwise_relu__clip__",
@@ -634,6 +672,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_3_depthwise_relu_neg2",
       "top" : "block_3_depthwise_relu_output",
       "type" : "activation",
       "name" : "block_3_depthwise_relu_neg2",
@@ -643,6 +682,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "block_3_project",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -661,8 +701,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -671,6 +711,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_4_expand",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -689,8 +730,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -702,19 +743,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_4_expand_relu__neg__",
       "top" : "block_4_expand_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_4_expand_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_4_expand_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_4_expand_relu__clip__",
       "top" : "block_4_expand_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_4_expand_relu__clip__",
@@ -727,6 +770,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_4_expand_relu_neg2",
       "top" : "block_4_expand_relu_output",
       "type" : "activation",
       "name" : "block_4_expand_relu_neg2",
@@ -736,6 +780,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_4_depthwise",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -754,8 +799,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -767,19 +812,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_4_depthwise_relu__neg__",
       "top" : "block_4_depthwise_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_4_depthwise_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_4_depthwise_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_4_depthwise_relu__clip__",
       "top" : "block_4_depthwise_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_4_depthwise_relu__clip__",
@@ -792,6 +839,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_4_depthwise_relu_neg2",
       "top" : "block_4_depthwise_relu_output",
       "type" : "activation",
       "name" : "block_4_depthwise_relu_neg2",
@@ -801,6 +849,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "block_4_project",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -819,20 +868,21 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "alpha" : 1,
       "bottom" : "block_3_project_BN_output,block_4_project_BN_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_4_add",
       "top" : "block_4_add_output",
       "type" : "elementwise",
       "name" : "block_4_add",
@@ -842,6 +892,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_5_expand",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -860,8 +911,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -873,19 +924,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_5_expand_relu__neg__",
       "top" : "block_5_expand_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_5_expand_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_5_expand_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_5_expand_relu__clip__",
       "top" : "block_5_expand_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_5_expand_relu__clip__",
@@ -898,6 +951,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_5_expand_relu_neg2",
       "top" : "block_5_expand_relu_output",
       "type" : "activation",
       "name" : "block_5_expand_relu_neg2",
@@ -907,6 +961,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_5_depthwise",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -925,8 +980,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -938,19 +993,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_5_depthwise_relu__neg__",
       "top" : "block_5_depthwise_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_5_depthwise_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_5_depthwise_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_5_depthwise_relu__clip__",
       "top" : "block_5_depthwise_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_5_depthwise_relu__clip__",
@@ -963,6 +1020,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_5_depthwise_relu_neg2",
       "top" : "block_5_depthwise_relu_output",
       "type" : "activation",
       "name" : "block_5_depthwise_relu_neg2",
@@ -972,6 +1030,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "block_5_project",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -990,20 +1049,21 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "alpha" : 1,
       "bottom" : "block_4_add_output,block_5_project_BN_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_5_add",
       "top" : "block_5_add_output",
       "type" : "elementwise",
       "name" : "block_5_add",
@@ -1013,6 +1073,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_6_expand",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1031,8 +1092,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -1044,19 +1105,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_6_expand_relu__neg__",
       "top" : "block_6_expand_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_6_expand_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_6_expand_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_6_expand_relu__clip__",
       "top" : "block_6_expand_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_6_expand_relu__clip__",
@@ -1069,6 +1132,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_6_expand_relu_neg2",
       "top" : "block_6_expand_relu_output",
       "type" : "activation",
       "name" : "block_6_expand_relu_neg2",
@@ -1078,6 +1142,7 @@
       "pad_r" : 1,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_6_depthwise",
       "pad_fill_mode" : 0,
       "pad_b" : 1,
       "pad_l" : 0,
@@ -1111,19 +1176,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_6_depthwise_relu__neg__",
       "top" : "block_6_depthwise_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_6_depthwise_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_6_depthwise_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_6_depthwise_relu__clip__",
       "top" : "block_6_depthwise_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_6_depthwise_relu__clip__",
@@ -1136,6 +1203,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_6_depthwise_relu_neg2",
       "top" : "block_6_depthwise_relu_output",
       "type" : "activation",
       "name" : "block_6_depthwise_relu_neg2",
@@ -1145,6 +1213,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "block_6_project",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1163,8 +1232,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -1173,6 +1242,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_7_expand",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1191,8 +1261,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -1204,19 +1274,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_7_expand_relu__neg__",
       "top" : "block_7_expand_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_7_expand_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_7_expand_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_7_expand_relu__clip__",
       "top" : "block_7_expand_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_7_expand_relu__clip__",
@@ -1229,6 +1301,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_7_expand_relu_neg2",
       "top" : "block_7_expand_relu_output",
       "type" : "activation",
       "name" : "block_7_expand_relu_neg2",
@@ -1238,6 +1311,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_7_depthwise",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1256,8 +1330,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -1269,19 +1343,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_7_depthwise_relu__neg__",
       "top" : "block_7_depthwise_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_7_depthwise_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_7_depthwise_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_7_depthwise_relu__clip__",
       "top" : "block_7_depthwise_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_7_depthwise_relu__clip__",
@@ -1294,6 +1370,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_7_depthwise_relu_neg2",
       "top" : "block_7_depthwise_relu_output",
       "type" : "activation",
       "name" : "block_7_depthwise_relu_neg2",
@@ -1303,6 +1380,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "block_7_project",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1321,20 +1399,21 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "alpha" : 1,
       "bottom" : "block_6_project_BN_output,block_7_project_BN_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_7_add",
       "top" : "block_7_add_output",
       "type" : "elementwise",
       "name" : "block_7_add",
@@ -1344,6 +1423,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_8_expand",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1362,8 +1442,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -1375,19 +1455,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_8_expand_relu__neg__",
       "top" : "block_8_expand_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_8_expand_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_8_expand_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_8_expand_relu__clip__",
       "top" : "block_8_expand_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_8_expand_relu__clip__",
@@ -1400,6 +1482,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_8_expand_relu_neg2",
       "top" : "block_8_expand_relu_output",
       "type" : "activation",
       "name" : "block_8_expand_relu_neg2",
@@ -1409,6 +1492,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_8_depthwise",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1427,8 +1511,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -1440,19 +1524,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_8_depthwise_relu__neg__",
       "top" : "block_8_depthwise_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_8_depthwise_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_8_depthwise_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_8_depthwise_relu__clip__",
       "top" : "block_8_depthwise_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_8_depthwise_relu__clip__",
@@ -1465,6 +1551,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_8_depthwise_relu_neg2",
       "top" : "block_8_depthwise_relu_output",
       "type" : "activation",
       "name" : "block_8_depthwise_relu_neg2",
@@ -1474,6 +1561,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "block_8_project",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1492,20 +1580,21 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "alpha" : 1,
       "bottom" : "block_7_add_output,block_8_project_BN_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_8_add",
       "top" : "block_8_add_output",
       "type" : "elementwise",
       "name" : "block_8_add",
@@ -1515,6 +1604,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_9_expand",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1533,8 +1623,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -1546,19 +1636,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_9_expand_relu__neg__",
       "top" : "block_9_expand_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_9_expand_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_9_expand_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_9_expand_relu__clip__",
       "top" : "block_9_expand_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_9_expand_relu__clip__",
@@ -1571,6 +1663,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_9_expand_relu_neg2",
       "top" : "block_9_expand_relu_output",
       "type" : "activation",
       "name" : "block_9_expand_relu_neg2",
@@ -1580,6 +1673,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_9_depthwise",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1598,8 +1692,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -1611,19 +1705,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_9_depthwise_relu__neg__",
       "top" : "block_9_depthwise_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_9_depthwise_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_9_depthwise_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_9_depthwise_relu__clip__",
       "top" : "block_9_depthwise_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_9_depthwise_relu__clip__",
@@ -1636,6 +1732,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_9_depthwise_relu_neg2",
       "top" : "block_9_depthwise_relu_output",
       "type" : "activation",
       "name" : "block_9_depthwise_relu_neg2",
@@ -1645,6 +1742,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "block_9_project",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1663,20 +1761,21 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "alpha" : 1,
       "bottom" : "block_8_add_output,block_9_project_BN_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_9_add",
       "top" : "block_9_add_output",
       "type" : "elementwise",
       "name" : "block_9_add",
@@ -1686,6 +1785,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_10_expand",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1704,8 +1804,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -1717,19 +1817,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_10_expand_relu__neg__",
       "top" : "block_10_expand_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_10_expand_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_10_expand_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_10_expand_relu__clip__",
       "top" : "block_10_expand_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_10_expand_relu__clip__",
@@ -1742,6 +1844,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_10_expand_relu_neg2",
       "top" : "block_10_expand_relu_output",
       "type" : "activation",
       "name" : "block_10_expand_relu_neg2",
@@ -1751,6 +1854,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_10_depthwise",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1769,8 +1873,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -1782,19 +1886,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_10_depthwise_relu__neg__",
       "top" : "block_10_depthwise_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_10_depthwise_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_10_depthwise_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_10_depthwise_relu__clip__",
       "top" : "block_10_depthwise_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_10_depthwise_relu__clip__",
@@ -1807,6 +1913,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_10_depthwise_relu_neg2",
       "top" : "block_10_depthwise_relu_output",
       "type" : "activation",
       "name" : "block_10_depthwise_relu_neg2",
@@ -1816,6 +1923,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "block_10_project",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1834,8 +1942,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -1844,6 +1952,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_11_expand",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1862,8 +1971,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -1875,19 +1984,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_11_expand_relu__neg__",
       "top" : "block_11_expand_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_11_expand_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_11_expand_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_11_expand_relu__clip__",
       "top" : "block_11_expand_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_11_expand_relu__clip__",
@@ -1900,6 +2011,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_11_expand_relu_neg2",
       "top" : "block_11_expand_relu_output",
       "type" : "activation",
       "name" : "block_11_expand_relu_neg2",
@@ -1909,6 +2021,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_11_depthwise",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1927,8 +2040,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -1940,19 +2053,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_11_depthwise_relu__neg__",
       "top" : "block_11_depthwise_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_11_depthwise_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_11_depthwise_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_11_depthwise_relu__clip__",
       "top" : "block_11_depthwise_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_11_depthwise_relu__clip__",
@@ -1965,6 +2080,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_11_depthwise_relu_neg2",
       "top" : "block_11_depthwise_relu_output",
       "type" : "activation",
       "name" : "block_11_depthwise_relu_neg2",
@@ -1974,6 +2090,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "block_11_project",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -1992,20 +2109,21 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "alpha" : 1,
       "bottom" : "block_10_project_BN_output,block_11_project_BN_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_11_add",
       "top" : "block_11_add_output",
       "type" : "elementwise",
       "name" : "block_11_add",
@@ -2015,6 +2133,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_12_expand",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -2033,8 +2152,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -2046,19 +2165,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_12_expand_relu__neg__",
       "top" : "block_12_expand_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_12_expand_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_12_expand_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_12_expand_relu__clip__",
       "top" : "block_12_expand_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_12_expand_relu__clip__",
@@ -2071,6 +2192,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_12_expand_relu_neg2",
       "top" : "block_12_expand_relu_output",
       "type" : "activation",
       "name" : "block_12_expand_relu_neg2",
@@ -2080,6 +2202,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_12_depthwise",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -2098,8 +2221,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -2111,19 +2234,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_12_depthwise_relu__neg__",
       "top" : "block_12_depthwise_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_12_depthwise_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_12_depthwise_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_12_depthwise_relu__clip__",
       "top" : "block_12_depthwise_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_12_depthwise_relu__clip__",
@@ -2136,6 +2261,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_12_depthwise_relu_neg2",
       "top" : "block_12_depthwise_relu_output",
       "type" : "activation",
       "name" : "block_12_depthwise_relu_neg2",
@@ -2145,6 +2271,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "block_12_project",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -2163,20 +2290,21 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "alpha" : 1,
       "bottom" : "block_11_add_output,block_12_project_BN_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_12_add",
       "top" : "block_12_add_output",
       "type" : "elementwise",
       "name" : "block_12_add",
@@ -2186,6 +2314,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_13_expand",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -2204,8 +2333,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -2217,19 +2346,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_13_expand_relu__neg__",
       "top" : "block_13_expand_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_13_expand_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_13_expand_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_13_expand_relu__clip__",
       "top" : "block_13_expand_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_13_expand_relu__clip__",
@@ -2242,6 +2373,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_13_expand_relu_neg2",
       "top" : "block_13_expand_relu_output",
       "type" : "activation",
       "name" : "block_13_expand_relu_neg2",
@@ -2251,6 +2383,7 @@
       "pad_r" : 1,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_13_depthwise",
       "pad_fill_mode" : 0,
       "pad_b" : 1,
       "pad_l" : 0,
@@ -2284,19 +2417,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_13_depthwise_relu__neg__",
       "top" : "block_13_depthwise_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_13_depthwise_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_13_depthwise_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_13_depthwise_relu__clip__",
       "top" : "block_13_depthwise_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_13_depthwise_relu__clip__",
@@ -2309,6 +2444,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_13_depthwise_relu_neg2",
       "top" : "block_13_depthwise_relu_output",
       "type" : "activation",
       "name" : "block_13_depthwise_relu_neg2",
@@ -2318,6 +2454,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "block_13_project",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -2336,8 +2473,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -2346,6 +2483,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_14_expand",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -2364,8 +2502,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -2377,19 +2515,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_14_expand_relu__neg__",
       "top" : "block_14_expand_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_14_expand_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_14_expand_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_14_expand_relu__clip__",
       "top" : "block_14_expand_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_14_expand_relu__clip__",
@@ -2402,6 +2542,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_14_expand_relu_neg2",
       "top" : "block_14_expand_relu_output",
       "type" : "activation",
       "name" : "block_14_expand_relu_neg2",
@@ -2411,6 +2552,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_14_depthwise",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -2429,8 +2571,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -2442,19 +2584,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_14_depthwise_relu__neg__",
       "top" : "block_14_depthwise_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_14_depthwise_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_14_depthwise_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_14_depthwise_relu__clip__",
       "top" : "block_14_depthwise_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_14_depthwise_relu__clip__",
@@ -2467,6 +2611,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_14_depthwise_relu_neg2",
       "top" : "block_14_depthwise_relu_output",
       "type" : "activation",
       "name" : "block_14_depthwise_relu_neg2",
@@ -2476,6 +2621,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "block_14_project",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -2494,20 +2640,21 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "alpha" : 1,
       "bottom" : "block_13_project_BN_output,block_14_project_BN_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_14_add",
       "top" : "block_14_add_output",
       "type" : "elementwise",
       "name" : "block_14_add",
@@ -2517,6 +2664,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_15_expand",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -2535,8 +2683,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -2548,19 +2696,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_15_expand_relu__neg__",
       "top" : "block_15_expand_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_15_expand_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_15_expand_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_15_expand_relu__clip__",
       "top" : "block_15_expand_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_15_expand_relu__clip__",
@@ -2573,6 +2723,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_15_expand_relu_neg2",
       "top" : "block_15_expand_relu_output",
       "type" : "activation",
       "name" : "block_15_expand_relu_neg2",
@@ -2582,6 +2733,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_15_depthwise",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -2600,8 +2752,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -2613,19 +2765,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_15_depthwise_relu__neg__",
       "top" : "block_15_depthwise_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_15_depthwise_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_15_depthwise_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_15_depthwise_relu__clip__",
       "top" : "block_15_depthwise_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_15_depthwise_relu__clip__",
@@ -2638,6 +2792,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_15_depthwise_relu_neg2",
       "top" : "block_15_depthwise_relu_output",
       "type" : "activation",
       "name" : "block_15_depthwise_relu_neg2",
@@ -2647,6 +2802,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "block_15_project",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -2665,20 +2821,21 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
     },
     {
-      "alpha" : 1,
       "bottom" : "block_14_add_output,block_15_project_BN_output",
+      "alpha" : 1,
       "operation" : 0,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_15_add",
       "top" : "block_15_add_output",
       "type" : "elementwise",
       "name" : "block_15_add",
@@ -2688,6 +2845,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_16_expand",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -2706,8 +2864,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -2719,19 +2877,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_16_expand_relu__neg__",
       "top" : "block_16_expand_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_16_expand_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_16_expand_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_16_expand_relu__clip__",
       "top" : "block_16_expand_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_16_expand_relu__clip__",
@@ -2744,6 +2904,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_16_expand_relu_neg2",
       "top" : "block_16_expand_relu_output",
       "type" : "activation",
       "name" : "block_16_expand_relu_neg2",
@@ -2753,6 +2914,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "block_16_depthwise",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -2771,8 +2933,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 3,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 3,
       "n_parallel" : 1
@@ -2784,19 +2946,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_16_depthwise_relu__neg__",
       "top" : "block_16_depthwise_relu_output_relu_neg",
       "type" : "activation",
       "name" : "block_16_depthwise_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "block_16_depthwise_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "block_16_depthwise_relu__clip__",
       "top" : "block_16_depthwise_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "block_16_depthwise_relu__clip__",
@@ -2809,6 +2973,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "block_16_depthwise_relu_neg2",
       "top" : "block_16_depthwise_relu_output",
       "type" : "activation",
       "name" : "block_16_depthwise_relu_neg2",
@@ -2818,6 +2983,7 @@
       "pad_r" : 0,
       "fused_relu" : 0,
       "fused_tanh" : 0,
+      "debug_info" : "block_16_project",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -2836,8 +3002,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 1,
       "Nx" : 1,
+      "pad_mode" : 1,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -2846,6 +3012,7 @@
       "pad_r" : 0,
       "fused_relu" : 1,
       "fused_tanh" : 0,
+      "debug_info" : "Conv_1",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
@@ -2864,8 +3031,8 @@
       "weights" : {
 
       },
-      "pad_mode" : 0,
       "Nx" : 1,
+      "pad_mode" : 0,
       "pad_value" : 0,
       "Ny" : 1,
       "n_parallel" : 1
@@ -2877,19 +3044,21 @@
 
       },
       "mode" : 6,
+      "debug_info" : "out_relu__neg__",
       "top" : "out_relu_output_relu_neg",
       "type" : "activation",
       "name" : "out_relu__neg__",
       "beta" : 0
     },
     {
-      "alpha" : -6,
       "bottom" : "out_relu_output_relu_neg",
+      "alpha" : -6,
       "operation" : 25,
       "weights" : {
 
       },
       "fused_relu" : 0,
+      "debug_info" : "out_relu__clip__",
       "top" : "out_relu_output_relu_clip",
       "type" : "elementwise",
       "name" : "out_relu__clip__",
@@ -2902,6 +3071,7 @@
 
       },
       "mode" : 6,
+      "debug_info" : "out_relu_neg2",
       "top" : "out_relu_output",
       "type" : "activation",
       "name" : "out_relu_neg2",
@@ -2909,12 +3079,13 @@
     },
     {
       "pad_r" : 0,
+      "debug_info" : "global_average_pooling2d_1",
       "pad_fill_mode" : 0,
       "pad_b" : 0,
       "pad_l" : 0,
-      "top" : "global_average_pooling2d_1_output",
       "size_x" : 7,
       "is_global" : 1,
+      "top" : "global_average_pooling2d_1_output",
       "top_shape_style" : 0,
       "stride_x" : 1,
       "avg_or_max" : 0,
@@ -2945,18 +3116,23 @@
       "bottom" : "global_average_pooling2d_1_output",
       "blob_biases" : 209,
       "has_tanh" : 0,
+      "debug_info" : "Logits",
       "name" : "Logits",
       "has_prelu" : 0
     },
     {
-      "C" : 2,
+      "bottom" : "Logits_output",
+      "attributes" : {
+        "is_output" : 1
+      },
       "weights" : {
 
       },
+      "debug_info" : "Logits__activation__",
       "top" : "confidence",
+      "C" : 2,
       "type" : "softmax",
-      "name" : "Logits__activation__",
-      "bottom" : "Logits_output"
+      "name" : "Logits__activation__"
     }
   ]
 }
