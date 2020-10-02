@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.16.9 clang-1200.0.22.5)
-// swift-module-flags: -target x86_64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FritzManagedModel
+// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
+// swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FritzManagedModel
 import CommonCrypto
 import CoreML
 import Foundation
@@ -59,7 +59,7 @@ extension BaseIdentifiedModel {
 }
 @available(OSX 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
 extension SwiftIdentifiedModel {
-  @available(*, deprecated, message: "See fritzModel().")
+  @available(*, deprecated, message: "Use fritzModel() instead to create a FritzMLModel.")
   public func fritz() -> Self
   public func fritzModel() -> FritzManagedModel.FritzMLModel
   public func updateIfNeeded(completionHandler: @escaping (Swift.Bool, Swift.Error?) -> Swift.Void)
@@ -248,7 +248,9 @@ public struct CocoImageAnnotation : Swift.Codable, FritzManagedModel.AnnotationT
   public let keypoints: [FritzManagedModel.CocoImageAnnotation.Keypoint]?
   public let label: Swift.String
   public let isImageLabel: Swift.Bool
-  public let format: Swift.String
+  public var format: Swift.String {
+    get
+  }
   public init(bbox: FritzManagedModel.CocoImageAnnotation.BoundingBox?, keypoints: [FritzManagedModel.CocoImageAnnotation.Keypoint]?, segmentation: FritzManagedModel.CocoImageAnnotation.Segmentation?, label: Swift.String, isImageLabel: Swift.Bool = false)
   public var requestOptions: FritzCore.RequestOptions {
     get

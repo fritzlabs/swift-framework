@@ -4,7 +4,7 @@
     "metadataOutputVersion" : "3.0",
     "outputSchema" : [
       {
-        "formattedType" : "Image (Color 720 x 1280)",
+        "formattedType" : "Image (Color 720 × 1280)",
         "hasSizeFlexibility" : "1",
         "shortDescription" : "",
         "sizeRange" : "[[100, 1920], [100, 1920]]",
@@ -12,7 +12,7 @@
         "type" : "Image",
         "isColor" : "1",
         "height" : "1280",
-        "sizeFlexibility" : "100...1920 x 100...1920",
+        "sizeFlexibility" : "100...1920 × 100...1920",
         "colorspace" : "RGB",
         "name" : "stylizedImage",
         "isOptional" : "0"
@@ -38,7 +38,7 @@
     },
     "inputSchema" : [
       {
-        "formattedType" : "Image (Color 720 x 1280)",
+        "formattedType" : "Image (Color 720 × 1280)",
         "hasSizeFlexibility" : "1",
         "shortDescription" : "",
         "sizeRange" : "[[100, 1920], [100, 1920]]",
@@ -46,7 +46,7 @@
         "type" : "Image",
         "isColor" : "1",
         "height" : "1280",
-        "sizeFlexibility" : "100...1920 x 100...1920",
+        "sizeFlexibility" : "100...1920 × 100...1920",
         "colorspace" : "RGB",
         "name" : "image",
         "isOptional" : "0"

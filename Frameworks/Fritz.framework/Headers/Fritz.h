@@ -156,8 +156,4 @@ import the headers individually."
 @import FritzVisionRigidPose;
 #endif
 
-#if __has_include(<FritzVisionDepthModel/FritzVisionDepthModel.h>)
-@import FritzVisionDepthModel;
-#endif
-
 #endif  // defined(__has_include)

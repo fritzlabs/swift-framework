@@ -4,10 +4,17 @@
 
 ---
 
-## [6.0.0-beta.1](https://github.com/fritzlabs/swift-framework/releases/tag/5.4.1)
-- Xcode Version: 12 beta X
+## [6.0.0](https://github.com/fritzlabs/swift-framework/releases/tag/6.0.0)
 
-1. Update SDK to build with Xcode 12 Beta X and iOS 14
+- Xcode Version: 12.0
+
+1. Update SDK to build with Xcode 12 and iOS 14
+2. Raised deployment target for all pre-trained models to iOS 12
+
+## [6.0.0-beta.1](https://github.com/fritzlabs/swift-framework/releases/tag/6.0.0-beta.1)
+- Xcode Version: 12 beta 2
+
+1. Update SDK to build with Xcode 12 Beta 2 and iOS 14
 2. If you are using custom models and are NOT using a `FritzVisionPredictor` to managing predictions: the `.fritz()` method for registering models with the Fritz SDK has been deprecated. To properly initialize models, use the new `.fritzModel()` method to obtain a `FritzMLModel` that has been intialized with the Fritz SDK. E.g.
 
 ```diff
@@ -24,11 +31,15 @@ let result = try! model.predict(input: input)
 ## [5.4.1](https://github.com/fritzlabs/swift-framework/releases/tag/5.4.1)
 - Xcode Version: 11.5.X
 
+- Xcode Version: 11.5.X
+
 1. Fixed a bug
 
 ## [5.4.0](https://github.com/fritzlabs/swift-framework/releases/tag/5.4.0)
 
 1. Updated FritzVisionSegmentationModelPredictor initialization
+
+- Xcode Version: 11.5.X
 
 ```diff
 

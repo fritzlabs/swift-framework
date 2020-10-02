@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.16.9 clang-1200.0.22.5)
-// swift-module-flags: -target x86_64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FritzVision
+// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
+// swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FritzVision
 import AVFoundation
 import Accelerate
 import CoreGraphics
@@ -109,11 +109,6 @@ public class ObjectDetectionInputProvider : CoreML.MLFeatureProvider {
   @objc required public init(model: FritzManagedModel.FritzMLModel)
   @objc required public init(model: FritzManagedModel.SwiftIdentifiedModel)
   @objc required public init(model: FritzManagedModel.FritzMLModel, managedModel: FritzManagedModel.FritzManagedModel)
-}
-extension CVBuffer {
-  public func normalize()
-  public func pixelValues() -> [Swift.Float]
-  public func printDebugInfo()
 }
 public protocol PointType {
   func toArray() -> [Swift.Double]
@@ -683,34 +678,6 @@ public enum HumanSkeleton : Swift.Int, FritzVision.SkeletonType {
 }
 @available(iOS 11, *)
 public typealias HumanPose = FritzVision.Pose<FritzVision.HumanSkeleton>
-@_inheritsConvenienceInitializers @objc(FritzVisionDepthModelOptions) final public class FritzVisionDepthModelOptions : ObjectiveC.NSObject, FritzVision.FritzImageOptions {
-  public static var defaults: FritzVision.FritzImageOptions
-  @objc final public var imageCropAndScaleOption: FritzVision.FritzVisionCropAndScale
-  @objc final public var forceCoreMLPrediction: Swift.Bool
-  @objc final public var forceVisionPrediction: Swift.Bool
-  @objc deinit
-  @objc override dynamic public init()
-}
-@available(iOS 11.0, *)
-extension AVDepthData : FritzVision.FritzPredictionResult {
-}
-@_inheritsConvenienceInitializers @available(iOS 11.0, *)
-@objc(FritzVisionDepthModel) final public class FritzVisionDepthModel : FritzVision.BasePredictor, FritzVision.DownloadableModel {
-  @objc public static var managedModel: FritzManagedModel.FritzManagedModel {
-    @objc get
-  }
-  public static var modelConfig: FritzManagedModel.FritzModelConfiguration
-  @objc public static var wifiRequiredForModelDownload: Swift.Bool
-  public static func fetchModel(completionHandler: @escaping (FritzVision.FritzVisionDepthModel?, Swift.Error?) -> Swift.Void)
-  @objc(predict:options:completion:) final public func predict(_ input: FritzVision.FritzVisionImage, options: FritzVision.FritzVisionDepthModelOptions = .init(), completion: (AVFoundation.AVDepthData?, Swift.Error?) -> Swift.Void)
-  @objc deinit
-  @objc override public init(model: FritzManagedModel.FritzMLModel)
-  @objc override public init(model: FritzManagedModel.FritzMLModel, managedModel: FritzManagedModel.FritzManagedModel)
-  @objc override public init(model: FritzManagedModel.SwiftIdentifiedModel)
-  public typealias PredictionInput = FritzVision.FritzVisionImage
-  public typealias ModelOptions = FritzVision.FritzVisionDepthModelOptions
-  public typealias PredictionResult = AVFoundation.AVDepthData
-}
 public typealias rgbaValue = (r: Swift.UInt8, g: Swift.UInt8, b: Swift.UInt8, a: Swift.UInt8)
 @_inheritsConvenienceInitializers @available(iOS 11.0, *)
 @objc(FritzVisionOutdoorSegmentationModelFast) final public class FritzVisionOutdoorSegmentationModelFast : FritzVision.FritzVisionOutdoorSegmentationPredictor, FritzVision.DownloadableModel {
@@ -1339,15 +1306,6 @@ public class FritzVisionDrawSkeletonCompoundFilter : FritzVision.FritzVisionImag
   public func process(_ image: FritzVision.FritzVisionImage) -> FritzVision.FritzVisionDrawSkeletonCompoundFilter.FritzVisionFilterResult
   @objc deinit
 }
-@available(iOS 11, *)
-extension FritzVisionImage {
-  public func masked(with depthData: AVFoundation.AVDepthData, focusingAt depth: CoreGraphics.CGFloat, focalWidth width: CoreGraphics.CGFloat = 1, resizeSamplingMethod samplingMethod: FritzVision.CIImagePipeline.ResizeSamplingMethod = .lanczos) -> UIKit.UIImage?
-  public func masked(with depthData: AVFoundation.AVDepthData, pixelsCloserThan depth: CoreGraphics.CGFloat, resizeSamplingMethod samplingMethod: FritzVision.CIImagePipeline.ResizeSamplingMethod = .lanczos) -> UIKit.UIImage?
-  public func masked(with depthData: AVFoundation.AVDepthData, pixelsFartherThan depth: CoreGraphics.CGFloat, resizeSamplingMethod samplingMethod: FritzVision.CIImagePipeline.ResizeSamplingMethod = .lanczos) -> UIKit.UIImage?
-  public func blurred(with depthData: AVFoundation.AVDepthData, focusingAt depth: CoreGraphics.CGFloat, focalWidth width: CoreGraphics.CGFloat = 1, blurRadius: CoreGraphics.CGFloat = 10, resizeSamplingMethod samplingMethod: FritzVision.CIImagePipeline.ResizeSamplingMethod = .lanczos) -> UIKit.UIImage?
-  public func blurred(with depthData: AVFoundation.AVDepthData, pixelsFartherThan depth: CoreGraphics.CGFloat, resizeSamplingMethod samplingMethod: FritzVision.CIImagePipeline.ResizeSamplingMethod = .lanczos, blurRadius: CoreGraphics.CGFloat = 10.0) -> UIKit.UIImage?
-  public func blurred(with depthData: AVFoundation.AVDepthData, pixelsCloserThan depth: CoreGraphics.CGFloat, resizeSamplingMethod samplingMethod: FritzVision.CIImagePipeline.ResizeSamplingMethod = .lanczos, blurRadius: CoreGraphics.CGFloat = 10.0) -> UIKit.UIImage?
-}
 @_inheritsConvenienceInitializers @available(iOS 12.0, *)
 @objc(FritzVisionOutdoorSegmentationModelSmall) final public class FritzVisionOutdoorSegmentationModelSmall : FritzVision.FritzVisionOutdoorSegmentationPredictor, FritzVision.DownloadableModel {
   @objc public static let modelConfig: FritzManagedModel.FritzModelConfiguration
@@ -1873,10 +1831,6 @@ extension FritzVision.FritzVisionHairSegmentationPredictor : FritzVision.FritzVi
 @available(iOS 11.0, *)
 extension FritzVision.FritzVisionPeopleAndPetSegmentationModelAccurate : FritzVision.FritzVisionImagePredictable {}
 extension FritzVision.HumanSkeleton : Swift.Hashable {}
-@available(iOS 11.0, *)
-extension FritzVision.FritzVisionDepthModel : FritzVision.FritzVisionImagePredictable {}
-@available(iOS 11.0, *)
-extension FritzVision.FritzVisionDepthModel : FritzVision.FritzPredictable {}
 @available(iOS 11.0, *)
 extension FritzVision.FritzVisionOutdoorSegmentationModelFast : FritzVision.FritzVisionImagePredictable {}
 @available(iOS 11.0, *)
