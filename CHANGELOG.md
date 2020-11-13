@@ -4,6 +4,10 @@
 
 ---
 
+## [6.1.0](https://github.com/fritzlabs/swift-framework/releases/tag/6.1.0)
+
+1. Introduce support for Xcode 12.2 and iOS 14.2
+
 ## [6.0.0](https://github.com/fritzlabs/swift-framework/releases/tag/6.0.0)
 
 - Xcode Version: 12.0

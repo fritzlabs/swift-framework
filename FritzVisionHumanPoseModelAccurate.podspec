@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'FritzVisionHumanPoseModelAccurate'
-  s.version = '6.0.0-beta.3'
+  s.version = '6.0.0'
   s.summary = 'Official Fritz SDK for Swift 5.1 and Objective-C'
   s.homepage = 'https://www.fritz.ai'
   s.license = { :type => 'Apache 2.0', :file => 'LICENSE.md' }
@@ -16,6 +16,6 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
-  s.dependency 'FritzBase/Vision', '6.0.0-beta.3'
+  s.dependency 'FritzBase/Vision', '~> 6.0.0'
   s.vendored_framework = 'Frameworks/FritzVisionHumanPoseModelAccurate.framework'
 end
