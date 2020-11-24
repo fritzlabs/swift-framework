@@ -251,6 +251,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) DeviceOrient
 + (void)configure;
 /// Configure the Fritz SDK with a custom configuration
 + (void)configureWith:(FritzConfiguration * _Nonnull)configuration;
+/// Determines if the Fritz SDK is successfully configured
++ (BOOL)isConfigured SWIFT_WARN_UNUSED_RESULT;
 /// Enables Fritz SDK logging
 /// \param level 
 /// – 0: Debug logging
@@ -607,6 +609,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) DeviceOrient
 + (void)configure;
 /// Configure the Fritz SDK with a custom configuration
 + (void)configureWith:(FritzConfiguration * _Nonnull)configuration;
+/// Determines if the Fritz SDK is successfully configured
++ (BOOL)isConfigured SWIFT_WARN_UNUSED_RESULT;
 /// Enables Fritz SDK logging
 /// \param level 
 /// – 0: Debug logging

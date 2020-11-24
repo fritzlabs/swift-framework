@@ -116,6 +116,7 @@ extension NSNotification.Name {
   }
   @objc(configure) public static func configure()
   @objc(configureWith:) public static func configure(with configuration: FritzCore.Configuration)
+  @objc(isConfigured) public static func isConfigured() -> Swift.Bool
   @objc(setLogLevel:) public static func setLogLevel(_ level: FritzCore.LogLevel)
   @objc deinit
   @objc override dynamic public init()
