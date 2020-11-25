@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name = 'FritzVisionRigidPose'
-  s.version = '6.1.2-beta.2'
+  s.version = '6.1.2-beta.3'
   s.summary = 'Official Fritz SDK for Swift 5.1 and Objective-C'
   s.homepage = 'https://www.fritz.ai'
   s.license = { :type => 'Apache 2.0', :file => 'LICENSE.md' }
   s.author = { 'Chris Kelly' => 'engineering@fritz.ai' }
-  s.source = { :http => 'https://fritz-swift-sdk-release-production.s3.amazonaws.com/FritzVisionRigidPose/6.1.2-beta.2/FritzVisionRigidPose.zip' }
+  s.source = { :http => 'https://fritz-swift-sdk-release-production.s3.amazonaws.com/FritzVisionRigidPose/6.1.2-beta.3/FritzVisionRigidPose.zip' }
 
   s.requires_arc = true
   s.static_framework = true
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
   s.dependency 'OpenCV'
-  s.dependency 'FritzBase/Vision', '6.1.2-beta.2'
+  s.dependency 'FritzBase/Vision', '6.1.2-beta.3'
 
   s.vendored_framework = 'Frameworks/FritzVisionRigidPose.framework'
   s.prefix_header_file = 'Frameworks/FritzVisionRigidPose.framework/Headers/PrefixHeader.pch'
