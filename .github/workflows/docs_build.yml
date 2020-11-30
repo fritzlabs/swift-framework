@@ -6,11 +6,11 @@ jobs:
   ios-docs-build-branch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: Checkout swift-framework
+        uses: actions/checkout@v2
       - name: Build docker image
         run: |
           docker build . -t jazzy -f deploy/JazzyDockerfile
-
       - name: Run build
         run: |
           mkdir /tmp/build
