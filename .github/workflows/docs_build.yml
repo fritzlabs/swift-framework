@@ -1,5 +1,4 @@
 name: Build Jazzy docs
-
 on: [pull_request]
 
 jobs:

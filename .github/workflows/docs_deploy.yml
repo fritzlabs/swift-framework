@@ -1,10 +1,10 @@
 name: Deploy Jazzy docs
 on:
+  workflow_dispatch:
   push:
     tags: "*"
 env:
   BUILD_DIR: /tmp/build
-
 
 jobs:
   ios-docs-deploy:
