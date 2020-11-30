@@ -10,9 +10,10 @@ jobs:
   ios-docs-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: Checkout swift-framework
+        uses: actions/checkout@v2
       - name: Set release tag
-        run: echo ::set-env name=TAG::${GITHUB_REF/refs\/tags\//}
+        run: echo "TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
       - name: Build docker image
         run: |
           docker build . -t jazzy -f deploy/JazzyDockerfile
@@ -29,6 +30,6 @@ jobs:
           AWS_REGION: us-east-1
         run: |
           set -eo pipefail
-          ls /tmp/build
+          pip install wheel
           pip install awscli
           deploy/deploy.sh /tmp/build $TAG

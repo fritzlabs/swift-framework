@@ -9,7 +9,7 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Swift Framework
+      - name: Checkout swift-framework
         uses: actions/checkout@v2
       - name: Create Release
         id: create_release
