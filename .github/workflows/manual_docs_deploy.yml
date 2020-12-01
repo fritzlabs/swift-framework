@@ -1,18 +1,21 @@
-name: Deploy Jazzy docs
+name: Manually Deploy Jazzy docs
 on:
-  push:
-    tags: "*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release'
+        required: true
 env:
   BUILD_DIR: /tmp/build
 
 jobs:
-  ios-docs-deploy:
+  manual-ios-docs-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout swift-framework
         uses: actions/checkout@v2
       - name: Set release tag
-        run: echo "TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+        run: echo "TAG=${{ github.event.inputs.version }}" >> $GITHUB_ENV
       - name: Build docker image
         run: |
           docker build . -t jazzy -f deploy/JazzyDockerfile
