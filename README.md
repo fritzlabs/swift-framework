@@ -15,13 +15,13 @@ Fritz AI helps you teach your applications how to see, hear, feel, think, and se
 
 ## Installation
 
-[iOS SDK instructions](https://docs.fritz.ai/get-started.html#ios?utm_source=github&utm_campaign=swift-framework)
+[iOS SDK instructions](https://docs.fritz.ai/develop/overview/?utm_source=github&utm_campaign=swift-framework/#ios)
 
 ## Documentation
 
 [Fritz AI Docs Home](https://docs.fritz.ai/?utm_source=github&utm_campaign=swift-framework)
 
-[iOS SDK Reference Docs](https://docs.fritz.ai/iOS/latest/index.html?utm_source=github&utm_campaign=swift-framework)
+[iOS SDK Reference Docs](https://api-reference.fritz.ai/iOS/latest/index.html?utm_source=github&utm_campaign=swift-framework)
 
 ## Join the community
 [Heartbeat](https://heartbeat.fritz.ai/?utm_source=github&utm_campaign=swift-framework) is a community of developers interested in the intersection of mobile and machine learning. [Chat with us in Slack](https://www.fritz.ai/slack?utm_source=github&utm_campaign=swift-framework) and stay up to date on the latest mobile ML news with our [Newsletter](https://www.fritz.ai/newsletter?utm_source=github&utm_campaign=swift-framework).
@@ -29,5 +29,5 @@ Fritz AI helps you teach your applications how to see, hear, feel, think, and se
 ## Help
 For any questions or issues, you can:
 - Submit an issue on this repo
-- Go to our [Help Center](https://docs.fritz.ai/help-center/index.html)
+- Visit our [Community Forum](https://support.fritz.ai/?utm_source=github&utm_campaign=swift-framework)
 - Message us directly in [Slack](https://www.fritz.ai/slack?utm_source=github&utm_campaign=swift-framework)
