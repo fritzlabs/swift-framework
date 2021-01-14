@@ -23,6 +23,9 @@ Fritz AI helps you teach your applications how to see, hear, feel, think, and se
 
 [iOS SDK Reference Docs](https://api-reference.fritz.ai/iOS/latest/index.html?utm_source=github&utm_campaign=swift-framework)
 
+## App Store Privacy
+The App Store now requires information about the data types your app and third-party partners may collect. [Information about what data Fritz AI collects and how it is used is available on our website.](https://www.fritz.ai/app-store-privacy.html)
+
 ## Join the community
 [Heartbeat](https://heartbeat.fritz.ai/?utm_source=github&utm_campaign=swift-framework) is a community of developers interested in the intersection of mobile and machine learning. [Chat with us in Slack](https://www.fritz.ai/slack?utm_source=github&utm_campaign=swift-framework) and stay up to date on the latest mobile ML news with our [Newsletter](https://www.fritz.ai/newsletter?utm_source=github&utm_campaign=swift-framework).
 
